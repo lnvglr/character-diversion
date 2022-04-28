@@ -10,3 +10,40 @@
     - Provide tool for people to create new character shapes 
 
 
+# Design space notation
+```
+A
+```
+*0D*
+```
+   B
+  /
+ /
+A
+```
+*1D*
+
+```
+   B --------- C
+  /           /
+ /           /
+A --------- D
+```
+*2D*
+
+```
+   E --------- H
+  /|          /|
+ / |         / |
+B --------- F  |
+|  C -------|- G
+| /         | /
+|/          |/
+A --------- D
+```
+*3D*
+
+```
+...
+```
+*4D*

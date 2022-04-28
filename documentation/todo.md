@@ -27,6 +27,15 @@
 - Application of Character Relationships onto different typefaces
 - Show a certain relationship in four different levels of grotesque.
 
+| | עברית | Latin |
+| --- | ---: | :--- |
+| Psiah/Tail |	ת, א, נ, מ	| f, j, y, (l, t) |
+| Shoulder |	ב, ה, ח, כ, ך, מ, ם, פ, ף, ר, ת	| a, h, m, n, u |
+| arc/gimel roof |	ג, ו, ט, י, נ, ן	| a, f, j, y, s |
+| diagonal |	א, ל, מ, צ, ץ, ק	| k, v, w, x, y, z |
+| |	נ	| r |
+| disconnected (Fedra) |	ק, ת, ש	| P, b |
+
 ## Variable Fonts
 - How to create different layers
 - How many layers (axes) can be applied across the font
