@@ -1,0 +1,670 @@
+/* Main UI font: IBM Plex Sans Variable */
+@font-face {
+	font-family: IBMPlexVariable;
+	src: url(fonts/ui/IBMPlexSansVar-Roman.woff2) format("woff2");
+	font-weight: 100 700;
+	font-stretch: 85 100;
+}
+
+@font-face {
+	font-family: IBMPlexVariable;
+	src: url(fonts/ui/IBMPlexSansVar-Italic.woff2) format("woff2");
+	font-style: italic;
+	font-weight: 100 700;
+	font-stretch: 85 100;
+}
+
+/* Code UI font: IBM Plex Mono in various weights */
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-Regular.woff2) format("woff2");
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-Italic.woff2) format("woff2");
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-Medium.woff2) format("woff2");
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-MediumItalic.woff2) format("woff2");
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-Bold.woff2) format("woff2");
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: IBMPlexMono;
+	src: url(fonts/ui/IBMPlexMono-BoldItalic.woff2) format("woff2");
+	font-weight: 700;
+	font-style: italic;
+}
+
+/* Symbols UI font: FontAwesome: https://fontawesome.com/ */
+@font-face {
+	font-family: FontAwesome;
+	src: url(fonts/ui/fa-regular-400.woff2) format("woff2");
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: FontAwesome;
+	src: url(fonts/ui/fa-solid-900.woff2) format("woff2");
+	font-weight: bold;
+}
+
+@keyframes rotate-360 {
+	0% {
+		transform: rotate(0turn);
+	}
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+/* Selectors */
+* {
+	box-sizing: border-box;
+	font-family: inherit;
+	--color-panel-background: #EAEAE3; /* light greyish */
+	--color-panel-header: #CACAC5; /* mid grey */
+	--color-active: #E1F5FE; /* light blue */
+}
+
+html {
+	font-family: IBMPlexVariable, -apple-system, ".SFNSText", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+	font-size: 16px;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 3rem;
+	font-style: normal;
+	font-weight: 400;
+}
+
+a {
+	color: currentColor;
+}
+
+input,
+select,
+button {
+	margin: 0 .2em .2em 0;
+}
+
+select,
+button {
+	padding: .25em .1em .2em .1em;
+}
+
+button {
+	padding: .3em .6em .2em .6em;
+	border-radius: 3px;
+	border: 1px solid darkgrey;
+	border-width: 0 1px 1px 0;
+	background: var(--color-panel-header);
+	font-weight: 500;
+}
+
+button.close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+
+#container {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 0fr 1fr;
+	grid-template-rows: 80px 1fr;
+	background-color: beige; /* on font load is hidden */
+}
+
+#title {
+	background-color: orange;
+	padding: 0 8px 0 8px;
+	position: relative;
+	border-bottom: 1px solid darkorange;
+}
+
+#title h1 {
+	font-size: 4rem;
+	font-weight: 700;
+	padding: 0;
+	margin: 0;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, .2)
+}
+
+.subtitle {
+	position: absolute;
+	width: 120px;
+	right: 10px;
+	top: 10px;
+	font-size: 1rem;
+	line-height: 1.2;
+	display: inline-block;
+	text-transform: uppercase;
+	text-align: right;
+}
+
+.subtitle a {
+	position: relative;
+	top: 1em;
+}
+
+#font-file {
+	background-color: beige;
+	font-size: 4rem;
+	padding: 0px 20px;
+	white-space: nowrap;
+	overflow-x: hidden;
+	border-bottom: 1px solid lightgrey;
+}
+
+.font-file {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.font-file:hover {
+	font-weight: 600;
+}
+
+#panels-right {
+	position: absolute;
+	width: 360px;
+	height: 100%;
+	right: 0px;
+	z-index: 1;
+}
+
+.panel-container {
+	position: relative;
+	background-color: beige;
+	overflow-x: auto;
+ 	overflow-y: scroll;
+ 	resize: horizontal;
+ 	min-width: 360px;
+ 	max-width: 50vw;
+ }
+
+.panel-container h2 {
+	position: relative;
+	font-size: 1.1em;
+	font-weight: 599; /* this was 600 but macOS 10.14 Safari 12 adds faux-bold at that weight! */
+	background-color: var(--color-panel-header);
+	color: black;
+	margin: 0;
+	border-bottom: 1px solid darkgrey;
+	padding: .3em .5em .05em 1.8em;
+}
+
+.panel-container h2 .icon {
+	font-size: .7em;
+	margin-top: .1em;
+}
+
+.panel-container h2 .icon.info {
+	padding: .5em;
+	margin-top: 0;
+	opacity: .4;
+}
+
+.panel-container h2 .icon.info:hover {
+	opacity: 1;
+}
+
+#panel-fonts .panel-content:not(:empty),
+#panel-ui .panel-content:not(:empty),
+#panel-axes .panel-content:not(:empty),
+#panel-stat .panel-content:not(:empty),
+#panel-media .media-grid:not(:empty),
+#panel-about .panel-content:not(:empty),
+#panel-tvts .panel-content.static,
+#panel-glyphs .panel-content .header {
+	padding: .5rem .6rem;
+}
+
+#panel-fonts .font-info:not(:empty) {
+	padding-top: 0.5em;
+	position: relative;
+}
+
+#panel-fonts select {
+	max-width: 100%;
+}
+
+#panel-fonts .loading .icon {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	animation: rotate-360 infinite linear 1.5s;
+}
+
+#panel-fonts .loading {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	min-height: 100%;
+	background-color: var(--color-panel-background);
+}
+
+#panel-fonts .loading .icon::before {
+	content: '\f2f1';
+}
+
+#panel-webfont .panel-content {
+	padding: 0 .5rem
+}
+
+#panel-tvts .panel-content {
+	overflow-x: scroll;
+}
+
+#panel-tvts .tvt-item .toggle {
+	position: relative;
+	left: 3px;
+}
+
+#panel-tvts .tvt-item {
+	display: grid;
+	grid-template-columns: 25px 15px 45px 45px 45px auto;
+	font-size: 75%;
+	white-space: nowrap;
+}
+
+#panel-tvts .scalar {
+	height: 20px;
+	background-color: #d0f473;
+}
+
+.tvt-points {
+	display: grid;
+	font-size: 75%;
+}
+
+#panel-tvts .tvt-item:not(.open)+.tvt-points { /* .tvt-item "open" class toggles visibility of subsequent .tvt-points element */
+	display: none;
+}
+
+#panel-media .media-grid {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+#panel-about .panel-content {
+	font-size: 75%;
+}
+
+.panel > div {
+	position: relative;
+	width: 100%;
+	background-color: var(--color-panel-background);
+}
+
+.panel.closed > div {
+	display: none;
+}
+
+.panel > div > .slider {
+	position: relative;
+	width: calc(100% - 20px);
+	left: 8px;
+}
+
+.panel label {
+	font-size: 75%;
+	margin-top: 4px;
+}
+
+.panel input[type=checkbox] {
+	margin-top: 4px;
+}
+
+#panel-glyphs.panel label {
+	margin-top: 0px;
+}
+
+#panel-webfont.panel > div {
+	font-size: 50px;
+	font-family: Webfont;
+	background-color: white;
+}
+
+#panel-glyphs .header {
+	width: 100%;
+	background-color: var(--color-panel-background);
+	padding: 2px 4px;
+	display: grid;
+	grid-template-columns: 35% 40% 25%;
+}
+
+#panel-glyphs .header label {
+	padding-top: 6px;
+}
+
+#panel-glyphs h2 span:not(.open) {
+	margin-left: .5em;
+}
+
+#panel-glyphs h2 #glyphs-ids {
+	padding: 3px 6px 1px 6px;
+}
+
+.instance {
+	position:relative;
+	background-color: white;
+	padding: 4px;
+	margin: 4px;
+}
+
+.instance .preview {
+	position: relative;
+}
+
+.instance .preview svg {
+	display: block;
+	position: absolute;
+	top: -11px;
+}
+
+.instance div {
+	align-self: center
+}
+
+.instance input {
+	margin: 0;
+}
+
+.tiles .instance {
+	width: 30px;
+	float: left;
+	position: relative;
+}
+
+.glyph-thumb {
+	width: 90px;
+	height: 90px;
+	border: 1px solid lightgrey;
+	border-width:0 1px 1px 0;
+	float: left;
+	position: relative;
+}
+
+.glyph-thumb > label {
+	position: absolute;
+	left: -1px;
+	top: -1px;
+	_border: 1px solid lightgrey;
+	color: beige;
+	background-color: #aaaaa1;
+	font-size: 75%;
+	padding: 0 2px;
+	font-weight: 500
+}
+
+.glyph-thumb:hover > label {
+	background-color: black;
+}
+
+.glyph-thumb.active > label {
+	background-color: black;
+}
+
+#drawing {
+	position: relative;
+}
+
+#drawing svg {
+	position: absolute;
+}
+
+#glyph-info {
+	position: absolute;
+	box-sizing: border-box;
+	width: calc(100% - 360px);
+	height: 240px;
+	bottom: 0px;
+	background-color: lightgrey;
+	z-index: 1;
+}
+
+#font-file {
+	color: grey;
+	font-style: italic;
+}
+
+.active {
+	background-color: var(--color-active);
+}
+
+code {
+	font-family: IBMPlexMono;
+	font-weight: 500;
+}
+
+pre {
+	background-color: var(--color-panel-background);
+	color: #404040;
+	font-size: 75%;
+	font-weight: normal;
+	padding: 0.5em;
+	overflow: auto;
+}
+
+.icon {
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-size: 75%;
+	cursor: default;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.texticon {
+	font-size: 75%;
+	_border: 1px solid white;
+	_padding: 1px 2px;
+
+	border: 1px solid;
+	border-radius: 1em;
+	padding: 3px 6px 1px 6px;	
+}
+
+.texticon.active {
+	color: var(--color-panel-header);
+	background-color: black;
+	border-color: black;	
+}
+
+.icon:link,
+.icon:hover,
+.icon:visited,
+.icon:active {
+	color: black;
+	text-decoration: none;
+}
+
+.glyph-thumb > .selected {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	z-index: 5;
+	opacity: 0.5;
+}
+
+.reveal {
+	transform: rotate(0turn);
+	position: absolute;
+	left: 1em;
+	top: 0.6em;
+	text-align: left;
+	transition: transform 0.05s ease-out;
+}
+
+.tvt-item .reveal {
+	display: inline-block;
+	position: relative;
+	top: 0;
+	left: 0;	
+}
+
+.panel.open>h2>.reveal, .tvt-item.open .reveal {
+	transform: rotate(0.25turn);
+}
+
+.cartesian-axis-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border-top: 1px solid lightgrey;
+}
+
+.axis-nudge {
+	width: 100%;
+	text-align: center;
+	margin-top: 1px;
+	background-color: grey;
+	color: white;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+#avar {
+	position: relative;
+	width: 100%;
+	min-height: 100px;
+	display: none;
+	left: -10px;
+}
+
+.no-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#drag-drop-zone {
+	display: flex;
+	position: relative;
+	color: grey;
+	grid-area: 1 / 2 / 3 / 3; /* occupy the upper-right and lower-right two cells in the *parent* grid */
+	background-color: beige;
+	align-items: center;
+	justify-content: center;
+	_border: 4px dashed grey;
+	_border-radius: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+#drag-drop-zone .border {
+	position: absolute;
+ 	left: 2em;
+ 	top: 2em;
+ 	width: calc(100% - 4em);
+ 	height: calc(100% - 4em);
+	border: 4px dashed grey;
+	border-radius: 1.5em;
+	margin: 0;
+}
+
+#drag-drop-zone .instructions {
+	text-align: center;
+}
+
+#drag-drop-zone input {
+ 	position: absolute;
+ 	left: 0;
+ 	top: 0;
+ 	width: 100%;
+ 	height: 100%;
+ 	opacity: 0.0;
+}
+
+/*
+#__drag-drop-zone > div > p {
+	cursor: default;
+}
+*/
+
+.popup-modal {
+	width: 500px;
+	height: 80%;
+	position: fixed;
+	left: calc(50% - 250px);
+	top: calc(50% - 40%);
+	background-color: beige;
+	border: 2px solid beige;
+	padding: .4em 1.6em 1.2em 1.6em;
+	border-radius: .4em;
+	overflow-y: scroll;
+	z-index: 1;
+}
+
+.popup-overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: black;
+	opacity: 0.6;
+	z-index: 1;
+}
+
+/* used in markdown help files */
+h4 {
+	font-weight: normal;
+	font-style: italic;
+	margin-bottom: 0.5em;
+}
+
+#help-overlay figure {
+	width: 100%;
+	margin: 1em 0 0 0;
+}
+
+#help-overlay figure img {
+	width: 100%;
+}
+
+#help-overlay figure figcaption {
+	font-size: 0.75em;
+}
+
+.template {
+	display: none;
+}
+
+.point-number {
+	font-weight: normal;
+}

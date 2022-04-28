@@ -1,0 +1,3922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Samsa: Variable Font Inspector</title>
+<link rel="shortcut icon" href="images/favicon.png">
+
+<script src="samsa-core.js"></script>
+
+<link rel="stylesheet" type="text/css" href="samsa-gui.css"/>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="title"><h1>Samsa</h1>
+	<div class="subtitle">
+		variable font inspector<br>
+	</div>
+	<div class="subtitle"></div>
+</div>
+
+<div id="drag-drop-zone" class="drag-drop" style="position: relative;">
+	<div class="border"></div>
+	<div class="instructions">
+		<h1>Drop a variable font here</h1>
+		<p style="text-decoration: underline;">or click to select a variable font from your computer</p>
+		<p>or select from the drop-down list in the Fonts panel</p>
+	</div>
+	<input id="file-upload-input" type="file" style="position: absolute; left: 0; top: 0; opacity: 0.0; width: 100%; height: 100%;">
+</div>
+
+<div id="font-file" class="drag-drop" style="display:none;">
+	<!-- &lt;drop a variable font here&gt; -->
+</div>
+
+<div id="panels-left" class="panel-container">
+
+	<div id="panel-fonts" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Fonts</h2>
+		<div class="panel-content">
+			<select class="font-selector"></select>			
+			<div class="font-info"></div>			
+		</div>
+	</div>
+
+	<div id="panel-ui" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> UI</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-webfont" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Webfont</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-axes" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Axes</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-stat" class="panel closed">
+		<h2><span class="icon bold reveal">&#xf04b;</span> STAT</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-instances" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Instances
+			<!--
+			<span class="icon" id="instances-as-grid">&#xf00a;</span>
+			<span class="icon" id="instances-as-list">&#xf0c9;</span>
+			-->
+		</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-tvts" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Delta sets</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-designspace" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Designspace</h2>
+		<div class="panel-content"></div>
+	</div>
+
+	<div id="panel-glyphs" class="panel open">
+		<h2><span class="icon bold reveal open">&#xf04b;</span> Glyphs
+			<!-- <span class="icon bold" id="glyphs-rewind">&#xf04a;</span> -->
+			<span class="icon bold" id="glyphs-stepback" title="Step back (Alt+←)">&#xf048;</span>
+			<span class="icon bold" id="glyphs-stop" title="Stop playing">&#xf04d;</span>
+			<span class="icon bold" id="glyphs-play" title="Play">&#xf04b;</span>
+			<span class="icon bold" id="glyphs-stepforward" title="Step forward (Alt+→)">&#xf051;</span>
+			<span class="texticon" id="glyphs-ids" title="Glyph IDs">123</span>
+			<!-- <span class="icon bold" id="glyphs-fastforward">&#xf04e;</span> -->
+		</h2>
+		<div class="panel-content">
+			<div class="header">
+				<label for="glyph-filter">Filter by name or id</label><input id="glyph-filter"><div></div>
+				<label for="string-filter">Filter by string</label><input id="string-filter"><div></div>
+				<label>Filter by type</label>
+				<div style="grid-column: 2 / 4">
+					<input type="checkbox" id="filter-simple" checked><label for="filter-simple">simple</label>
+					<input type="checkbox" id="filter-composite" checked><label for="filter-composite">composite</label>
+					<input type="checkbox" id="filter-blank" checked><label for="filter-blank">blank</label>
+				</div>
+			</div>
+		</div>
+		<br clear="all">
+	</div>
+
+	<div id="panel-media" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> Media</h2>
+		<div class="panel-content">
+			<div class="media-grid"></div>
+		</div>
+	</div>
+
+	<div id="panel-about" class="panel open">
+		<h2><span class="icon bold reveal">&#xf04b;</span> About</h2>
+		<div class="panel-content">
+			Samsa is developed by <a href="https://www.lorp.org/">Laurence Penney</a> 2017–present. In 2019 Google Fonts funded major improvements and libre licensing.
+			<ul>
+			<li><a href="https://github.com/Lorp/samsa">GitHub repository</a></li>
+			<li><a href="https://www.axis-praxis.org/samsa/">Samsa</a> (hosted at Axis-Praxis)</li>
+			<li><a href="https://lorp.github.io/samsa/src/samsa-gui.html">Samsa</a> (hosted at GitHub)</li>
+			<li><a href="https://twitter.com/axis_praxis">@axis_praxis</a> updates via Twitter</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<div id="drawing" class="drag-drop" style="display:none;">
+	
+	<div id="panels-right" class="panel-container"></div>
+	<div id="glyph-info" class="panel" style="display:none">
+		<h2>Glyph info</h2>
+		<div class="panel-content">
+			<label>id</label><input class="id">
+			<label>name</label><input class="name">
+			<label>curve-order</label><input class="curve-order">
+			<label>num-contours</label><input class="num-contours">
+			<label>num-points</label><input class="num-points">
+			<label>num-components</label><input class="num-components">
+			<label>glyph-size</label><input class="glyph-size">
+			<label>num-tuples</label><input class="num-tuples">
+			<label>tuple-size</label><input class="tuple-size">
+		</div>
+	</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+let GLOBAL = {
+	vf: null, // maybe allow an array of fonts... select them with a drop down in info panel
+	currentGlyphId: null,
+};
+
+CONFIG.visualization = true;
+CONFIG.uiModes = {
+
+	light: {
+		name: "light",
+
+		layers: ["layer-grid","layer-default","layer-instance","layer-points","layer-instance-points","layer-arrows-total","layer-arrows-split","layer-pointnumbers","layer-tangents"],
+
+		cartesianAxes: {
+			stroke: "#31b8e7",
+			strokeWidth: 1,
+		},
+
+		metrics: {
+			stroke: "#31b8e7",
+			strokeWidth: 1,
+			dashArray: [3,3],
+		},
+
+		arrow: {
+			strokeWidth: 3,
+			tipLength: 20,
+			tipWidth: 15,
+			color: "#0044ee",
+		},
+
+		tangent: {
+			color: "grey",
+			strokeWidth: 2,
+		},
+
+		designspace: {
+			colors: ["blue", "red"], // these are used for the position indicators in the Designspace panel and for drawing their associated loci in the main window
+		},
+
+		tuple: {
+			colors: ["#f57670", "#c39921","#57b21f","#1ebf95","#1fb7e9","#a58efc","#f966d5"], // "ggplot2 hue" palette from https://serialmentor.com/dataviz/color-basics.html
+		},
+
+		axis: {
+			colors: ["#6991fc", "#5da2b2", "#5fa963", "#a88f30", "#c57c1d", "#df5c4b", "#b670d3", "#9381ef"], // taken from 5th column of "IBM Design v2.0 palette" https://medium.com/design-ibm/inclusive-color-sequences-for-data-viz-in-6-steps-712869b910c2
+		},
+
+		tupleNeedle: {
+			stroke: "red",
+		},
+
+		tupleScalar: {
+			fill: "black",
+		},
+
+		point: {
+			size: 10,
+			shape: "■", // one of ■●▲+x
+			shapeOffCurve: "●",
+			opacity: 1,
+		},
+
+		pointNumbers: {
+			angle: 90,
+			offset: 10,
+		},
+
+		glyphDefault: {
+			fill: "#ddd",
+			stroke: "none",
+			strokeWidth: 0,
+			backgroundColor: "transparent",
+			point: {
+				stroke: "#888",
+				strokeWidth: 3,
+				fill: "none",
+				shape: "+",
+				shapeOffCurve: "+",
+			},
+		},
+
+		glyphCurrent: {
+			fill: "none",
+			stroke: "black",
+			strokeWidth: 2,
+			opacity: 1,
+			point: {
+				size: 15,
+				strokeWidth: 0,
+				fill: "blue",
+				opacity: 0.7,
+			},
+		},
+
+		glyphThumb: {
+			fill: "black",
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		text: {
+			font: "IBM Plex",
+			size: 18,
+		},
+
+		label: {
+			font: "IBM Plex",
+			size: 12,
+		},
+	},
+
+	dark: {
+		name: "dark",
+
+		layers: ["layer-grid","layer-default","layer-instance","layer-points","layer-instance-points","layer-arrows-total","layer-arrows-split","layer-pointnumbers"],
+
+		cartesianAxes: {
+			stroke: "lightblue",
+			strokeWidth: 1,
+		},
+
+		metrics: {
+			stroke: "#31b8e7",
+			strokeWidth: 1,
+			dashArray: [3,3],
+		},
+
+		arrow: {
+			strokeWidth: 3,
+			tipLength: 20,
+			tipWidth: 15,
+			color: "orange",
+		},
+
+		tangent: {
+			color: "grey",
+			strokeWidth: 2,
+		},
+
+		designspace: {
+			colors: ["blue", "red"],
+		},
+
+		tuple: {
+			//colors: ["#269d78", "#d7601c","#7571b1","#e5318a","#68a42c","#e5aa27","#a57528"], // "ColorBrewer Dark2" palette from https://serialmentor.com/dataviz/color-basics.html
+			colors: ["#f57670", "#c39921","#57b21f","#1ebf95","#1fb7e9","#a58efc","#f966d5"], // "ggplot2 hue" palette from https://serialmentor.com/dataviz/color-basics.html
+		},
+
+		tupleNeedle: {
+			stroke: "red",
+		},
+
+		tupleScalar: {
+			fill: "black",
+		},
+
+		point: {
+			size: 7,
+			shape: "+",
+			shapeOffCurve: "+",
+			stroke: "yellow",
+			strokeWidth: 2,
+		},
+
+		pointNumbers: {
+			angle: 90,
+			offset: 10,
+			color: "blue",
+		},
+
+		glyphDefault: {
+			fill: "#555",
+			stroke: "none",
+			strokeWidth: 0,
+			backgroundColor: "black",
+		},
+
+		glyphCurrent: {
+			fill: "white",
+			strokeWidth: 2,
+			opacity: 0.8,
+			point: {
+				size: 17,
+				fill: "blue",
+				stroke: "none",
+				opacity: 0.7,
+				shape: "■", // one of ⯅●■
+				shapeOffCurve: "●", // ⯅●■
+			}
+		},
+
+		glyphThumb: {
+			fill: "black",
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		// ?better as CSS, so we can add italic, weight, border, background-color etc?
+		text: {
+			font: "IBM Plex",
+			size: 18,
+		},
+
+		label: {
+			font: "IBM Plex",
+			size: 12,
+		},
+	},
+
+	loci: {
+		name: "loci",
+
+		layers: ["layer-grid","layer-loci","layer-default","layer-instance","layer-points","layer-instance-points","layer-arrows-total","layer-arrows-split","layer-pointnumbers"],
+
+		cartesianAxes: {
+			stroke: "#31b8e7",
+			strokeWidth: 1,
+		},
+
+		metrics: {
+			stroke: "#31b8e7",
+			strokeWidth: 1,
+			dashArray: [3,3],
+		},
+
+		arrow: {
+			strokeWidth: 0,
+		},
+
+		designspace: {
+			colors: ["royalblue", "crimson"],
+		},
+
+		tuple: {
+			colors: ["#f57670", "#c39921","#57b21f","#1ebf95","#1fb7e9","#a58efc","#f966d5"], // "ggplot2 hue" palette from https://serialmentor.com/dataviz/color-basics.html
+		},
+
+		tupleNeedle: {
+			stroke: "red",
+		},
+
+		tupleScalar: {
+			fill: "black",
+		},
+
+		loci: {
+			steps: 40,
+			strokeWidth: 6,
+			style: "railway", // "railway" or "line"
+			opacity: 0.7,
+		},
+
+		point: {
+			size: 10,
+			shape: "●", // one of ■●▲+x
+			shapeOffCurve: "●",
+			opacity: 1,
+		},		
+
+		pointNumbers: {
+			angle: 90,
+			offset: 10,
+		},
+
+		glyphDefault: {
+			fill: "none",
+			stroke: "none",
+			strokeWidth: 0,
+			backgroundColor: "transparent",
+			point: {
+				stroke: "#888",
+				strokeWidth: 0,
+				fill: "none",
+				shape: "+",
+				shapeOffCurve: "+",
+			},
+		},
+
+		glyphCurrent: {
+			fill: "none",
+			stroke: "#aaa",
+			strokeWidth: 2,
+			opacity: 1,
+			point: {
+				size: 15,
+				strokeWidth: 0,
+				fill: "green",
+				opacity: 0.75,
+			},
+		},
+
+		glyphThumb: {
+			fill: "black",
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		text: {
+			font: "IBM Plex",
+			size: 18,
+		},
+
+		label: {
+			font: "IBM Plex",
+			size: 12,
+		},
+	},
+
+	preview: {
+		name: "preview",
+
+		layers: ["layer-instance"],
+
+		cartesianAxes: {
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		metrics: {
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		arrow: {
+			strokeWidth: 0,
+			tipLength: 0,
+			tipWidth: 0,
+			color: "transparent",
+		},
+
+		designspace: {
+			colors: ["blue", "red"],
+		},
+
+		tuple: {
+			colors: ["#f57670", "#c39921","#57b21f","#1ebf95","#1fb7e9","#a58efc","#f966d5"], // "ggplot2 hue" palette from https://serialmentor.com/dataviz/color-basics.html
+		},
+
+		tupleNeedle: {
+			stroke: "red",
+		},
+
+		tupleScalar: {
+			fill: "black",
+		},
+
+		point: {
+			size: 0, // disable points
+		},		
+
+		pointNumbers: {},
+
+		glyphDefault: {
+			fill: "none", // disable the default glyph
+			stroke: "none",
+			strokeWidth: 0,
+			backgroundColor: "white",
+		},
+
+		glyphCurrent: {
+			fill: "black",
+			stroke: "none",
+			opacity: 1,
+		},
+
+		glyphThumb: {
+			fill: "black",
+			stroke: "none",
+			strokeWidth: 0,
+		},
+
+		text: {
+			font: "IBM Plex",
+			size: 18,
+		},
+
+		label: {
+			font: "IBM Plex",
+			size: 12,
+		},
+	},
+}
+
+CONFIG.ui = CONFIG.uiModes["light"];
+
+CONFIG.docs = {
+	axes: {
+		wght: "regex:microsoft",
+		wdth: "regex:microsoft",
+		opsz: "regex:microsoft",
+		ital: "regex:microsoft",
+		slnt: "regex:microsoft",
+		xtra: "regex:typenetwork",
+		xopq: "regex:typenetwork",
+		ytra: "regex:typenetwork",
+		yopq: "regex:typenetwork",
+		ytlc: "regex:typenetwork",
+		ytuc: "regex:typenetwork",
+		ytde: "regex:typenetwork",
+		ytas: "regex:typenetwork",
+		xtab: "regex:typenetwork",
+		vrot: "regex:typenetwork",
+		udln: "regex:typenetwork",
+		shdw: "regex:typenetwork",
+		refl: "regex:typenetwork",
+		otln: "regex:typenetwork",
+		engr: "regex:typenetwork",
+		embo: "regex:typenetwork",
+		ytch: "regex:typenetwork",
+		xtch: "regex:typenetwork",
+		rxad: "regex:typenetwork",
+		ryad: "regex:typenetwork",
+		rsec: "regex:typenetwork",
+		vuid: "regex:typenetwork",
+		votf: "regex:typenetwork",
+		gext: "https://github.com/microsoft/OpenTypeDesignVariationAxisTags/blob/master/Proposals/Glyph_Extension_Axis/ProposalSummary.md",
+		hght: "https://github.com/microsoft/OpenTypeDesignVariationAxisTags/blob/master/Proposals/Height_Axis/ProposalSummary.md",
+		spac: "https://github.com/Microsoft/OpenTypeDesignVariationAxisTags/blob/master/Proposals/Spacing_Axis/ProposalSummary.md",
+	},
+	regex: {
+		microsoft: "https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxistag_$1",
+		typenetwork: "https://variationsguide.typenetwork.com/#$1",
+	},
+	hoi: "http://underware.nl/case-studies/hoi/",
+};
+
+
+// add an info (help) icon to each panel
+Qall(".panel>h2").forEach(header => {
+	let info = EL("div");
+	info.innerHTML = "\uf129";
+	info.classList.add("icon","bold","info");
+	info.style.position = "absolute";
+	info.style.right = "0.5em";
+	info.style.top = "0.1em";
+	header.append(info);
+});
+
+
+// shorthands
+function Q (selector) {
+	return document.querySelector(selector);
+}
+
+function Qall (selector) {
+	return document.querySelectorAll(selector);
+}
+
+function EL (tag) {
+	return document.createElement(tag);
+}
+
+function SVG (tag) {
+    return document.createElementNS("http://www.w3.org/2000/svg", tag);
+}
+
+SVGElement.prototype.attr = function (attrs) {
+// attach multiple SVG attributes
+// - example of attrs: { d: path, stroke: "black", "stroke-width": "2px", fill: "#eee" }
+	for (const prop in attrs) {
+		this.setAttributeNS(null, prop, attrs[prop]);
+	}
+};
+
+function htmlEntities(str) {
+	// https://css-tricks.com/snippets/javascript/htmlentities-for-javascript/
+	return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// TODO: specify that this gets the current fvs from sliders
+function getCurrentFvs() {
+
+	// TODO: store the current values separately from the axes’ value to avoid conversions
+
+	let fvs = {};
+	Qall(".slider").forEach(slider => {
+		let axis = slider.data.axis;
+		fvs[axis.tag] = axis.min + slider.value * (axis.max - axis.min);
+	});
+	return fvs;
+}
+
+
+// TODO: this is needless duplication of what SamsaFont.addInstance() already does
+// - we can assign the ui object in the options argument
+function appendInstanceEl(instance, select) {
+
+	const font = GLOBAL.vf;
+	const panel = Q("#panel-instances>div");
+	const cell0 = EL("div"), cell1 = EL("div"), cell2 = EL("div"), /*cell3 = EL("div"),*/ cell4 = EL("div");
+	//panel.classList.add("tiles");
+
+	// create the instance DOM element
+	let li = EL("div"); // not li?
+	let icon = "-", title;
+
+	// initialize instance if necessary
+	if (instance === undefined) {
+		instance = font.addInstance(getCurrentFvs(), { name: "Custom", ui: li }); // { name: "Custom", tuple: [] };
+	}
+
+	// list view
+	// - items are: bookmark icon, name, n axis settings
+	panel.style.minWidth = "100%";
+	panel.style.overflowX = "scroll";
+
+
+	li.classList.add("instance");
+	li.style.display = "grid";
+	li.style.gridTemplateColumns = font.axes.length > 0 ? `30px 30px 100px 30px repeat(${GLOBAL.vf.axisCount}, 70px)`
+														: `30px 30px 100px 30px`;
+
+	// instance type
+	switch (instance.type) {
+		case "default": icon = "\uf015"; title = "Default"; break; // FontAwesome home
+		case "named": icon = "\uf02e"; title = "Named instance"; break; // FontAwesome bookmark
+		case "custom": icon = "\uf1de"; title = "Custom instance"; break; // FontAwesome sliders
+		case "stat": icon = "\uf03a"; title = "STAT instance"; break; // FontAwesome list
+	}
+
+	cell0.style.cursor = "pointer";
+	cell0.style.textAlign = "center";
+	cell0.style.fontFamily = "FontAwesome";
+	cell0.innerHTML = `<strong title="${title}">${icon}</strong>`;
+
+	// SVG of the A glyph
+	// - would current glyph be better? ... the image serves as a kind of visual label, but...
+	cell1.classList.add("preview");
+	let svg = SVG("svg");
+	let glyph = font.glyphs[font.defaultGlyphId()];
+	let iglyph = glyph.numContours < 0 ? glyph.decompose(instance.tuple) : glyph.instantiate(null, instance);
+	if (iglyph && iglyph.numContours > 0) {
+
+		// simple glyph
+		let svgPath = SVG("path");
+		let svgg = SVG("g");
+		let scale = 20 / font.unitsPerEm;
+		svg.attr({width: 30, height: 30});
+		svgg.setAttributeNS(null, "transform", `translate(4,20) scale(${scale},-${scale})`);
+ 		svgPath.setAttributeNS(null, "d", iglyph.svgPath());
+		svgg.append(svgPath);
+		svg.append(svgg);
+	}
+	cell1.append(svg);
+
+	// instance name
+	cell2.style.textAlign = "center";
+	cell2.innerHTML = `<input value="${instance.name}" ${instance.type == "default" ? "readonly " : ""}style="width: 85px">`;
+
+	/*
+	// visibility
+	cell3.setAttribute("title", "Visibility");
+	cell3.style.textAlign = "center";
+	cell3.style.fontFamily = "FontAwesome";
+	cell3.style.cursor = "pointer";
+	cell3.innerHTML = "&#xf06e"; // eye open f070 eye closed
+	*/
+
+	// instantiate button
+	cell4.classList.add("instantiate");
+	cell4.setAttribute("title", "Download TTF");
+	cell4.style.textAlign = "center";
+	cell4.style.fontFamily = "FontAwesome";
+	cell4.style.cursor = "pointer";
+	cell4.innerHTML = "\uf358"; // download
+
+	// append all the elements so far
+	li.append(cell0, cell1, cell2, cell4);
+
+	// all the axis settings
+	GLOBAL.vf.axes.forEach((axis, a) => {
+		let axisCell = EL("div");
+		axisCell.style.fontSize = "75%";
+		axisCell.style.textAlign = "right";
+		axisCell.innerText = instance.fvs[axis.tag];
+		li.append(axisCell);
+	});
+
+	// bind instance data to instance element
+	li.data = { instance: instance };
+
+	// append the instance DOM element
+	panel.append(li);
+
+	cell2.addEventListener("input", ev => {
+		instance.name = ev.target.value;
+	});
+
+	// make it active
+	if (select) {
+		setActiveInstance (GLOBAL.vf, li);
+	}
+}
+
+
+function exportImage (format, filename="samsa-drawing", params) {
+	if (GLOBAL.frameIndex === undefined)
+		GLOBAL.frameIndex = 0;
+	else
+		GLOBAL.frameIndex++;
+
+	let svgCode = Q("#samsa-svg").outerHTML;
+	svgCode = svgCode.replace(`<svg `, `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" `);
+
+	// replace clientWidth, clientHeight with 1000,1000 - seems to work pretty well, but should be improved and made configurable
+	svgCode = svgCode.replace(/ width="\d*"/, ` width="1000"`);
+	svgCode = svgCode.replace(/ height="\d*"/, ` height="1000"`);
+
+	if (format == "svg") {
+		let fauxLink = EL("a");
+		fauxLink.download = filename + ".svg";
+		fauxLink.href = "data:image/svg+xml;base64," + btoa(svgCode);
+		document.body.append(fauxLink); // needed for Firefox, not Chrome or Safari
+		fauxLink.click();
+		fauxLink.remove();
+	}
+
+	else if (format == "png") {
+	
+		// 1. create the image
+		// 2. define what happens when it’s loaded
+		// 3. define what to load
+		let img = new Image(1000, 1000);
+		img.onload = function () {
+
+			// make a canvas to export the bitmap
+			let canvas = EL("canvas");
+			canvas.setAttribute("width", 1000);
+			canvas.setAttribute("height", 1000);
+			canvas.id = "samsa-drawing-canvas" + "-" + filename;
+			canvas.style.border = "1px solid red";
+			document.body.append(canvas);
+			let frameIndexStr = GLOBAL.frameIndex.toString();
+			while (frameIndexStr.length<3)
+				frameIndexStr = `0${frameIndexStr}`;
+
+			if (params && params.frameNumbers === true)
+				filename += frameIndexStr;
+			filename += ".png";
+			let ctx = canvas.getContext("2d");
+			ctx.fillStyle = "white";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(img, 0, 0);
+			let fauxLink = EL("a");
+			fauxLink.download = filename;
+			fauxLink.href = canvas.toDataURL('image/png'); // get pixels from canvas
+			document.body.append(fauxLink); // needed for Firefox, not Chrome or Safari
+			fauxLink.click();
+			fauxLink.remove();
+			canvas.remove(); // better to just blank it each time, when exporting multiple frames?
+		}
+
+		// give the <img> a src attribute with an SVG data url, to render the SVG on the canvas
+		img.src = "data:image/svg+xml," + encodeURIComponent(svgCode);	
+	}
+
+	else if (format == "svg-animation") {
+
+		let svg = Q("#samsa-svg").cloneNode();
+		let svgg = Q("#samsa-svg #svg-transform-group").cloneNode();
+		let svgInstance = Q("#samsa-svg #layer-instance").cloneNode();
+		let svgAnimate = SVG("animate");
+
+		svgg.removeAttribute("id");
+		svgInstance.removeAttribute("d");
+		svgInstance.removeAttribute("id");
+
+		svgAnimate.attr({
+			attributeName: "d",
+			values: params.values, // the array of paths converted to a string
+			keyTimes: params.keyTimes,
+			dur: params.dur,
+			repeatCount: params.repeatCount,
+		});
+
+		svgInstance.append(svgAnimate);
+		svgg.append(svgInstance);
+		svg.append(svgg);
+		let svgCode = svg.outerHTML; // local scope svgCode
+
+		// same fixups as in simple "svg" export
+		svgCode = svgCode.replace(`<svg `, `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" `);
+		svgCode = svgCode.replace(/ width="\d*"/, ` width="1000"`);
+		svgCode = svgCode.replace(/ height="\d*"/, ` height="1000"`);
+
+		let fauxLink = EL("a");
+		fauxLink.download = filename + ".svg";
+		fauxLink.href = "data:image/svg+xml;base64," + btoa(svgCode);
+		document.body.append(fauxLink); // needed for Firefox, not Chrome or Safari
+		fauxLink.click();
+		fauxLink.remove();
+	}
+}
+
+
+
+function vfLoaded (font) {
+
+	loadingAnimationEnd();
+
+	GLOBAL.vf = font;
+	let panel, panelPart;
+
+	GLOBAL.currentGlyphId = 0;
+	GLOBAL.tvtToggles = [];
+
+	// set up initial global tuple, the default designspace location
+	GLOBAL.tuple = [];
+	font.axes.forEach(() => {
+		GLOBAL.tuple.push(0);
+	});
+
+	///////////////////////////////////////////////////////
+	// Main container grid: hide overlay and show main UI, reset cursor
+	///////////////////////////////////////////////////////
+	Q("#drag-drop-zone").style.display = "none";
+	Q("#font-file").style.display = "block";
+	Q("#drawing").style.display = "block";
+	Q("#container").style.backgroundColor = "transparent";
+
+
+	///////////////////////////////////////////////////////
+	// Filename box
+	///////////////////////////////////////////////////////
+	Q("#font-file").innerText = font.filename; // or font.names[6];
+
+
+	///////////////////////////////////////////////////////
+	// Fonts panel
+	///////////////////////////////////////////////////////
+	panelPart = Q("#panel-fonts .font-info");
+	panelPart.innerText = "";
+	panelPart.style.fontSize = "75%";
+	panelPart.style.wordBreak = "break-all";
+	[
+		["File", font.filename],
+		["Size", `${font.filesize} bytes, ${font.numGlyphs} glyph${font.numGlyphs==1?"":"s"}`],
+		["Full name", font.names[4]],
+		["Version", font.names[5]],
+	].forEach(item => {
+		panelPart.innerHTML += `<em>${item[0]}:</em> ${item[1]}<br>`;
+	});
+
+
+	///////////////////////////////////////////////////////
+	// UI Panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-ui>div");
+	if (!Q("#ui-mode")) { // only build once
+		panel.innerText = "";
+
+		// ui options select
+		let uiModeHTML = "";
+		uiModeHTML += `<select id="ui-mode">`;
+		Object.keys(font.config.uiModes).forEach(modeId => {
+			let mode = font.config.uiModes[modeId];
+			uiModeHTML += `<option value="${modeId}">${mode.name || modeId}</option>`;
+		});
+		uiModeHTML += `</select><br>`;
+		panel.innerHTML += uiModeHTML;
+		panel.innerHTML += `<input id="arrows-split" class="ui-arrows" type="checkbox" checked><label for="arrows-split">Split deltas</label>`;
+		panel.innerHTML += "&nbsp;";
+		panel.innerHTML += `<input id="arrows-total" class="ui-arrows" type="checkbox"><label for="arrows-total">Total deltas</label>`;
+		panel.innerHTML += "&nbsp;";
+		panel.innerHTML += `<input id="point-numbers" class="ui-arrows" type="checkbox"><label for="point-numbers">Point numbers</label>`;
+		panel.innerHTML += "&nbsp;";
+		panel.innerHTML += `<input id="point-tangents" class="ui-arrows" type="checkbox" checked><label for="point-tangents">Tangents</label>`;
+
+		// set the value for the select (for some reason it doesn’t work if this code comes any earlier)
+		Q("#ui-mode").value = font.config.ui.name;
+
+		// UI checkbox click
+		Qall(".ui-arrows").forEach(el => {
+			el.addEventListener("change", e => {
+				let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+				let glyph = font.glyphs[GLOBAL.currentGlyphId];
+				iglyph = glyph.instantiate(instance.tuple);
+				setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+				font.instances.pop();
+			});
+		});
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Webfont panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-webfont>div");
+	panel.innerText = "AaBbCc";
+	panel.setAttribute("contentEditable", true);
+
+	// add the webfont (not experimental CUBE fonts though)
+	if (font.flavor != "CUBE") {	
+		let webfontFace = new FontFace("Webfont", font.data.buffer)
+		webfontFace.load().then(webfontFace => {
+			document.fonts.add(webfontFace);
+		});
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Media panel
+	///////////////////////////////////////////////////////
+	let mediaGrid = Q("#panel-media .media-grid");
+	mediaGrid.innerText = "";
+
+	// export buttons
+	mediaGrid.innerHTML += `<div></div><button id="export-svg">Export SVG</button>`;
+	mediaGrid.innerHTML += `<div></div><button id="export-png">Export PNG</button>`;
+	mediaGrid.innerHTML += `<div></div><button id="export-mp4">Export MP4</button>`;
+	let svgAxisSel = EL("div");
+	svgAxisSel.innerHTML += `<label>Select axis</label> `;
+
+	// axis selector
+	let mediaAxisSelect = EL("select");
+	mediaAxisSelect.id = "svg-animation-axis";
+	font.axes.forEach(axis => {
+		let option = EL("option");
+		option.setAttribute("value", axis.id);
+		option.innerText = `${axis.tag} (${axis.id})`;
+		mediaAxisSelect.append(option);
+	});
+	svgAxisSel.append(mediaAxisSelect);
+	mediaGrid.append(svgAxisSel);
+	mediaGrid.innerHTML += `<button id="export-svg-animation">Export SVG animation</button>`;
+	
+	// SVG export
+	Q("#export-svg").addEventListener("click", () => {
+		exportImage ("svg");
+	});
+
+	// SVG animation export
+	Q("#export-svg-animation").addEventListener("click", () => {
+
+		// build special animation object to pass to the exporter
+		// - MDN https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate
+		// - CSS-Tricks/Sara Soueidan https://css-tricks.com/guide-svg-animations-smil/
+
+		// for every single-axis tuple that controls axis 0
+		// - record start, peak, end
+		// - build this into a sorted array of timing values
+		// - then use this array of timing values to get the required instances
+
+		// let’s build fvs, not tuple, so we don’t need to worry about avar or whether default is at min or max
+		// - hmm, are you sure? we’re using normalized values because we parse tvts
+
+
+		let fvs = {};
+		let glyph = font.glyphs[GLOBAL.currentGlyphId];
+		let keyTimesSet = new Set();
+		let thisAxis = Q("#panel-media #svg-animation-axis").value;
+		let svgAnimation;
+
+		// find the tvts that only affect the chosen axis, then record their start, peak, end
+		glyph.tvts.forEach(tvt => {
+
+			// check it’s just axis 0 that is non-zero
+			if (tvt.peak[thisAxis] != 0.0) {
+
+				let valid = true;
+				for (let a=0; a<font.axes.length; a++) {
+					if (tvt.peak[a] != 0.0 && a != thisAxis) {
+						valid = false;
+						break;
+					}
+				}
+				if (valid) {
+					keyTimesSet.add(tvt.start[thisAxis]).add(tvt.peak[thisAxis]).add(tvt.end[thisAxis]);
+				}
+			}
+		});
+
+		if (keyTimesSet.size > 0) {
+
+			// create a sorted keyTimes array from the set of unique values
+			let keyTimes = Array.from(keyTimesSet).sort((a, b) => a - b);
+			let keyTimesZeroOne; // normalized on a scale from 0 to 1
+			let keyPaths = [];
+			keyTimes.forEach(T => {
+
+				let animInstance, iglyph;
+				let frameTuple = []; // create tuple for this frame’s instance
+				for (let a=0; a < font.axes.length; a++) {
+					frameTuple[a] = a==thisAxis ? T : 0; // animate the <thisAxis> axis
+				}
+				
+				animInstance = font.addInstance(null, {tuple: frameTuple}); // make instance
+				iglyph = glyph.instantiate(animInstance.tuple);
+				keyPaths.push(iglyph.decompose(frameTuple).svgPath());
+
+				font.instances.pop(); // pop instance
+			});
+
+			// create keyTimesZeroOne array, normalized onto range [0,1]
+			let kMin=keyTimes[0], kMax=keyTimes[keyTimes.length-1];
+			if (kMin == 0.0 && kMax == 1.0)
+				keyTimesZeroOne = keyTimes;
+			else {
+				keyTimesZeroOne = [];
+				keyTimes.forEach(T => {
+					keyTimesZeroOne.push((T-kMin) / (kMax-kMin));
+				});
+			}
+
+			// build svg using keyPaths and keyTimes
+			svgAnimation = {
+				attributeName: "d",
+				dur: "5s",
+				values: keyPaths.join(";"),
+				keyTimes: keyTimesZeroOne.join(";"),
+				repeatCount: "indefinite",
+			};
+		}
+		if (svgAnimation)
+			exportImage ("svg-animation", "samsa-animation", svgAnimation);
+	});
+
+	// PNG export
+	Q("#export-png").addEventListener("click", () => {
+		exportImage ("png");
+	});
+
+	// MP4 export
+	Q("#export-mp4").addEventListener("click", () => {
+
+		// TODO: more efficient to just make one canvas, and blank it for each frame?
+
+		if (0) {
+			GLOBAL.animSteps = 10;
+			GLOBAL.animCurrent = 0;
+
+			function doAnimationFrame () {
+				if (GLOBAL.animCurrent < GLOBAL.animSteps) {
+
+					let animInstance, iglyph;
+					let Tmin = font.axes[0].min < font.axes[0].default ? -1.0 : 0.0;
+					let Tmax = font.axes[0].max > font.axes[0].default ? 1.0 : 0.0;
+					let T = Tmin + GLOBAL.animCurrent/(GLOBAL.animSteps-1) * (Tmax-Tmin);
+					let frameNumberStr = GLOBAL.animCurrent.toString();
+					while (frameNumberStr.length < 3)
+						frameNumberStr = `0${frameNumberStr}`;
+
+					let frameTuple = []; // create tuple for this frame’s instance
+					for (let a=0; a < font.axes.length; a++) {
+						frameTuple[a] = a==0 ? T : 0; // animate only axis 0 for now
+					}
+					
+					animInstance = font.addInstance(null, {tuple: frameTuple}); // make instance
+					iglyph = glyphApplyVariations(font.glyphs[GLOBAL.currentGlyphId], null, animInstance); // make instance glyph
+
+					setActiveGlyph (GLOBAL.currentGlyphId, animInstance); // make SVG of instance glyph
+					exportImage ("png", `samsa-frame${frameNumberStr}`, {frameNumbers: false}); // place SVG on canvas, export canvas as PNG
+					font.instances.pop(); // pop instance
+
+					GLOBAL.animCurrent++;
+				}
+				else {
+					console.log(`end`);
+					clearInterval (GLOBAL.animTimer);
+					GLOBAL.animTimer = undefined;
+				}
+
+			}
+
+			GLOBAL.animTimer = setInterval(doAnimationFrame, 200);
+		}
+		else {
+
+			const steps = 50;
+
+			for (let s=0; s<steps; s++) {
+
+				let animInstance, glyph, iglyph;
+				let Tmin = font.axes[0].min < font.axes[0].default ? -1.0 : 0.0;
+				let Tmax = font.axes[0].max > font.axes[0].default ? 1.0 : 0.0;
+				let T = Tmin + s/(steps-1) * (Tmax-Tmin);
+				let frameNumberStr = s.toString();
+				while (frameNumberStr.length < 3) // generate frame number string (TODO: write padWithZeroes() function)
+					frameNumberStr = `0${frameNumberStr}`;
+
+				let frameTuple = []; // create tuple for this frame’s instance
+				for (let a=0; a < font.axes.length; a++) {
+					frameTuple[a] = a==0 ? T : 0; // animate only axis 0 for now
+				}
+				
+				animInstance = font.addInstance(null, {tuple: frameTuple}); // make instance
+				glyph = font.glyphs[GLOBAL.currentGlyphId];
+				iglyph = glyph.numContours < 0 ? glyph.decompose(animInstance.tuple) : glyph.instantiate(null, animInstance);
+				setActiveGlyph (GLOBAL.currentGlyphId, animInstance); // make SVG of instance glyph
+				exportImage ("png", `samsa-frame${frameNumberStr}`, {frameNumbers: false}); // place SVG on canvas, export canvas as PNG
+				font.instances.pop(); // pop instance
+			}
+
+			// save shell script to invoke ffmpeg
+			let frameRate = 24;
+			let shellScript = `ffmpeg -r ${frameRate} -i samsa-frame%03d.png -vcodec libx264 -pix_fmt yuv420p samsa-movie.mp4`;
+			let scriptLink = EL("a");
+			scriptLink.download = "samsa-movie.sh";
+			scriptLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(shellScript));
+			document.body.append(scriptLink); // needed for Firefox, not Chrome or Safari
+			scriptLink.click();
+			document.body.removeChild(scriptLink);
+		}
+
+	});
+
+
+	///////////////////////////////////////////////////////
+	// Axes panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-axes>div");
+	panel.innerText = "";
+
+
+	let liH = EL("li");
+	liH.classList.add("header");
+	liH.style.display = "grid";
+	liH.style.gridTemplateColumns = `35px 20px 1fr 50px 50px 50px 50px 10px`;
+	liH.innerHTML = `<label>Tag</label><label class="icon bold">\uf129</label><label>Name</label><label class="min icon bold" style="text-align:center;">\uf13a</label><label class="default icon bold" style="text-align:center;">\uf015</label><label class="max icon bold" style="text-align:center;">\uf139</label><label class="icon bold" style="text-align:center;">\uf007</label>`;
+	panel.append(liH);
+
+	// add each axis
+	font.axes.forEach((axis, a) => {
+
+		let li = EL("li");
+		li.id = `axis-${a}`;
+		li.classList.add("axis-row");
+		li.style.display = "grid";
+		li.style.gridTemplateColumns = liH.style.gridTemplateColumns;
+		li.style.listStyleType = "none";
+
+		li.innerHTML = `<label class="tag"><code>${axis.tag}</code></label>`;
+
+		let docStr = "", docUrl = font.config.docs.axes[axis.tag.toLowerCase()];
+		if (docUrl) {
+			let docParts = docUrl.split(/:(.+)/)
+			if (docUrl && docParts[0] == "regex") {
+				docUrl = font.config.docs.regex[docParts[1]].replace("$1", axis.tag.toLowerCase()); // handles microsoft and typenetwork
+			}
+			docStr = `<a href="${docUrl}" class="icon bold" title="‘${axis.tag}’ axis specification" target="_blank">\uf05a</a>`; // info icon, links to the specification of this axis
+		}
+		li.innerHTML += `<div>${docStr}</div>`;
+
+		li.innerHTML += `<label>${axis.name}</label>`;
+
+		li.innerHTML += `<input class="axis-min" value="${axis.min}" readonly style="text-align:right;">`;
+		li.innerHTML += `<input class="axis-default" value="${axis.default}" readonly style="text-align:right;">`;
+		li.innerHTML += `<input class="axis-max" value="${axis.max}" readonly style="text-align:right;">`;
+		li.innerHTML += `<input class="axis-current active" value="${axis.default}" style="text-align:right; font-weight: 900;">`; // current
+
+		let nudger = EL("div");
+		nudger.style.height = "1rem";
+		nudger.classList.add("no-select");
+		nudger.style.fontSize = "0.5rem";
+		nudger.innerHTML += `<div class="axis-nudge">+</div>`;
+		nudger.innerHTML += `<div class="axis-nudge">−</div>`;
+		li.append(nudger);
+
+		panel.append(li);
+
+		// handle text input
+		li.querySelector(".axis-current").addEventListener("change", ev => {
+
+			const font = GLOBAL.vf;
+			const axis = ev.target.closest("li").data.axis;
+
+			// parse the number in base 10 or base 16
+			const numFormat = Q("#axis-value-format").value;
+			let number;
+			switch (numFormat) {
+				case "user": case "norm":
+					number = parseFloat(ev.target.value);
+					break;
+				case "userhex": case "normhex":
+					number = parseInt(ev.target.value, 16);
+					if (numFormat == "userhex") {
+						if (number >= 0x80000000)
+							number -= 0x100000000;
+						number /= 0x10000;
+					}
+					else { // numFormat == "normhex"
+						if (number >= 0xc000)
+							number -= 0x10000;
+						number /= 0x4000;
+					}
+					break;
+			}
+
+			if (numFormat == "user" || numFormat == "userhex") {
+				number = GLOBAL.vf.axisNormalize(axis, number);
+			}
+
+			if (number>1) number = 1;
+			if (number<-1) number = -1;
+			GLOBAL.tuple[axis.id] = number;
+			let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+			setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+			setAxes (font, font.tupleToFvs(GLOBAL.tuple));
+			axesUpdateValues();
+			panelSTAT_handleChange();
+			panelWebfont_handleChange();
+			updateDesignspace();
+			font.instances.pop();
+		});
+
+		let slider = EL("input");
+		slider.classList.add("slider");
+		slider.setAttribute("type", "range");
+		slider.setAttribute("min", 0.0);
+		slider.setAttribute("max", 1.0);
+		slider.setAttribute("step", 0.001);
+
+		panel.append(slider);
+
+		slider.data = li.data = {axis: axis, current: axis.default};
+
+		slider.addEventListener("input", axisInput);
+
+		// double-click sets the axis to default
+		li.querySelector(".tag").addEventListener("dblclick", ev => {
+
+			let fvsFromSliders = getCurrentFvs();
+			let fvs = font.tupleToFvs(GLOBAL.tuple);
+			let tag = ev.target.innerText;
+			fvs[tag] = axis.default;
+
+			setAxes (font, fvs);
+			let instance = font.addInstance(fvs);
+			setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+			axesUpdateValues();
+			panelSTAT_handleChange();
+			panelWebfont_handleChange();
+			updateDesignspace();
+			font.instances.pop();
+		});
+
+	});
+
+	// create grid layout
+	let grid = EL("div");
+	grid.style.display = "grid";
+	grid.classList.add("axes-footer");
+	grid.style.gridTemplateColumns = "30% 35% 1fr";
+	grid.style.gridColumnGap = "3px";
+
+	let axisValueFormat = EL("select");
+	axisValueFormat.id = "axis-value-format";
+	axisValueFormat.innerHTML = `<option>user</option><option>userhex</option><option>norm</option><option>normhex</option>`;
+
+	let addInstanceEl = EL("button");
+	addInstanceEl.innerText = "Add instance";
+	addInstanceEl.class = "instance-add";
+
+	let axisValueLabel = EL("label");
+	axisValueLabel.innerText = "Number format";
+
+	grid.append(axisValueLabel, axisValueFormat, addInstanceEl);
+
+	// avar toggle
+	if (font.avar.length > 0) {
+		let avarLabel = EL("label");
+		let avarChk = EL("input");
+		avarChk.setAttribute("type", "checkbox");
+		avarChk.id = "avarChk";
+		avarLabel.innerText = "Show avar";
+		avarLabel.setAttribute("for", avarChk)
+		grid.append(avarLabel, avarChk);
+
+		avarChk.addEventListener("change", ev => {
+			Q(`#avar`).style.display = avarChk.checked ? "block" : "none";
+		});
+	}
+
+	panel.append(grid);
+
+	// avar ui
+	const avarDiv = EL("div");
+	avarDiv.id = "avar";
+
+	if (font.avar.length > 0) {
+		let avarSVGwidth = 340, avarSVGheight = 100;
+		let avarMapColor = "grey", avarCurrentColor = "limegreen";
+		font.avar.forEach((axisMaps, a) => {
+			if (axisMaps.length > 0) {
+				const avarSVG = SVG("svg");
+
+				avarSVG.classList.add("avar-axis-svg");
+				avarSVG.data = {axis: font.axes[a]};
+				avarSVG.attr({
+					width: 360,
+					height: 116,
+				});
+
+				let rect = SVG("rect");
+				rect.attr({
+					x: 10,
+					y: 10,
+					width: avarSVGwidth,
+					height: avarSVGheight,
+					stroke: "black",
+					"stroke-width": 0.25,
+					fill: "none",
+				});
+				avarSVG.append(rect);
+
+				axisMaps.forEach(map => {
+
+					let arrowLine = SVG("line");
+					let arrowHead = SVG("path");
+					let arrow = getArrowParams({
+						x1: 10 + (map[0]+1)/2 * avarSVGwidth,
+						y1: 10,
+						x2: 10 + (map[1]+1)/2 * avarSVGwidth,
+						y2: 10 + avarSVGheight,
+						tipWid: 5,
+						tipLen: 10,
+					});
+
+					arrowLine.attr({
+						x1: arrow.x1,
+						y1: arrow.y1,
+						x2: arrow.newX2,
+						y2: arrow.newY2,
+						stroke: avarMapColor,
+						"stroke-width": 1,
+						fill: avarMapColor,
+					});
+
+					arrowHead.attr({
+						d: `M${arrow.x2} ${arrow.y2}L${arrow.arrowX1} ${arrow.arrowY1}L${arrow.arrowX2} ${arrow.arrowY2}Z`,
+						fill: avarMapColor,
+					});
+
+					avarSVG.append(arrowLine, arrowHead);
+				});
+
+				// current line
+				let avarCurrentLine = SVG("line");
+				let avarCurrentHead = SVG("path");
+				let arrow = getArrowParams({
+					x1: 10 + 1/2 * avarSVGwidth,
+					y1: 10,
+					x2: 10 + 1/2 * avarSVGwidth,
+					y2: 10+avarSVGheight,
+					tipWid: 10,
+					tipLen: 20,
+				});
+				avarCurrentLine.attr({
+					stroke: avarCurrentColor,
+					"stroke-width": 3,
+					x1: arrow.x1,
+					y1: arrow.y1,
+					x2: arrow.newX2,
+					y2: arrow.newY2,
+				});
+
+				avarCurrentHead.attr({
+					d: `M${arrow.x2} ${arrow.y2}L${arrow.arrowX1} ${arrow.arrowY1}L${arrow.arrowX2} ${arrow.arrowY2}Z`,
+					fill: avarCurrentColor,
+				});
+
+				avarCurrentLine.classList.add("avar-current");
+				avarCurrentHead.classList.add("avar-current");
+
+				avarSVG.append(avarCurrentLine, avarCurrentHead);
+
+				let titleEl = SVG("title");
+				titleEl.textContent = `${font.axes[a].default}\n→ ${0}\n → ${0}\n${font.axes[a].default}`;
+				avarSVG.append(titleEl);
+
+				avarDiv.append(avarSVG);
+			}
+
+		});
+	}
+	panel.append(avarDiv);
+
+	// handle events
+
+	// event: click
+	addInstanceEl.addEventListener("click", ()=>{
+		appendInstanceEl(undefined, true);
+	});
+
+	// event: change format
+	Q("#axis-value-format").addEventListener("change", ()=>{
+
+		let fvs = font.tupleToFvs(GLOBAL.tuple);
+		font.axes.forEach((axis,a) => {
+			Q(`#axis-${a}>.axis-min`).value = numberFormat(axis.min, axis);
+			Q(`#axis-${a}>.axis-default`).value = numberFormat(axis.default, axis);
+			Q(`#axis-${a}>.axis-max`).value = numberFormat(axis.max, axis);
+			let currentVal = fvs[axis.tag] === undefined ? axis.default : fvs[axis.tag];
+			Q(`#axis-${a}>.axis-current`).value = numberFormat(currentVal, axis);
+		});
+
+	});
+
+
+	if (font.axes.length == 0) {
+		panel.innerHTML = "This font does not contain variation axes.";
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Delta sets panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-tvts>div");
+	//panel.innerText = "";
+
+	panel.innerHTML = "This font does not contain delta sets.";
+
+
+
+	///////////////////////////////////////////////////////
+	// STAT panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-stat>div");
+	panel.innerText = "";
+	if (font.tables.STAT) {
+		const STAT = font.tables.STAT.data;
+
+		// create grid layout
+		let grid = EL("div");
+		grid.style.display = "grid";
+		grid.classList.add("designAxes");
+		grid.style.gridTemplateColumns = "30% 35% 1fr";
+		grid.style.gridColumnGap = "3px";
+
+		let label, select, note;
+
+		// STAT version
+		const versionCol0 = EL("label");
+		const versionCol1 = EL("label");
+		versionCol0.innerText = "STAT version";
+		versionCol1.innerText = `${STAT.majorVersion}.${STAT.minorVersion}`;
+		grid.append(versionCol0, versionCol1, new EL("div")); // last cell is blank
+
+		// for each STAT designAxis create a <select>; plus a <select> for multiaxis axisValueTables
+		let selects = [];
+		for (let a=0; a <= STAT.designAxesSorted.length; a++) { // we build 1+designAxes.length selects
+			let select = EL("select");
+			select.data = {};
+			
+			if (a < STAT.designAxes.length)
+				select.data.designAxis = STAT.designAxesSorted[a]; // we make 1 per designAxis, plus another for multiaxis (format 4)
+
+			let option = EL("option");
+			option.value = -1;
+			option.innerText = "[no match]";
+			select.append(option)
+
+			selects.push(select);
+		}
+		
+		// go thru all axisValueTables, assigning them to their correct <select>
+		STAT.axisValueTables.forEach((avt, a) => {
+
+			let option = EL("option");
+			option.value = a; // for easy retrieval of the axisValueTable later
+			option.data = { axisValueTable: avt };
+			option.innerText = font.names[avt.nameID];
+			if (avt.flags & 0x0002) { // ELIDABLE_AXIS_VALUE_NAME
+				option.innerText = "(" + option.innerText + ")";
+			}
+
+			switch (avt.format) {
+
+				case 1: case 2: case 3:
+					let designAxis = STAT.designAxes[avt.axisIndex];
+					selects[designAxis.axisOrdering].append(option); // TODO: vulnerability when axisOrdering values are not well formed, zero-indexed ids
+					break;
+
+				case 4:
+					selects[STAT.designAxesSorted.length].append(option); // append to the last select (for multi-axis records)
+					break;
+			}
+
+		});
+
+		selects.forEach(select => {
+
+			label = EL("label");
+
+			if (select.querySelectorAll("option").length == 0) {
+				// handle a <select> without options
+				let option = EL("option");
+				option.innerText = "(none)";
+				select.append(option);
+				select.disabled = true;
+			}
+			else {
+				// handle changes in this <select>
+				select.addEventListener("change", ev => {
+
+					const STAT = font.tables.STAT.data;
+					if (ev.target.value != -1) {
+
+						const STAT = GLOBAL.vf.tables.STAT.data;
+						let avt = STAT.axisValueTables[ev.target.value];
+						let fvs = GLOBAL.vf.tupleToFvs(GLOBAL.tuple);
+						let axisIndices = avt.axisIndex;
+						let values = avt.value;
+						if (avt.format != 4) { // for format 4, they are already arrays
+							axisIndices = [axisIndices];
+							values = [values];
+						}
+
+						// upadte the fvs from the axisValueTable
+						axisIndices.forEach((axisIndex, a) => {
+							fvs[STAT.designAxes[axisIndex].tag] = values[a];
+						});
+
+						// update the rest of the Samsa UI
+						setAxes (font, fvs);
+						let instance = font.addInstance(fvs, {type: "custom"});
+						setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+						axesUpdateValues();
+						panelSTAT_handleChange(fvs); // TODO: add another parameter NOT to update the select selection when false
+						panelWebfont_handleChange();
+						updateDesignspace();
+						font.instances.pop();
+
+					}
+				});
+			}
+
+			if (select.data && select.data.designAxis)
+				label.innerText = font.names[select.data.designAxis.nameID];
+			else
+				label.innerText = "Multi-axis";
+
+			// disable selection for any <select> with no options
+			if (select.options.length <= 1)
+				select.disabled = true;	
+
+			// append these to the grid
+			grid.append(label, select, EL("label"));
+
+		});
+
+		label = EL("label");
+		let input = EL("input");
+
+		input.id = "stat-composed-name";
+		input.readOnly = true;
+		label.innerText = "Composed name";
+
+		// "Add instance" button
+		let addInstanceEl = EL("button");
+		addInstanceEl.innerText = "Add instance";
+		addInstanceEl.class = "instance-add";
+
+		// add grid to the panel
+		grid.append(label, input, addInstanceEl);
+		panel.append(grid);
+
+		// set current STAT instance and add it to the Instances panel
+		addInstanceEl.addEventListener("click", () => {
+
+			let fvs = GLOBAL.vf.tupleToFvs(GLOBAL.tuple);
+			let instance = font.addInstance(fvs, { type: "stat", name: Q("#stat-composed-name").value });
+			appendInstanceEl(instance, true);
+		});
+	}
+
+	else {
+		panel.innerHTML = "This font does not contain a STAT table.";
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Instances panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-instances>div");
+	panel.innerText = "";
+	panel.style.backgroundClip = "border-box";
+	panel.style.padding = "1px 0"; // necessary so the padding of the contents uses the panel’s background-color 
+
+	let li = Q("div");
+	let fvsString = "";
+
+	// add each instance
+	font.instances.forEach((instance, i) => {
+		appendInstanceEl(instance);
+	});
+	setActiveInstance(GLOBAL.vf); // without an instance parameter, it sets it to the default
+
+
+	///////////////////////////////////////////////////////
+	// Designspace panel
+	///////////////////////////////////////////////////////
+	panel = Q("#panel-designspace>div");
+	panel.innerText = "";
+	panel.style.backgroundColor = "white";
+
+	// build cartesian area
+	let cartesian = EL("div");
+	cartesian.id = "ds-cartesian";
+	cartesian.setAttribute("style", "width: 100%; height: 360px;");
+	panel.append(cartesian);
+
+	// checkboxes for X and Y axis assignment
+	let htmlX, htmlY;
+	htmlX = `<div id="xSelect" class="ds-axis-group">`;
+	htmlY = `<div id="ySelect" class="ds-axis-group">`;
+	GLOBAL.vf.axes.forEach((axis,a) => {
+		htmlX += `<div><input type="checkbox" id="x-${a}" value="${a}"${a==0 ? " checked" : ""}><label for="x-${a}">${axis.tag}</label></div>`;
+		htmlY += `<div><input type="checkbox" id="y-${a}" value="${a}"${a==1 ? " checked" : ""}><label for="y-${a}">${axis.tag}</label></div>`;
+	});
+	htmlX += `</div>`;
+	htmlY += `</div>`;
+	panel.innerHTML += `<div class="cartesian-axis-row"><div>X=<span id="xValue">0</span></div>${htmlX}</div>`;
+	panel.innerHTML += `<div class="cartesian-axis-row"><div>Y=<span id="yValue">0</span></div>${htmlY}</div>`;
+	
+	// attach change events to each checkbox
+	Qall(".ds-axis-group input").forEach(el => {
+		el.addEventListener("change", () => {
+			// validate new state of checkboxes
+			let valid = true, foundAxes = [];
+			Qall(".ds-axis-group input:checked").forEach(el => {
+				if (foundAxes.includes(el.value))
+					valid = false;
+				else
+					foundAxes.push(el.value);
+
+				updateDesignspace();
+				redrawFeatureVariationsBoxes(GLOBAL.currentGlyphId);
+			});
+
+			// if invalid, set red background
+			xSelect.style.backgroundColor = ySelect.style.backgroundColor = valid ? "inherit" : "red"; // TODO: work out scope of xSelect and ySelect here
+		});
+	});
+
+	// TODO: consider user/normalized option
+
+	buildDesignspace();
+
+
+	// TODO: .designspace export - is this useful?
+	if (false) {
+
+		let exportEl = EL("button");
+		exportEl.innerText = "Export as .designspace";
+		exportEl.id = "instance-add";
+		panel.append(exportEl);
+
+		/*
+		<designspace format="3">
+			<axes>
+				<!-- define axes here -->
+				<axis../>
+				</axes>
+			<sources>
+				<!-- define masters here -->
+				<source../>
+			</sources>
+			<instances>
+				<!-- define instances here -->
+				<instance../>
+			</instances>
+		</designspace>
+		*/
+
+		let designspace = EL("designspace");
+		designspace.setAttribute("format", 3);
+		let dsAxes = EL("axes");
+		let dsSources = EL("sources");
+		let dsInstances = EL("instances");
+		GLOBAL.vf.axes.forEach(axis => {
+			let dsAxis = EL("axis");
+			dsAxis.setAttribute("name", axis.name);
+			dsAxis.setAttribute("tag", axis.tag);
+			dsAxis.setAttribute("minimum", axis.min);
+			dsAxis.setAttribute("default", axis.default);
+			dsAxis.setAttribute("maximum", axis.max);
+			dsAxes.append(dsAxis);
+		})
+		// what to do about sources?
+		GLOBAL.vf.instances.forEach(instance => {
+			let dsInst = EL("instance");
+			//dsInstances.appendChild(dsInst);
+		})
+		designspace.append(dsAxes, dsSources, dsInstances);
+		console.log ("<?xml version='1.0' encoding='utf-8'?>\n" + designspace.outerHTML);
+	}
+
+
+
+	if (!panel.parentNode.classList.contains("open"))
+		panel.style.display = "none";
+
+
+	///////////////////////////////////////////////////////
+	// Glyphs panel
+	///////////////////////////////////////////////////////
+	GLOBAL.currentGlyphId = font.defaultGlyphId();
+	updateGlyphsPanel (font.instances[0]); // instances[0] is always the default instance
+
+
+	Q("body").style.cursor = "default";
+
+
+	///////////////////////////////////////////////////////
+	// late event handlers and assignments
+	///////////////////////////////////////////////////////
+
+	// ui: handle change of mode
+	Q("#ui-mode").addEventListener("change", () => {
+		font.config.ui = font.config.uiModes[Q("#ui-mode").value]; // set the config variable to the current selection in #ui-mode
+		let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+		setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+		font.instances.pop();
+	});
+
+	// designspace: handle mousemove and mousedown (late event handler)
+	Q("#ds-cartesian").addEventListener("mousemove", e => {
+		// requires pointer-events:none on all grid lines
+		if (e.buttons & 1) { // 1 is bitmask for left mouse button
+			updateDesignSpaceMoved(e);
+		}
+	});
+	Q("#ds-cartesian").addEventListener("mousedown", e => {
+		updateDesignSpaceMoved(e);
+	});
+
+}
+
+
+function updateDesignSpaceMoved(e) {
+
+	const saveScrollY = Q("#panels-left").scrollTop; // fixes Safari macOS 10.14 bug where controls panel scrolls to top on most interactions
+	let font = GLOBAL.vf;
+	let rect = e.target.getBoundingClientRect();
+	let x = e.clientX - rect.left;
+	let y = e.clientY - rect.top;
+	x = x/180-1;
+	y = 1-y/180;
+
+	// update the visual designspace location lines
+	Q("#svgXVal").setAttributeNS(null, "d", `M${x} -1 V1`);
+	Q("#svgYVal").setAttributeNS(null, "d", `M-1 ${y} H1`);
+
+	// initialize tuple
+	let tuple = [];
+	for (let a=0; a < font.axes.length; a++) {
+		tuple.push(0); // default is 0 by definition
+	}
+	
+	// X: set all checked axes to the X value
+	for (let el of Qall("#xSelect input:checked"))
+		tuple[el.value] = x; // el.value is axisId
+
+	// Y: set all checked axes to the Y value
+	for (let el of Qall("#ySelect input:checked"))
+		tuple[el.value] = y; // el.value is axisId
+
+	// update the text fields
+	Q("#xValue").innerText = x.toFixed(5);
+	Q("#yValue").innerText = y.toFixed(5);
+
+	// set the axes in the Axes panel
+	let fvs = font.tupleToFvs(tuple);
+	setAxes (font, fvs);
+
+	// now update the glyph in the drawing
+	// - should we do this simply by setting the axes in the Axes panel
+	let instance = font.addInstance(null, {tuple: tuple});
+
+
+	let glyph = font.glyphs[GLOBAL.currentGlyphId];
+	setActiveGlyph (glyph.id, instance); // update the SVG
+
+	font.instances.pop();
+
+	axesUpdateValues();
+	panelWebfont_handleChange();
+
+	Q("#panels-left").scrollTop = saveScrollY; // for the macOS 10.14 bug referenced at the start of this click handler
+}
+
+function numberFormat(val, axis) {
+
+	let V;
+	switch (Q("#axis-value-format").value) {
+
+		case "user":
+			V = val;
+			break;
+
+		case "userhex":
+			V = Math.round(val * 0x10000);
+			if (V<0)
+				V += 0x100000000;
+			V = V.toString(16);
+			for (let p=V.length; p<8; p++)
+				V = `0${V}`;
+			break;
+
+		case "norm":
+			V = GLOBAL.vf.axisNormalize(axis, val);
+			break;
+
+		case "normhex":
+			V = GLOBAL.vf.axisNormalize(axis, val);
+			V = Math.round(V * 0x4000);
+			if (V<0)
+				V += 0x10000;
+			V = V.toString(16);
+			for (let p=V.length; p<4; p++)
+				V = `0${V}`;
+			break;
+
+	}
+	return V;
+}
+
+
+function axesUpdateValues () {
+	// update axis values
+	const font = GLOBAL.vf;
+	let fvs = font.tupleToFvs(GLOBAL.tuple);
+	font.axes.forEach((axis,a) => {
+		let currentVal = fvs[axis.tag] === undefined ? axis.default : fvs[axis.tag];
+		Q(`#axis-${a}>.axis-current`).value = numberFormat(currentVal, axis);
+	});
+
+	// update avar
+	if (font.avar) {
+
+		let avarSVGs = Qall(".avar-axis-svg");
+		if (avarSVGs.length > 0) {
+			avarSVGs.forEach(avarSVG => {
+
+				let avarSVGwidth = 340, avarSVGheight = 100;
+				let axis = avarSVG.data.axis;
+				let userVal = Q(`#axis-${axis.id}`).data.current, userValTrans = axis.default;
+				let initial = font.axisNormalize(axis, userVal, true); // set avarIgnore arg to true
+				let final = GLOBAL.tuple[axis.id]; // == font.axisNormalize(axis, userVal); // i.e. avarIgnore == undefined
+				let avarCurrentLine = avarSVG.querySelector("line.avar-current");
+				let avarCurrentHead = avarSVG.querySelector("path.avar-current");
+				let arrow = getArrowParams({
+					x1: 10 + (initial+1)/2 * avarSVGwidth,
+					y1: 10,
+					x2: 10 + (final+1)/2 * avarSVGwidth,
+					y2: 10 + avarSVGheight,
+					tipWid: 10,
+					tipLen: 20,
+				});
+
+				// adjust the arrow’s line and head attributes
+				avarCurrentLine.attr({
+					x1: arrow.x1,
+					y1: arrow.y1,
+					x2: arrow.newX2,
+					y2: arrow.newY2,
+				});
+				avarCurrentHead.attr({
+					d: `M${arrow.x2} ${arrow.y2}L${arrow.arrowX1} ${arrow.arrowY1}L${arrow.arrowX2} ${arrow.arrowY2}Z`,
+				});
+
+				// set title tooltip
+				if (final > 0)
+					userValTrans += final * (axis.max - axis.default);
+				else if (final < 0)
+					userValTrans += final * (axis.default - axis.min);
+				avarSVG.querySelector("title").textContent = `${userVal}\n→ ${initial}\n→ ${final}\n→ ${userValTrans}`;
+			});
+		}
+
+		font.axes.forEach((axis, a) => {
+			axis.id
+
+		});
+	}
+}
+
+
+function panelWebfont_handleChange() {
+	let fvs = GLOBAL.vf.tupleToFvs(GLOBAL.tuple);
+	Q("#panel-webfont.panel>div").style.fontVariationSettings = fvsToCSS(fvs);
+}
+
+
+function axisInput(ev) {
+
+	const saveScrollY = Q("#panels-left").scrollTop; // fixes Safari macOS 10.14 bug where controls panel scrolls to top on most interactions
+	let font = GLOBAL.vf;
+	let fvsFromSliders = getCurrentFvs();
+	let fvs = font.tupleToFvs(GLOBAL.tuple);
+	let tag = ev.target.data.axis.tag;
+	fvs[tag] = fvsFromSliders[tag];
+	ev.target.data.current = fvs[tag];
+
+	// create instance
+	let instance = font.addInstance(fvs); // { name: "Custom", tuple: [] };
+
+	let glyph = font.glyphs[GLOBAL.currentGlyphId];
+	setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+	
+	axesUpdateValues();
+	panelSTAT_handleChange();
+	panelWebfont_handleChange();
+	updateDesignspace();
+
+	// delete instance
+	font.instances.pop();
+	Q("#panels-left").scrollTop = saveScrollY; // for the macOS 10.14 bug referenced at the start of this click handler
+}
+
+function buildDesignspace() {
+
+	const ui = CONFIG.ui;
+	let xSelect = Q("#xSelect");
+	let ySelect = Q("#ySelect");
+
+	// draw cartesian axes
+	let cartesian = Q("#ds-cartesian");
+
+	let svg = SVG("svg");
+	svg.id = "svg-designspace";
+	let svgg = SVG("g"); // this transforms everything inside it
+	svgg.id = "svg-designspace-transform";
+	let svgXYAxes, svgXVal, svgYVal;
+	let scale = 360/2; // 360 is the width & height of the cartesian space in px, 2 is the width & height of the cartesian space in normalized units (-1 to +1)
+	svg.attr({width: 360, height: 360});
+	svgg.setAttributeNS(null, "transform", `translate(180,180) scale(${scale},-${scale})`); // TODO: rewrite this with a viewBox on the parent SVG
+
+	// feature variations layer
+	let svgFV = SVG("g");
+	svgFV.id = "svg-designspace-featurevariations";
+	svgFV.style.pointerEvents = "none"; // disable click, mousemove etc. so we don’t interfere with dragging around
+
+	// cartesian axes
+	svgXYAxes = SVG("path");
+	svgXYAxes.attr({
+		d: "M-1 0 L1 0 M0 -1 L0 1",
+		stroke: `lightblue`,
+		"stroke-width": `${1/scale}px`,
+		fill: "none",
+		"pointer-events": "none",
+	});
+
+	// x value
+	svgXVal = SVG("path");
+	svgXVal.id = "svgXVal";
+	svgXVal.attr({
+		d: "M0 -1 V1",
+		stroke: ui.designspace.colors[1],
+		"stroke-width": `${1/scale}px`,
+		fill: "none",
+		"pointer-events": "none",
+	});
+
+	// y value
+	svgYVal = SVG("path");
+	svgYVal.id = "svgYVal";
+	svgYVal.attr({
+		d: "M-1 0 H1",
+		stroke: ui.designspace.colors[0],
+		"stroke-width": `${1/scale}px`,
+		fill: "none",
+		"pointer-events": "none",
+	});
+
+	svgg.append(svgFV, svgXVal, svgYVal, svgXYAxes);
+	svg.append(svgg);
+	cartesian.append(svg);
+
+
+	// draw some glyphs (at named instance locations)
+
+
+
+	// capture mouse
+
+
+
+	// consider 1d view
+
+}
+
+
+// handle change when axes move
+function updateDesignspace() {
+
+	// TODO: represent invalid axis settings better
+	// - currently we set the axes to default if they are invalid, so that we don’t need to unhide them when they are valid again...
+
+	let x=0, y=0; // 0 is default, and also represents the error condition when an unhandled number of var axes are tied to a coordinate axis
+	let xAxes = Qall("#xSelect input[type=checkbox]:checked"); // which var axes are tied to the X cartesian axis?
+	let yAxes = Qall("#ySelect input[type=checkbox]:checked"); // which var axes are tied to the Y cartesian axis?
+
+	if (xAxes.length == 1)
+		x = GLOBAL.tuple[xAxes[0].value * 1]; // xAxes[0] is the only one checked
+
+	if (yAxes.length == 1)
+		y = GLOBAL.tuple[yAxes[0].value * 1]; // yAxes[0] is the only one checked
+
+	Q("#svgXVal").setAttributeNS(null, "d", `M${x} -1 V1`);
+	Q("#svgYVal").setAttributeNS(null, "d", `M-1 ${y} H1`);
+}
+
+function panelSTAT_handleChange(fvs) {
+
+	const font = GLOBAL.vf;
+	if (!font.tables["STAT"])
+		return;
+
+	const STAT = font.tables["STAT"].data;
+	if (fvs === undefined)
+		fvs = font.tupleToFvs(GLOBAL.tuple);
+	let selectValues = {};
+	const axisTags = Object.keys(fvs);
+	let statName, elidable = true, statNamesStrs = [];
+
+	// find the avt’s which match this fvs
+	let avtIndexMulti = -1;
+	for (let a=0; a<STAT.axisValueTables.length; a++) {
+		const avt = STAT.axisValueTables[a];
+		axisTags.forEach(tag => {
+
+			// TODO: are we sure rounding is ok here? If not we can roud-trip through tuple representation
+
+			// do we have a match?
+			if (avt.format < 4 && 
+				selectValues[tag] === undefined && 
+				(fvs[tag] == avt.value || (avt.format == 2 && fvs[tag] >= avt.min && fvs[tag] <= avt.max)) && 
+				tag == STAT.designAxes[avt.axisIndex].tag) {
+
+				selectValues[tag] = {};
+				selectValues[tag].avtIndex = a; // index of this axisValueTable in STAT.axisValueTables
+				selectValues[tag].note = "";
+			}
+			else if (avt.format == 4 && avtIndexMulti == -1) {
+				let match = true;
+				avt.axisIndex.forEach((axisIndex, a) => { // axisIndex is an array because format 4
+					if (avt.value[a] != fvs[STAT.designAxes[axisIndex].tag])
+						match = false;
+				});
+				if (match)
+					avtIndexMulti = a;
+			}
+		});
+	}
+
+	// for each <select>, select the right option
+	Qall("#panel-stat select").forEach((select, a) => {
+		let tag;
+		if (a < STAT.designAxes.length) {
+			tag = select.data.designAxis.tag;
+			if (select.options.length > 1) {
+				if (fvs[tag] === undefined) // this fvs needs to specify all fvar axes
+					select.value = select.options[1].value; // set designAxes which are not in the font to the (only) valid option
+				else
+					select.value = (selectValues[tag] === undefined) ? -1 : selectValues[tag].avtIndex;
+			}
+		}
+		else {
+			select.value = avtIndexMulti;
+		}
+
+		// calculate the note for this <select>
+		let note = "";
+		if (select.options.length > 1) {
+			let axisIndices = [], values = [];
+			if (select.value != -1) {
+
+				let avt = STAT.axisValueTables[select.value];
+				axisIndices = avt.axisIndex;
+				let values = avt.value;
+				if (avt.format != 4) {
+					axisIndices = [axisIndices];
+					values = [values];
+					note = avt.value;
+				}
+
+				// get stat name component
+				let name = font.names[avt.nameID];
+				let thisElidable = avt.flags & 0x0002;
+
+				if (avt.format == 2 && fvs[tag] != values[0]) {
+					name += `[${Math.round(fvs[tag]*100)/100}]`;
+					thisElidable = false; // make "Regular" no longer elidable if we’ve appended a value
+				}
+
+				if (!thisElidable) {
+					if (a < STAT.designAxes.length)
+						statNamesStrs.push(name); // append single-axis names
+					else
+						statNamesStrs.unshift(name); // prepend multiaxis names (the OpenType spec doesn’t not say what happens for these names… perhaps they should be ignored if their axes have already been accounted for by single-axis axisValueTables)
+					elidable = false; // global elidable
+				}
+
+				// determine the fvs
+				axisIndices.forEach((axisIndex, a) => {
+					fvs[STAT.designAxes[axisIndex].tag] = values[a];
+				});
+
+				// augment the note
+				switch (avt.format) {
+					case 2: note += ` [${avt.min},${avt.max}]`; break;
+					case 3: note += ` (→ ${avt.linkedValue})`; break;
+					case 4: note = JSON.stringify(fvs); break;
+				}
+			}
+		}
+
+		// set the note
+		select.nextSibling.innerText = note; // vulnerable to layout changes but concise! (requires <label> of the note to immediately follow the <select>)
+	});
+
+	// finalize and display statName
+	if (elidable && STAT.elidedFallbackNameID !== undefined)
+		statName = font.names[STAT.elidedFallbackNameID];
+	else
+		statName = statNamesStrs.join(" ");
+	Q("#stat-composed-name").value = statName;
+}
+
+
+function updateGlyphsPanel(instance) {
+
+	const font = GLOBAL.vf;
+
+	///////////////////////////////////////////////////////
+	// glyphs panel
+	///////////////////////////////////////////////////////
+	const panel = Q("#panel-glyphs>div");
+	const panelHeader = panel.querySelector(".header"); // save the header
+	panel.innerText = ""; // clear all
+	panelHeader.querySelectorAll("input").forEach(el => { // reset the inputs
+		switch (el.type) {
+			case "text": el.value = ""; break;
+			case "checkbox": el.checked = true; break;
+		}
+	}); 
+	panel.append(panelHeader); // restore the header
+
+
+	const scale = 50 / font.unitsPerEm;
+	const showGlyphIds = Q("#panel-glyphs>h2 #glyphs-ids").classList.contains("active");
+
+	for (let g=0; g < font.numGlyphs; g++) {
+
+		let glyph = font.glyphs[g];
+		let glyphName = font.glyphs[g].name || "undefined";
+		let glyphThumb = EL("div");
+		glyphThumb.classList.add("glyph-thumb");
+		glyphThumb.setAttribute("id", `g-${g}`);
+		glyphThumb.setAttribute("title", `${g}: ${glyphName}`);
+
+		if (glyph) {
+
+			// simple glyph
+			let svg = SVG("svg");
+			svg.attr({width: 90, height: 90});
+
+			let svgg = SVG("g");
+			svgg.id = `g${glyph.id}`;
+			svgg.setAttributeNS(null, "transform", `translate(20,60) scale(${scale},-${scale})`);
+			
+			// decompose/instantiate this glyph
+			let iglyph;
+			if (glyph.numContours < 0)
+				iglyph = glyph.decompose(instance.tuple);
+			else
+				iglyph = glyph.instantiate(null, instance);
+			let svgPath = SVG("path");
+			svgPath.attr({
+				d: iglyph.svgPath(),
+				stroke: GLOBAL.vf.config.ui.glyphThumb.stroke,
+				"stroke-width": `${GLOBAL.vf.config.ui.glyphThumb.strokeWidth}px`,
+				fill: GLOBAL.vf.config.ui.glyphThumb.fill,
+			});
+			svgg.append(svgPath);
+			svg.append(svgg);
+			glyphThumb.append(svg);
+
+		}
+
+		// set the label for the glyph thumb: glyph name and glyph id
+		let label = EL("label");
+		let spanName = EL("span"), spanId = EL("span");
+		spanName.innerText = glyphName;
+		spanName.classList.add("name");
+		spanId.innerText = g;
+		spanId.classList.add("id");
+		if (showGlyphIds)
+			spanName.style.display = "none";
+		else
+			spanId.style.display = "none";
+
+		// append the elements
+		label.append(spanName, spanId);
+		glyphThumb.append(label);
+		panel.append(glyphThumb);
+	}
+
+	setActiveGlyph(GLOBAL.currentGlyphId, instance);
+}
+
+function setAxes (font, fvs) {
+	
+
+	let sliders = Qall(".slider");
+	font.axes.forEach((axis, a) => {
+
+		if (axis.min > axis.max)
+			return;
+
+		let val = fvs[axis.tag];
+		if (val < axis.min)
+			val = axis.min;
+		if (val > axis.max)
+			val = axis.max;
+
+		sliders[a].value = (val - axis.min) / (axis.max - axis.min);
+		sliders[a].data.current = val;
+	});
+}
+
+function getActiveInstance (font) {
+
+	let instance = null;
+	Qall(".instance").forEach(el => {
+		console.log(`checking instance`)
+		if (el.classList.contains("active")) {
+			console.log(`got instance`, el.data.instance)
+			instance = el.data.instance;
+		}
+	});
+
+	return instance;
+}
+
+function setActiveInstance (font, target) {
+
+	Qall(".instance").forEach((el, i) => {
+
+		let instance = font.instances[i]; // font.instances[0] is the default "instance"
+
+		// update instance ui
+		if (el == target || (!target && instance.type == "default")) { // allows for future reordering
+			
+			el.classList.add("active");
+			setAxes (font, instance.fvs);
+			instanceApplyVariations (font, instance);
+			updateGlyphsPanel (instance);
+			axesUpdateValues();
+			panelSTAT_handleChange();
+			panelWebfont_handleChange();
+		}
+		else {
+			el.classList.remove("active");
+			//target.data.selected = true;
+		}
+	});
+}
+
+
+function getActiveGlyph () {
+
+	let g=0, el;
+	if (el = Q(".glyph-thumb.active")) {
+		let comps = el.id.split("-");
+		g = 1*comps[1];
+	}
+	return g;
+
+	// TODO: it would be simpler just to store the active glyph somewhere
+	// return font.currentGlyphId;
+}
+
+
+function getArrowParams (arrow) {
+
+	// call with getArrowParams({x1: x1, x2: x2, y1: y1, y2: y2, tipLen: tipLen, tipWid, tipWid})
+
+	const x1 = arrow.x1, y1 = arrow.y1, x2 = arrow.x2, y2 = arrow.y2;
+	const tipLen = arrow.tipLen, tipWid = arrow.tipWid;
+	if (x2!=x1 || y2!=y1) {
+		const len = Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+		const arrowBackX = (y2-y1) * tipWid/2/len, arrowBackY = (x2-x1) * tipWid/2/len;
+
+		arrow.arrowX1 = arrow.arrowX2 = arrow.newX2 = x1 + (x2-x1) * (len-tipLen)/len;
+		arrow.arrowY1 = arrow.arrowY2 = arrow.newY2 = y1 + (y2-y1) * (len-tipLen)/len;
+		arrow.arrowX1 += arrowBackX;
+		arrow.arrowY1 -= arrowBackY;
+		arrow.arrowX2 -= arrowBackX;
+		arrow.arrowY2 += arrowBackY;
+	}
+	return arrow;
+}
+
+function getSVGForShape (point, shape, size) {
+
+	let svgEl;
+	switch (shape) {
+		// "■●▲+x"
+		case "■":
+			svgEl = SVG("rect");
+			svgEl.attr({
+				x: point[0]-size/2,
+				y: point[1]-size/2,
+				width: size,
+				height: size,
+			});
+			break;
+
+		case "●":
+			svgEl = SVG("circle");
+			svgEl.attr({
+				cx: point[0],
+				cy: point[1],
+				r: size/2,
+			});
+			break;
+
+		case "▲":
+			svgEl = SVG("path");
+			svgEl.attr({
+				d: `M${point[0]} ${point[1]+size/2}L${point[0]+size/2*0.86602540378} ${point[1]-size/2*0.5}L${point[0]-size/2*0.86602540378} ${point[1]-size/2*0.5}Z`,
+			});
+			break;
+
+		case "+":
+			svgEl = SVG("path");
+			svgEl.attr({
+				d: `M${point[0]-size/2} ${point[1]}L${point[0]+size/2} ${point[1]}M${point[0]} ${point[1]-size/2}L${point[0]} ${point[1]+size/2}`,
+			});
+			break;
+
+		case "x":
+			svgEl = SVG("path");
+			svgEl.attr({
+				d: `M${point[0]-size/2} ${point[1]-size/2}L${point[0]+size/2} ${point[1]+size/2}M${point[0]-size/2} ${point[1]+size/2}L${point[0]+size/2} ${point[1]-size/2}`,
+			});
+			break;
+	}
+
+	return svgEl; // undefined if no shape was set
+}
+
+
+function updateTvts (glyph, iglyph) {
+
+	///////////////////////////////////////////////////////
+	// Tuples panel
+	///////////////////////////////////////////////////////
+
+	// TODO: we shouldn’t be doing all this for each glyph refresh
+	let font = GLOBAL.vf;
+	let ui = font.config.ui;
+	let panel = Q("#panel-tvts>div");
+
+	// display the tvts
+	// - each tvt gets a <li> info row followed by an <ol> (initially hidden) containing the list of point deltas (each as point delta as <li>)
+	glyph.tvts.forEach((tvt, t) => {
+
+		// show id, numPoints, scalar, order, and an SVG graph for each axis
+		let axisGraphs = [], ASarray = [];
+		let tvtOrder = 0; // the number of axes involved in this tuple (i.e. with peak != 0); tvtOrder=1 (linear), tvtOrder=2 (quadratic), tvtOrder=3 (cubic), etc.
+		let sValue = iglyph.tvtsVisualization[t].S; // get S value to draw as bar graph
+		let numDeltas = 0;
+		for (let p=0; p<tvt.deltas.length; p++) {
+			if (tvt.deltas[p] !== null)
+				numDeltas++;
+		}
+
+		// add a graph for each axis
+		// - each graph is a single SVG element with descendants
+		// - each tuple contains <font.numAxes> graphs representing how this tuple responds to each axis
+		for (let a=0; a<font.axisCount; a++) {
+			let tvtGraphEl = EL("div");
+			let tvtGraph = SVG("svg");
+			let svgg = SVG("g");
+
+			tvtGraph.attr({width: 50, height: 21});
+			svgg.setAttributeNS(null, "transform", `translate(20,20) scale(1,-1)`);
+
+			// draw a graph through start, peak, end for each axis
+			let Sx = 20, Sy = 20; // x and y scales
+
+			// draw graph paper
+			let pathG = SVG("path");
+			pathG.attr({
+				fill: "none",
+				stroke: "darkgrey",
+				"stroke-width": 0.5,
+				d: `M ${Sx*-1} 0 L ${Sx*1} 0 M 0 0 L 0 ${Sy*1}`,
+			});
+			svgg.append(pathG);
+
+			// draw tuple start, peak, end data
+			if (tvt.peak[a] != 0) { // “When a delta is provided for a region defined by n-tuples that have a peak value of 0 for some axis, then that axis does not factor into scalar calculations.”
+
+				// sawtooth graph for this tuple
+				// - typical graph shapes are shown at https://docs.microsoft.com/en-us/typography/opentype/spec/otvaroverview
+				const path = SVG("path");
+				path.attr({
+					fill: "black",
+					stroke: "none",
+					d: `M ${Sx*tvt.start[a]},0 L ${Sx*tvt.peak[a]},${Sy*1.0} L ${Sx*tvt.end[a]},0`,
+				});
+				svgg.append(path);
+
+				// needle showing current axis position
+				if (GLOBAL.tuple[a] != 0) {	
+					const needle = SVG("line");
+					needle.attr({
+						fill: "none",
+						stroke: ui.tupleNeedle.stroke,
+						"stroke-width": "1px",
+						x1: 0, y1: 0, x2: 0, y2: 20,
+						transform: `translate(${GLOBAL.tuple[a]*20},0)`,
+					});
+					svgg.append(needle);
+				}
+
+				// axis-scalar (copied from samsa-core.js)
+				let AS;
+				const ua = GLOBAL.tuple[a], peak = tvt.peak[a], start = tvt.start[a], end = tvt.end[a];
+				if (ua < start || ua > end)
+					AS = 0;
+				else if (ua == peak)
+					AS = 1;
+				else if (ua < peak)
+					AS = (ua - start) / (peak - start);
+				else if (ua > peak)
+					AS = (end - ua) / (end - peak);
+
+				ASarray.push(AS);
+				tvtOrder++;
+				tvtGraphEl.title = `${GLOBAL.tuple[a]} → ${AS}`;
+			}
+
+			tvtGraph.append(svgg);
+			tvtGraphEl.append(tvtGraph);
+			tvtGraphEl.style.display = "inline-block";
+			tvtGraphEl.style.width = "50px";
+
+			axisGraphs.push(tvtGraphEl);
+		}
+
+		// build the <li> (main tvt data)
+		const li = EL("li");
+		li.classList.add("tvt-item");
+		if (GLOBAL.tvtToggles[t])
+			li.classList.add("open");
+		li.data = {tvtId: t};
+		if (sValue > 0)
+			li.style.backgroundColor = "white";
+
+		let cells = [];
+		cells[0] = EL("div"); // tvtId
+		cells[0].classList.add("index");
+		cells[0].style.backgroundColor = ui.tuple.colors[t % ui.tuple.colors.length];
+		cells[0].innerText = t;
+
+		cells[1] = EL("div"); // toggle-points
+		let toggle = EL("div");
+		toggle.innerText = "\uf04b";
+		toggle.classList.add("toggle","bold","icon","reveal");
+		cells[1].append(toggle);
+
+		cells[2] = EL("div"); // points
+		cells[2].classList.add("points");
+		cells[2].innerText = numDeltas;
+
+		cells[3] = EL("div"); // scalar
+		cells[3].classList.add("scalar");
+		cells[3].innerText = Math.round(sValue*1000)/1000;
+		cells[3].setAttribute("style", `width: ${sValue * 100}%;`);
+
+		cells[4] = EL("div"); // order
+		cells[4].classList.add("order");
+		cells[4].innerText = tvtOrder;
+
+		cells[5] = EL("div"); // axes
+		cells[5].classList.add("axes");
+		cells[5].style.width = `${50 * axisGraphs.length}px`;
+		cells[5].style.textAlign = "left";
+  		cells[5].append(...axisGraphs);
+
+		li.append(...cells);
+
+		// build the <ol> (list of deltas): its visibility is dependent on "open" class of the preceding <li> element
+		let ol = EL("ol");
+		ol.classList.add("tvt-points");
+		ol.setAttribute("start", 0);
+		tvt.deltas.forEach((delta, p) => {
+
+			let li_ = EL("li");
+			const scaledDelta = iglyph.tvtsVisualization[t].scaledDeltas[p];
+			li_.innerText = `${Math.round(scaledDelta[0])},${Math.round(scaledDelta[1])}`;
+			if (delta === null)
+				li_.style.color = "grey";
+
+			ol.append(li_);
+
+		});
+
+		// append the <li> and the <ol> we just built
+		panel.append(li, ol);
+	});
+
+}
+
+function redrawFeatureVariationsBoxes(g) {
+
+	const font = GLOBAL.vf;
+
+	let svgFV = Q("#svg-designspace-featurevariations");
+	if (svgFV) {
+		while(svgFV.childNodes.length) // empty the node
+			svgFV.removeChild(svgFV.firstChild);
+	}
+       
+	let featureVarBoxes = font.featureVariationsBoxes(g);
+	for (fvBox of featureVarBoxes) {
+
+		// show the cartesian x axis var axis using x and width
+		// show the cartesian y axis var axis using y and height
+		// abort if the designspace uses multiple var axes on a single cartesian axis
+
+		let xSelects = Qall("#xSelect input[type='checkbox']:checked");
+		let ySelects = Qall("#ySelect input[type='checkbox']:checked");
+		let x, y, width, height;
+		let xAxisId, yAxisId;
+
+		if (xSelects.length == 1)
+			xAxisId = xSelects[0].value * 1;
+
+		if (ySelects.length == 1)
+			yAxisId = ySelects[0].value * 1;
+
+		if (xAxisId === undefined || fvBox[xAxisId] === undefined) {
+			x = -1;
+			width = 2;
+		}
+		else {
+			x = fvBox[xAxisId][0];
+			width = fvBox[xAxisId][1] - fvBox[xAxisId][0];
+		}
+
+		if (yAxisId === undefined || fvBox[yAxisId] === undefined) {
+			y = -1;
+			height = 2;
+		}
+		else {
+			y = fvBox[yAxisId][0];
+			height = fvBox[yAxisId][1] - fvBox[yAxisId][0];
+		}
+
+		if (!(x == -1 && width == 2 && y == -1 && height == 2)) {
+			let svgBox = SVG("rect");
+			svgBox.attr({
+				width: width,
+				height: height,
+				x: x,
+				y: y,
+				fill: "green",
+				strokeWidth: 0,
+				opacity: 0.25,
+			});
+			svgFV.append(svgBox);
+		}
+	}	
+}
+
+function setActiveGlyph (g, instance) {
+	let font = GLOBAL.vf;
+	let ui = font.config.ui;
+	if (g === undefined)
+		g = 0;
+	g *= 1;
+
+	GLOBAL.currentGlyphId = g;
+	let glyph = font.glyphs[g];
+
+	// highlight active glyph thumbnail (first, unhighlight all of them)
+	Qall(".glyph-thumb").forEach(el => {
+		el.classList.remove("active");
+	});
+	Q(`#g-${g}`).classList.add("active");
+
+	// empty the tvts panel and insert header row
+	let panelTvts = Q("#panel-tvts>div");
+	if (font.axes.length == 0)
+		panelTvts.classList.add("static");
+	else {
+		panelTvts.classList.add("variations");
+		panelTvts.innerHTML = "";
+		const lh = EL("li"), axesHeader = EL("div");
+		lh.classList.add("tvt-item", "header");
+		lh.innerHTML = `<div title="Delta set index">#</div><div>Points</div><div title="Points"></div><div title="Scalar">Scalar</div><div title="Order">Order</div>`;
+		for (let axis of font.axes)
+			axesHeader.innerHTML += `<div style="display:inline-block;width:50px;"><code>${axis.tag}</code></div>`;
+
+		lh.append(axesHeader);
+		panelTvts.append(lh);
+	}
+
+
+	// display the feature variations for this glyph on the designspace svg
+	redrawFeatureVariationsBoxes(g);
+
+	// Glyph info panel is display:none for now
+	let glyphInfo = {
+		id: glyph.id,
+		name: glyph.name,
+		"curve-order": glyph.curveOrder,
+		"num-contours": glyph.numContours,
+		"num-points": glyph.numPoints,
+		"num-components": glyph.components.length,
+		"glyph-size": font.glyphOffsets[g+1] - font.glyphOffsets[g],
+		"num-tuples": glyph.tvts.length,
+		"tuple-size": font.tupleSizes[g],
+	};
+
+	let panel = Q("#glyph-info");
+	Object.keys(glyphInfo).forEach(elClass => {
+		panel.querySelector(`.${elClass}`).value = glyphInfo[elClass];
+	});
+
+	updateGlyphSVG (g, instance);
+}
+
+
+function updateGlyphSVG (g, instance) {
+
+	// instance may be undefined
+
+	let font = GLOBAL.vf;
+	let ui = font.config.ui;
+	const uiScale = font.unitsPerEm/1000
+	if (g === undefined)
+		g = 0;
+	g *= 1;
+
+	GLOBAL.currentGlyphId = g; // hmm, should be part of the font, not GLOBAL … TODO: check g < numGlyphs
+	let glyph = font.glyphs[g];
+
+
+	if (instance) {
+		GLOBAL.tuple = [];
+		instance.tuple.forEach((v,i) => {
+			GLOBAL.tuple[i] = v; // deep copy
+		})
+		//GLOBAL.tuple = instance.tuple; // hmm, shallow copy should be ok, because it won’t be garbage collected
+	}
+
+
+	// FeatureVariations?
+	// - if so, reassign glyph to the substitute glyph
+	// - GLOBAL.currentGlyphId does not change
+	if (font.featureVariations) {
+		let substituteGlyphId = glyph.featureVariationsGlyphId(GLOBAL.tuple);
+		if (substituteGlyphId !== undefined)
+			glyph = font.glyphs[substituteGlyphId];		
+	}
+
+
+
+	let iglyph = glyph.instantiate(GLOBAL.tuple);
+
+
+	updateTvts (glyph, iglyph);
+	console.log(glyph, iglyph)
+
+
+	// clear main window and tvts panel
+	let drawingEl = Q("#drawing");
+	let svgEl = Q("#samsa-svg");
+	if (svgEl)
+		svgEl.remove();
+
+	// set up parent SVG element (svg) and the scaled container (svgg)
+	let scale = 0.5 / uiScale;
+	svgEl = SVG("svg");
+	svgEl.id = "samsa-svg";
+	let svgg = SVG("g"); // this transforms everything inside it
+	svgg.id = "svg-transform-group";
+	svgEl.attr( {
+		width: drawingEl.clientWidth, // we rewrite width and height on export, so clientWidth/clientHeight have no effect
+		height: drawingEl.clientHeight,
+		style: `background-color: ${ui.glyphDefault.backgroundColor};`,
+	});
+	svgg.setAttributeNS(null, "transform", `translate(130,500) scale(${scale},-${scale})`);
+
+	// define radial gradient for quadratic tangents (only if tangents are active)
+	if (Q("#point-tangents").checked && ui.tangent && ui.tangent.color) {
+		const   svgDefs = SVG("defs"),
+				linear = SVG("linearGradient"),
+				stop0 = SVG("stop"),
+				stop1 = SVG("stop");
+		stop0.attr({ offset: "0%", style: `stop-color: ${ui.tangent.color}; stop-opacity: 1;` });
+		stop1.attr({ offset: "100%", style: `stop-color: ${ui.tangent.color}; stop-opacity: 0;` });
+		linear.attr({
+			id: "tangent-linear-fade",
+			x1: "0%",
+			y1: "0%",
+			x2: "100%",
+			y2: "0%",
+		});
+		linear.append(stop0, stop1);
+		svgDefs.appendChild(linear);
+		svgEl.append(svgDefs);
+	}
+
+
+	// draw each layer in the order it was specified in font.config.ui.layers
+	ui.layers.forEach(layer => {
+
+		let svgPath, svgg2, svgg3, paths, path;
+		let style = {
+			size: 0,
+			fill: "none",
+			stroke: "none",
+			strokeWidth: 0,
+		};
+
+		switch (layer) {
+
+			case "layer-grid":
+
+				// draw cartesian axes
+				if (ui.cartesianAxes.strokeWidth > 0 || ui.cartesianAxes.stroke != "none") {
+					svgPath = SVG("path");
+					svgPath.id = layer;
+					svgPath.attr({
+						d: "M-10000,0 L10000,0 M0,-10000 L0,10000",
+						stroke: ui.cartesianAxes.stroke,
+						"stroke-width": ui.cartesianAxes.strokeWidth * uiScale,
+						fill: "none",
+					});
+					svgg.append(svgPath);
+				}
+
+				// draw advance width
+				if (ui.metrics.strokeWidth > 0 || ui.metrics.stroke != "none") {
+					svgPath = SVG("path");
+					svgPath.attr({
+						d: `M${iglyph.points[glyph.points.length-3][0]} -10000V10000`, // glyph.points.length works for simple, composite and empty
+						stroke: ui.metrics.stroke,
+						"stroke-width": ui.metrics.strokeWidth * uiScale,
+					});
+					if (ui.metrics.dashArray) {
+						let dashStr = "";
+						ui.metrics.dashArray.forEach(dash => {
+							dashStr += `${dash*uiScale} `;
+						});
+						svgPath.attr({
+							"stroke-dasharray": dashStr,
+						});
+					}
+					svgg.append(svgPath);
+				}
+
+				break;
+
+
+			case "layer-default":
+
+				// draw glyph
+
+				// we transform each component
+				// - check each time we use getGlyphSVGpath()
+				// - we take the translation from the glyph’s points property (which has been processed as usual by tvts)
+				// - TODO: we’ll take the transformation matrix from the glyph’s components[p].transform
+				// - must look up the order or processing: translate, transform or transform, translate (I recall that Apple and Microsoft differed on this)
+				// - fonts using transforms are quite rare; Wingdings uses rotation and reflection in some ornaments
+				// - https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+
+				svgPath = SVG("path");
+				svgPath.id = layer;
+				svgPath.attr({
+					d: glyph.decompose().svgPath(),
+					stroke: ui.glyphDefault.stroke,
+					"stroke-width": ui.glyphDefault.strokeWidth * uiScale,
+					fill: ui.glyphDefault.fill,
+				});
+				console.log(glyph.decompose(), svgPath)
+				svgg.append(svgPath);
+
+				break;
+
+
+			case "layer-instance":
+
+				// draw glyph with variations taken from the current axis settings
+				// - should we render all active instances in this "layer"?
+
+				let uiStyle = ui.glyphCurrent;
+
+				svgPath = SVG("path"); // give this an id so we can detect clicks
+				svgPath.id = layer;
+				svgPath.attr({
+					d: iglyph.decompose(GLOBAL.tuple).svgPath(),
+					style: `opacity: ${uiStyle.opacity}`,
+					stroke: uiStyle.stroke,
+					"stroke-width": uiStyle.strokeWidth * uiScale,
+					fill: `${uiStyle.fill}`,
+					// "filter": "url(#blur)", not yet :)					
+				});
+				if (uiStyle.strokeDash) {
+					let dashes = "";
+					for (dash of uiStyle.strokeDash) {
+						dashes += `${dash * uiScale} `;
+					}
+					svgPath.attr({ "stroke-dasharray": dashes.trim() }); // IUP implicit movement
+				}
+
+				svgg.append(svgPath);
+
+				break;
+
+
+			case "layer-instance-points":
+			case "layer-points":
+
+				// draw control points, grouped in their own <g>
+
+				// set style, with overrides
+				Object.keys(ui.point).forEach(k => {
+					style[k] = ui.point[k];
+				});
+				if (layer=="layer-instance-points" && ui.glyphCurrent.point)
+					Object.keys(ui.glyphCurrent.point).forEach(k => {
+						style[k] = ui.glyphCurrent.point[k];
+					});
+				else if (layer=="layer-points" && ui.glyphDefault.point)
+					Object.keys(ui.glyphDefault.point).forEach(k => {
+						style[k] = ui.glyphDefault.point[k];
+					});
+
+				// only draw if they’re wanted
+				if (style.size > 0) {				
+					
+					// create group element
+					svgg2 = SVG("g");
+					svgg2.id = layer;
+
+					// set attrs
+					svgg2.attr({
+						fill: style.fill,
+						"stroke-width": style.strokeWidth * uiScale,
+						stroke: style.stroke,
+						opacity: style.opacity,
+					});
+
+					// draw the points
+					(layer=="layer-instance-points" ? iglyph : glyph).points.forEach(function (pt, p) {
+						let svgEl = getSVGForShape (
+							pt,
+							pt[2] ? style.shape : style.shapeOffCurve,
+							style.size * uiScale);
+						if (svgEl)
+							svgg2.append(svgEl);
+					});
+
+					svgg.append(svgg2);
+				}
+				break;
+
+
+			case "layer-tangents":
+
+				if (!(Q("#point-tangents").checked && ui.tangent && ui.tangent.color))
+					break;
+
+				// convert line to path (similar to getArrowParams())
+				function lineToPath(x1, y1, x2, y2, strokeWidth) {
+					let path = "";
+					const len = Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+					if (len > 0) {
+						const ratio = 0.5*strokeWidth/len, dx = (y2-y1)*ratio, dy = (x2-x1)*ratio;
+						path = `M${x1+dx} ${y1-dy} L${x2+dx} ${y2-dy} L${x2-dx} ${y2+dy} L${x1-dx} ${y1+dy} Z`;
+					}
+					return path;
+				}
+
+				// create group for layer-tangents
+				svgg2 = SVG("g");
+				svgg2.id = layer;
+
+				// loop through each contour
+				let startPt = 0, endPt, numCountourPoints;
+				for (let c=0; c<iglyph.endPts.length; c++) {
+					endPt = iglyph.endPts[c];
+					numCountourPoints = endPt-startPt+1;
+
+					// loop through all points in this contour
+					for (let p=0; p<numCountourPoints; p++) {
+						const pt = iglyph.points[startPt+p];
+
+						// if this point is off-curve
+						if (pt[2] == 0) {
+
+							const prev = p>0 ? p-1 : numCountourPoints-1;
+							const next = p<numCountourPoints-1 ? p+1 : 0;
+							const prevPt = iglyph.points[startPt+prev], nextPt = iglyph.points[startPt+next];
+							let tangents = [];
+							const strokeWidth = ui.tangent.strokeWidth * uiScale;
+
+							switch (iglyph.curveOrder) {
+
+								case 2:
+									[prevPt, nextPt].forEach(otherPt => {
+
+										const tangent = SVG("rect");
+										const angle = Math.atan2(otherPt[1]-pt[1], otherPt[0]-pt[0]) * 180 / Math.PI;
+										let len = Math.sqrt((otherPt[0]-pt[0])*(otherPt[0]-pt[0]) + (otherPt[1]-pt[1]) * (otherPt[1]-pt[1]));
+										if (otherPt[2] == 0)
+											len *= 0.5;
+										tangent.attr({
+											x: pt[0],
+											y: pt[1] - 0.5*strokeWidth*uiScale,
+											width: len,
+											height: strokeWidth*uiScale,
+											transform: `rotate(${angle} ${pt[0]} ${pt[1]})`,
+											fill: "url(#tangent-linear-fade)",
+										});
+										tangents.push(tangent);
+									});
+									break;
+
+								case 3:
+									tangents[0] = SVG("line");
+									const eitherPt = prevPt[2] ? prevPt : nextPt;
+									tangents[0].attr({
+										x1: pt[0],
+										y1: pt[1],
+										x2: eitherPt[0],
+										y2: eitherPt[1],
+										stroke: ui.tangent.color,
+										"stroke-width": strokeWidth,
+									});
+									break;
+							}
+							svgg2.append(...tangents);
+						}
+					}
+					startPt = endPt+1;
+				}
+
+				svgg.append(svgg2);
+				break;
+
+
+			case "layer-arrows-total":
+
+				// require checkbox checked and this ui mode to have arrow strokeWidth
+				if (!(Q("#arrows-total").checked && ui.arrow.strokeWidth))
+					break;
+
+				svgg2 = SVG("g");
+				svgg2.id = layer;
+				svgg2.attr({
+					"stroke": ui.arrow.color,
+					"stroke-width": ui.arrow.strokeWidth * uiScale,
+				});
+
+				// TODO: Make a function to draw arrows that the "split arrows" method can use too
+				glyph.points.forEach((point1, pt) => {
+					let point2 = iglyph.points[pt]; // transformed point
+					let x1 = point1[0], y1 = point1[1], x2 = point2[0], y2 = point2[1];
+					if (x1==x2 && y1==y2) {
+						// same location so no line (now we can ignore divide-by-zero in the else{}
+					}
+					else {
+						// get the arrow parameters so we can draw a truncated line (maybe dotted) plus arrow head
+						let arrow = getArrowParams ({x1: x1, y1: y1, x2: x2, y2: y2, tipWid: ui.arrow.tipWidth * GLOBAL.vf.unitsPerEm/1000, tipLen: ui.arrow.tipLength * GLOBAL.vf.unitsPerEm/1000});
+						let svgLine = SVG("line");
+						let svgArrowHead = SVG("path");
+						svgLine.attr({ x1: x1, y1: y1, x2: arrow.newX2, y2: arrow.newY2 });
+						svgArrowHead.attr({
+							d: `M${x2} ${y2}L${arrow.arrowX1} ${arrow.arrowY1}L${arrow.arrowX2} ${arrow.arrowY2}Z`,
+							fill: ui.arrow.color,
+							stroke: "none",
+						});
+
+						if (!iglyph.touched[pt]) {
+							svgLine.attr({ "stroke-dasharray": 4 * uiScale }); // IUP implicit movement
+						}
+
+						svgg2.append(svgLine, svgArrowHead);
+
+					}
+				});										
+
+				svgg.append(svgg2);
+				break;
+
+
+			case "layer-arrows-split":
+
+				// require checkbox checked and this ui mode to have arrow strokeWidth
+				if (!(Q("#arrows-split").checked && ui.arrow.strokeWidth))
+					break;
+
+				svgg2 = SVG("g");
+				svgg2.id = layer;
+				svgg2.attr({
+					"fill": "none",
+					"stroke-width": 3,
+					"stroke": "green",
+				});
+
+				glyph.points.forEach((point, pt) => {
+
+					let x1 = point[0], y1 = point[1];
+					let x2, y2;
+
+					// make an arrow for each tvt
+					glyph.tvts.forEach((tvt, t) => {
+						let sValue = iglyph.tvtsVisualization[t].S;
+						let delta = tvt.deltas[pt];
+						let iup = (delta === null);
+						let lineColor = ui.tuple.colors[t % ui.tuple.colors.length]; // get the t’th colour in the array, wrapping round to the start when we run out of colours
+
+						if (iup) {
+							x2 = x1 + iglyph.tvtsVisualization[t].scaledDeltas[pt][0];
+							y2 = y1 + iglyph.tvtsVisualization[t].scaledDeltas[pt][1];
+						}
+						else {							
+							x2 = x1 + delta[0] * sValue;
+							y2 = y1 + delta[1] * sValue;
+						}
+
+						if (x2!=x1 || y2!=y1) {
+
+							// Arrows:
+							// We avoid SVG’s built-in method of attaching shapes to lines, and make a separate line and arrowhead
+							// Thick lines blunt pointed arrows, so we draw each line up to the base of the arrowhead.
+							// It might be more efficient to draw each tuple’s lines as one path
+							// - but the resulting SVG would be ugly to edit
+							// - and we’d also have to make separate paths for IUP and non-IUP arrows
+							let arrow = getArrowParams ({x1: x1, y1: y1, x2: x2, y2: y2, tipWid: ui.arrow.tipWidth * GLOBAL.vf.unitsPerEm/1000, tipLen: ui.arrow.tipLength * GLOBAL.vf.unitsPerEm/1000});
+
+							// make the line
+							let svgLine = SVG("line");
+							svgLine.attr({
+								x1: x1, y1: y1, x2: arrow.newX2, y2: arrow.newY2,
+								stroke: lineColor,
+								"stroke-width": ui.arrow.strokeWidth * uiScale,
+							});
+							if (iup)
+								svgLine.attr({ "stroke-dasharray": 4 * uiScale });
+
+							// make the arrowhead with SVG path
+							// - SVG polygon more efficient, but less flexible if we want a special shape
+							let svgArrowHead = SVG("path");
+							svgArrowHead.attr({
+								d: `M${x2} ${y2}L${arrow.arrowX1} ${arrow.arrowY1}L${arrow.arrowX2} ${arrow.arrowY2}Z`,
+								fill: lineColor,
+								stroke: "none",
+							});
+
+							svgg2.append(svgLine, svgArrowHead);
+						}
+						// show "pinned" points with a circle (these are points with 0,0 deltas, that protect other unmoved points that also do not move because of IUP)
+						// - hmm, not sure it is a good idea to try to visualize "pinned" points
+						// - they might be pinned by 1 axis, IUP’d by another axis, and moved by yet another axis
+						// - maybe useful only if you have one single-tuple axis active?
+						/*
+						else if (!iup && (delta[0] === 0 && delta[1] === 0)) {
+
+							console.log("circle!");
+							let svgCircle = SVG("circle");
+							svgCircle.attr({
+								cx: x1,
+								cy: y1,
+								r: 28,
+								stroke: lineColor,
+							});
+							svgg2.appendChild(svgCircle);
+						}
+						*/
+
+						x1 = x2;
+						y1 = y2;
+					});
+				});
+
+				svgg.append(svgg2);
+				break;
+
+
+			case "layer-loci":
+
+				const steps = ui.loci.steps; // we will make steps+1 instances
+				let lociX = [], lociY = []; // one for each point
+
+				svgg2 = SVG("g");
+				svgg2.id = layer + "-X";
+				svgg2.attr({
+					"fill": "none",
+				});
+
+				// trace X loci from -1 to 1
+				// TODO: force inclusion of default location and all axis peaks
+				for (let s=0; s<steps; s++) {
+
+					let lociInstanceX, lociInstanceY, iglyphX, iglyphY;
+					let T = -1.0 + s/(steps-1) * 2.0;
+
+					// initialize tuple
+					let tupleX = [], tupleY = [];
+					for (let a=0; a < font.axes.length; a++) {
+						tupleX[a] = tupleY[a] = GLOBAL.tuple[a];
+					}
+
+					// check which tuple values are non-default
+					// - what VF axes are attached to the X and Y axes?
+					Qall("#xSelect input:checked").forEach(el => {
+						tupleX[el.value*1] = T;
+					});
+					Qall("#ySelect input:checked").forEach(el => {
+						tupleY[el.value*1] = T;
+					});
+					
+					// make instance
+					lociInstanceX = font.addInstance(null, {tuple: tupleX});
+					lociInstanceY = font.addInstance(null, {tuple: tupleY});
+
+					// TODO: fix composites or decide not to handle them (currently they are still rounded, and the loci only work on the first component)
+					iglyphX = glyph.numContours < 0 ? glyph.decompose(lociInstanceX.tuple) : glyph.instantiate(null, lociInstanceX, {roundDeltas: false});
+					iglyphY = glyph.numContours < 0 ? glyph.decompose(lociInstanceY.tuple) : glyph.instantiate(null, lociInstanceY, {roundDeltas: false});
+
+					// build the SVG polylines in parallel
+					for (let p=0; p<glyph.points.length; p++) {
+						if (s==0) {
+							lociX[p] = "";
+							lociY[p] = "";
+						}
+						else {
+							lociX[p] += " ";
+							lociY[p] += " ";
+						}
+						lociX[p] += `${iglyphX.points[p][0]},${iglyphX.points[p][1]}`;
+						lociY[p] += `${iglyphY.points[p][0]},${iglyphY.points[p][1]}`;
+					}
+
+					// pop instances
+					font.instances.pop();
+					font.instances.pop();
+				}
+
+				// create the SVG element, one set of elements per point
+				for (let p=0; p<glyph.points.length; p++) {
+
+					[lociX, lociY].forEach(LOCI => {
+
+						let svgPolyline;
+
+						// draw initial polyline
+						svgPolyline = SVG("polyline");
+						svgPolyline.attr({
+							points: LOCI[p],
+							stroke: LOCI===lociX ? ui.designspace.colors[0] : ui.designspace.colors[1],
+							"stroke-width": ui.loci.strokeWidth * uiScale,
+							opacity: ui.loci.opacity,
+						});
+						svgg2.append(svgPolyline);
+
+						// if railway mode, draw extra lines
+						if (ui.loci.style == "railway") {
+
+							svgPolyline = SVG("polyline");
+							svgPolyline.attr({
+								points: LOCI[p],
+								stroke: "white",
+								"stroke-width": ui.loci.strokeWidth / 1.5 * uiScale,
+							});
+							svgg2.append(svgPolyline);
+
+							svgPolyline = SVG("polyline");
+							svgPolyline.attr({
+								points: LOCI[p],
+								stroke: LOCI===lociX ? ui.designspace.colors[0] : ui.designspace.colors[1],
+								"stroke-width": ui.loci.strokeWidth * 1.5 * uiScale,
+								"stroke-dasharray": `${1*uiScale} ${5*uiScale}`,
+							});
+							svgg2.append(svgPolyline);
+						}
+
+					});
+
+				}
+
+				svgg.append(svgg2);
+				break;
+
+
+			case "layer-pointnumbers":
+
+				if (!Q("#point-numbers").checked)
+					break;
+
+				svgg2 = SVG("g");
+				svgg2.id = layer;
+				svgg2.attr({
+					"fill": ui.pointNumbers.color || "black",
+					"stroke": "none",
+				});
+				svgg2.style.fontSize = `${24*uiScale}px`;
+
+				let xOffset = yOffset = ui.pointNumbers.offset || 0;
+				let angle = ui.pointNumbers.angle * Math.PI/180 || 0;
+				angle = Math.PI - angle;
+				xOffset *= Math.sin(angle) * uiScale;
+				yOffset *= Math.cos(angle) * uiScale;
+
+				iglyph.points.forEach((point, pt) => {
+
+					// make a text element for each point
+					let svgText = SVG("text");
+					svgText.textContent = pt;
+
+					svgText.attr({
+						x: point[0]+xOffset,
+						y: point[1]+yOffset,
+						class: "point-number",
+						transform: `translate(0,${2*point[1]}) scale(1,-1)`,
+					});
+
+					// if angle points to the left of the point, make the number’s text anchor on the right hand side
+					if (xOffset < 0)
+						svgText.attr({
+							"text-anchor": "end",
+						});
+
+					svgg2.append(svgText);
+				});
+
+				svgg.append(svgg2);
+				break;
+		}
+
+	});
+
+
+	svgEl.append(svgg);
+	drawingEl.append(svgEl);
+
+}
+
+
+function playGlyphs() {
+	let g = (getActiveGlyph()+1) % GLOBAL.vf.numGlyphs;
+	let instance = GLOBAL.vf.addInstance(null, {tuple: GLOBAL.tuple});
+	setActiveGlyph (g, instance);
+	GLOBAL.vf.instances.pop();
+	GLOBAL.vf.timerGlyphPlayer = setTimeout (playGlyphs, 500);
+}
+
+
+// click handlers for all clicks
+document.onclick = function (event) {
+
+	// about target
+	// - via the method of assignment in the if(), target gets the desired element rather than a child (or grandchild) that in fact received the event
+	// - the closest(x) method is great: we find whether event.target happened on something within something selected by x
+	// - order matters! (e.g. an icon within an instance row must be handled before the instance row itself)
+	let target;
+	let font = GLOBAL.vf;
+	const saveScrollY = Q("#panels-left").scrollTop; // fixes Safari macOS 10.14 bug where controls panel scrolls to top on most interactions
+	let handled = false;
+
+
+	if (target = event.target.closest("#panels-left .panel .instantiate")) {
+
+		// create and download the instance
+		let instanceEl = target.closest(".instance");
+		let instance = instanceEl.data.instance;
+
+		GLOBAL.vf.makeInstance(instance); // creates instance.static
+
+		let fauxLink = EL("a");
+		fauxLink.download = GLOBAL.vf.filename;
+		fauxLink.href = "data:font/ttf;base64," + uint8ToBase64(instance.static);
+
+		document.body.append(fauxLink); // needed for Firefox, not Chrome or Safari
+		fauxLink.click();
+		fauxLink.remove();
+
+		handled = true;
+	}
+
+	else if (target = event.target.closest(".instance")) {
+
+		setActiveInstance(GLOBAL.vf, target);
+		handled = true;
+	}
+
+	else if (target = event.target.closest("#panel-axes .header .icon")) {
+
+		let fvs = {}, redraw = true;
+		if (target.classList.contains("default")) {
+			GLOBAL.vf.axes.forEach((axis,a) => {
+				fvs[axis.tag] = axis.default;
+			});
+		}
+		else if (target.classList.contains("min")) {
+			GLOBAL.vf.axes.forEach((axis,a) => {
+				fvs[axis.tag] = axis.min;
+			});
+		}
+		else if (target.classList.contains("max")) {
+			GLOBAL.vf.axes.forEach((axis,a) => {
+				fvs[axis.tag] = axis.max;
+			});
+		}
+		else
+			redraw = false;
+
+		if (redraw) {
+			let instance = font.addInstance(fvs);
+			setActiveGlyph (GLOBAL.currentGlyphId, instance); // update the SVG
+			font.instances.pop();
+			axesUpdateValues();
+			panelSTAT_handleChange();
+			panelWebfont_handleChange();
+			updateDesignspace();
+			setAxes (GLOBAL.vf, fvs);
+		}
+		handled = true;
+	}
+
+	else if (event.target.classList.contains("ctrl-pt")) {
+		console.log("click pt", event.target);
+		console.log(event.target.data.point);
+		handled = true;
+	}
+
+	else if (target = event.target.closest(".panel>h2 .info")) {
+
+		// load help file
+		const helpFile = target.parentNode.parentNode.id + ".md"; // one of these for each panel, so panel-glyphs.md, panel-stat.md, etc.
+
+		fetch(`help/${helpFile}`)
+		.then(response => {
+				return response.text();
+			}, 
+			error => {
+				return "## No response from server\n\nHelp files are only available when Samsa is installed on a web server.";
+				console.log ("No response from server: Samsa was probably run by double-clicking the html file, so under file:// instead of https://");
+			}
+		)
+		.then(doc => {
+
+			// Markdown (very minimal!)
+
+			// code blocks
+			doc = htmlEntities(doc).replace( /\n```\n([\s\S]*?)\n```/gm, "\n<pre><code>$1</code></pre>\n");
+			// \s\S matches all whitespace and non-whitespace characters (note that "." does not match newlines, except with the s modifier, which does not work in Firefox)
+
+			// numbered lists
+			// - m is multiline, g is global
+			doc = doc.replace( /\n\n^\d+\. (.+?)$/gm, "\n\n<ol><li>$1</li>"); // first
+			doc = doc.replace( /^\d+\. (.*?)$\n\n/gm, "<li>$1</li></ol>\n"); // last
+			doc = doc.replace( /^\d+\. (.+?)$/gm, "<li>$1</li>"); // middle
+
+			// unnumbered lists
+			doc = doc.replace( /\n\n(\*|-) (.+?)$/gm, "\n\n<ul><li>$2</li>"); // first
+			doc = doc.replace( /^(\*|-) (.*?)$\n\n/gm, "<li>$2</li></ul>\n\n"); // last
+			doc = doc.replace( /^(\*|-) (.+?)$/gm, "<li>$2</li>"); // middle
+
+			// bold and italic
+			doc = doc.replace( /(\*\*|__)([^\n]+?)(\*\*|__)/g, `<strong>$2</strong>`); // bold
+			doc = doc.replace( /(\*|_)([^\n]+?)(\*|_)/g, `<em>$2</em>`); // italic
+
+			// linebreaks
+			doc = doc.replace( /\n\n/g, `</p><p>\n\n`);
+			doc = doc.replace( /  \n/g, "<br>\n");
+
+			// headings
+			doc = doc.replace( /#### (.*)\n/g, "<h4>$1</h4>\n"); // h4
+			doc = doc.replace( /### (.*)\n/g, "<h3>$1</h3>\n"); // h3
+			doc = doc.replace( /## (.*)\n/g, "<h2>$1</h2>\n"); // h2
+			doc = doc.replace( /# (.*)\n/g, "<h1>$1</h1>\n"); // h1
+
+			// images
+			doc = doc.replace( /!\[([^\]]*?)\]\(([^)]*?)\)/g, `<figure><img src="$2" title="$1"><figcaption>$1</figcaption></figure> `); // images
+
+			// links
+			doc = doc.replace( /\[([^\]]*?)\]\(([^)]*?)\)/g, `<a href="$2">$1</a>`); // links
+
+			// code snippets
+			doc = doc.replace( /`([^\n]*?)`/g, `<code>$1</code>`); // <code>
+
+			// build ui
+			// - create the transparent overlay
+			const overlay = EL("div");
+			overlay.classList.add("popup-overlay");
+			document.body.append(overlay);
+
+			// - create the help window
+			const help = EL("div");
+			help.classList.add("popup-modal");
+			help.id = "help-overlay";
+			help.innerHTML = doc;
+			document.body.append(help);
+
+			// - create the "Close" button at top right
+			const closeButton = EL("button");
+			closeButton.classList.add("close");
+			closeButton.innerText = "Close";
+			help.append(closeButton);
+			closeButton.addEventListener("click", removeOverlay);
+			overlay.addEventListener("click", removeOverlay);
+						
+		});
+		handled = true;
+	}
+
+	else if (target = event.target.closest("#panel-glyphs>h2") 
+			&& event.target.classList.contains("icon")
+			&& !event.target.classList.contains("reveal")) { // this test must be before the other h2 test
+
+		let g;
+		let step = false;
+		clearTimeout(font.timerGlyphPlayer);
+		
+		switch (event.target.id) {
+
+			case "glyphs-stepforward":
+				g = getActiveGlyph()+1;
+				step = true;
+				break;
+			case "glyphs-stepback":
+				g = getActiveGlyph()-1+font.numGlyphs;
+				step = true;
+				break;
+			case "glyphs-play":
+				playGlyphs();
+				break;
+			case "glyphs-stop":
+				clearTimeout(font.timerGlyphPlayer);
+				font.timerGlyphPlayer = undefined;
+				break;
+		}
+
+		if (step) {
+			let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+			g %= font.numGlyphs;
+			clearTimeout(font.timerGlyphPlayer);
+			setActiveGlyph (g, instance);
+			font.instances.pop();
+		}
+
+		handled = true;
+	}
+
+	else if (target = event.target.closest("#panel-glyphs>h2") 
+			&& event.target.id == "glyphs-ids") {
+
+		// toggle the display of the spans inside the label
+		let active = Q("#glyphs-ids").classList.toggle("active");
+		let glyphLabels = Qall("#panel-glyphs .glyph-thumb label");
+		glyphLabels.forEach(label => {			
+			label.querySelector(".id").style.display = active ? "inline" : "none";
+			label.querySelector(".name").style.display = active ? "none" : "inline";
+		})
+		handled = true;
+	}
+
+	else if (target = event.target.closest(".panel>h2")) {
+
+		// toggle display of panel when panel header is clicked
+		let panelDiv = target.parentNode.querySelector("div.panel-content");
+		target.parentNode.classList.toggle("open");
+		if (target.parentNode.classList.contains("open"))
+			panelDiv.style.display = "block";
+		else
+			panelDiv.style.display = "none";
+		handled = true;
+	}
+
+	else if (target = event.target.closest(".glyph-thumb")) {
+
+		let comps = target.id.split("-");
+		let g = comps[1];
+		event.preventDefault(); // stops the <a href...> having an effect?
+
+		let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+		setActiveGlyph(g, instance);
+		font.instances.pop();
+		handled = true;
+	}
+
+	else if (target = event.target.closest(".tvt-item .toggle")) {
+
+		const liTvt = event.target.closest("li");
+		const tvtId = liTvt.data.tvtId;
+		GLOBAL.tvtToggles[tvtId] = !GLOBAL.tvtToggles[tvtId]; // store the toggle state so we can rebuild the panel
+		event.target.closest("li").classList.toggle("open"); // the "open" class triggers visibility of a subsequent ol element
+	}
+
+	else if (event.target.classList.contains("axis-nudge")) {
+
+		const delta = event.target.innerHTML == "+" ? 1 : -1; // is the delta +1 or -1? the decrementer innerHTML can be - (hyphen-minus) or − (minus sign) or in fact anything except +
+		const axis = event.target.closest("li").data.axis; // which axis is this?
+		GLOBAL.tuple[axis.id] += delta/16384; // adjust the tuple
+		if (GLOBAL.tuple[axis.id] > 1)
+			GLOBAL.tuple[axis.id] = 1;
+		if (GLOBAL.tuple[axis.id] < -1)
+			GLOBAL.tuple[axis.id] = -1;
+
+		let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+		setActiveGlyph(GLOBAL.currentGlyphId, instance);
+		axesUpdateValues();
+		panelSTAT_handleChange();
+		panelWebfont_handleChange();
+		updateDesignspace();
+		setAxes (font, font.tupleToFvs(GLOBAL.tuple));
+		font.instances.pop();
+		handled = true;
+	}
+
+	if (handled) {
+		Q("#panels-left").scrollTop = saveScrollY; // for the macOS 10.14 bug referenced at the start of this click handler
+		return false;
+	}
+
+	// no return value if the event was not handled
+	return true;
+}
+
+
+function loadingAnimationStart() {
+	const fontInfo = Q("#panel-fonts .font-info");
+	const loading = EL("div");
+	const loadingIcon = EL("span");
+	fontInfo.style.minHeight = "6rem";
+	loadingIcon.classList.add("icon", "bold");
+	loading.classList.add("loading");
+	loading.append(loadingIcon);
+	fontInfo.append(loading);
+}
+
+
+function loadingAnimationEnd() {
+	let loading = Q("#panel-fonts .font-info .loading");
+	if (loading)
+	 	loading.remove();
+}
+
+
+// handles drag-drop drops and also handles the click to choose a file (because it’s an <input type="file">)
+Q("#file-upload-input").onchange = e => {
+
+	loadingAnimationStart();
+	const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.__file__ = file;
+    reader.onload = function (event) {
+
+		let vf = new SamsaFont({
+			arrayBuffer: this.result,
+			inFile: this.__file__.name,
+			filesize: this.__file__.size,
+			date: this.__file__.lastModified,  // doesn't retrieve the real file date
+			callback: vfLoaded,
+		});
+	};
+
+	reader.readAsArrayBuffer(file); // https://stackoverflow.com/questions/22659164/read-a-drag-and-dropped-file
+
+};
+
+
+// handle drag onto drag-drop zones
+// - any element of class "drag-drop" is ok to drop on
+// - the file processing is handled in Q("#file-upload-input").addEventListener("change", ev => {
+document.ondragenter = e => {
+	if (e.target.closest(".drag-drop")) {
+		Q("#drag-drop-zone").style.display = "flex";
+		Q("#font-file").style.display = "none";
+		Q("#drag-drop-zone .border").style.borderColor = "black";
+	}
+	else { // dragged out of a drag-drop zone
+		Q("#drag-drop-zone").style.display = "none";
+		Q("#font-file").style.display = "block";
+	}
+};
+
+
+// destroy the elements that make the overlay popup
+function removeOverlay () {
+
+	Qall(".popup-overlay, .popup-modal").forEach(el => {
+		el.remove();
+	});
+}
+
+
+document.onkeydown = e => {
+
+	const font = GLOBAL.vf;
+
+	// space key: switch to preview mode
+	if (e.key == " " && GLOBAL.vf) {
+		const el = e.target;
+		const tagName = el.tagName.toLowerCase();
+		if (el.isContentEditable || (tagName == "input" && el.type == "text") || tagName == "textarea") {
+			return true;
+		}
+
+		if (e.repeat) {
+			e.preventDefault(); // we don’t want anything to scroll, which is default behaviour for space
+			return true;
+		}
+
+		// switch to preview UI mode if not in preview UI mode
+		e.preventDefault();
+		if (Q("#ui-mode").value != "preview") {
+			const saveScrollY = Q("#panels-left").scrollTop; // fixes Safari macOS 10.14 bug where controls panel scrolls to top on most interactions
+			GLOBAL.quickPreviewSaved = font.config.ui.name;
+			font.config.ui = font.config.uiModes["preview"];
+			let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+			setActiveGlyph (GLOBAL.currentGlyphId, instance);
+			font.instances.pop();
+			Q("#panels-left").scrollTop = saveScrollY; // for the macOS 10.14 bug referenced at the start of this click handler
+		}
+		return false;
+	}
+
+	// escape key
+	if (e.keyCode == 27) {
+		removeOverlay();
+	}
+
+	// alt-left-arrow and alt-right-arrow: next/previous glyph
+	if ((e.keyCode == 37 || e.keyCode == 39) && e.altKey) {
+		e.preventDefault();
+		let increment = e.keyCode == 37 ? -1 : 1;
+		GLOBAL.currentGlyphId = (GLOBAL.currentGlyphId + increment + font.numGlyphs) % font.numGlyphs;
+
+		let instance = font.addInstance(null, {tuple: GLOBAL.tuple});
+		setActiveGlyph (GLOBAL.currentGlyphId, instance);
+		font.instances.pop();
+	}
+
+};
+
+
+document.onkeyup = e => {
+
+	if (e.key == " " && GLOBAL.vf) {
+		// switch from preview UI mode back to the saved UI mode
+		if (GLOBAL.quickPreviewSaved) {
+			e.preventDefault();
+			GLOBAL.vf.config.ui = GLOBAL.vf.config.uiModes[GLOBAL.quickPreviewSaved];
+			GLOBAL.quickPreviewSaved = null;
+			let instance = GLOBAL.vf.addInstance(null, {tuple: GLOBAL.tuple});
+			setActiveGlyph (GLOBAL.currentGlyphId, instance);
+			GLOBAL.vf.instances.pop();
+		}
+		return false;
+	}
+
+};
+
+
+// Glyphs panel: filter by glyph name or glyph id
+Q("#glyph-filter").addEventListener("input", e => {
+
+	Q("#string-filter").value = "";
+	const glyphThumbs = Qall(".glyph-thumb");
+	let filter = Q("#glyph-filter").value;
+	let min, max, reg;
+	let numeric = filter.match(/^(\d+)(-(\d+))?$/); // a range like "87-106"
+	if (numeric) {
+		min = numeric[1] * 1;
+		max = numeric[3] === undefined ? min : numeric[3] * 1; // max = min if there’s no range
+	}
+	else
+		reg = new RegExp(filter, "i"); // case-insensitive
+
+	for (let g=0; g<glyphThumbs.length; g++) {
+		let thumbEl = glyphThumbs[g];
+		let name = thumbEl.querySelector(".name").textContent;
+		let id = thumbEl.querySelector(".id").textContent;
+		thumbEl.style.display = filter == "" || (numeric ? g >= min && g <= max : name.match(reg)) || id == filter ? "block" : "none";
+	}
+});
+
+
+// Glyphs panel: filter by string
+Q("#string-filter").addEventListener("input", e => {
+
+	Q("#glyph-filter").value = "";
+	const glyphThumbs = Qall(".glyph-thumb");
+	let filter = Q("#string-filter").value;
+	let glyphIds = [];
+
+	for (let c=0; c<filter.length; c++){
+		let uni = filter.charCodeAt(c);
+		glyphIds.push(GLOBAL.vf.cmap[uni]);
+	}
+
+	for (let g=0; g<glyphThumbs.length; g++) {
+		let thumbEl = glyphThumbs[g];
+		thumbEl.style.display = glyphIds.length == 0 || glyphIds.indexOf(g) != -1 ? "block" : "none";
+	}
+});
+
+
+// Glyphs panel: simple/composite glyphs toggles
+function filterGlyphs(el) {
+
+	const glyphThumbs = Qall(".glyph-thumb");
+	const simple = Q("#filter-simple").checked, composite = Q("#filter-composite").checked, blank = Q("#filter-blank").checked;
+
+	for (let g=0; g<glyphThumbs.length; g++) {
+		const numContours = GLOBAL.vf.glyphs[g].numContours;
+		if (numContours > 0)
+			glyphThumbs[g].style.display = simple ? "block" : "none";
+		else if (numContours < 0)
+			glyphThumbs[g].style.display = composite ? "block" : "none";
+		else
+			glyphThumbs[g].style.display = blank ? "block" : "none";
+	}
+}
+Qall("#filter-simple, #filter-composite, #filter-blank").forEach(el => el.addEventListener("input", e => filterGlyphs(e.target)))
+
+
+// Fonts panel menu: handle selection
+Q("#panel-fonts .font-selector").addEventListener("change", e => {
+
+	let target = e.target; //this.querySelector("option:selected");
+
+	if (target.selectedIndex > 0) {
+
+		let option = target[target.selectedIndex];
+		let fontData, url;
+
+		const isDataUrl = option.data.url.indexOf("data:") === 0;
+
+		// if the app is running in file: protocol, skip any fonts that are not data: protocol
+		if (location.protocol == "file:" && !isDataUrl) {
+			
+			alert ("Cannot load font files from disk if application is on file: protocol. You must embed the fonts as base64 in samsa-config.js or install Samsa on a web server such as localhost.");			
+		}
+		else {
+			// load the font
+			loadingAnimationStart();
+			let vf = new SamsaFont({
+				fontFamily: "FontNameShouldGoHere",
+				filename: option.data.filename,
+				url: option.data.url,
+				callback: vfLoaded,
+			});
+		}
+	}
+});
+
+
+window.onresize = () => {
+
+	// make the SVG fit exactly into the #drawing quadrant of the main grid
+	const drawingEl = Q("#drawing");
+	const svgEl = Q("#samsa-svg");
+
+	if (drawingEl && svgEl) {
+		svgEl.attr({
+			width: drawingEl.clientWidth,
+			height: drawingEl.clientHeight,
+		});
+	}
+
+	let rightCol = Q("#panels-right");
+	let glyphInfoBox = Q("#glyph-info");
+	rightCol.style.right = "0px";
+	glyphInfoBox.style.bottom = "0px";
+}
+
+window.onload = () => {
+
+	// panels that need to be initialized once per session
+	let panel, panelPart;
+
+	// handle loading a font via a url in query string: prepend a new record to the fontList with preload=true
+	GLOBAL.urlParams = new URLSearchParams(window.location.search);
+	let preloaded = false, preloadUrl;
+	if (preloadUrl = GLOBAL.urlParams.get("preload")) {
+		CONFIG.fontList.unshift ({
+			url: preloadUrl,
+			preload: true,
+		});
+	}
+
+	///////////////////////////////////////////////////////
+	// Fonts panel
+	///////////////////////////////////////////////////////
+
+	panelPart = Q("#panel-fonts .font-selector");
+	panelPart.innerHTML = "";
+
+	let option = EL("option");
+	option.value = -1;
+	option.innerText = "[no font selected]";
+	panelPart.append(option);
+	for (let font of CONFIG.fontList) {
+
+		// work out a filename if it doesn’t have one
+		const isDataUrl = font.url.indexOf("data:") === 0;
+		const filename = font.filename ? font.filename
+		                               : isDataUrl ? `${font.name}.ttf` 
+		                                           : font.url.substr(font.url.lastIndexOf("/")+1);
+		
+		option = EL("option");
+		option.value = filename; // filename;
+		option.innerText = filename; // filename;
+
+		option.data = {
+			url: font.url,
+			filename: font.filename,
+			name: font.name,
+		};
+
+		panelPart.append(option);
+
+		// preload this font if it has preload property
+		if (font.preload && !preloaded) {
+
+			let vf = new SamsaFont({
+
+				fontFamily: font.name,
+				url: font.url,
+				filename: filename,
+				callback: vfLoaded,
+			});
+
+			preloaded = true; // we preload max one font
+			Q(".font-selector").value = filename;
+		}
+	}
+
+	// assign each panel to left or right panel-container
+	const panelsLeft = Q("#panels-left"), panelsRight = Q("#panels-right");
+	for (let panelInfo of CONFIG.panels) {
+		if (panel = Q(`#${panelInfo.id}`)) { // = not ==
+			let container = panelInfo.side == "right" ? panelsRight : panelsLeft;
+			panel.classList.add(panelInfo.open == false ? "closed" : "open");
+			container.append(panel);		
+		}
+	}
+}
+
+</script>
+
+<script src="samsa-config.js"></script>
+
+</body>
+</html>

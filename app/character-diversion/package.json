@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "name": "character-diversion",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.1"
+  },
+  "dependencies": {
+    "@Lorp/samsa": "file:samsa"
+  }
+}
