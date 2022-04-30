@@ -1,59 +1,28 @@
 <template>
-	<div>
-		glyph
-		<svg id="samsa-svg" width="1320" height="809" style="background-color: transparent;"><g v-html="glyph"></g></svg>
-		<slot />
-	</div>
+	<GlyphsGlyph :glyph="glyph" :tuple="[tuple1, tuple2]" />
+	<GlyphsGlyph glyph="ת" :tuple="[tuple1, tuple2]" />
+	<GlyphsGlyph glyph="j" :tuple="[tuple1, tuple2]" />
+	<br>
+	<input v-model="glyph" />
+	<input v-model="tuple1" type="range" min="0" max="1" step="0.0000001"/>
+	<input v-model="tuple2" type="range" min="0" max="1" step="0.0000001"/>
 </template>
 
 <script>
-import { SamsaFont } from '/assets/samsa-core.js'
-
 export default {
-	name: "default",
+	name: "Samsa",
 
 	data() {
 		return {
-			glyph: ''
+			glyph: 'n',
+			tuple1: 0,
+			tuple2: 0.5
 		};
 	},
 	mounted() {
-		console.log(SamsaFont)
-		let vf = new SamsaFont({
-			fontFamily: "IBM Plex Sans",
-			url: "fonts/NewFontVF.ttf",
-			callback: (font) => {
-				const glyph = font.glyphs[5];
-				// create svg
-				const svgPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-				svgPath.setAttribute("d", glyph.decompose().svgPath());
-				this.glyph = svgPath.outerHTML;
-			}
-		});
-		// 	stroke: ui.glyphDefault.stroke,
-		// 	"stroke-width": ui.glyphDefault.strokeWidth * uiScale,
-		// 	fill: ui.glyphDefault.fill,
-
-
-		// let vf = new SamsaFont({
-		// 	fontFamily: "IBM Plex Sans",
-		// 	url: "fonts/IBMPlexSansVar-Roman.ttf",
-		// 	callback: function (font) {
-		// 		console.log(font);
-		// 	}
-		// });
-		console.log(vf)
 	},
-	methods: {
-		SVG(tag) {
-    return document.createElementNS("http://www.w3.org/2000/svg", tag);
-}
-	}
 }
 </script>
 
 <style>
-path {
-	fill: red;
-}
 </style>
