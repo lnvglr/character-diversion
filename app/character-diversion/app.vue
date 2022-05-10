@@ -1,3 +1,3 @@
 <template>
-  <Samsa />
+  <NuxtLayout />
 </template>

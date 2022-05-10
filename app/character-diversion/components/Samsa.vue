@@ -3,7 +3,7 @@
 		<FormKit type="text" placeholder="Glyphs" v-model="glyph" />
 		<FormKit type="select" placeholder="Glyphs" v-model="font" :options="fontOptions" />
 	</div>
-  <div class="glyphs">
+  <div class="glyphs" v-if="font">
     <GlyphsGlyph
       v-for="g in glyphs"
       :key="g"
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
+
 export default {
   name: 'Samsa',
 
@@ -23,8 +25,8 @@ export default {
       glyph: 'j',
       tuple1: 0,
       tuple2: 0,
-      font: 'IBMPlexSansVar-Roman.ttf',
-      fontOptions: ['DiodeNextGlobalVF.ttf', 'IBMPlexSansVar-Roman.ttf', 'NewFontVF.ttf'],
+      font: null,
+      fontOptions: [],
     }
   },
   computed: {
@@ -33,6 +35,8 @@ export default {
     },
   },
   mounted() {
+    this.fontOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
+    this.font = this.fontOptions[0]
     document.onmousemove = (event) => {
       this.tuple1 = 1 - (1 / window.innerWidth) * event.pageX
       this.tuple2 = 1 - (1 / window.innerHeight) * event.pageY
