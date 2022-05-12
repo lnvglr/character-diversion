@@ -1,0 +1,30 @@
+{
+  "name": "character-diversion-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Character Diversion Backend",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@strapi/strapi": "4.1.10",
+    "@strapi/plugin-users-permissions": "4.1.10",
+    "@strapi/plugin-i18n": "4.1.10",
+    "better-sqlite3": "7.4.6"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "f27c6172-bafb-4f60-9f9b-17bfb8ea447b"
+  },
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

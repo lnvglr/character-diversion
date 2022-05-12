@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "opinions",
+  "info": {
+    "singularName": "opinion",
+    "pluralName": "opinions",
+    "displayName": "Opinion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "content": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "richtext",
+      "required": false
+    },
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "discourse": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::discourse.discourse",
+      "inversedBy": "opinions"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "opinion"
+    },
+    "tuple": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "json"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
