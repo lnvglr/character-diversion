@@ -89,7 +89,13 @@ const postOpinion = () => {
     discourse: currentDiscourse.value
   }
   create<Strapi4Response<Opinion>>('opinions', opinion).then(({data}) => {
-    currentDiscourse.value.attributes.opinions.data.push(data)
+    if (currentDiscourse.value.attributes.opinions?.data) {
+      currentDiscourse.value.attributes.opinions.data.push(data)
+    } else {
+      currentDiscourse.value.attributes.opinions = {
+        data: [data]
+      }
+    }
     newOpinion.value = ''
   })
 }
