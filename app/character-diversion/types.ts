@@ -22,22 +22,32 @@ export interface Comment {
 	createdAt: Date;
 	updatedAt: Date;
 }
-export interface Spectrum {
-	id: string;
-	axes: Array<number>[];
-}
 export interface Opinion {
 	id: string;
 	attributes: {
-		name: string;
 		title: string;
 		content: string;
 		author: string;
 		createdAt: Date;
 		updatedAt: Date;
-		comments: Comment[];
-		fonts: SamsaFont[];
-		glyphs: SamsaGlyph[];
-		spectrum: Spectrum;
+		comments?: Comment[];
+		fonts?: SamsaFont[];
+		glyphs?: SamsaGlyph[];
+		tuple?: number[];
+		spectrum?: FontSpectrum[];
 	}
+}
+export interface FontSpectrum {
+	font?: SamsaFont;
+	glyphSpectrum?: GlyphSpectrum[];
+	tupleSpectrum?: TupleSpectrum[];
+}
+export interface GlyphSpectrum {
+	glyphs?: string[];
+	tupleSpectrum?: TupleSpectrum[];
+}
+export interface TupleSpectrum {
+	name: string;
+	min: number[];
+	max: number[];
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 p-10 gap-5">
+  <div class="grid grid-cols-3 gap-5">
     <NuxtLink
       to="/discourse/new"
       key="remove"
@@ -23,7 +23,7 @@
       v-for="discourseItem in discourse.all"
       :key="discourseItem.id"
       :to="`/discourse/${discourseItem.id}`"
-      class="flex items-center justify-center flex-col p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24"
+      class="flex items-center justify-center p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24"
       @click="discourse.current = discourseItem.id"
     >
       <h2 class="text-l font-bold">
@@ -32,6 +32,22 @@
           ({{ discourseItem?.attributes?.opinions?.data.length }})</span
         >
       </h2>
+      <div
+        class="
+          flex
+          items-center
+          justify-center
+          w-6
+          h-6
+          -my-10
+          rounded-full
+          ml-auto
+          hover:bg-red-500 hover:text-white
+        "
+        @click.prevent="removeDiscourse(discourseItem.id)"
+      >
+        <font-awesome-icon :icon="['fas', 'times']" fixed-width class="fa-xs" />
+      </div>
     </NuxtLink>
   </div>
 </template>
@@ -39,12 +55,12 @@
 <script setup>
 import { discourse } from '@/composables/states'
 const discourses = reactive(discourse.all)
-const { create } = useStrapi4()
+const { delete: remove } = useStrapi4()
 
-const postDiscourse = () => {
-  create('discourses', {
-    title: (Math.random() + 10).toString(36).substring(2),
-  }).then(({ data }) => discourses.push(data))
+const removeDiscourse = (id) => {
+  remove('discourses', id).then(
+    ({ data }) => (discourse.all = discourse.all.filter((e) => e.id !== data.id))
+  )
 }
 </script>
 

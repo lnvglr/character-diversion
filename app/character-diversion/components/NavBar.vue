@@ -6,7 +6,7 @@
       w-full
       bg-slate-100
       border-t border-t-slate-200
-      dark:bg-slate-700 dark:border-t-slate-600
+      dark:bg-slate-800 dark:border-t-slate-600
     "
   >
     <ul :class="`flex flex-row justify-around p-5 max-w-2xl mx-auto`">

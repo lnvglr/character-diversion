@@ -216,7 +216,7 @@ export default {
   },
   computed: {
     fontUrl() {
-      return 'fonts/' + this.font
+      return '/public/fonts/' + this.font
     },
   },
   watch: {

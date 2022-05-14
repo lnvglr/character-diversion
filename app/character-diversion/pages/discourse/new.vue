@@ -28,7 +28,7 @@
 
 <script setup>
 import { discourse } from '@/composables/states'
-const route = useRoute()
+const router = useRouter()
 
 const formData = reactive({
 	title: '',
@@ -41,10 +41,9 @@ const postDiscourse = () => {
     title: formData.title,
     content: formData.content,
   }).then(({ data }) => {
-    console.log(data)
-    discourse.all.push(data)}
-    )
-  console.log(route)
+    discourse.all.push(data)
+    router.push(`/discourse/${data.id}`)
+  })
 }
 </script>
 
