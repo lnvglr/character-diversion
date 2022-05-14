@@ -1,5 +1,5 @@
 <template>
-  <Html :class="`${theme === 'dark' ? 'dark' : ''}`" :lang="locale">
+  <Html :lang="locale" :class="$colorMode.value">
     <Body
       class="
         antialiased
@@ -12,21 +12,15 @@
       "
     >
       <NuxtPage />
+		  <NavBar />
     </Body>
   </Html>
 </template>
 <script lang="ts" setup>
-const theme = ''
 const locale = 'en'
 definePageMeta({
-  name: 'Home',
-  icon: 'home',
-  order: 1,
   transition: {
     name: 'page',
-  },
-  keepAlive: {
-    exclude: ['modal'],
   },
 })
 </script>

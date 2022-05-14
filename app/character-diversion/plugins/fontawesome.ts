@@ -9,4 +9,5 @@ config.autoAddCss = false
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon)
+
 })

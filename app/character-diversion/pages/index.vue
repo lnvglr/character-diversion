@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
-    <template #header>Home</template>
-    <Samsa />
+    <template #header>Character Diversion</template>
+    <!-- <Samsa /> -->
   </NuxtLayout>
 </template>
 
@@ -12,7 +12,3 @@ definePageMeta({
 	order: 1,
 })
 </script>
-
-<style>
-
-</style>

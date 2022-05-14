@@ -22,7 +22,7 @@ export default {
 
   data() {
     return {
-      glyph: 'j',
+      glyph: 'jתm',
       tuple1: 0,
       tuple2: 0,
       font: null,

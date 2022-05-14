@@ -4,7 +4,6 @@
     <main class="p-5 m-10">
 			<slot />
     </main>
-		<NavBar />
   </div>
 </template>
 

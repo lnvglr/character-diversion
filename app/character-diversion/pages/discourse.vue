@@ -1,55 +1,72 @@
 <template>
   <NuxtLayout name="grid">
-    <template #header>Discourse: {{discourse.current}}</template>
+    <template #header>Discourse</template>
     <template #sidebar>
-      <h3 class="text-l font-bold p-5 border-b">Opinions ({{currentOpinions?.length}})</h3>
-      <Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" @remove="removeOpinion(opinion.id)"/>
-      <div class="p-5"><FormKit type="text" placeholder="New opinion..." v-model="newOpinion" v-on:keyup.enter="postOpinion" /></div>
+      <h3 class="text-lg font-bold p-5">Opinions ({{ currentOpinions?.length }})</h3>
+      <p class="text-sm font-bold p-5 border-b">Discourse: {{ currentDiscourse.id }}</p>
+      <Opinion
+        v-for="opinion in currentOpinions"
+        :key="opinion"
+        :opinion="opinion"
+        @remove="removeOpinion(opinion.id)"
+      />
+      <div class="p-5">
+        <FormKit
+          type="text"
+          placeholder="New opinion..."
+          v-model="newOpinion"
+          v-on:keyup.enter="postOpinion"
+        />
+      </div>
     </template>
-    <div class="flex flex-col p-5">
-      <h2 class="text-xl font-bold">{{currentDiscourse.attributes.title}}</h2>
-      <p class="text-xl font-bold">{{currentOpinions.map(({id}) => id)}}</p>
-
-      <pre>{{t}}</pre>
-    </div>
+    <NuxtPage />
   </NuxtLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Opinion } from '@/types'
 import { discourse } from '@/composables/states'
+
+const { find, create, delete: remove } = useStrapi4()
+
 definePageMeta({
   name: 'Discourse',
-	icon: 'wand-magic-sparkles',
-	order: 3
+  icon: 'bars-progress',
+  order: 3,
 })
-const { find, create, delete: remove } = useStrapi4()
-const discoursesRaw = (await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] })).data
-discourse.all = discoursesRaw
-discourse.current = discoursesRaw[0].id
-// const t = discoursesRaw.reduce((acc, { id, attributes }) => {
-//   acc[id] = attributes
-//   return acc
-// }, {})
+discourse.all = (
+  await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] })
+).data
+discourse.current = discourse.current || discourse.all[0]?.id
 const currentDiscourse = computed(() => discourse.all.find(({ id }) => id === discourse.current))
-const currentOpinions = computed(() => currentDiscourse.value.attributes.opinions.data)
+const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
 const newOpinion = ref('')
+
 const removeOpinion = (id) => {
   remove('opinions', id).then(({ data }) => {
-    currentDiscourse.value.attributes.opinions.data = currentDiscourse.value.attributes.opinions.data.filter(e => e.id !== data.id);
+    currentDiscourse.value.attributes.opinions.data =
+      currentDiscourse.value.attributes.opinions.data.filter((e) => e.id !== data.id)
   })
 }
 const postOpinion = () => {
-  create('opinions', {
-    title: newOpinion.value,
-    content: newOpinion.value,
-    discourse: currentDiscourse.value
-  }).then(({data}) => {
-    currentDiscourse.value.attributes.opinions.data.push(data)
+  if (newOpinion.value == '') return
+  console.log(newOpinion.value)
+  const opinion: Opinion = {
+    attributes: {
+      name: newOpinion.value,
+      title: newOpinion.value,
+      fonts: null,
+      glyphs: null,
+      spectrum: null,
+    },
+  }
+  create('opinions', opinion).then((res) => {
+    console.log(res)
+    // currentDiscourse.value.attributes.opinions.data.push(res)
     newOpinion.value = ''
   })
 }
 </script>
 
 <style>
-
 </style>

@@ -1,5 +1,14 @@
 <template>
-  <nav class="fixed bottom-0 w-full bg-slate-100 border-t border-t-slate-200">
+  <nav
+    class="
+      fixed
+      bottom-0
+      w-full
+      bg-slate-100
+      border-t border-t-slate-200
+      dark:bg-slate-700 dark:border-t-slate-600
+    "
+  >
     <ul :class="`flex flex-row justify-around p-5 max-w-2xl mx-auto`">
       <li v-for="route in routes" :key="route">
         <NuxtLink
@@ -11,11 +20,10 @@
             rounded-lg
             hover:bg-slate-200
             active:text-blue-600
-            router-link-active:bg-slate-300
             w-16
             h-16
-						md:w-24
-						md:h-24
+            md:w-24 md:h-24
+            dark:text-slate-200 dark:hover:bg-slate-600
           "
         >
           <font-awesome-icon
@@ -54,5 +62,8 @@ export default {
 <style scoped>
 .router-link-active {
   color: var(--color-blue-600);
+}
+:global(.dark .router-link-active) {
+  color: var(--color-blue-400);
 }
 </style>
