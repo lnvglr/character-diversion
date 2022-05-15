@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-3 -m-10 h-screen">
     <div class="p-10 col-span-2">
-      <div class="grid gap-5 p-10">
-        <b>{{ currentDiscourse.attributes.title }}</b>
+      <div class="mb-10">
+        <h1 class="text-3xl font-bold">{{ currentDiscourse.attributes.title }}</h1>
       </div>
 
 		  <FormKit type="text" placeholder="Glyphs" v-model="string" />

@@ -37,7 +37,7 @@
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
     </svg>
-    <span>{{ points.length }}</span>
+    <!-- <span>{{ points.length }}</span> -->
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
   },
   data() {
     return {
-      size: 2,
+      size: 0.5,
       handleSize: 10,
       glyph: null,
       tangents: null,
