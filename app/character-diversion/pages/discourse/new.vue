@@ -1,29 +1,34 @@
 <template>
-<div class="p-10 flex justify-center w-2xl">
-	<FormKit
-    type="form"
-    v-model="formData"
-    :form-class="submitted ? 'hide' : 'show'"
-    submit-label="Create"
-    @submit="postDiscourse"
-  >
-    <h1 class="font-bold text-2xl mb-5">Start Discourse!</h1>
-    <FormKit
+  <div class="p-10 flex flex-col gap-5 items-center w-4xl">
+  <div class="p-10 flex gap-5 justify-center w-full">
+    <Input
       type="text"
       name="title"
-      label="Title"
-      placeholder="New conventional character relationships"
+      v-model="formData.title"
+      placeholder="Title"
       validation="required"
     />
-    <FormKit
+    <Input
       type="textarea"
       rows="3"
       name="content"
-      label="Description"
-      placeholder="Your desicription goes here"
+      v-model="formData.content"
+      placeholder="Description"
     />
-  </FormKit>
   </div>
+    <Input
+      class="w-full"
+      type="range"
+      min="0"
+      max="1"
+      :step="0.01"
+      :gap="0.1"
+      :decimal="0.01"
+      name="range"
+      v-model="formData.content"
+      label="SHLD"
+    />
+</div>
 </template>
 
 <script setup>
@@ -31,9 +36,12 @@ import { discourse } from '@/composables/states'
 const router = useRouter()
 
 const formData = reactive({
-	title: '',
-	content: '',
+  title: '',
+  // content: 5,
+  content: [0.2,0.8],
+  contentb: 0.4,
 })
+const value = ref('hello')
 const { create } = useStrapi4()
 
 const postDiscourse = () => {
@@ -49,6 +57,6 @@ const postDiscourse = () => {
 
 <style>
 form {
-  width: var(--max-w-sm)
+  width: var(--max-w-sm);
 }
 </style>

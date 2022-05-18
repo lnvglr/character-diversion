@@ -33,7 +33,8 @@
         stroke="lightgrey"
         :stroke-width="6 / size"
       />
-      <g v-if="glyph"><path :d="glyph" class="fill-blue-100 hover:fill-blue-200"></path></g>
+      <g v-if="glyphAlt" class="ring"><path :stroke-width="6 / size" :d="glyphAlt" class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path></g>
+      <g v-if="glyph"><path :d="glyph" :stroke-width="6 / size"  class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path></g>
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
     </svg>
@@ -59,12 +60,17 @@ export default {
       type: Array,
       default: () => [0.5, 0],
     },
+    tupleAlt: {
+      type: Array,
+      default: () => [0.5, 0],
+    },
   },
   data() {
     return {
-      size: 0.5,
+      size: 1,
       handleSize: 10,
       glyph: null,
+      glyphAlt: null,
       tangents: null,
       baseline: 0,
       baselineOffset: 10000,
@@ -107,7 +113,9 @@ export default {
       // svgPath.setAttribute("d", glyph.decompose(this.tuple).svgPath());
       // this.glyph = svgPath.outerHTML;
       const decomposed = glyph.decompose(this.tuple)
+      const decomposedAlt = glyph.decompose(this.tupleAlt)
       this.glyph = decomposed.svgPath()
+      this.glyphAlt = decomposedAlt.svgPath()
 
       // Points
       // const points = glyph.instantiate(this.tuple).points;

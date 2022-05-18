@@ -3,10 +3,11 @@
     <div class="p-10 col-span-2">
       <div class="mb-10">
         <h1 class="text-3xl font-bold">{{ currentDiscourse.attributes.title }}</h1>
+        <!-- <pre>{{currentDiscourse}}</pre> -->
       </div>
 
 		  <FormKit type="text" placeholder="Glyphs" v-model="string" />
-      <Samsa :tuple="[tupleA0, 0]" :string="string" />
+      <Samsa :tuple="[tuple0[0], tuple1[0]]" :tupleAlt="[tuple0[1], tuple1[1]]" :string="string" />
     </div>
 
     <div class="border-l">
@@ -20,25 +21,27 @@
         @click="opinionHover(opinion)"
       />
       <div class="p-5">
-        <FormKit
+        <Input
           type="text"
           placeholder="New opinion..."
           v-model="newOpinion"
           v-on:keyup.enter="postOpinion"
         />
-        <input
+        <Input
           type="range"
           step="0.01"
           min="0"
           max="1"
-          v-model="tupleA0"
+          v-model="tuple0"
+          label="PSYA"
         />
-        <input
+        <Input
           type="range"
           step="0.01"
           min="0"
           max="1"
-          v-model="tupleA1"
+          label="SHLD"
+          v-model="tuple1"
         />
       </div>
     </div>
@@ -64,8 +67,8 @@ const removeDiscourse = (id) => {
 
 const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
 const newOpinion = ref('')
-const tupleA0 = ref(0)
-const tupleA1 = ref(1)
+const tuple0 = ref([0,1])
+const tuple1 = ref([0,1])
 const string = ref('jתm')
 
 const removeOpinion = (id) => {
@@ -76,8 +79,10 @@ const removeOpinion = (id) => {
 }
 const opinionHover = (opinion: Opinion) => {
   string.value = opinion.attributes.glyphs?.join('') || string.value
-  tupleA0.value = Number(opinion.attributes.tuple?.[0])
-  tupleA1.value = Number(opinion.attributes.tuple?.[1])
+  console.log(tuple0.value)
+  tuple0.value = opinion.attributes.tuple?.[0]
+  tuple1.value = opinion.attributes.tuple?.[1]
+  console.log(tuple0.value)
 }
 const postOpinion = () => {
   if (newOpinion.value == '') return
@@ -85,7 +90,7 @@ const postOpinion = () => {
     title: newOpinion.value,
     fonts: null,
     glyphs: string.value.split(''),
-    tuple: [tupleA0.value, tupleA1.value],
+    tuple: [tuple0.value, tuple1.value],
     discourse: currentDiscourse.value
   }
   create<Strapi4Response<Opinion>>('opinions', opinion).then(({data}) => {

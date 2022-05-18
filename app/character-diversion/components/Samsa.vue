@@ -9,6 +9,7 @@
       :glyphName="g"
       :font="font"
       :tuple="tuple"
+      :tupleAlt="tupleAlt"
     />
   </div>
 </template>
@@ -21,7 +22,9 @@ export default {
   props: {
     tuple: {
       type: Array,
-      default: () => [0.5, 0],
+    },
+    tupleAlt: {
+      type: Array,
     },
     string: {
       type: String,

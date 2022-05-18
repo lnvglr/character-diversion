@@ -17,6 +17,7 @@ definePageMeta({
 discourse.all = (
   await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] })
 ).data
+console.log(await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] }))
 discourse.current = discourse.current || discourse.all[0]?.id
 
 </script>
