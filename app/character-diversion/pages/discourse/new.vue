@@ -1,6 +1,6 @@
 <template>
-  <div class="p-10 flex flex-col gap-5 items-center w-4xl">
-  <div class="p-10 flex gap-5 justify-center w-full">
+  <div class="p-10 flex flex-col gap-5 items-center w-full">
+  <div class="p-10 flex flex-col justify-center max-w-2xl">
     <Input
       type="text"
       name="title"
@@ -15,39 +15,37 @@
       v-model="formData.content"
       placeholder="Description"
     />
+  <FormKit type="select" placeholder="Choose Font..." v-model="formData.font" :options="availableOptions" />
+  <FormKit type="button" @click="postDiscourse" label="Start Discourse" />
   </div>
-    <Input
-      class="w-full"
-      type="range"
-      min="0"
-      max="1"
-      :step="0.01"
-      :gap="0.1"
-      :decimal="0.01"
-      name="range"
-      v-model="formData.content"
-      label="SHLD"
-    />
+
 </div>
 </template>
 
 <script setup>
+
 import { discourse } from '@/composables/states'
+const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
+const availableOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
+
 const router = useRouter()
 
 const formData = reactive({
   title: '',
-  // content: 5,
-  content: [0.2,0.8],
-  contentb: 0.4,
+  content: '',
+  font: null,
 })
-const value = ref('hello')
+// watch(() => {
+//   console.log(reactive(toRefs(formData)).font)
+// })
 const { create } = useStrapi4()
 
 const postDiscourse = () => {
+  console.log(formData)
   create('discourses', {
     title: formData.title,
     content: formData.content,
+    font: formData.font,
   }).then(({ data }) => {
     discourse.all.push(data)
     router.push(`/discourse/${data.id}`)

@@ -1,5 +1,6 @@
 <template>
   <Button @click="next">
+		<span class="mr-1">Change Theme</span>
 		<font-awesome-icon
 			:icon="['fas', icons[$colorMode.preference]]"
 			fixed-width
@@ -9,7 +10,6 @@
 </template>
 
 <script setup>
-import Button from '@/components/atoms/Button.vue'
 const colorMode = useColorMode()
 const icons = {
 	'system': 'desktop',
@@ -17,8 +17,9 @@ const icons = {
 	'light': 'sun',
 }
 const next = () => {
-	const i = Object.keys(icons).indexOf(colorMode.preference)
-	colorMode.preference = Object.keys(icons)[(i + 1) % Object.keys(icons).length]
+	const themes = Object.keys(icons)
+	const i = themes.indexOf(colorMode.preference)
+	colorMode.preference = themes[(i + 1) % themes.length]
 }
 </script>
 

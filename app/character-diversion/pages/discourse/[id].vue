@@ -7,7 +7,7 @@
       </div>
 
 		  <FormKit type="text" placeholder="Glyphs" v-model="string" />
-      <Samsa :tuple="[tuple0[0], tuple1[0]]" :tupleAlt="[tuple0[1], tuple1[1]]" :string="string" />
+      <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)" :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)" :string="string" :font="currentDiscourse.attributes.font" />
     </div>
 
     <div class="border-l">
@@ -28,20 +28,14 @@
           v-on:keyup.enter="postOpinion"
         />
         <Input
+          v-for="axis in curr.axes"
+          :key="axis.tag"
           type="range"
-          step="0.01"
-          min="0"
-          max="1"
-          v-model="tuple0"
-          label="PSYA"
-        />
-        <Input
-          type="range"
-          step="0.01"
-          min="0"
-          max="1"
-          label="SHLD"
-          v-model="tuple1"
+          :step="1"
+          :min="axis.min"
+          :max="axis.max"
+          v-model="curr.position[axis.name]"
+          :label="axis.name"
         />
       </div>
     </div>
@@ -49,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core.js'
 import { discourse } from '@/composables/states'
 import type { Strapi4Response } from '@nuxtjs/strapi/dist/runtime/types'
 import type { Opinion } from '@/types'
@@ -58,17 +53,30 @@ const currentDiscourse = computed(() => discourse.all.find(({ id }) => id == rou
 
 const { find, create, delete: remove } = useStrapi4()
 
-const removeDiscourse = (id) => {
+const removeDiscourse = (id: string) => {
   remove('discourses', id).then(({ data }) => {
     discourse.all = discourse.all.filter((e) => e.id !== data.id)
   })
 }
+const curr = reactive({
+  axes: null,
+  position: {}
+})
+new SamsaFont({
+  url: '/fonts/' + currentDiscourse.value.attributes.font,
+  callback: (font: SamsaFont) => {
+    curr.axes = font.axes
+    font.axes.forEach(e => {
+      curr.position[e.name] = [0, e.max]
+    })
+    console.log(curr)
+    // currentDiscourse.value.attributes.SamsaFont = font
+  },
+})
 
 
 const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
 const newOpinion = ref('')
-const tuple0 = ref([0,1])
-const tuple1 = ref([0,1])
 const string = ref('jתm')
 
 const removeOpinion = (id) => {
@@ -79,10 +87,10 @@ const removeOpinion = (id) => {
 }
 const opinionHover = (opinion: Opinion) => {
   string.value = opinion.attributes.glyphs?.join('') || string.value
-  console.log(tuple0.value)
-  tuple0.value = opinion.attributes.tuple?.[0]
-  tuple1.value = opinion.attributes.tuple?.[1]
-  console.log(tuple0.value)
+  // console.log(tuple0.value)
+  // tuple0.value = opinion.attributes.tuple?.[0]
+  // tuple1.value = opinion.attributes.tuple?.[1]
+  // console.log(tuple0.value)
 }
 const postOpinion = () => {
   if (newOpinion.value == '') return
@@ -90,7 +98,7 @@ const postOpinion = () => {
     title: newOpinion.value,
     fonts: null,
     glyphs: string.value.split(''),
-    tuple: [tuple0.value, tuple1.value],
+    // tuple: [tuple0.value, tuple1.value],
     discourse: currentDiscourse.value
   }
   create<Strapi4Response<Opinion>>('opinions', opinion).then(({data}) => {

@@ -1,6 +1,7 @@
 <template>
   <NuxtLayout>
     <template #header>Profile</template>
+		<div class="m-5"><ThemeToggle /></div>
   </NuxtLayout>
 </template>
 

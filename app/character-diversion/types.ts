@@ -9,7 +9,9 @@ export interface Discourse {
     createdAt?: Date
     updatedAt?: Date
     opinions?: Opinion[]
-    fonts: SamsaFont[]
+    SamsaFont: SamsaFont,
+    fonts: SamsaFont[],
+    font: string
   }
 }
 export interface Opinion {

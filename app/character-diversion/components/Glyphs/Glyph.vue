@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core.js'
+import { discourse } from '@/composables/states'
 
 export default {
   name: 'default',
@@ -98,7 +99,7 @@ export default {
           this.assignGlyph(e.glyphs, this.glyphName)
           // @ts-ignore
           // this.size /= (1000 / e.unitsPerEm)
-          console.log(e)
+          // console.log(e)
         },
       })
     },
@@ -143,7 +144,7 @@ export default {
     },
     assignGlyph(glyphs: SamsaGlyph[], glyph: String) {
       const g = glyphs.map((e) => e.name).includes(glyph) ? glyph : this.toUnicode(glyph)
-      console.log(g)
+      // console.log(g)
       if (glyph.length === 1) {
         this.SamsaGlyph = glyphs.find((e) => e.name === g)
         this.SamsaGlyphInstance =

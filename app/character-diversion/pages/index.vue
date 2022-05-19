@@ -1,7 +1,6 @@
 <template>
   <NuxtLayout>
     <template #header>Character Diversion</template>
-    <!-- <Samsa /> -->
   </NuxtLayout>
 </template>
 

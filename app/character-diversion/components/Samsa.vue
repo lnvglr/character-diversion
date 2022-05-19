@@ -1,13 +1,13 @@
 <template>
-	<div class="double">
-		<FormKit type="select" placeholder="Glyphs" v-model="font" :options="fontOptions" />
-	</div>
-  <div class="glyphs" v-if="font">
+	<!-- <div class="double">
+		<FormKit type="select" placeholder="Glyphs" v-model="selectedFont" :options="fontOptions" />
+	</div> -->
+  <div class="glyphs" v-if="selectedFont">
     <GlyphsGlyph
       v-for="g in glyphs"
       :key="g"
       :glyphName="g"
-      :font="font"
+      :font="selectedFont"
       :tuple="tuple"
       :tupleAlt="tupleAlt"
     />
@@ -30,11 +30,14 @@ export default {
       type: String,
       default: 'jתm',
     },
+    font: {
+      type: String,
+    }
   },
 
   data() {
     return {
-      font: null,
+      selectedFont: null,
       fontOptions: [],
     }
   },
@@ -45,7 +48,7 @@ export default {
   },
   mounted() {
     this.fontOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
-    this.font = this.fontOptions[0]
+    this.selectedFont = this.font
     // document.onmousemove = (event) => {
     //   this.tuple[0] = 1 - (1 / window.innerWidth) * event.pageX
     //   this.tuple[1] = 1 - (1 / window.innerHeight) * event.pageY

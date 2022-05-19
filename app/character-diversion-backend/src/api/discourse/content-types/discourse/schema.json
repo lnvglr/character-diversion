@@ -27,16 +27,11 @@
       "target": "api::opinion.opinion",
       "mappedBy": "discourse"
     },
-    "font": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "files"
-      ]
-    },
     "content": {
       "type": "richtext"
+    },
+    "font": {
+      "type": "string"
     }
   }
 }

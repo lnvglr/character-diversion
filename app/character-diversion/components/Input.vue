@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full mb-5">
+  <div class="input-container relative w-full mb-5">
     <label v-if="label" :for="_.uid">{{ label }}</label>
     <InputRange
       v-if="'range' === type"
@@ -18,7 +18,7 @@
       v-bind="$attrs"
 
       :class="{ empty }"
-      class="input border pt-5 pb-1 px-4 rounded-md w-full focus:outline-blue-500"
+      class="input border rounded-md w-full focus:outline-blue-500"
     />
     <label class="placeholder" v-if="placeholder" :for="_.uid">{{ placeholder }}</label>
   </div>
@@ -59,12 +59,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.input {
+  padding: var(--p-5) var(--padding-x) var(--p-1);
+  &, &:active, &:focus {
+    &, & ~ .placeholder {
+      --padding-x: var(--p-3);
+      --padding-y: var(--p-2);
+    }
+  }
+}
 .placeholder,
 .input:focus ~ .placeholder,
 .input:active ~ .placeholder {
   position: absolute;
   z-index: 100;
-  left: calc(var(--p-4) + var(--border-default));
+  top: var(--padding-y);
+  left: calc(var(--padding-x) + var(--border-default));
   transform: translateZ(0);
   pointer-events: none;
   transition-duration: var(--transition-duration-default);
@@ -74,19 +84,20 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   will-change: transform;
+  color: var(--color-slate-400);
 }
 
 .placeholder,
 .input:not(:disabled):focus ~ .placeholder,
 .input:not(:disabled):active ~ .placeholder {
-  top: var(--p-1);
-  font-size: 0.75em;
-  color: var(--color-slate-500);
+  font-size: var(--text-xs);
+  color: var(--color-slate-700);
 }
 .input.empty:not(:focus) ~ .placeholder {
-  top: var(--p-3);
+  --padding-y: var(--p-3);
+  --padding-x: var(--p-4);
   font-size: 1em;
   transform: scale(1);
-  color: var(--slate-600);
+  color: var(--color-slate-400);
 }
 </style>
