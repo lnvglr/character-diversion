@@ -1,18 +1,18 @@
 <template>
-  <div class="flex -m-10 h-screen">
+  <div class="flex h-screen">
     <div class="p-10 grow overflow-auto">
-      <div class="mb-10">
-        <h1 class="text-3xl font-bold">{{ currentDiscourse.attributes.title }}</h1>
-        <!-- <pre>{{currentDiscourse}}</pre> -->
-      </div>
-
-		  <FormKit type="text" placeholder="Glyphs" v-model="string" />
-      <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)" :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)" :string="string" :font="currentDiscourse.attributes.font" />
+      <Samsa
+        :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)"
+        :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)"
+        :string="string"
+        :font="currentDiscourse.attributes.font"
+      />
     </div>
 
-    <div class="border-l min-w-[360px]">
+    <div class="border-l min-w-[360px] overflow-scroll">
+      <h1 class="text-3xl font-bold p-5 pb-0">{{ currentDiscourse.attributes.title }}</h1>
+      <p class="p-5 pt-1">{{ currentDiscourse.attributes.content }}</p>
       <h3 class="text-lg font-bold p-5">Opinions ({{ currentOpinions?.length }})</h3>
-      <p class="text-sm font-bold p-5 border-b">Discourse: {{ currentDiscourse?.id }}</p>
       <Opinion
         v-for="opinion in currentOpinions"
         :key="opinion"
@@ -21,8 +21,9 @@
         @click="opinionHover(opinion)"
       />
       <div class="p-5">
+        <Input type="text" placeholder="Glyphs" v-model="string" />
         <Input
-          type="text"
+          type="textarea"
           placeholder="New opinion..."
           v-model="newOpinion"
           v-on:keyup.enter="postOpinion"
@@ -60,22 +61,21 @@ const removeDiscourse = (id: string) => {
 }
 const curr = reactive({
   axes: null,
-  position: {}
+  position: {},
 })
 new SamsaFont({
   url: '/fonts/' + currentDiscourse.value.attributes.font,
   callback: (font: SamsaFont) => {
     curr.axes = font.axes
-    font.axes.forEach(e => {
+    font.axes.forEach((e) => {
       curr.position[e.tag] = [e.min, e.max]
     })
   },
 })
 
-
 const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
 const newOpinion = ref('')
-const string = ref('abcdeftghijklmnopqrstuvwxyz')
+const string = ref('abc')
 
 const removeOpinion = (id) => {
   remove<Strapi4Response<Opinion>>('opinions', id).then(({ data }) => {
@@ -94,14 +94,14 @@ const postOpinion = () => {
     fonts: null,
     glyphs: string.value.split(''),
     tuple: curr.position, // @todo: only save those that differ from default
-    discourse: currentDiscourse.value
+    discourse: currentDiscourse.value,
   }
-  create<Strapi4Response<Opinion>>('opinions', opinion).then(({data}) => {
+  create<Strapi4Response<Opinion>>('opinions', opinion).then(({ data }) => {
     if (currentDiscourse.value.attributes.opinions?.data) {
       currentDiscourse.value.attributes.opinions.data.push(data)
     } else {
       currentDiscourse.value.attributes.opinions = {
-        data: [data]
+        data: [data],
       }
     }
     newOpinion.value = ''

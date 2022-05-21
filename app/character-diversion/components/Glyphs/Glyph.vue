@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      size: 1,
+      size: 0.5,
       handleSize: 10,
       glyph: null,
       glyphAlt: null,

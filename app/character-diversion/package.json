@@ -2,7 +2,13 @@
   "name": "character-diversion",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "npm": "8.5.5",
+    "node": "v16.15.0"
+  },
   "scripts": {
+    "start": "nuxt start",
+    "heroku-postbuild": "npm run build",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -22,6 +28,7 @@
     "@nuxtjs/i18n": "^7.2.2",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/strapi": "^1.3.2",
+    "@yaireo/relative-time": "^1.0.2",
     "text-title-case": "^1.0.2"
   },
   "devDependencies": {

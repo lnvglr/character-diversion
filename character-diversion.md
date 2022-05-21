@@ -2,8 +2,6 @@
 
 **The Platform for Typographic Discourse**
 
-## Contents
-
 ##Introduction
 
 ###Why
@@ -25,6 +23,8 @@
 
 ### Concept
 
+core functionality
+
 ### Architecture & Deployment
 
 ### Design
@@ -32,6 +32,8 @@
 ## Case Study
 
 ###Non-Conventional Hebrew-Latin Character Relationships
+
+reference back to proposals
 
 ## Outlook
 

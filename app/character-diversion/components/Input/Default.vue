@@ -18,7 +18,7 @@ export default {
 	},
   methods: {
     updateValue(val) {
-      const value = val.length !== 0 ? ('number' === this.type ? Number(val) : String(val)) : null
+      const value = 'number' === this.type ? Number(val) : String(val)
       this.$emit('update:modelValue', value)
     },
   },

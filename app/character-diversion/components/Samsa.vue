@@ -4,8 +4,8 @@
 	</div> -->
   <div class="glyphs gap-5" v-if="selectedFont">
     <GlyphsGlyph
-      v-for="g in glyphs"
-      :key="g"
+      v-for="(g, i) in glyphs"
+      :key="`${g} ${i}`"
       :glyphName="g"
       :font="selectedFont"
       :tuple="tuple"
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     glyphs() {
-      return this.string.split('')
+      return this.string?.split('')
     },
   },
   mounted() {
@@ -67,7 +67,7 @@ export default {
 }
 .glyphs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-auto-rows: 1fr;
 }
 .glyphs > * {

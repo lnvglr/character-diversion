@@ -26,7 +26,6 @@ module.exports = {
   plugins: [
     require('tailwind-css-variables')({
       screens: false,
-      fontFamily: false,
       lineHeight: false,
       letterSpacing: false,
       backgroundSize: false,

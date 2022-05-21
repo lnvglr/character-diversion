@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-5">
+  <div class="grid grid-cols-3 gap-5 p-10">
     <NuxtLink
       to="/discourse/new"
       key="remove"

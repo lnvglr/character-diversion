@@ -1,6 +1,5 @@
 <template>
-  <NuxtLayout>
-    <template #header>Discourse</template>
+  <NuxtLayout name="plain">
     <NuxtPage />
   </NuxtLayout>
 </template>
