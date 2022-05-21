@@ -25,7 +25,7 @@ export interface Opinion {
     comments?: Comment[]
     fontSpectrum?: FontSpectrum[]
     glyphSpectrum?: Array<GlyphSpectrum | string>
-    tupleSpectrum?: TupleSpectrum[]
+    tuple?: TupleSpectrum
   }
 }
 export interface Comment {
@@ -42,13 +42,11 @@ export interface FontSpectrum {
 }
 export interface GlyphSpectrum {
   glyph: string
-  samsaGlyph: SamsaGlyph
+  samsaGlyph?: SamsaGlyph
   tupleSpectrum?: TupleSpectrum[]
 }
 export interface TupleSpectrum {
-  name: string
-  min: number
-  max: number
+  [name: string]: [min: number, max: number]
 }
 /**
 const discourse: Discourse = {

@@ -11,7 +11,7 @@
         dark:bg-gray-900
       "
     >
-      <NuxtPage />
+      <NuxtPage class="page" />
 		  <NavBar />
     </Body>
   </Html>

@@ -95,7 +95,7 @@ export default {
     input(eventTarget: HTMLInputElement, index: number) {
       let value = eventTarget.valueAsNumber
       const newValues = this.modelValue
-      const gap = this.gap || this.$attrs.max / 100
+      const gap = this.gap || Math.max((this.$attrs.max - this.$attrs.min) / 100, this.step)
 
       if (!Array.isArray(newValues)) {
         return this.$emit('update:modelValue', value)

@@ -5,6 +5,7 @@
       bottom-0
       w-full
       bg-slate-100
+      h-30
       border-t border-t-slate-200
       dark:bg-slate-800 dark:border-t-slate-600
     "
@@ -18,8 +19,13 @@
             items-center
             justify-center
             rounded-lg
-            hover:bg-slate-200
-            active:text-blue-600
+            shadow-[0_0_0_0_black]
+            duration-100
+            hover:bg-white
+            hover:border-2
+            hover:border-black
+            hover:shadow-[5px_5px_0_0_black]
+            active:text-orange-600
             w-16
             h-16
             md:w-24 md:h-24
@@ -61,9 +67,9 @@ export default {
 
 <style scoped>
 .router-link-active {
-  color: var(--color-blue-600);
+  color: var(--color-orange-600);
 }
 :global(.dark .router-link-active) {
-  color: var(--color-blue-400);
+  color: var(--color-orange-400);
 }
 </style>

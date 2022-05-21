@@ -33,8 +33,8 @@
         stroke="lightgrey"
         :stroke-width="6 / size"
       />
-      <g v-if="glyphAlt" class="ring"><path :stroke-width="6 / size" :d="glyphAlt" class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path></g>
-      <g v-if="glyph"><path :d="glyph" :stroke-width="6 / size"  class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path></g>
+      <g v-if="glyphAlt" class="hover:z-10"><path :stroke-width="6 / size" :d="glyphAlt" class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path></g>
+      <g v-if="glyph" class="hover:z-10"><path :d="glyph" :stroke-width="6 / size"  class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path></g>
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
     </svg>

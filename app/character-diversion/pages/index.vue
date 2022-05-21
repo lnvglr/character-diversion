@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout name="landing">
     <template #header>Character Diversion</template>
   </NuxtLayout>
 </template>

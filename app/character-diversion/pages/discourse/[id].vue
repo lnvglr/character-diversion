@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-3 -m-10 h-screen">
-    <div class="p-10 col-span-2">
+  <div class="flex -m-10 h-screen">
+    <div class="p-10 grow overflow-auto">
       <div class="mb-10">
         <h1 class="text-3xl font-bold">{{ currentDiscourse.attributes.title }}</h1>
         <!-- <pre>{{currentDiscourse}}</pre> -->
@@ -10,7 +10,7 @@
       <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)" :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)" :string="string" :font="currentDiscourse.attributes.font" />
     </div>
 
-    <div class="border-l">
+    <div class="border-l min-w-[360px]">
       <h3 class="text-lg font-bold p-5">Opinions ({{ currentOpinions?.length }})</h3>
       <p class="text-sm font-bold p-5 border-b">Discourse: {{ currentDiscourse?.id }}</p>
       <Opinion
@@ -34,7 +34,7 @@
           :step="1"
           :min="axis.min"
           :max="axis.max"
-          v-model="curr.position[axis.name]"
+          v-model="curr.position[axis.tag]"
           :label="axis.name"
         />
       </div>
@@ -67,17 +67,15 @@ new SamsaFont({
   callback: (font: SamsaFont) => {
     curr.axes = font.axes
     font.axes.forEach(e => {
-      curr.position[e.name] = [0, e.max]
+      curr.position[e.tag] = [e.min, e.max]
     })
-    console.log(curr)
-    // currentDiscourse.value.attributes.SamsaFont = font
   },
 })
 
 
 const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
 const newOpinion = ref('')
-const string = ref('jתm')
+const string = ref('abcdeftghijklmnopqrstuvwxyz')
 
 const removeOpinion = (id) => {
   remove<Strapi4Response<Opinion>>('opinions', id).then(({ data }) => {
@@ -87,10 +85,7 @@ const removeOpinion = (id) => {
 }
 const opinionHover = (opinion: Opinion) => {
   string.value = opinion.attributes.glyphs?.join('') || string.value
-  // console.log(tuple0.value)
-  // tuple0.value = opinion.attributes.tuple?.[0]
-  // tuple1.value = opinion.attributes.tuple?.[1]
-  // console.log(tuple0.value)
+  curr.position = opinion.attributes.tuple
 }
 const postOpinion = () => {
   if (newOpinion.value == '') return
@@ -98,7 +93,7 @@ const postOpinion = () => {
     title: newOpinion.value,
     fonts: null,
     glyphs: string.value.split(''),
-    // tuple: [tuple0.value, tuple1.value],
+    tuple: curr.position, // @todo: only save those that differ from default
     discourse: currentDiscourse.value
   }
   create<Strapi4Response<Opinion>>('opinions', opinion).then(({data}) => {

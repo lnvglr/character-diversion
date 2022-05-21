@@ -2,7 +2,7 @@
 	<!-- <div class="double">
 		<FormKit type="select" placeholder="Glyphs" v-model="selectedFont" :options="fontOptions" />
 	</div> -->
-  <div class="glyphs" v-if="selectedFont">
+  <div class="glyphs gap-5" v-if="selectedFont">
     <GlyphsGlyph
       v-for="g in glyphs"
       :key="g"
@@ -10,6 +10,7 @@
       :font="selectedFont"
       :tuple="tuple"
       :tupleAlt="tupleAlt"
+      class="outline outline-black hover:outline-2 duration-100 hover:shadow-[5px_5px_0_0_black]"
     />
   </div>
 </template>
@@ -28,7 +29,7 @@ export default {
     },
     string: {
       type: String,
-      default: 'jתm',
+      default: 'abcdeftghijklmnopqrstuvwxyz',
     },
     font: {
       type: String,
@@ -68,9 +69,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   grid-auto-rows: 1fr;
-  gap: 1px;
 }
 .glyphs > * {
-  box-shadow: 0 0 0 1px grey;
+  border-radius: var(--rounded-lg);
 }
 </style>
