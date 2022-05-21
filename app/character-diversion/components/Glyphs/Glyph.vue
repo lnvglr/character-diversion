@@ -33,8 +33,20 @@
         stroke="lightgrey"
         :stroke-width="6 / size"
       />
-      <g v-if="glyphAlt" class="hover:z-10"><path :stroke-width="6 / size" :d="glyphAlt" class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path></g>
-      <g v-if="glyph" class="hover:z-10"><path :d="glyph" :stroke-width="6 / size"  class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path></g>
+      <g v-if="glyphAlt" class="hover:z-10">
+        <path
+          :stroke-width="6 / size"
+          :d="glyphAlt"
+          class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"
+        ></path>
+      </g>
+      <g v-if="glyph" class="hover:z-10">
+        <path
+          :d="glyph"
+          :stroke-width="6 / size"
+          class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"
+        ></path>
+      </g>
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
     </svg>
@@ -143,21 +155,16 @@ export default {
         .reduce((a: number, b: number) => (a >= b ? a : b), 0)
     },
     assignGlyph(glyphs: SamsaGlyph[], glyph: String) {
-      const g = glyphs.map((e) => e.name).includes(glyph) ? glyph : this.toUnicode(glyph)
-      // console.log(g)
       if (glyph.length === 1) {
-        this.SamsaGlyph = glyphs.find((e) => e.name === g)
+        this.SamsaGlyph = glyphs[this.toUnicode([glyph])[0]]
         this.SamsaGlyphInstance =
           this.SamsaGlyph?.numContours < 0
             ? this.SamsaGlyph?.decompose(this.tuple)
             : this.SamsaGlyph?.instantiate(this.tuple)
       }
     },
-    toUnicode(string: string, prefix: string = 'uni'): string {
-      return string
-        .split('')
-        .map((e) => prefix + `000${e.charCodeAt(0).toString(16).toUpperCase()}`.slice(-4))
-        .join('')
+    toUnicode(string: string[]): string[] {
+      return string.map((e) => this.SamsaFont.cmap[e.charCodeAt(0)])
     },
     SVG(tag: string) {
       return document.createElementNS('http://www.w3.org/2000/svg', tag)
