@@ -6,6 +6,16 @@ export default defineNuxtConfig({
   env: {
     strapiBaseUri: process.env.API_URL || "https://character-diversion-backend.herokuapp.com/"
   },
+  globals: {
+    id: () => `__asdbj`,
+  },
+  vue: {
+    config: {
+      globalProperties: {
+        $id: () => `__asdbaaaaaaaaj`,
+      },
+    }
+  },
   buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa'],
   formkit: {
     configFile: './formkit.config.ts',

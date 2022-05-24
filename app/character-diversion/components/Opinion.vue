@@ -10,7 +10,7 @@
           >{{ glyph }}</small
         >
       </div> -->
-      <span class="flex gap-2 items-center text-slate-400 text-xs"><img class="w-5 h-5 object-cover rounded-full" src="/images/IMG_6686.jpg" />Leon Vogler · {{publishedAt}}</span>
+      <span class="flex gap-2 items-center text-slate-400 text-xs"><img class="w-5 h-5 object-cover rounded-full" src="/images/IMG_6686.jpg" />{{[opinion.attributes.author?.data?.attributes?.name, publishedAt].filter(e => e).join(' · ')}}</span>
     </div>
     <div
       class="

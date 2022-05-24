@@ -41,7 +41,6 @@ const formData = reactive({
 const { create } = useStrapi4()
 
 const postDiscourse = () => {
-  console.log(formData)
   create('discourses', {
     title: formData.title,
     content: formData.content,
@@ -53,7 +52,7 @@ const postDiscourse = () => {
 }
 </script>
 
-<style>
+<style scoped>
 form {
   width: var(--max-w-sm);
 }

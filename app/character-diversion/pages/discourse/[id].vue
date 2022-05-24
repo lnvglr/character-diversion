@@ -1,111 +1,103 @@
 <template>
-  <div class="flex h-screen">
-    <div class="p-10 grow overflow-auto">
-      <Samsa
-        :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)"
-        :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)"
-        :string="string"
-        :font="currentDiscourse.attributes.font"
-      />
+  <div class="-m-10 flex h-screen">
+    <div class="p-10 grow overflow-auto" v-if="currentDiscourse">
+      <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)"
+        :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)" :string="string"
+        :font="currentDiscourse.attributes.font" />
     </div>
 
-    <div class="border-l min-w-[360px] overflow-scroll">
+    <div class="border-l min-w-[360px] overflow-scroll mb-48">
+      <Image :source="currentDiscourse.attributes.featuredImage" />
       <h1 class="text-3xl font-bold p-5 pb-0">{{ currentDiscourse.attributes.title }}</h1>
       <p class="p-5 pt-1">{{ currentDiscourse.attributes.content }}</p>
       <h3 class="text-lg font-bold p-5">Opinions ({{ currentOpinions?.length }})</h3>
-      <Opinion
-        v-for="opinion in currentOpinions"
-        :key="opinion"
-        :opinion="opinion"
-        @remove="removeOpinion(opinion.id)"
-        @click="opinionHover(opinion)"
-      />
-      <div class="p-5">
+      <Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" @remove="removeOpinion(opinion.id)"
+        @click="opinionHover(opinion)" />
+      <div class="p-5" v-if="$user">
         <Input type="text" placeholder="Glyphs" v-model="string" />
-        <Input
-          type="textarea"
-          placeholder="New opinion..."
-          v-model="newOpinion"
-          v-on:keyup.enter="postOpinion"
-        />
-        <Input
-          v-for="axis in curr.axes"
-          :key="axis.tag"
-          type="range"
-          :step="1"
-          :min="axis.min"
-          :max="axis.max"
-          v-model="curr.position[axis.tag]"
-          :label="axis.name"
-        />
+        <Input type="textarea" placeholder="New opinion..." v-model="newOpinion" v-on:keyup.enter="postOpinion" />
+        <Input v-for="axis in curr.axes" :key="axis.tag" type="range" :step="1" :min="axis.min" :max="axis.max"
+          v-model="curr.position[axis.tag]" :label="axis.name" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core.js'
-import { discourse } from '@/composables/states'
-import type { Strapi4Response } from '@nuxtjs/strapi/dist/runtime/types'
 import type { Opinion } from '@/types'
+export default {
+  setup() {
+    const { find, create, delete: remove } = useStrapi4()
+    const curr = reactive({
+      axes: null,
+      position: {},
+    })
+    return {
+      find, create, remove,
+      curr,
+      newOpinion: ref(''),
+      string: ref('abc')
+    }
 
-const route = useRoute()
-const currentDiscourse = computed(() => discourse.all.find(({ id }) => id == route.params.id))
-
-const { find, create, delete: remove } = useStrapi4()
-
-const removeDiscourse = (id: string) => {
-  remove('discourses', id).then(({ data }) => {
-    discourse.all = discourse.all.filter((e) => e.id !== data.id)
-  })
-}
-const curr = reactive({
-  axes: null,
-  position: {},
-})
-new SamsaFont({
-  url: '/fonts/' + currentDiscourse.value.attributes.font,
-  callback: (font: SamsaFont) => {
-    curr.axes = font.axes
-    font.axes.forEach((e) => {
-      curr.position[e.tag] = [e.min, e.max]
+  },
+  mounted() {
+    new SamsaFont({
+      url: '/fonts/' + this.currentDiscourse?.attributes.font,
+      callback: (font: SamsaFont) => {
+        this.curr.axes = font.axes
+        font.axes.forEach((e) => {
+          this.curr.position[e.tag] = [e.min, e.max]
+        })
+      },
     })
   },
-})
-
-const currentOpinions = computed(() => currentDiscourse.value?.attributes.opinions?.data)
-const newOpinion = ref('')
-const string = ref('abc')
-
-const removeOpinion = (id) => {
-  remove<Strapi4Response<Opinion>>('opinions', id).then(({ data }) => {
-    currentDiscourse.value.attributes.opinions.data =
-      currentDiscourse.value.attributes.opinions.data.filter((e) => e.id !== data.id)
-  })
-}
-const opinionHover = (opinion: Opinion) => {
-  string.value = opinion.attributes.glyphs?.join('') || string.value
-  curr.position = opinion.attributes.tuple
-}
-const postOpinion = () => {
-  if (newOpinion.value == '') return
-  const opinion = {
-    title: newOpinion.value,
-    fonts: null,
-    glyphs: string.value.split(''),
-    tuple: curr.position, // @todo: only save those that differ from default
-    discourse: currentDiscourse.value,
-  }
-  create<Strapi4Response<Opinion>>('opinions', opinion).then(({ data }) => {
-    if (currentDiscourse.value.attributes.opinions?.data) {
-      currentDiscourse.value.attributes.opinions.data.push(data)
-    } else {
-      currentDiscourse.value.attributes.opinions = {
-        data: [data],
+  computed: {
+    currentDiscourse() {
+      return this.$state.discourse.all.find(({ id }) => id == this.$route.params.id)
+    },
+    currentOpinions() {
+      return this.currentDiscourse?.attributes.opinions?.data
+    },
+  },
+  methods: {
+    removeDiscourse(id: string) {
+      this.$strapi.delete('discourses', id).then(({ data }) => {
+        this.$state.discourse.all = discourse.all.filter((e) => e.id !== data.id)
+      })
+    },
+    removeOpinion(id: string) {
+      this.$strapi.delete('opinions', id).then(({ data }) => {
+        this.currentDiscourse.attributes.opinions.data =
+          this.currentDiscourse.attributes.opinions.data.filter((e) => e.id !== data.id)
+      })
+    },
+    opinionHover(opinion: Opinion) {
+      this.string = opinion.attributes.glyphs?.join('') || this.string
+      this.curr.position = opinion.attributes.tuple
+    },
+    postOpinion() {
+      if (this.newOpinion == '') return
+      const opinion = {
+        title: this.newOpinion,
+        fonts: null,
+        glyphs: this.string.split(''),
+        tuple: this.curr.position, // @todo: only save those that differ from default
+        discourse: this.currentDiscourse,
+        author: this.$user
       }
+      this.$strapi.create('opinions', opinion).then(({ data }) => {
+          if (this.currentDiscourse.attributes.opinions?.data) {
+            this.currentDiscourse.attributes.opinions.data.push(data)
+          } else {
+            this.currentDiscourse.attributes.opinions = {
+              data: [data],
+            }
+          }
+          this.newOpinion = ''
+        })
     }
-    newOpinion.value = ''
-  })
+  }
 }
 </script>
 

@@ -8,9 +8,9 @@
 
 <script setup>
 definePageMeta({
-  name: 'Explore',
-	icon: 'binoculars',
-	order: 2,
+  // name: 'Explore',
+	// icon: 'binoculars',
+	// order: 2,
 })
 
 

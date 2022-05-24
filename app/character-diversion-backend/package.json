@@ -9,12 +9,12 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.1.10",
-    "@strapi/plugin-users-permissions": "4.1.10",
     "@strapi/plugin-i18n": "4.1.10",
-    "better-sqlite3": "7.4.6"
+    "@strapi/plugin-users-permissions": "4.1.10",
+    "@strapi/strapi": "4.1.10",
+    "better-sqlite3": "7.4.6",
+    "strapi-provider-email-nodemailer": "^3.6.10"
   },
   "author": {
     "name": "Leon Vogler"

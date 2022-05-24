@@ -1,17 +1,21 @@
-import { SamsaFont, SamsaGlyph } from '~~/assets/samsa-core'
-
+import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
+export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+// import { Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+// export interface Strapi4RequestParamsObject extends Omit<Strapi4RequestParams, 'populate'> {
+//   populate: string | Array<string> | { [key: string]: Strapi4RequestParamsObject };
+// }
 export interface Discourse {
-  id: string
+  id: string;
   attributes: {
-    title: string
-    content: string
-    author?: string
-    createdAt?: Date
-    updatedAt?: Date
-    opinions?: Opinion[]
-    SamsaFont: SamsaFont,
-    fonts: SamsaFont[],
-    font: string
+    title: string;
+    content: string;
+    author?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    opinions?: Opinion[];
+    SamsaFont: SamsaFont;
+    fonts: SamsaFont[];
+    font: string;
   }
 }
 export interface Opinion {

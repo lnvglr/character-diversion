@@ -1,22 +1,11 @@
 <template>
   <div
-    :class="`
-      range-container
-      relative
-      mt-2
-      h-10
-      w-full
-      text-amber-500/20
-    `"
-    :style="`
-      --handle-color: var(--color-${color}-500);
-      --track-fill: var(--color-${color}-300);
-    `"
+    :class="`range-container relative mt-2 h-10 w-full text-amber-500/20`"
+    :style="`--handle-color: var(--color-${color}-500);--track-fill: var(--color-${color}-300);`"
     :data-min="dataMin"
     :data-max="dataMax"
   >
-    <div :style="style" class="slider-track absolute"></div>
-    <div class="relative">
+    <div class="track" :style="style" >
       <input
         type="range"
         ref="min"
@@ -134,24 +123,29 @@ export default {
   }
 }
 
-:global(.dark .slider-track) {
+:global(.dark .track) {
   --track-bg: var(--color-slate-700);
 }
-.slider-track {
+.track {
   --start: calc(var(--min) * 1%);
   --end: calc(var(--max) * 1%);
-  width: 100%;
-  height: var(--track-size);
-  top: 0;
-  bottom: 0;
-  border-radius: var(--rounded-default);
-  background: linear-gradient(
-    to right,
-    var(--track-bg) var(--start),
-    var(--track-fill) var(--start),
-    var(--track-fill) var(--end),
-    var(--track-bg) var(--end)
-  );
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: var(--track-size);
+    top: 0;
+    bottom: 0;
+    border-radius: var(--rounded-default);
+    background: linear-gradient(
+      to right,
+      var(--track-bg) var(--start),
+      var(--track-fill) var(--start),
+      var(--track-fill) var(--end),
+      var(--track-bg) var(--end)
+    );
+  }
 }
 
 input[type='range'] {

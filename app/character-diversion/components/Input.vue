@@ -1,24 +1,15 @@
 <template>
-  <div class="input-container relative w-full mb-5">
+  <div class="input-container relative w-full">
     <label v-if="label" :for="_.uid">{{ label }}</label>
-    <InputRange
-      v-if="'range' === type"
+    <component
+      :is="'range' === type ? InputRange : InputDefault"
       :type="type"
       :id="_.uid"
       v-model="modelValue"
       v-bind="$attrs"
-      :class="{ empty }"
+      :empty="empty || null"
       class="rounded-md w-full focus:outline-blue-500"
-    />
-    <InputDefault
-      v-else
-      :type="type"
-      :id="_.uid"
-      v-model="modelValue"
-      v-bind="$attrs"
-
-      :class="{ empty }"
-      class="input border rounded-md w-full focus:outline-blue-500"
+      :class="{ border: 'range' !== type }"
     />
     <label class="placeholder" v-if="placeholder" :for="_.uid">{{ placeholder }}</label>
   </div>
@@ -26,6 +17,14 @@
 
 <script>
 export default {
+  setup() {
+    const InputRange = resolveComponent('InputRange')
+    const InputDefault = resolveComponent('InputDefault')
+    return {
+      InputRange,
+      InputDefault,
+    }
+  },
   props: {
     modelValue: {
       type: [String, Number, Array],
@@ -59,18 +58,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input {
+:global(form input) {
+  width: 100%;
+}
+:is(input, textarea):not([type=range]) {
   padding: var(--p-5) var(--padding-x) var(--p-1);
-  &, &:active, &:focus {
-    &, & ~ .placeholder {
+  &,
+  &:active,
+  &:focus {
+    &,
+    & ~ .placeholder {
       --padding-x: var(--p-3);
       --padding-y: var(--p-2);
     }
   }
 }
 .placeholder,
-.input:focus ~ .placeholder,
-.input:active ~ .placeholder {
+:is(input, textarea):not([type=range]):focus ~ .placeholder,
+:is(input, textarea):not([type=range]):active ~ .placeholder {
   position: absolute;
   z-index: 100;
   top: var(--padding-y);
@@ -88,12 +93,12 @@ export default {
 }
 
 .placeholder,
-.input:not(:disabled):focus ~ .placeholder,
-.input:not(:disabled):active ~ .placeholder {
+:is(input, textarea):not([type=range]):not(:disabled):focus ~ .placeholder,
+:is(input, textarea):not([type=range]):not(:disabled):active ~ .placeholder {
   font-size: var(--text-xs);
   color: var(--color-slate-700);
 }
-.input.empty:not(:focus) ~ .placeholder {
+:is(input, textarea):not([type=range])[empty]:not(:focus) ~ .placeholder {
   --padding-y: var(--p-3);
   --padding-x: var(--p-4);
   font-size: 1em;

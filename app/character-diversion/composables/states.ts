@@ -1,7 +1,12 @@
 import type { Discourse } from '~/types'
 import { reactive } from 'vue'
 
-export const discourse = reactive({
-	all: [] as Discourse[],
+interface State {
+	all: Discourse[];
+	current: string;
+}
+
+export const discourse = reactive<State>({
+	all: [],
 	current: null as string
 })

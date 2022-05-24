@@ -1,23 +1,26 @@
 <template>
-  <NuxtLayout name="plain">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { discourse } from '@/composables/states'
-const { find } = useStrapi4()
+export default {
+  setup() {
 
-definePageMeta({
-  name: 'Discourse',
-  icon: 'bars-progress',
-  order: 3,
-})
-discourse.all = (
-  await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] })
-).data
-console.log(await find('discourses', { populate: ['author', 'opinions.author', 'opinions.comments.author'] }))
-discourse.current = discourse.current || discourse.all[0]?.id
+    definePageMeta({
+      name: 'Discourse',
+      icon: 'bars-progress',
+      order: 3,
+    })
+  },
+  async mounted() {
+    const { data: all } = await this.$strapi.find('discourses', { populate: ['featuredImage', 'author', 'opinions.author', 'opinions.comments.author'] })
+    this.$state.discourse.all = all
+    this.$state.discourse.current = discourse.current || discourse.all[0]
+  }
+}
 
 </script>
 

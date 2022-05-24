@@ -32,6 +32,13 @@
     },
     "font": {
       "type": "string"
+    },
+    "featuredImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

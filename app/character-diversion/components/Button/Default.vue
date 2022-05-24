@@ -1,7 +1,7 @@
 <template>
   <button
-    class="flex items-center justify-center duration-100 py-3 px-4"
-    :style="`--color: var(--color-${color}-500); --hover: var(--color-${color}-600);--radius: var(${borderRadius})`"
+    class="flex items-center justify-center duration-100 py-3 px-4 hover:bg-opacity-50"
+    :style="`--color-default: var(--color-${color}-500); --color-dark: var(--color-${color}-600); --color-light: var(--color-${color}-100); --radius: var(${borderRadius})`"
   >
     <slot></slot>
   </button>
@@ -12,11 +12,11 @@ export default {
   props: {
     radius: {
       type: String,
-      default: 'pill',
+      default: 'rounded',
     },
     color: {
       type: String,
-      default: 'orange',
+      default: 'blue',
     },
   },
   computed: {
@@ -42,20 +42,34 @@ export default {
 <style lang="scss" scoped>
 button {
   color: white;
-  background-color: var(--color);
+  background-color: var(--color-default);
   border-radius: var(--radius);
   line-height: 1;
-white-space: nowrap;
-  &:after {
+  white-space: nowrap;
+  &.arrow:after {
     content: '→';
     margin-left: var(--p-2);
     transition: 200ms;
   }
   &:hover {
-    &:after {
+    --color-default: var(--color-dark) !important;
+    &.arrow:after {
       transform: translateX(var(--p-1));
     }
-    background-color: var(--hover);
   }
+  &.clear {
+    color: var(--color-default);
+    background-color: transparent;
+    &:hover {
+      background-color: var(--color-light);
+    }
+  }
+}
+:global(button.clear:hover) {
+  // background-color: var(--color-light) !important;
+  // color: var(--color-dark) !important;
+  // opacity: 0.5;
+  // color: var(--color-light);
+  // background-color: var(--color-default) !important;
 }
 </style>
