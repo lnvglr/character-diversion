@@ -1,13 +1,10 @@
 <template>
-	<!-- <div class="double">
-		<FormKit type="select" placeholder="Glyphs" v-model="selectedFont" :options="fontOptions" />
-	</div> -->
-  <div class="glyphs gap-5" v-if="selectedFont">
+  <div class="glyphs gap-5" v-if="font">
     <GlyphsGlyph
       v-for="(g, i) in glyphs"
       :key="`${g} ${i}`"
       :glyphName="g"
-      :font="selectedFont"
+      :font="font"
       :tuple="tuple"
       :tupleAlt="tupleAlt"
       class="outline outline-black hover:outline-2 duration-100 hover:shadow-[5px_5px_0_0_black]"
@@ -15,8 +12,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
+import { SamsaFont } from '@/assets/samsa-core.js'
 
 export default {
   name: 'Samsa',
@@ -32,28 +30,13 @@ export default {
       default: 'abcdeftghijklmnopqrstuvwxyz',
     },
     font: {
-      type: String,
-    }
-  },
-
-  data() {
-    return {
-      selectedFont: null,
-      fontOptions: [],
+      type: Object as () => SamsaFont,
     }
   },
   computed: {
     glyphs() {
       return this.string?.split('')
     },
-  },
-  mounted() {
-    this.fontOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
-    this.selectedFont = this.font
-    // document.onmousemove = (event) => {
-    //   this.tuple[0] = 1 - (1 / window.innerWidth) * event.pageX
-    //   this.tuple[1] = 1 - (1 / window.innerHeight) * event.pageY
-    // }
   },
 }
 </script>

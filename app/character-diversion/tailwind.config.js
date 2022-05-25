@@ -20,6 +20,8 @@ module.exports = {
       alert: colors.red,
       black: colors.black,
       white: colors.white,
+      yellow: colors.yellow,
+      emerald: colors.emerald,
       mint: {
         "50": "#fcfffc",
         "100": "#fcfffc",

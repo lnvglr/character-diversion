@@ -6,11 +6,10 @@
       ">
       <ButtonDefault icon="plus">New Discourse</ButtonDefault>
     </NuxtLink>
-    </div>
+  </div>
   <div class="grid grid-cols-3 gap-5 p-10">
-    <NuxtLink v-for="discourseItem in $state.discourse.all" :key="discourseItem.id" :to="`/discourse/${discourseItem.id}`"
-      class="flex items-center justify-center p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24"
-      @click="$state.discourse.current = discourseItem">
+    <NuxtLink v-for="(discourseItem, id) in $state.discourse.id" :key="discourseItem.id" :to="`/discourse/${discourseItem.id}`"
+      class="flex items-center justify-center p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24">
       <h2 class="text-l font-bold">
         {{ discourseItem?.attributes.title
         }}<span v-if="discourseItem?.attributes?.opinions?.data.length > 0">
@@ -38,9 +37,7 @@
 export default {
   methods: {
     removeDiscourse(id: string) {
-      this.$strapi.delete('discourses', id).then(
-        ({ data }) => (discourse.all = discourse.all.filter((e) => e.id !== data.id))
-      )
+      this.$strapi.delete('discourses', id).then(({ data }) => (delete discourse.id[data.id]))
     }
 
   }

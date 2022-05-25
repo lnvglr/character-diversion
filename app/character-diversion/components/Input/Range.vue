@@ -1,7 +1,6 @@
 <template>
   <div
     :class="`range-container relative mt-2 h-10 w-full text-amber-500/20`"
-    :style="`--handle-color: var(--color-${color}-500);--track-fill: var(--color-${color}-300);`"
     :data-min="dataMin"
     :data-max="dataMax"
   >
@@ -106,13 +105,33 @@ export default {
 .range-container {
   --handle-size: 1em;
   --track-size: 0.5em;
-  --track-bg: var(--color-slate-200);
   --outline-size: 0;
+  --text-color: var(--color-slate-400);
+  --handle-color: black;
+  --track-bg: var(--color-slate-200);
+  --track-fill: black;
+  color: var(--color-slate-200);
+
+
+  $colors: primary,
+  secondary,
+  success,
+  warning,
+  alert;
+
+  @each $color in $colors {
+    &.#{$color} {
+      --handle-color: var(--color-#{$color}-600);
+      --track-fill: var(--color-#{$color}-300);
+      color: var(--color-#{$color}-200);
+    }
+  }
+
   &:before,
   &:after {
     bottom: 0;
     position: absolute;
-    color: var(--color-slate-400);
+    color: var(--text-color);
   }
   &:before {
     content: attr(data-min);

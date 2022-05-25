@@ -30,7 +30,7 @@ export default {
   methods: {
     postDiscourse() {
       this.$strapi.create('discourses', this.formData).then(({ data }) => {
-        this.$state.discourse.all.push(data)
+        this.$state.discourse.id[data.id] = data
         this.$router.push(`/discourse/${data.id}`)
       })
     }

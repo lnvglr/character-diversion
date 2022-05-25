@@ -1,5 +1,26 @@
-import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+
+
+import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
+export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
+// add cmap property to SamsaFont ts type
+declare module '@/assets/samsa-core' {
+  interface SamsaFont {
+    cmap: {
+      [key: string]: number
+    };
+    axes: {
+      axisNameID: number
+      default: number
+      flags: number
+      id: number
+      max: number
+      min: number
+      name: string
+      tag: string
+    }
+  }
+}
 // import { Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 // export interface Strapi4RequestParamsObject extends Omit<Strapi4RequestParams, 'populate'> {
 //   populate: string | Array<string> | { [key: string]: Strapi4RequestParamsObject };

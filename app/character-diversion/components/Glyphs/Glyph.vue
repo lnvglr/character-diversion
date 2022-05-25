@@ -1,51 +1,16 @@
 <template>
   <div v-if="glyph">
-    <svg
-      :style="`--width: ${(limits[0]?.[0] + baselineOffset * 2 * size) / 5}px;`"
-      :viewBox="`${-baselineOffset} ${baseline * -0.5} ${limits[0]?.[0] + baselineOffset * 2} ${
-        baseline + padding + 400
-      }`"
-      transform="scale(1,-1)"
-    >
-      <line
-        :x1="-baselineOffset"
-        :y1="0"
-        x2="100%"
-        :y2="0"
-        stroke="lightgrey"
-        :stroke-width="6 / size"
-      />
-      <line
-        v-if="limits[0]"
-        :x1="limits[0]?.[0]"
-        :y1="-2000"
-        :x2="limits[0]?.[0]"
-        :y2="2000"
-        stroke="lightgrey"
-        :stroke-width="6 / size"
-      />
-      <line
-        v-if="limits[1]"
-        :x1="limits[1]?.[0]"
-        :y1="-2000"
-        :x2="limits[1]?.[0]"
-        :y2="2000"
-        stroke="lightgrey"
-        :stroke-width="6 / size"
-      />
+    <svg :style="`--width: ${(limits[0]?.[0] + baselineOffset * 2 * size) / 5}px;`" :viewBox="`${-baselineOffset} ${baseline * -0.5} ${limits[0]?.[0] + baselineOffset * 2} ${baseline + padding + 400
+    }`" transform="scale(1,-1)">
+      <GlyphsGlyphFrame :size="size" :baseline="baselineOffset" :start="limits[0]?.[0]" :end="limits[1]?.[0]" />
+
       <g v-if="glyphAlt" class="hover:z-10">
-        <path
-          :stroke-width="6 / size"
-          :d="glyphAlt"
-          class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"
-        ></path>
+        <path :stroke-width="6 / size" :d="glyphAlt"
+          class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path>
       </g>
       <g v-if="glyph" class="hover:z-10">
-        <path
-          :d="glyph"
-          :stroke-width="6 / size"
-          class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"
-        ></path>
+        <path :d="glyph" :stroke-width="6 / size"
+          class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path>
       </g>
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
@@ -55,9 +20,7 @@
 </template>
 
 <script lang="ts">
-import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core.js'
-import { discourse } from '@/composables/states'
-
+import { SamsaFont, SamsaGlyph } from '@/types'
 export default {
   name: 'default',
   props: {
@@ -67,7 +30,7 @@ export default {
       validator: (value: String) => value.length === 1,
     },
     font: {
-      type: String,
+      type: Object as () => SamsaFont,
     },
     tuple: {
       type: Array,
@@ -92,7 +55,7 @@ export default {
       w: 0,
       h: 0,
       padding: 100,
-      SamsaFont: null,
+      // SamsaFont: null,
       SamsaGlyph: null,
       SamsaGlyphInstance: null,
       throttle: false,
@@ -100,20 +63,11 @@ export default {
   },
   mounted() {
     this.setup()
-
-    // get input and listen to change
   },
   methods: {
     setup() {
-      this.SamsaFont = new SamsaFont({
-        url: this.fontUrl,
-        callback: (e: SamsaFont) => {
-          this.assignGlyph(e.glyphs, this.glyphName)
-          // @ts-ignore
-          // this.size /= (1000 / e.unitsPerEm)
-          // console.log(e)
-        },
-      })
+      this.assignGlyph(this.font, this.glyphName)
+      this.size = 0.5 / (1000 / this.font.unitsPerEm)
     },
     updateGlyph() {
       const glyph = this.SamsaGlyph
@@ -154,17 +108,20 @@ export default {
         .map((pt: number[]) => pt[1])
         .reduce((a: number, b: number) => (a >= b ? a : b), 0)
     },
-    assignGlyph(glyphs: SamsaGlyph[], glyph: String) {
+    assignGlyph(font: SamsaFont, glyph: String) {
       if (glyph.length === 1) {
-        this.SamsaGlyph = glyphs[this.toUnicode([glyph])[0]]
+        this.SamsaGlyph = font.glyphs[this.toUnicode(font, glyph)]
         this.SamsaGlyphInstance =
           this.SamsaGlyph?.numContours < 0
             ? this.SamsaGlyph?.decompose(this.tuple)
             : this.SamsaGlyph?.instantiate(this.tuple)
       }
     },
-    toUnicode(string: string[]): string[] {
-      return string.map((e) => this.SamsaFont.cmap[e.charCodeAt(0)])
+    toUnicode(font: SamsaFont, string: string | string[]): number | number[] {
+      if (typeof string === 'string') {
+        return font.cmap[string.charCodeAt(0)]
+      }
+      return string.map((e) => font.cmap[e.charCodeAt(0)])
     },
     SVG(tag: string) {
       return document.createElementNS('http://www.w3.org/2000/svg', tag)
@@ -200,29 +157,25 @@ export default {
         case '▲':
           svgEl = this.SVG('path')
           this.setAttributes(svgEl, {
-            d: `M${point[0]} ${point[1] + size / 2}L${point[0] + (size / 2) * 0.86602540378} ${
-              point[1] - (size / 2) * 0.5
-            }L${point[0] - (size / 2) * 0.86602540378} ${point[1] - (size / 2) * 0.5}Z`,
+            d: `M${point[0]} ${point[1] + size / 2}L${point[0] + (size / 2) * 0.86602540378} ${point[1] - (size / 2) * 0.5
+              }L${point[0] - (size / 2) * 0.86602540378} ${point[1] - (size / 2) * 0.5}Z`,
           })
           break
 
         case '+':
           svgEl = this.SVG('path')
           this.setAttributes(svgEl, {
-            d: `M${point[0] - size / 2} ${point[1]}L${point[0] + size / 2} ${point[1]}M${
-              point[0]
-            } ${point[1] - size / 2}L${point[0]} ${point[1] + size / 2}`,
+            d: `M${point[0] - size / 2} ${point[1]}L${point[0] + size / 2} ${point[1]}M${point[0]
+              } ${point[1] - size / 2}L${point[0]} ${point[1] + size / 2}`,
           })
           break
 
         case 'x':
           svgEl = this.SVG('path')
           this.setAttributes(svgEl, {
-            d: `M${point[0] - size / 2} ${point[1] - size / 2}L${point[0] + size / 2} ${
-              point[1] + size / 2
-            }M${point[0] - size / 2} ${point[1] + size / 2}L${point[0] + size / 2} ${
-              point[1] - size / 2
-            }`,
+            d: `M${point[0] - size / 2} ${point[1] - size / 2}L${point[0] + size / 2} ${point[1] + size / 2
+              }M${point[0] - size / 2} ${point[1] + size / 2}L${point[0] + size / 2} ${point[1] - size / 2
+              }`,
           })
           break
       }
@@ -232,15 +185,26 @@ export default {
   },
   computed: {
     fontUrl() {
-      return '/public/fonts/' + this.font
+      return '/fonts/' + this.font
     },
+    cmap() {
+      return this.font.cmap
+    }
   },
   watch: {
-    font() {
-      this.setup()
+    cmap() {
+      console.log(this.cmap)
+      this.assignGlyph(this.font, this.glyphName)
+    },
+    font: {
+      handler() {
+        console.log(this.cmap)
+        this.setup()
+      },
+      deep: true
     },
     glyphName(g: String) {
-      this.assignGlyph(this.SamsaFont?.glyphs, g)
+      this.assignGlyph(this.font, g)
     },
     SamsaGlyph() {
       this.updateGlyph()
@@ -259,20 +223,24 @@ div {
   overflow: hidden;
   position: relative;
 }
+
 span {
   font-family: sans-serif;
   position: absolute;
 }
-div > * {
+
+div>* {
   width: var(--width);
   min-width: var(--width);
 }
+
 svg:deep() path {
   /* color: burlywood; */
   /* fill: rgb(230, 249, 255); */
   /* stroke: black; */
   stroke-width: 2;
 }
+
 svg:deep() .tangents path {
   stroke: lightslategray;
 }
