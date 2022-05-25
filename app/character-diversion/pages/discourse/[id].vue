@@ -1,19 +1,19 @@
 <template>
-  <div class="-m-10 flex h-screen">
-    <div class="p-10 grow overflow-auto" v-if="currentDiscourse">
-      <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i].max)"
-        :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i].max)" :string="string"
+  <div class="-m-10 flex h-screen" v-if="currentDiscourse">
+    <div class="p-10 grow overflow-auto">
+      <Samsa :tuple="Object.values(curr.position).map((e, i) => e[0] / curr.axes[i]?.max || 1)"
+        :tupleAlt="Object.values(curr.position).map((e, i) => e[1] / curr.axes[i]?.max || 1)" :string="string"
         :font="currentDiscourse.attributes.font" />
     </div>
 
-    <div class="border-l min-w-[360px] overflow-scroll mb-48">
+    <div class="border-l min-w-[360px] overflow-scroll">
       <Image :source="currentDiscourse.attributes.featuredImage" />
       <h1 class="text-3xl font-bold p-5 pb-0">{{ currentDiscourse.attributes.title }}</h1>
       <p class="p-5 pt-1">{{ currentDiscourse.attributes.content }}</p>
       <h3 class="text-lg font-bold p-5">Opinions ({{ currentOpinions?.length }})</h3>
       <Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" @remove="removeOpinion(opinion.id)"
         @click="opinionHover(opinion)" />
-      <div class="p-5" v-if="$user">
+      <div class="p-5" v-if="$strapi.user">
         <Input type="text" placeholder="Glyphs" v-model="string" />
         <Input type="textarea" placeholder="New opinion..." v-model="newOpinion" v-on:keyup.enter="postOpinion" />
         <Input v-for="axis in curr.axes" :key="axis.tag" type="range" :step="1" :min="axis.min" :max="axis.max"
@@ -63,7 +63,7 @@ export default {
   methods: {
     removeDiscourse(id: string) {
       this.$strapi.delete('discourses', id).then(({ data }) => {
-        this.$state.discourse.all = discourse.all.filter((e) => e.id !== data.id)
+        this.$state.discourse.all = this.$state.discourse.all.filter((e) => e.id !== data.id)
       })
     },
     removeOpinion(id: string) {
@@ -84,7 +84,7 @@ export default {
         glyphs: this.string.split(''),
         tuple: this.curr.position, // @todo: only save those that differ from default
         discourse: this.currentDiscourse,
-        author: this.$user
+        author: this.$strapi.user
       }
       this.$strapi.create('opinions', opinion).then(({ data }) => {
           if (this.currentDiscourse.attributes.opinions?.data) {

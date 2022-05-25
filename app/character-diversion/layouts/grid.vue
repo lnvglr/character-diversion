@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-col h-screen">
-    <Header><slot name="header"></slot></Header>
     <main class="grid grid-cols-12 grid-rows-1 grow">
       <div class="col-span-9">
         <slot />

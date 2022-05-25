@@ -1,12 +1,11 @@
 <template>
-	<img :src="src" />
+	<img v-if="source?.data" :src="src" />
 </template>
 <script lang="ts">
 export default {
 	props: {
 		source: {
-			type: String,
-			default: '',
+			type: Object,
 		},
 	},
 	computed: {

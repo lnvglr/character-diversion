@@ -4,13 +4,24 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.2s ease;
+  transition: all var(--transition-duration-300) var(--transition-timing-function-default);
 }
 
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
 }
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform var(--transition-duration-300) var(--transition-timing-function-default);
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-100%);
+}
+
 
 .list-move, /* apply transition to moving elements */
 .list-enter-active,

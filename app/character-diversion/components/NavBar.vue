@@ -1,15 +1,13 @@
 <template>
   <nav class="
-      fixed
-      bottom-0
-      w-full
+      h-full
       bg-slate-100
-      h-30
-      border-t border-t-slate-200
-      dark:bg-slate-800 dark:border-t-slate-600
+      border-t border-slate-200
+      sm:border-r sm:border-0
+      dark:bg-slate-800 dark:border-slate-600
     ">
-    <ul :class="`flex flex-row justify-around p-5 max-w-2xl mx-auto`">
-      <li v-for="route in routes" :key="route">
+    <ul :class="`flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5`">
+      <li v-for="(route, index) in routes" :key="route" :class="{'mb-auto': index === routes.length - 1}" >
         <NuxtLink :to="route.path" class="
             flex flex-col
             items-center
@@ -21,16 +19,18 @@
             hover:border-2
             hover:border-black
             hover:shadow-[5px_5px_0_0_black]
-            active:text-orange-600
+            active:text-primary-600
             w-16
             h-16
-            md:w-24 md:h-24
+            md:w-16 md:h-16
             dark:text-slate-200 dark:hover:bg-slate-600
           ">
-          <font-awesome-icon :icon="[route.active ? 'fas' : 'fas', route.icon]" fixed-width class="fa-xl" />
+          <font-awesome-icon :icon="[route.active ? 'fas' : 'fas', route.icon]" fixed-width class="fa-lg" />
           <span class="text-xs mt-2">{{ route.name }}</span>
         </NuxtLink>
+
       </li>
+      <ButtonLogout class="hidden sm:block mt-auto" :icon="true" :label="false"></ButtonLogout>
     </ul>
   </nav>
 </template>
@@ -84,11 +84,13 @@ export default {
 </script>
 
 <style scoped>
-.router-link-active {
-  color: var(--color-orange-600);
+a:hover {
+  transform: translate(-2px,-2px);
 }
-
+.router-link-active {
+  color: var(--color-primary-600);
+}
 :global(.dark .router-link-active) {
-  color: var(--color-orange-400);
+  color: var(--color-primary-400);
 }
 </style>

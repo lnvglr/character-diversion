@@ -1,5 +1,5 @@
 <template>
-  <Html :lang="locale" :class="$colorMode.value">
+  <Html :lang="locale" :class="$colorMode?.value">
 
   <Body class="
         antialiased
@@ -10,8 +10,20 @@
         bg-white
         dark:bg-gray-900
       ">
-    <NuxtPage class="page" />
-    <NavBar />
+    <NuxtLayout name="frame">
+      <template #header>
+        <Transition name="slide">
+          <Header class="bg-mint-300 text-black" iconClass="text-black" v-if="showHeader">{{ $route.meta.name }}</Header>
+        </Transition>
+      </template>
+      <template #body>
+        <!-- <pre>{{$route}}</pre> -->
+        <NuxtPage class="page" />
+      </template>
+      <template #navigation>
+        <NavBar />
+      </template>
+    </NuxtLayout>
   </Body>
 
   </Html>
@@ -19,9 +31,13 @@
 <script lang="ts">
 import { discourse } from '@/composables/states'
 export default {
-  setup() {
-    useNuxtApp().provide('strapi', useStrapi4())
-    useNuxtApp().provide('state', { discourse: reactive(discourse) })
+  async setup() {
+    const app = useNuxtApp()
+    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), user: {} }
+    strapi.user = await strapi.fetchUser()
+    if (!app.$strapi) app.provide('strapi', reactive(strapi))
+    if (!app.$state) app.provide('state', reactive({ discourse }))
+
     definePageMeta({
       transition: {
         name: 'page',
@@ -29,10 +45,14 @@ export default {
     })
   },
   data() {
-    locale: 'en'
+    return {
+      locale: 'en'
+    }
   },
-  mounted() {
-    useNuxtApp().provide('user', JSON.parse(window.sessionStorage.getItem('userData')))
+  computed: {
+    showHeader() {
+      return this.$route.matched[0].path !== '/discourse'
+    }
   }
 }
 

@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [],
   tailwindcss: {
@@ -7,20 +9,43 @@ module.exports = {
     fontFamily: {
       sans: ['Gramatika'],
     },
-    extend: {
-      colors: {
-        mint: {
-          "100": "#fcfffc",
-          "200": "#e9f5e8",
-          "300": "#c8dbc7",
-          "400": "#9cb19c",
-          "500": "#6d7f6e",
-          "600": "#485549",
-          "700": "#313b33",
-          "800": "#28302b",
-          "900": "#233027",
-        },
+    colors: {
+      primary: colors.orange,
+      secondary: colors.slate,
+      neutral: colors.stone,
+      slate: colors.slate,
+      info: colors.blue,
+      success: colors.emerald,
+      warning: colors.amber,
+      alert: colors.red,
+      black: colors.black,
+      white: colors.white,
+      mint: {
+        "50": "#fcfffc",
+        "100": "#fcfffc",
+        "200": "#e9f5e8",
+        "300": "#c8dbc7",
+        "400": "#9cb19c",
+        "500": "#6d7f6e",
+        "600": "#485549",
+        "700": "#313b33",
+        "800": "#28302b",
+        "900": "#233027",
       },
+      beige: {
+        "50": "hsl(60,27%,98%)",
+        "100": "hsl(60,14%,96%)",
+        "200": "hsl(20,18%,90%)",
+        "300": "hsl(24,17%,83%)",
+        "400": "hsl(24,16%,64%)",
+        "500": "hsl(25,16%,45%)",
+        "600": "hsl(33,16%,32%)",
+        "700": "hsl(30,19%,25%)",
+        "800": "hsl(12,19%,15%)",
+        "900": "hsl(24,29%,10%)",
+      },
+    },
+    extend: {
     },
   },
   plugins: [

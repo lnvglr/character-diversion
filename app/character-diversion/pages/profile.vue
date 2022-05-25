@@ -1,16 +1,15 @@
 <template>
   <NuxtLayout>
-    <template #header>Profile</template>
     <div class="flex flex-col items-start gap-5">
-      <h1 class="font-bold text-4xl">
-        <span v-if="user?.name">Good Morning, {{ user.name.split(' ')[0] }}!</span>
-        <span v-else>Login!</span>
+      <h1 class="font-bold text-4xl" v-if="$strapi.user?.name">
+        <span>Good Morning, {{ $strapi.user?.name.split(' ')[0] }}!</span>
       </h1>
+      <FormLogin v-else/>
       <hr />
       <h3 class="font-bold text-xl">Appearence</h3>
       <ThemeToggle />
 
-      <ButtonDefault @click="logout" class="clear" color="red" v-if="user">Logout</ButtonDefault>
+      <ButtonLogout color="alert"/>
     </div>
   </NuxtLayout>
 </template>
@@ -23,21 +22,6 @@ export default {
       icon: 'user',
       order: 4,
     })
-  },
-  data() {
-    return {
-      user: {},
-    }
-  },
-  mounted() {
-    this.user = JSON.parse(window.sessionStorage.getItem('userData'))
-  },
-  methods: {
-    logout() {
-      window.sessionStorage.removeItem('jwt')
-      window.sessionStorage.removeItem('userData')
-      this.$router.push('/login')
-    },
   },
 }
 </script>

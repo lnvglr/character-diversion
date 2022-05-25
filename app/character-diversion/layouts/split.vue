@@ -1,6 +1,5 @@
 <template>
   <div class="">
-    <Header><slot name="header"></slot></Header>
     <main class="flex justify-center h-screen">
       <div class="hidden sm:block w-1/2 bg-cover h-screen">
         <div class="background w-full h-screen bg-opacity-20"></div>

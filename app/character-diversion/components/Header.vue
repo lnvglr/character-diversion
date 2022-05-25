@@ -5,8 +5,8 @@
       <h1 class="text-2xl font-display"><slot></slot></h1
     ></NuxtLink>
     <div class="flex items-center gap-5 ml-auto">
-      <NuxtLink to="/login" v-if="!$user">Login</NuxtLink>
-      <NuxtLink to="/register" v-if="!$user"><ButtonDefault>Sign Up</ButtonDefault></NuxtLink>
+      <NuxtLink to="/login" v-if="!$strapi.user">Login</NuxtLink>
+      <NuxtLink to="/register" v-if="!$strapi.user"><ButtonDefault>Sign Up</ButtonDefault></NuxtLink>
     </div>
   </header>
 </template>
@@ -15,7 +15,7 @@ export default {
   props: {
     iconClass: {
       type: String,
-      default: 'text-blue-500',
+      default: 'text-primary-500',
     },
   },
 }

@@ -5,10 +5,8 @@
 </template>
 
 <script lang="ts">
-import { discourse } from '@/composables/states'
 export default {
-  setup() {
-
+  async setup() {
     definePageMeta({
       name: 'Discourse',
       icon: 'bars-progress',
@@ -18,7 +16,6 @@ export default {
   async mounted() {
     const { data: all } = await this.$strapi.find('discourses', { populate: ['featuredImage', 'author', 'opinions.author', 'opinions.comments.author'] })
     this.$state.discourse.all = all
-    this.$state.discourse.current = discourse.current || discourse.all[0]
   }
 }
 

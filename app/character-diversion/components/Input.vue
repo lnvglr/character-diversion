@@ -8,7 +8,7 @@
       v-model="modelValue"
       v-bind="$attrs"
       :empty="empty || null"
-      class="rounded-md w-full focus:outline-blue-500"
+      class="rounded-md w-full focus:outline-info-500"
       :class="{ border: 'range' !== type }"
     />
     <label class="placeholder" v-if="placeholder" :for="_.uid">{{ placeholder }}</label>
@@ -58,51 +58,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.input-container {
+  --padding-x: var(--p-3);
+  --padding-y: var(--p-2);
+}
+input {
+  height: var(--h-12)
+}
 :global(form input) {
   width: 100%;
 }
 :is(input, textarea):not([type=range]) {
-  padding: var(--p-5) var(--padding-x) var(--p-1);
-  &,
-  &:active,
-  &:focus {
-    &,
-    & ~ .placeholder {
-      --padding-x: var(--p-3);
-      --padding-y: var(--p-2);
-    }
-  }
+  padding: calc(var(--padding-y) + 0.625em) var(--padding-x) 0;
 }
-.placeholder,
-:is(input, textarea):not([type=range]):focus ~ .placeholder,
-:is(input, textarea):not([type=range]):active ~ .placeholder {
+:is(textarea) {
+  padding-top: calc(var(--padding-y) + 0.75em);
+}
+.placeholder {
   position: absolute;
-  z-index: 100;
-  top: var(--padding-y);
-  left: calc(var(--padding-x) + var(--border-default));
-  transform: translateZ(0);
+  z-index: 10;
   pointer-events: none;
-  transition-duration: var(--transition-duration-default);
-  transition-timing-function: var(--transition-timing-function-default);
   max-width: 100%;
+  font-size: var(--text-md);
+  color: var(--color-slate-400);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   will-change: transform;
-  color: var(--color-slate-400);
+  transform: translateZ(0);
+  transition-duration: var(--transition-duration-default);
+  transition-timing-function: var(--transition-timing-function-default);
+  top: var(--padding-y);
+  left: calc(var(--padding-x) + var(--border-default));
 }
 
-.placeholder,
-:is(input, textarea):not([type=range]):not(:disabled):focus ~ .placeholder,
-:is(input, textarea):not([type=range]):not(:disabled):active ~ .placeholder {
-  font-size: var(--text-xs);
-  color: var(--color-slate-700);
-}
 :is(input, textarea):not([type=range])[empty]:not(:focus) ~ .placeholder {
   --padding-y: var(--p-3);
-  --padding-x: var(--p-4);
-  font-size: 1em;
-  transform: scale(1);
-  color: var(--color-slate-400);
+}
+// all input types except range, which are not disabled:
+// where the input is not :focus, :active or filled (:not([empty]))
+// select the .placeholder
+:is(input, textarea):not([type=range]):not(:disabled):where(:focus, :active, :not([empty])) ~ .placeholder {
+  font-size: var(--text-xs);
+  color: var(--color-slate-700);
 }
 </style>

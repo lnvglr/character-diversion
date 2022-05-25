@@ -1,20 +1,13 @@
 <template>
-  <div class="grid grid-cols-3 gap-5 p-10">
+<div>
+  <div class="flex w-full p-10"><h1 class="text-4xl font-bold">Discover Discourses</h1>
     <NuxtLink to="/discourse/new" key="remove" class="
-        flex
-        items-center
-        justify-center
-        p-5
-        rounded-lg
-        text-white
-        bg-blue-500
-        hover:bg-blue-600
-        cursor-pointer
-        h-24
+        ml-auto
       ">
-      <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"></font-awesome-icon>
-      New Discourse
+      <ButtonDefault icon="plus">New Discourse</ButtonDefault>
     </NuxtLink>
+    </div>
+  <div class="grid grid-cols-3 gap-5 p-10">
     <NuxtLink v-for="discourseItem in $state.discourse.all" :key="discourseItem.id" :to="`/discourse/${discourseItem.id}`"
       class="flex items-center justify-center p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24"
       @click="$state.discourse.current = discourseItem">
@@ -38,15 +31,16 @@
       </div>
     </NuxtLink>
   </div>
+  </div>
 </template>
 
 <script lang="ts">
 export default {
   methods: {
     removeDiscourse(id: string) {
-      // this.$strapi.delete('discourses', id).then(
-      //   ({ data }) => (discourse.all = discourse.all.filter((e) => e.id !== data.id))
-      // )
+      this.$strapi.delete('discourses', id).then(
+        ({ data }) => (discourse.all = discourse.all.filter((e) => e.id !== data.id))
+      )
     }
 
   }
