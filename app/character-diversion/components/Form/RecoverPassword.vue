@@ -1,9 +1,9 @@
 <template>
   <form class="flex gap-2" @submit="forgotPassword">
     <Input type="text" name="email" placeholder="Email" v-model="email" />
-    <ButtonDefault type="submit">
+    <Button type="submit">
       Send Email Link<font-awesome-icon class="ml-3" :icon="['fas', 'arrow-right']" />
-    </ButtonDefault>
+    </Button>
   </form>
 </template>
 <script lang="ts">

@@ -65,6 +65,9 @@ export default {
 input {
   height: var(--h-12)
 }
+:global(form :is(input, textarea)) {
+  margin-bottom: var(--m-2);
+}
 :global(form input) {
   width: 100%;
 }

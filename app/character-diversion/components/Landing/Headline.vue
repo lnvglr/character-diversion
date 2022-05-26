@@ -26,7 +26,7 @@ const transformedHeadline = computed(() => {
         `<span class='word'>${e
           .split('')
           .map((f) => {
-            if (f === props.letter) {
+            if (f.toLocaleLowerCase() === props.letter.toLocaleLowerCase()) {
               letter++
               return `<span class='letter' data-count='${letter}'>${f}<span class='comment'>${props.comments[letter]}</span></span>`
             } else {
@@ -83,7 +83,7 @@ const transformedHeadline = computed(() => {
       font-size: var(--text-xs);
       font-weight: normal;
       text-transform: none;
-      background-color: var(--color-amber-500);
+      background-color: var(--color-warning-500);
       color: white;
       padding: var(--p-3);
       border-radius: var(--rounded-full);
@@ -99,7 +99,7 @@ const transformedHeadline = computed(() => {
         font-size: 0.975em;
         vertical-align: 0.01em;
         .comment {
-          background-color: var(--color-blue-600);
+          background-color: var(--color-info-600);
         margin-left: -1em;
         }
       }

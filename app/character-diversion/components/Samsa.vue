@@ -1,5 +1,5 @@
 <template>
-  <div class="glyphs gap-5" v-if="font">
+  <div class="glyphs" v-if="font">
     <GlyphsGlyph
       v-for="(g, i) in glyphs"
       :key="`${g} ${i}`"
@@ -7,7 +7,7 @@
       :font="font"
       :tuple="tuple"
       :tupleAlt="tupleAlt"
-      class="outline outline-black hover:outline-2 duration-100 hover:shadow-[5px_5px_0_0_black]"
+      class="border-b border-r border-beige-200 dark:border-mint-900"
     />
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     glyphs() {
-      return this.string?.split('')
+      return [...new Set(this.string.split(''))]
     },
   },
 }
@@ -50,10 +50,10 @@ export default {
 }
 .glyphs {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
 }
-.glyphs > * {
+/* .glyphs > * {
   border-radius: var(--rounded-lg);
-}
+} */
 </style>

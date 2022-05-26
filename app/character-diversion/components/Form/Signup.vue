@@ -3,7 +3,7 @@
     <Input type="text" name="name" placeholder="Name" v-model="formData.name" />
     <Input type="email" name="email" placeholder="Email" v-model="formData.email" />
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
-    <ButtonDefault type="submit" class="">Sign up</ButtonDefault>
+    <Button type="submit" class="">Sign up</Button>
     <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
   </form>
 </template>

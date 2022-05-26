@@ -15,3 +15,10 @@ export default {
 	},
 }
 </script>
+<style scoped>
+img {
+	width: 100%;
+	aspect-ratio: 21/9;
+	object-fit: cover;
+}
+</style>

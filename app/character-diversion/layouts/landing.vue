@@ -10,7 +10,7 @@
 						Diversion—the most adequate platform for typographic discourse in the world.</div>
 					<div>
 						<NuxtLink to="/discourse">
-							<ButtonDefault class="arrow" radius="pill" color="primary">Discover</ButtonDefault>
+							<Button class="arrow" radius="pill" color="primary">Discover</Button>
 						</NuxtLink>
 					</div>
 				</div>

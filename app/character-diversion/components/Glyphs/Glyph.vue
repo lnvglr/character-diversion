@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      size: 0.5,
+      size: 1,
       handleSize: 10,
       glyph: null,
       glyphAlt: null,
@@ -67,7 +67,7 @@ export default {
   methods: {
     setup() {
       this.assignGlyph(this.font, this.glyphName)
-      this.size = 0.5 / (1000 / this.font.unitsPerEm)
+      this.size = (1000 / this.font.unitsPerEm)
     },
     updateGlyph() {
       const glyph = this.SamsaGlyph
@@ -187,22 +187,14 @@ export default {
     fontUrl() {
       return '/fonts/' + this.font
     },
-    cmap() {
-      return this.font.cmap
-    }
   },
   watch: {
-    cmap() {
-      console.log(this.cmap)
-      this.assignGlyph(this.font, this.glyphName)
-    },
-    font: {
-      handler() {
-        console.log(this.cmap)
-        this.setup()
-      },
-      deep: true
-    },
+    // font: {
+    //   handler() {
+    //     this.setup()
+    //   },
+    //   deep: true
+    // },
     glyphName(g: String) {
       this.assignGlyph(this.font, g)
     },

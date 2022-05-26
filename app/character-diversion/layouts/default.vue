@@ -1,9 +1,7 @@
 <template>
-	<div>
-    <main class="p-10">
-			<slot />
-    </main>
-  </div>
+  <main class="p-10 h-screen">
+    <slot />
+  </main>
 </template>
 
 <script>

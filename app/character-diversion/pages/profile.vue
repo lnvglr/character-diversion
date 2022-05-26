@@ -7,9 +7,9 @@
       <FormLogin v-else/>
       <hr />
       <h3 class="font-bold text-xl">Appearence</h3>
-      <ThemeToggle />
+      <ButtonTheme />
 
-      <ButtonLogout color="alert"/>
+      <ButtonLogout color="alert" />
     </div>
   </NuxtLayout>
 </template>

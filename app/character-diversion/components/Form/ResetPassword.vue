@@ -2,9 +2,9 @@
 <form class="flex flex-col gap-2" @submit="resetPassword">
   <Input type="password" v-model="password" placeholder="Password">
   <Input type="password" v-model="confirmPassword" placeholder="Confirm Password">
-    <ButtonDefault type="submit" class="arrow" :disabled="password.length < 3 || password !== confirmPassword">
+    <Button type="submit" class="arrow" :disabled="password.length < 3 || password !== confirmPassword">
       Reset Password
-    </ButtonDefault>
+    </Button>
   </form>
 </template>
 <script lang="ts">

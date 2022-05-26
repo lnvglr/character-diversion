@@ -2,9 +2,9 @@
   <form class="flex flex-col gap-2" @submit="login">
     <Input type="text" name="email" placeholder="Email" v-model="formData.identifier" />
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
-    <ButtonDefault type="submit" :disabled="formData.password?.length < 3"
+    <Button type="submit" :disabled="formData.password?.length < 3"
       >Login<font-awesome-icon class="ml-3" :icon="['fas', 'arrow-right']"
-    /></ButtonDefault>
+    /></Button>
 
     <p class="my-2">
       <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>

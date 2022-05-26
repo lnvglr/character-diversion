@@ -1315,14 +1315,12 @@ function SamsaFont (init, config) {
 			// - note that in a browser frontend application, the font url normally needs to be on the same server as the application for same origin policy
 			
 			fetch(this.url)
-			.then(response => {
-				return response.arrayBuffer();
-			})
-			.then(arrayBuffer => {			
-				this.filesize = arrayBuffer.byteLength;
-				this.data = new DataView(arrayBuffer);
-				this.parse();
-			});
+				.then(response => response.arrayBuffer())
+				.then(arrayBuffer => {
+					this.filesize = arrayBuffer.byteLength;
+					this.data = new DataView(arrayBuffer);
+					this.parse();
+				})
 		}
 	}
 

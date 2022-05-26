@@ -1,11 +1,14 @@
 <template>
-	<ButtonDefault @click="logout" class="" color="red" v-if="$strapi.user" :icon="icon && 'arrow-right-from-bracket'">
+	<Button @click="logout" v-if="$strapi.user" title="Logout" :icon="icon && 'arrow-right-from-bracket'">
 		<template v-slot v-if="label">
-			{{label}}
-		</template></ButtonDefault>
+			{{ label }}
+		</template>
+	</Button>
 </template>
 <script lang="ts">
 export default {
+	setup() {
+	},
 	props: {
 		label: {
 			type: [String, Boolean],

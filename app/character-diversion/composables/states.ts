@@ -1,36 +1,36 @@
 import type { Discourse } from '~/types'
-import { reactive, computed, ComputedRef } from 'vue'
-import { SamsaFont } from '@/assets/samsa-core.js'
+// import type { SamsaFont as SamsaFontType, Discourse } from '~/types'
+import { reactive, ComputedRef } from 'vue'
+import { SamsaFont } from '@/assets/samsa-core'
 
-interface State {
-  all: Discourse[]
+interface DiscourseState {
   id: {
     [id: string]: Discourse
   }
   current: ComputedRef<Discourse>
+  tuple: {
+    current: Object
+  }
 }
 
-export const discourse = reactive<State>({
-  all: [],
+export const discourse = reactive<DiscourseState>({
   id: {},
   current: null,
+  tuple: {
+    current: {}
+  }
 })
-// watch(
-//   () => useRoute().params.id,
-//   () => {
-//     const current =
-//       discourse.id[useRoute().params.id as keyof typeof discourse.id]
-//     useSamsaFont(discourse.current.attributes.font).then((font: SamsaFont) => {
-//       current.attributes.SamsaFont = font
-//       discourse.current = current
-//     })
-//   }
-// )
 
 export const useSamsaFont = (fontName: string) =>
   new Promise((resolve, reject) => {
     new SamsaFont({
       url: '../assets/fonts/' + fontName,
-      callback: (e: SamsaFont) => resolve(e),
+      callback: (e: SamsaFont) => {
+        if (e.errors.length > 0) {
+          reject(e)
+        } else {
+          resolve(e)
+        }
+      },
     })
   })

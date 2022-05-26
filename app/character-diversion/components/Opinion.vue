@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center p-2 pt-1 hover:bg-slate-100 cursor-pointer border-b" v-if="opinion">
+  <div class="flex items-center p-2 pt-1 hover:bg-slate-100 cursor-pointer first:border-t border-b border-slate-300" v-if="opinion">
     <div class="flex flex-col gap-2">
       <p class="text-sm font-bold">{{ opinion.attributes.title }}</p>
       <!-- <div class="flex gap-1">

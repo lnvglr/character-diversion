@@ -4,7 +4,7 @@
       <Input type="text" name="title" v-model="formData.title" placeholder="Title" validation="required" />
       <Input type="textarea" rows="3" name="content" v-model="formData.content" placeholder="Description" />
       <FormKit type="select" placeholder="Choose Font..." v-model="formData.font" :options="availableOptions" />
-      <ButtonDefault type="submit">Start New Discourse</ButtonDefault>
+      <Button type="submit">Start New Discourse</Button>
     </form>
   </div>
 </template>

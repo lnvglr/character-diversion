@@ -1,33 +1,20 @@
 <template>
-<div>
-  <div class="flex w-full p-10"><h1 class="text-4xl font-bold">Discover Discourses</h1>
+<div class="">
+  <div class="flex w-full p-10">
+    <h1 class="text-4xl font-bold">Discover Discourses</h1>
     <NuxtLink to="/discourse/new" key="remove" class="
         ml-auto
       ">
-      <ButtonDefault icon="plus">New Discourse</ButtonDefault>
+      <Button icon="plus">New Discourse</Button>
     </NuxtLink>
   </div>
   <div class="grid grid-cols-3 gap-5 p-10">
     <NuxtLink v-for="(discourseItem, id) in $state.discourse.id" :key="discourseItem.id" :to="`/discourse/${discourseItem.id}`"
-      class="flex items-center justify-center p-5 bg-slate-100 hover:bg-slate-200 rounded-lg h-24">
-      <h2 class="text-l font-bold">
-        {{ discourseItem?.attributes.title
-        }}<span v-if="discourseItem?.attributes?.opinions?.data.length > 0">
-          ({{ discourseItem?.attributes?.opinions?.data.length }})</span>
+      class="flex flex-col justify-start p-5 rounded-md border border-beige-300 bg-beige-50 hover:bg-white h-24 shadow-[5px_5px_0_0_black] hover:shadow-[10px_10px_0_0_black] duration-100">
+      <h2 class="text-xl font-bold">
+        {{ discourseItem?.attributes.title }}
       </h2>
-      <div class="
-          flex
-          items-center
-          justify-center
-          w-6
-          h-6
-          -my-10
-          rounded-full
-          ml-auto
-          hover:bg-red-500 hover:text-white
-        " @click.prevent="removeDiscourse(discourseItem.id)">
-        <font-awesome-icon :icon="['fas', 'times']" fixed-width class="fa-xs" />
-      </div>
+      <span> {{ discourseItem?.attributes.author.data?.attributes.name }}</span>
     </NuxtLink>
   </div>
   </div>
