@@ -3,12 +3,12 @@
 		<Image :source="$state.discourse.current.attributes.featuredImage" />
 		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer" :class="{'border-b': !sidebarMinimized}" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
 		<div class="" v-if="!sidebarMinimized">
-			<Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" @remove="removeOpinion(opinion.id)"
-				@click="opinionHover(opinion)" />
+			<Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" :active="$state.opinion.active.id === opinion.id" @click="selectOpinion(opinion)" />
 		</div>
 		<div class="p-5" v-if="$strapi.user && !sidebarMinimized">
 			<FormNewOpinion />
 		</div>
+		<Button class="m-5 small" @click="selectOpinion()">reset</Button>
 	</div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
 			return this.currentDiscourse?.attributes.opinions?.data;
 		},
 		axes() {
-			return this.$state.configuration.font?.axes;
+			return this.$state.opinion.font?.axes;
 		},
 	},
 	watch: {
@@ -41,17 +41,19 @@ export default {
 	},
 	methods: {
 		setPosition() {
-			this.$state.configuration.axes = this.$state.configuration.font?.axes.reduce((acc: Object, curr: SamsaFontAxes) => ({ ...acc, [curr.tag]: [curr.min, curr.max] }), {});
+			this.$state.opinion.form.attributes.axes = this.$state.opinion.font?.axes.reduce((acc: Object, curr: SamsaFontAxes) => ({ ...acc, [curr.tag]: [curr.min, curr.max] }), {});
 		},
-		removeOpinion(id: string) {
-			this.$strapi.delete("opinions", id).then(({ data }) => {
-				this.$state.discourse.current.attributes.opinions.data =
-					this.$state.discourse.current.attributes.opinions.data.filter((e) => e.id !== data.id);
-			});
-		},
-		opinionHover(opinion: Opinion) {
-			this.$state.configuration.glyphs = opinion.attributes.glyphs || this.$state.configuration.glyphs;
-			this.$state.configuration.axes = opinion.attributes.tuple;
+		selectOpinion(opinion: Opinion = null) {
+			console.log()
+			if (opinion === null || this.$state.opinion.active.id === opinion.id) {
+				this.$state.opinion.reset('active')
+				this.$state.opinion.reset('form')
+				this.setPosition()
+				return
+			}
+			this.$state.opinion.active = Object.assign({}, {...opinion})
+			this.$state.opinion.form = Object.assign({}, {...opinion})
+
 		},
 	},
 }

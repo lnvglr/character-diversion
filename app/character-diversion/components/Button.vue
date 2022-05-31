@@ -146,7 +146,7 @@ export default {
   }
   &.small {
     --size: var(--h-6);
-    --padding: var(--p-1) var(--p-2);
+    --padding: var(--p-0) var(--p-2);
   }
   &.large {
     --size: var(--h-12);
@@ -172,11 +172,14 @@ export default {
     &.#{$color} {
       --background-color: var(--color-#{$color}-500);
 
-      &:hover {
+      &:not(.clear):hover {
         --color: white;
 				--bg-opacity: 1;
         --background-color: var(--color-#{$color}-700);
         --border-color: var(--background-color);
+      }
+      &.clear:hover {
+        --background-color: var(--color-#{$color}-500);
       }
     }
   }

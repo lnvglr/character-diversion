@@ -29,7 +29,7 @@
   </Html>
 </template>
 <script lang="ts">
-import { discourse, configuration } from '@/composables/states'
+import { discourse, opinion } from '@/composables/states'
 import { glyphMethods, utils } from '@/composables/methods'
 export default {
   async setup() {
@@ -37,7 +37,7 @@ export default {
     const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), ...useStrapiClient(), user: {} }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
-    if (!app.$state) app.provide('state', reactive({ discourse, configuration }))
+    if (!app.$state) app.provide('state', reactive({ discourse, opinion }))
     if (!app.$f) app.provide('f', { glyphMethods, utils })
 
     definePageMeta({

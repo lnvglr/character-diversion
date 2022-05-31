@@ -1,4 +1,4 @@
-import type { Discourse, SamsaGlyph, SamsaFont as SamsaFontType } from '~/types'
+import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType } from '~/types'
 import { reactive, ComputedRef } from 'vue'
 import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '~~/composables/methods'
@@ -15,15 +15,17 @@ interface DiscourseState {
     files: object
   },
 }
-interface ConfigurationState {
+interface OpinionState {
+  form: Opinion,
+  active: Opinion,
   axes: {
     [tag: string]: number | string
   }
   glyphs: number[]
   opinion: string
   font: SamsaFontType
+  reset: () => void
 }
-
 export const discourse = reactive<DiscourseState>({
   id: {},
   current: null,
@@ -33,11 +35,25 @@ export const discourse = reactive<DiscourseState>({
     files: null
   },
 })
-export const configuration = reactive<ConfigurationState>({
+const defaultOpinion = {
+  id: null,
+  attributes: {
+    title: null,
+    axes: {},
+    glyphs: [],
+  }
+} as Opinion
+export const opinion = reactive<OpinionState>({
+  form: defaultOpinion,
+  active: defaultOpinion,
   axes: {},
   opinion: '',
   glyphs: [],
-  font: null
+  font: null,
+  reset: (area: string = 'form') => {
+    Object.assign(opinion[area], defaultOpinion)
+    glyphMethods.setPosition()
+  }
 })
 
 export const useSamsaFont = (fontName: string) =>

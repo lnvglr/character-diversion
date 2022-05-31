@@ -65,6 +65,14 @@
         }
       },
       "type": "json"
+    },
+    "axes": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "json"
     }
   }
 }

@@ -31,6 +31,7 @@ export default {
     })
     // const discourses = ([...response.data]).reverse();
     const discourses = response.data;
+    console.log(discourses)
     this.$state.discourse.id = discourses.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
     this.setCurrentDiscourse(this.$route.params.id)
   },
@@ -40,7 +41,7 @@ export default {
       if (!current) return
       useSamsaFont(current.attributes.font?.data?.attributes.url)
         .then((font: SamsaFont) => {
-          this.$state.configuration.font = font
+          this.$state.opinion.font = font
           this.$state.discourse.current = current
         })
         .catch(e => {

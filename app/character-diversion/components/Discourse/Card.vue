@@ -4,7 +4,7 @@
 		<!-- <div class="text-6xl font-bold p-5 text-primary-500 border-b border-beige-300">AaBbCc</div> -->
 		<div class="flex flex-col justify-start p-5 gap-2  h-full">
 		<h2 class="text-2xl font-bold leading-5">
-			{{ discourse.attributes.title }} {{ discourse.id }}
+			{{ discourse.attributes.title }}
 		</h2>
 		<span> {{ discourse.attributes.author.data?.attributes.name }}</span>
 		<span class="mt-auto"> {{ $f.utils.relativeTime(discourse.attributes.publishedAt) }}</span>

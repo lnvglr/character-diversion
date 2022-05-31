@@ -7,10 +7,10 @@ export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 declare module '@/assets/samsa-core' {
   interface SamsaFont {
     cmap: {
-      [unicode: string]: number
+      [unicode: number]: number
     },
     cmapReverse: {
-      [glyphId: number]: string
+      [glyphId: number]: number
     }
     axes: SamsaFontAxes
   }
@@ -62,8 +62,11 @@ export interface Opinion {
     updatedAt?: Date
     comments?: Comment[]
     fontSpectrum?: FontSpectrum[]
-    glyphs?: Array<GlyphSpectrum | string>
+    glyphs?: Array<GlyphSpectrum | string | number>
     tuple?: TupleSpectrum
+    axes?: {
+      [tag: string]: number[]
+    }
   }
 }
 export interface Comment {

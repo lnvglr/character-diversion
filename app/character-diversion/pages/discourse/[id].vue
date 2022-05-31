@@ -17,9 +17,9 @@
       <div class="grid grid-cols-autofill-32 gap-1 p-1" v-else>
         <div
           class="flex justify-center w-full h-32 bg-white rounded-md relative cursor-pointer border border-beige-100 overflow-hidden"
-          v-for="(glyph, k) in $state.configuration.font.glyphs.filter((e: SamsaGlyph) => $state.configuration.glyphs.includes(e.id))"
+          v-for="(glyph, k) in $state.opinion.font.glyphs.filter((e: SamsaGlyph) => $state.opinion.form.attributes.glyphs.includes(e.id))"
           :key="glyph.id" :title="glyph.name">
-          <GlyphsMiniGlyph class="text-8xl" :glyph="glyph" :tuple="$state.configuration.axes" :frame="true"
+          <GlyphsMiniGlyph class="text-8xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :frame="true"
             :title="glyph.name" />
         </div>
       </div>
