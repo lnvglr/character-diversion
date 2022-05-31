@@ -12,13 +12,12 @@
             flex flex-col
             items-center
             justify-center
-            rounded-lg
-            shadow-[0_0_0_0_black]
+            rounded-md
             duration-100
-            border-black
+            border-beige-200
             hover:bg-white
-            hover:border-2
-            hover:shadow-[5px_5px_0_0_black]
+            hover:border
+            active:scale-95
             active:text-primary-600
             w-16
             h-16
@@ -66,7 +65,6 @@ export default {
   },
   computed: {
     routes() {
-      console.log(this.$router.options.routes)
       return this.$router.options.routes
         .filter(e => e.meta?.order)
         .sort((a, b) => a.meta.order - b.meta.order)

@@ -7,7 +7,6 @@
 </template>
 
 <script lang="ts">
-import { handleError } from "vue"
 import { Discourse, SamsaFont } from "~~/types"
 
 export default {
@@ -27,7 +26,7 @@ export default {
   },
   async mounted() {
     const response = await this.$strapi.find('discourses', {
-      populate: ['featuredImage', 'author', 'opinions.author', 'opinions.comments.author'],
+      populate: ['featuredImage', 'font', 'author', 'opinions.author', 'opinions.comments.author'],
       sort: ['publishedAt:desc'],
     })
     // const discourses = ([...response.data]).reverse();
@@ -39,23 +38,20 @@ export default {
     setCurrentDiscourse(id: string) {
       const current = this.$state.discourse.id[id as keyof typeof discourse.id]
       if (!current) return
-      useSamsaFont(current.attributes.font)
+      useSamsaFont(current.attributes.font?.data?.attributes.url)
         .then((font: SamsaFont) => {
           this.$state.configuration.font = font
           this.$state.discourse.current = current
         })
         .catch(e => {
           this.$state.discourse.current = current
-          console.error(e.errors)
         })
     },
   },
   watch: {
     '$route': {
-      handler(to, from) {
-        const to_depth = to?.path.split('/').length
-        const from_depth = from?.path.split('/').length
-        this.animationName = to_depth < from_depth ? 'slide-right' : 'slide-left'
+      handler() {
+        this.setCurrentDiscourse(this.$route.params.id)
       },
       immediate: true
     },

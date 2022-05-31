@@ -30,12 +30,17 @@
     "content": {
       "type": "richtext"
     },
-    "font": {
-      "type": "string"
-    },
     "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
+      ]
+    },
+    "font": {
+      "allowedTypes": [
+        "files"
       ],
       "type": "media",
       "multiple": false

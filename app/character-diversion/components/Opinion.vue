@@ -1,15 +1,8 @@
 <template>
-  <div class="flex items-center p-2 pt-1 hover:bg-slate-100 cursor-pointer first:border-t border-b border-slate-300" v-if="opinion">
+  <div class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer border-b border-beige-300 max-w-[360px]" v-if="opinion">
     <div class="flex flex-col gap-2">
       <p class="text-sm font-bold">{{ opinion.attributes.title }}</p>
-      <!-- <div class="flex gap-1">
-        <small
-          class="flex items-center justify-center bg-slate-200 w-5 h-5 rounded-sm"
-          v-for="glyph in opinion.attributes.glyphs"
-          :key="glyph"
-          >{{ glyph }}</small
-        >
-      </div> -->
+      <span class="flex gap-1 items-center text-xs"><span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-for="glyph in glyphs">{{glyph}}</span><span class="bg-beige-200 text-beige-500 px-2 rounded-sm">{{opinion.attributes.tuple}}</span></span>
       <span class="flex gap-2 items-center text-slate-400 text-xs"><img class="w-5 h-5 object-cover rounded-full" src="/images/IMG_6686.jpg" />{{[opinion.attributes.author?.data?.attributes?.name, publishedAt].filter(e => e).join(' · ')}}</span>
     </div>
     <div
@@ -41,6 +34,9 @@ export default {
     },
   },
   computed: {
+    glyphs() {
+			return this.$f.glyphMethods.getGlyphsById(this.opinion.attributes.glyphs, this.$state.configuration.font)
+    },
     publishedAt() {
       return (new RelativeTime()).from(new Date(this.opinion.attributes.publishedAt))
         // return new Date(this.opinion.attributes.publishedAt).toLocaleString('de', {

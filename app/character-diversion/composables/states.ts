@@ -1,13 +1,19 @@
 import type { Discourse, SamsaGlyph, SamsaFont as SamsaFontType } from '~/types'
 import { reactive, ComputedRef } from 'vue'
 import { SamsaFont } from '@/assets/samsa-core'
-import { utils } from '~~/composables/methods'
+import { utils, glyphMethods } from '~~/composables/methods'
+import { GlyphsFrame } from '~~/.nuxt/components'
 
 interface DiscourseState {
   id: {
     [id: string]: Discourse
   }
   current: ComputedRef<Discourse>
+  new: {
+    title: string,
+    content: string,
+    files: object
+  },
 }
 interface ConfigurationState {
   axes: {
@@ -25,7 +31,7 @@ export const discourse = reactive<DiscourseState>({
     title: null,
     content: null,
     files: null
-  }
+  },
 })
 export const configuration = reactive<ConfigurationState>({
   axes: {},
@@ -39,7 +45,8 @@ export const useSamsaFont = (fontName: string) =>
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
       new SamsaFont({
-        url: '../assets/fonts/' + fontName,
+        url: 'http://localhost:1337' + fontName,
+        // url: '../assets/fonts/' + fontName,
         callback: (e: SamsaFont) => {
           if (e.errors.length > 0) {
             reject(e)
@@ -55,6 +62,11 @@ export const useSamsaFont = (fontName: string) =>
 
 const openTypeGlyphs = (font: SamsaFontType) => {
   return font.glyphs.map((glyph: SamsaGlyph) => {
+    if (! glyph.name) {
+      const character = String.fromCharCode(Number(font.cmapReverse[glyph.id]))
+      glyph.name = (!['\x00'].includes(character) && glyph.name) && character
+      return glyph
+    }
     if (! (glyph.id in font.cmapReverse)) {
       glyph.openType = {
         is: null

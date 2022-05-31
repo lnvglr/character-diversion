@@ -20,18 +20,19 @@ export default {
 			return this.$state.configuration.font?.axes;
 		},
 		string() {
-			const map = this.$state.configuration.font?.cmapReverse;
-			if (!map) return ''
-			return this.$state.configuration.glyphs.map((id: string) => {
-				if (!(id in map)) {
-					const SamsaGlyph = this.$state.configuration.font.glyphs[id];
-					const lig = SamsaGlyph?.openType.lig;
-					if (lig)
-						return lig;
-					id = SamsaGlyph?.openType.base;
-				}
-				return String.fromCharCode(map[id]);
-			}).join("");
+			return this.$f.glyphMethods.getGlyphsById(this.$state.configuration.glyphs, this.$state.configuration.font)
+			// const map = this.$state.configuration.font?.cmapReverse;
+			// if (!map) return ''
+			// return this.$state.configuration.glyphs.map((id: string) => {
+			// 	if (!(id in map)) {
+			// 		const SamsaGlyph = this.$state.configuration.font.glyphs[id];
+			// 		const lig = SamsaGlyph?.openType.lig;
+			// 		if (lig)
+			// 			return lig;
+			// 		id = SamsaGlyph?.openType.base;
+			// 	}
+			// 	return String.fromCharCode(map[id]);
+			// }).join("");
 		}
 	},
 	methods: {

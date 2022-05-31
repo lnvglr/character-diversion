@@ -5,7 +5,7 @@
       <Input type="text" name="title" v-model="formData.title" placeholder="Title" validation="required" />
       <Input type="textarea" rows="3" name="content" v-model="formData.content" placeholder="Description" />
       <!-- <FormKit type="select" placeholder="Choose Font..." v-model="formData.font" :options="availableOptions" /> -->
-      <Input type="file" name="fonts" v-model="formData.font" :accept="['ttf', 'otf']" />
+      <Input type="file" name="font" v-model="formData.font" :accept="['ttf', 'otf', 'jpg', 'png']" />
       <Button type="submit" class="large">Start New Discourse</Button>
     </form>
   </div>
@@ -14,10 +14,14 @@
 <script lang="ts">
 export default {
   setup() {
+    const client = useStrapiClient()
+    console.log(useStrapiClient())
+
     const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
     const availableOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
     return {
       availableOptions,
+      client
     }
   },
   data() {
@@ -31,31 +35,28 @@ export default {
   },
   methods: {
     postDiscourse(e: Event) {
-      
       e.preventDefault()
+      const formData = new FormData();
+      const dataCompiled = {
+        ...this.formData,
+        author: this.$strapi.user
+      };
+      
+      delete dataCompiled.font
+      formData.append('data', JSON.stringify(dataCompiled));
+      formData.append('files.font', this.formData.font[0], this.formData.font[0].name);
 
-    const data = {};
-    const formData = new FormData();
-
-    // this.formData
-    //   .forEach((e) => {
-    //     if (!['submit', 'file'].includes(type)) {
-    //       data[name] = value;
-    //     } else if (type === 'file') {
-    //       files.forEach((file) => {
-    //         formData.append(`files.${name}`, file, file.name);
-    //       });
-    //     }
-    //   });
-
-    // formData.append('data', JSON.stringify(data));
-
-      // form.append("files.featuredImage", this.formData.font)
-      // console.log(form.get('files'))
-      // const res = this.$strapi.create("upload", form).then((response) => response[0]?.url)
-      this.$strapi.create('discourses', {...this.formData, author: this.$strapi.user}).then(({ data }) => {
-        this.$state.discourse.id[data.id] = data
-        this.$router.push(`/discourse/${data.id}`)
+      this.client('discourses', {
+        method: 'POST',
+        body: formData
+      }).then(({ data }) => {
+        this.$strapi.findOne('discourses', data.id, {
+          populate: ['featuredImage', 'font', 'author', 'opinions.author', 'opinions.comments.author']
+        }).then(({ data }) => {
+          console.log(data)
+          this.$state.discourse.id[data.id] = data
+          this.$router.push(`/discourse/${data.id}`)
+        })
       })
     }
   }

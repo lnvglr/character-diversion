@@ -34,7 +34,7 @@ import { glyphMethods, utils } from '@/composables/methods'
 export default {
   async setup() {
     const app = useNuxtApp()
-    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), user: {} }
+    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), ...useStrapiClient(), user: {} }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
     if (!app.$state) app.provide('state', reactive({ discourse, configuration }))

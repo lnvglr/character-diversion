@@ -1,7 +1,7 @@
 <template>
 	<div class="m-5 border rounded-md bg-beige-50 border-beige-300 min-w-[360px] overflow-scroll" :class="{ minimized: sidebarMinimized }">
 		<Image :source="$state.discourse.current.attributes.featuredImage" />
-		<h3 class="text-lg font-bold p-5 flex w-full hover:bg-white cursor-pointer" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
+		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer" :class="{'border-b': !sidebarMinimized}" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
 		<div class="" v-if="!sidebarMinimized">
 			<Opinion v-for="opinion in currentOpinions" :key="opinion" :opinion="opinion" @remove="removeOpinion(opinion.id)"
 				@click="opinionHover(opinion)" />

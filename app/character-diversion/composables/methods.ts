@@ -25,6 +25,21 @@ export const glyphMethods = {
           (e: number) => e !== id
         ))
   },
+  getGlyphsById: (glyphs: number[], font: SamsaFont) => {
+    const map = font?.cmapReverse
+    if (!glyphs || !map) return ''
+    return glyphs
+      .map((id: string) => {
+        if (!(id in map)) {
+          const SamsaGlyph = font.glyphs[id]
+          const lig = SamsaGlyph?.openType.lig
+          if (lig) return lig
+          id = SamsaGlyph?.openType.base
+        }
+        return String.fromCharCode(map[id])
+      })
+      .join('')
+  },
 }
 export const utils = {
   invertObject: (object: Object) => {

@@ -2249,7 +2249,7 @@ function SamsaFont (init, config) {
 		let font = this;
 		let node = this.config.isNode;
 		let data, p;
-		let offset = font.glyphOffsets[g];
+		let offset = font.glyphOffsets[g] || 0;
 		let size = font.glyphSizes[g];
 		let pt;
 		let glyph = new SamsaGlyph( {
@@ -2266,6 +2266,11 @@ function SamsaFont (init, config) {
 		}
 
 		// set up data and pointers
+		let glyfOffset = offset 
+		if ('glyf' in font.tables) {
+			glyfOffset = font.tables['glyf'].offset + offset
+		}
+
 		if (node) {
 			data = Buffer.alloc(size);
 
@@ -2274,12 +2279,12 @@ function SamsaFont (init, config) {
 			// - reading a whole glyph into memory, then parsing from memory
 			// - reading a block of data from the glyf table, loading more when needed, and parsing from memory
 			// - I think it was a bit faster when we loaded all glyphs in sequence, than the present case where we load a glyph and then its tvts
-			read (fd, data, 0, size, font.tables['glyf'].offset + offset);
+			read (fd, data, 0, size, glyfOffset);
 			p = 0;
 		}
 		else {
 			data = font.data;
-			p = font.tables['glyf'].offset + offset;
+			p = glyfOffset;
 		}
 
 		// non-printing glyph

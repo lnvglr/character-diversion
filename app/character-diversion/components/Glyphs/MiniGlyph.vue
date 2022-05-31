@@ -32,17 +32,30 @@ export default {
 		return {
 			baselineOffset: 0,
 			padding: 1000,
+			decomposed: null
 		}
 	},
-	computed: {
-		decomposed() {
-			return this.glyph.decompose(this.tuple)
+	mounted() {
+		// console.log(this.glyph)
+	},
+	watch: {
+		tuple: {
+			handler() {
+				this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
+			},
+			deep: true,
+			immediate: true
 		},
+	},
+	computed: {
+		// decomposed() {
+		// 	return this.glyph.decompose(this.tuple)
+		// },
 		path() {
-			return this.decomposed.svgPath()
+			return this.decomposed?.svgPath()
 		},
 		points() {
-			return this.decomposed.points
+			return this.decomposed?.points
 		},
 		width() {
 			const [limits] = this.points.slice(-3, -2)

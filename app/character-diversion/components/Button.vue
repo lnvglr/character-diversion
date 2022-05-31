@@ -1,7 +1,7 @@
 <template>
   <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="color" class="button flex items-center justify-center gap-2">
     <slot></slot>
-    <font-awesome-icon v-if="icon" :icon="['fa', icon]" />
+    <font-awesome-icon v-if="icon" :icon="['fa', icon]" fixed-width />
   </component>
 </template>
 <script lang="ts">
@@ -105,8 +105,14 @@ export default {
     box-shadow: 0 0 0 3px var(--color-info-500);
   }
 
-  &:active {
-    --color: currentColor;
+  &:active, &.active {
+    --color: var(--color-white);
+    --background-color: var(--color-info-500);
+    // --color: currentColor;
+    &:hover {
+      --background-color: var(--color-info-600);
+      --bg-opacity: 1;
+    }
   }
 
   &[disabled=true] {
