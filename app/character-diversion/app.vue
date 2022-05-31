@@ -29,14 +29,16 @@
   </Html>
 </template>
 <script lang="ts">
-import { discourse } from '@/composables/states'
+import { discourse, configuration } from '@/composables/states'
+import { glyphMethods, utils } from '@/composables/methods'
 export default {
   async setup() {
     const app = useNuxtApp()
     const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), user: {} }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
-    if (!app.$state) app.provide('state', reactive({ discourse }))
+    if (!app.$state) app.provide('state', reactive({ discourse, configuration }))
+    if (!app.$f) app.provide('f', { glyphMethods, utils })
 
     definePageMeta({
       transition: {
@@ -51,7 +53,7 @@ export default {
   },
   computed: {
     showHeader() {
-      return this.$route.matched[0].path !== '/discourse'
+      return !['/discourse', '/'].includes(this.$route.matched[0].path)
     }
   }
 }

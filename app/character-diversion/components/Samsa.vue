@@ -14,7 +14,7 @@
 
 <script lang="ts">
 const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
-import { SamsaFont } from '@/assets/samsa-core.js'
+import { SamsaFont, SamsaGlyph } from '@/types'
 
 export default {
   name: 'Samsa',
@@ -32,6 +32,10 @@ export default {
     font: {
       type: Object as () => SamsaFont,
     }
+  },
+  mounted() {
+    console.log(this.font.cmap)
+    console.log(this.font.glyphs)
   },
   computed: {
     glyphs() {

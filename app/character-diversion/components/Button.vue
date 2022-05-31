@@ -53,9 +53,11 @@ export default {
     fill: currentColor !important;
   }
 }
-
+:global(:where(.button)) {
+  margin: 0 calc(var(--border-default) * -2);
+}
 :where(.button) {
-  --size: 2rem;
+  --size: var(--h-8);
   --font-size: inherit;
   --color: white;
   --background-color: black;
@@ -75,9 +77,9 @@ export default {
   // background-color: var(--background-color);
   box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
   text-align: center;
-  margin: 0 calc(var(--border-default) * -2);
   transition: all var(--transition-duration-default) ease-in-out;
   z-index: 1;
+  white-space: nowrap;
 
   &:before {
     transition: all var(--transition-duration-default) ease-in-out;
@@ -136,6 +138,14 @@ export default {
     min-width: var(--size);
     max-width: var(--size);
   }
+  &.small {
+    --size: var(--h-6);
+    --padding: var(--p-1) var(--p-2);
+  }
+  &.large {
+    --size: var(--h-12);
+    --padding: var(--p-4) var(--p-5);
+  }
 
   &.center {
     margin-inline: auto;
@@ -144,15 +154,6 @@ export default {
   &.initial-height {
     height: initial;
     min-height: var(--size);
-  }
-
-  &.small {
-    --size: 1.5rem;
-  }
-
-  &.large {
-    --size: var(--input-size);
-    --font-size: var(--text-xl);
   }
 
   $colors: primary,

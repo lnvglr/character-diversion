@@ -15,9 +15,9 @@
             rounded-lg
             shadow-[0_0_0_0_black]
             duration-100
+            border-black
             hover:bg-white
             hover:border-2
-            hover:border-black
             hover:shadow-[5px_5px_0_0_black]
             active:text-primary-600
             w-16
@@ -31,7 +31,8 @@
 
       </li>
       <ButtonTheme class="hidden sm:block mt-auto" :icon="true" :label="false" />
-      <ButtonLogout class="hidden sm:block mt-auto hover:bg-alert-500 hover:text-white hover:shadow-none" :icon="true" :label="false" />
+      <Button v-if="!$strapi.user" to="/login" class="hidden sm:block" icon="arrow-right-to-bracket" :label="false" />
+      <ButtonLogout v-else class="hidden sm:block hover:bg-alert-500 hover:text-white hover:shadow-none" :icon="true" :label="false" />
     </ul>
   </nav>
 </template>
@@ -65,6 +66,7 @@ export default {
   },
   computed: {
     routes() {
+      console.log(this.$router.options.routes)
       return this.$router.options.routes
         .filter(e => e.meta?.order)
         .sort((a, b) => a.meta.order - b.meta.order)
@@ -85,8 +87,8 @@ export default {
 </script>
 
 <style scoped>
-a:hover {
-  transform: translate(-2px,-2px);
+li a:hover {
+  /* transform: translate(-2px,-2px); */
 }
 .router-link-active {
   color: var(--color-primary-600);

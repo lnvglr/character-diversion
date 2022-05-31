@@ -1,15 +1,16 @@
 <template>
-  <div class="input-container relative w-full">
+  <div class="input-container" :class="containerClass">
     <label v-if="label" :for="_.uid">{{ label }}</label>
     <component
-      :is="'range' === type ? InputRange : InputDefault"
+      :is="is"
       :type="type"
       :id="_.uid"
       v-model="modelValue"
+      @update:modelValue="updateValue"
       v-bind="$attrs"
       :empty="empty || null"
-      class="rounded-md w-full focus:outline-info-500"
-      :class="{ border: 'range' !== type }"
+      class="rounded-md border-beige-300 w-full focus:outline-info-500"
+      :class="{ border }"
     />
     <label class="placeholder" v-if="placeholder" :for="_.uid">{{ placeholder }}</label>
   </div>
@@ -18,13 +19,18 @@
 <script>
 export default {
   setup() {
-    const InputRange = resolveComponent('InputRange')
     const InputDefault = resolveComponent('InputDefault')
+    const InputRange = resolveComponent('InputRange')
+    const InputCheckbox = resolveComponent('InputCheckbox')
+    const InputFile = resolveComponent('InputFile')
     return {
-      InputRange,
       InputDefault,
+      InputRange,
+      InputCheckbox,
+      InputFile,
     }
   },
+  emits: ['update:modelValue'],
   props: {
     modelValue: {
       type: [String, Number, Array],
@@ -41,16 +47,50 @@ export default {
     placeholder: {
       type: String,
     },
+    'containerClass': {
+      type: String,
+    },
   },
   inheritAttrs: false,
   computed: {
     empty() {
       return (!this.modelValue || String(this.modelValue) === '') && 0 !== this.modelValue
     },
+    border() {
+      switch(this.type) {
+        case 'range':
+        case 'checkbox':
+        // case 'file':
+          return false
+        default:
+          return true
+      }
+    },
+    is() {
+      switch(this.type) {
+        case 'range':
+          return this.InputRange
+        case 'checkbox':
+          return this.InputCheckbox
+        case 'file':
+          return this.InputFile
+        default:
+          return this.InputDefault
+      }
+    }
   },
   methods: {
     updateValue(val) {
-      const value = val.length !== 0 ? ('number' === this.type ? Number(val) : String(val)) : null
+      const type = typeof val
+      let value = val
+      switch(type) {
+        case 'number':
+          value = Number(val)
+          break;
+        case 'string':
+          value = val.length !== 0 ? val : null
+          break;
+      }
       this.$emit('update:modelValue', value)
     },
   },
@@ -62,10 +102,17 @@ export default {
   --padding-x: var(--p-3);
   --padding-y: var(--p-2);
 }
-input {
-  height: var(--h-12)
+:global(:where(.input-container)) {
+  position: relative;
+  width: var(--w-full);
 }
-:global(form :is(input, textarea)) {
+input {
+  height: var(--h-12);
+}
+:global(:where(input, textarea)) {
+  display: block;
+}
+:global(form :is(input, textarea, .dropzone)) {
   margin-bottom: var(--m-2);
 }
 :global(form input) {
@@ -83,7 +130,7 @@ input {
   pointer-events: none;
   max-width: 100%;
   font-size: var(--text-md);
-  color: var(--color-slate-400);
+  color: var(--color-beige-400);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -103,6 +150,6 @@ input {
 // select the .placeholder
 :is(input, textarea):not([type=range]):not(:disabled):where(:focus, :active, :not([empty])) ~ .placeholder {
   font-size: var(--text-xs);
-  color: var(--color-slate-700);
+  color: var(--color-beige-700);
 }
 </style>

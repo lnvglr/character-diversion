@@ -26,8 +26,13 @@ export default {
     }
   },
   async mounted() {
-    const { data: all } = await this.$strapi.find('discourses', { populate: ['featuredImage', 'author', 'opinions.author', 'opinions.comments.author'] })
-    this.$state.discourse.id = all.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
+    const response = await this.$strapi.find('discourses', {
+      populate: ['featuredImage', 'author', 'opinions.author', 'opinions.comments.author'],
+      sort: ['publishedAt:desc'],
+    })
+    // const discourses = ([...response.data]).reverse();
+    const discourses = response.data;
+    this.$state.discourse.id = discourses.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
     this.setCurrentDiscourse(this.$route.params.id)
   },
   methods: {
@@ -36,11 +41,14 @@ export default {
       if (!current) return
       useSamsaFont(current.attributes.font)
         .then((font: SamsaFont) => {
-          current.attributes.SamsaFont = font
+          this.$state.configuration.font = font
           this.$state.discourse.current = current
         })
-        .catch(e => console.log(e.errors))
-    }
+        .catch(e => {
+          this.$state.discourse.current = current
+          console.error(e.errors)
+        })
+    },
   },
   watch: {
     '$route': {

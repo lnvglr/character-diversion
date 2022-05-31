@@ -1,7 +1,7 @@
 <template>
-		<line :x1="baseline * -1" :y1="0" x2="100%" :y2="0" :stroke-width="4 / size" />
-		<line :x1="start" :y1="-2000" :x2="start" :y2="2000" :stroke-width="4 / size" />
-		<line :x1="end" :y1="-2000" :x2="end" :y2="2000" :stroke-width="4 / size" />
+	<line :x1="-5000" :y1="0" :x2="10000" :y2="0" :stroke-width="3000 / size" />
+	<line :x1="start" :y1="-3000" :x2="start" :y2="3000" :stroke-width="3000 / size" />
+	<line :x1="end" :y1="-3000" :x2="end" :y2="3000" :stroke-width="3000 / size" />
 </template>
 
 <script lang="ts">

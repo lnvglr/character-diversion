@@ -1,17 +1,11 @@
 <template>
-  <div v-if="glyph">
-    <svg :style="`--width: ${(limits[0]?.[0] + baselineOffset * 2 * size) / 5}px;`" :viewBox="`${-baselineOffset} ${baseline * -0.5} ${limits[0]?.[0] + baselineOffset * 2} ${baseline + padding + 400
-    }`" transform="scale(1,-1)">
-      <GlyphsGlyphFrame :size="size" :baseline="baselineOffset" :start="limits[0]?.[0]" :end="limits[1]?.[0]" />
-
-      <g v-if="glyphAlt" class="hover:z-10">
-        <path :stroke-width="6 / size" :d="glyphAlt"
-          class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50"></path>
-      </g>
-      <g v-if="glyph" class="hover:z-10">
-        <path :d="glyph" :stroke-width="6 / size"
-          class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50"></path>
-      </g>
+  <div class="glyph-container relative" v-if="glyph">
+    <svg @click="selected = !selected" :style="`--width: ${(limits[0]?.[0] + baselineOffset * 2 * size) / 5}px;`"
+      :viewBox="`${-baselineOffset} ${baseline * -0.5} ${limits[0]?.[0] + baselineOffset * 2} ${baseline + padding + 400
+      }`" transform="scale(1,-1)">
+      <GlyphsFrame :size="size" :baseline="baselineOffset" :start="limits[0]?.[0]" :end="limits[1]?.[0]" />
+      <GlyphsG :glyph="glyph" :size="size" class="stroke-emerald-500 fill-emerald-500/10 hover:fill-emerald-500/50" />
+      <GlyphsG :glyph="glyphAlt" :size="size" class="stroke-yellow-500 fill-yellow-300/5 hover:fill-yellow-500/50" />
       <!-- <g v-if="glyph" class="tangents"><path :d="tangents"></path></g> -->
       <!-- <g v-if="points" v-html="points.join('')"></g> -->
     </svg>
@@ -20,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { SamsaFont, SamsaGlyph } from '@/types'
+import { SamsaGlyph as SamsaGlyphType, SamsaFont } from '@/types'
 export default {
   name: 'default',
   props: {
@@ -28,6 +22,9 @@ export default {
       type: String,
       default: 'a',
       validator: (value: String) => value.length === 1,
+    },
+    Glyph: {
+      type: Object as () => SamsaGlyphType,
     },
     font: {
       type: Object as () => SamsaFont,
@@ -43,6 +40,7 @@ export default {
   },
   data() {
     return {
+      selected: 1,
       size: 1,
       handleSize: 10,
       glyph: null,
@@ -59,15 +57,23 @@ export default {
       SamsaGlyph: null,
       SamsaGlyphInstance: null,
       throttle: false,
+      hoveringAlt: false,
+      preview: false,
     }
   },
   mounted() {
     this.setup()
+    window.addEventListener('keydown', (e) => {
+      if (e.code === "Space") this.preview = true
+    })
+    window.addEventListener('keyup', (e) => {
+      if (e.code === "Space") this.preview = false
+    })
   },
   methods: {
     setup() {
-      this.assignGlyph(this.font, this.glyphName)
-      this.size = (1000 / this.font.unitsPerEm)
+      this.assignGlyph(this.glyphName)
+      this.size = (1000 / this.font.unitsPerEm) * this.size
     },
     updateGlyph() {
       const glyph = this.SamsaGlyph
@@ -108,20 +114,20 @@ export default {
         .map((pt: number[]) => pt[1])
         .reduce((a: number, b: number) => (a >= b ? a : b), 0)
     },
-    assignGlyph(font: SamsaFont, glyph: String) {
+    assignGlyph(glyph: String) {
       if (glyph.length === 1) {
-        this.SamsaGlyph = font.glyphs[this.toUnicode(font, glyph)]
+        this.SamsaGlyph = this.font.glyphs[this.toUnicode(glyph)]
         this.SamsaGlyphInstance =
           this.SamsaGlyph?.numContours < 0
             ? this.SamsaGlyph?.decompose(this.tuple)
             : this.SamsaGlyph?.instantiate(this.tuple)
       }
     },
-    toUnicode(font: SamsaFont, string: string | string[]): number | number[] {
+    toUnicode(string: string | string[]): number | number[] {
       if (typeof string === 'string') {
-        return font.cmap[string.charCodeAt(0)]
+        return this.font.cmap[string.charCodeAt(0)]
       }
-      return string.map((e) => font.cmap[e.charCodeAt(0)])
+      return string.map((e) => this.font.cmap[e.charCodeAt(0)])
     },
     SVG(tag: string) {
       return document.createElementNS('http://www.w3.org/2000/svg', tag)
@@ -189,14 +195,8 @@ export default {
     },
   },
   watch: {
-    // font: {
-    //   handler() {
-    //     this.setup()
-    //   },
-    //   deep: true
-    // },
     glyphName(g: String) {
-      this.assignGlyph(this.font, g)
+      this.assignGlyph(g)
     },
     SamsaGlyph() {
       this.updateGlyph()
@@ -209,7 +209,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.glyph-container {
   display: flex;
   justify-content: center;
   overflow: hidden;

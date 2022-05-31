@@ -64,8 +64,8 @@ export default {
           (100 / (this.$attrs.max - this.$attrs.min)) *
           (val - this.$attrs.min)
         ).toFixed(this.decimalPlaces)};`
-      const max = calc('max', this.value[1] ? this.value[1] : this.value[0])
-      const min = calc('min', this.value[1] ? this.value[0] : '0')
+      const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
+      const min = calc('min', this.value[1] !== null ? this.value[0] : '0')
       return `${min} ${max}`
     },
     decimalPlaces() {
@@ -83,7 +83,7 @@ export default {
     input(eventTarget: HTMLInputElement, index: number) {
       let value = eventTarget.valueAsNumber
       const newValues = this.modelValue
-      const gap = this.gap || Math.max((this.$attrs.max - this.$attrs.min) / 100, this.step)
+      const gap = this.gap || Math.max(Math.abs(this.$attrs.max - this.$attrs.min) / 100, this.step)
 
       if (!Array.isArray(newValues)) {
         return this.$emit('update:modelValue', value)

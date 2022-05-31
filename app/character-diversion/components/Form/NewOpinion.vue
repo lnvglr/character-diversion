@@ -1,58 +1,63 @@
 <template>
 	<form>
 		<Input type="text" placeholder="Glyphs" v-model="string" />
-		<Input type="textarea" placeholder="New opinion..." v-model="newOpinion" v-on:keyup.enter="postOpinion" />
-
-		<Input v-for="axis in axes" :key="axis.tag" type="range" :step="1" :min="axis.min" :max="axis.max"
-			v-model="$state.discourse.tuple.current[axis.tag]" :label="axis.name" class="success" />
+		<Input type="textarea" placeholder="New opinion..." v-model="$state.configuration.opinion"
+			v-on:keyup.enter="postOpinion" />
+		<div v-for="axis in axes" :key="axis.tag">
+			<Input v-if="axis.tag in $state.configuration.axes" type="range" :step="1" :min="axis.min" :max="axis.max"
+			v-model="$state.configuration.axes[axis.tag]" :label="axis.name" class="success" />
+		</div>
 	</form>
 </template>
 
 <script lang="ts">
-import type { Discourse, Opinion } from '@/types'
 export default {
-	props: {
-		discourse: {
-			type: Object as () => Discourse,
-		}
-	},
-	data() {
-		return {
-			string: 'abc',
-			newOpinion: '',
-		}
-	},
 	computed: {
-		currentOpinions() {
-			return this.currentDiscourse?.attributes.opinions?.data
+		currentDiscourse() {
+			return this.$state.discourse.current;
 		},
 		axes() {
-			return this.currentDiscourse?.attributes.SamsaFont.axes
+			return this.$state.configuration.font?.axes;
+		},
+		string() {
+			const map = this.$state.configuration.font?.cmapReverse;
+			if (!map) return ''
+			return this.$state.configuration.glyphs.map((id: string) => {
+				if (!(id in map)) {
+					const SamsaGlyph = this.$state.configuration.font.glyphs[id];
+					const lig = SamsaGlyph?.openType.lig;
+					if (lig)
+						return lig;
+					id = SamsaGlyph?.openType.base;
+				}
+				return String.fromCharCode(map[id]);
+			}).join("");
 		}
 	},
 	methods: {
 		postOpinion() {
-			if (this.newOpinion == '') return
+			console.log('a')
 			const opinion = {
-				title: this.newOpinion,
+				title: this.$state.configuration.opinion,
 				fonts: null,
-				glyphs: this.string.split(''),
-				tuple: this.$state.discourse.tuple.current, // @todo: only save those that differ from default
+				glyphs: this.$state.configuration.glyphs,
+				tuple: this.$state.configuration.axes,
 				discourse: this.$state.discourse.current,
 				author: this.$strapi.user
-			}
-			this.$strapi.create('opinions', opinion).then(({ data }) => {
+			};
+			this.$strapi.create("opinions", opinion).then(({ data }) => {
 				if (this.$state.discourse.current.attributes.opinions?.data) {
-					this.$state.discourse.current.attributes.opinions.data.push(data)
-				} else {
+					this.$state.discourse.current.attributes.opinions.data.push(data);
+				}
+				else {
 					this.$state.discourse.current.attributes.opinions = {
 						data: [data],
-					}
+					};
 				}
-				this.newOpinion = ''
-			})
+				this.$state.configuration.opinion = "";
+			});
 		}
-	}
+	},
 }
 </script>
 

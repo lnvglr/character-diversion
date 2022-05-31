@@ -19,4 +19,7 @@ module.exports = ({ env }) => ({
       defaultReplyTo: 'nonreply@character-diversion.com',
     },
   },
+  upload: {
+    enabled: true,
+  },
 });

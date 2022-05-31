@@ -48,6 +48,31 @@ module.exports = {
       },
     },
     extend: {
+
+      gridTemplateColumns: {
+        // Complex site-specific row configuration
+        'autofill-4': 'repeat(auto-fill, minmax(1rem, 1fr))',
+        'autofill-8': 'repeat(auto-fill, minmax(2rem, 1fr))',
+        'autofill-12': 'repeat(auto-fill, minmax(3rem, 1fr))',
+        'autofill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
+        'autofill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
+        'autofill-24': 'repeat(auto-fill, minmax(6rem, 1fr))',
+        'autofill-28': 'repeat(auto-fill, minmax(7rem, 1fr))',
+        'autofill-32': 'repeat(auto-fill, minmax(8rem, 1fr))',
+        'autofill-36': 'repeat(auto-fill, minmax(9rem, 1fr))',
+        'autofill-40': 'repeat(auto-fill, minmax(10rem, 1fr))',
+        'autofill-44': 'repeat(auto-fill, minmax(11rem, 1fr))',
+        'autofill-48': 'repeat(auto-fill, minmax(12rem, 1fr))',
+        'autofill-52': 'repeat(auto-fill, minmax(13rem, 1fr))',
+        'autofill-56': 'repeat(auto-fill, minmax(14rem, 1fr))',
+        'autofill-60': 'repeat(auto-fill, minmax(15rem, 1fr))',
+        'autofill-64': 'repeat(auto-fill, minmax(16rem, 1fr))',
+        'autofill-72': 'repeat(auto-fill, minmax(18rem, 1fr))',
+        'autofill-80': 'repeat(auto-fill, minmax(20rem, 1fr))',
+        'autofill-96': 'repeat(auto-fill, minmax(24rem, 1fr))',
+        'autofill-128': 'repeat(auto-fill, minmax(32rem, 1fr))',
+        'autofill-160': 'repeat(auto-fill, minmax(40rem, 1fr))',
+      }
     },
   },
   plugins: [
