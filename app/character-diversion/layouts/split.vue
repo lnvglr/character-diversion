@@ -1,10 +1,7 @@
 <template>
   <div class="">
     <main class="flex justify-center h-screen">
-      <div class="hidden sm:block w-1/2 bg-cover h-screen">
-        <div class="background w-full h-screen bg-opacity-20"></div>
-      </div>
-      <div class="sm:w-1/2">
+      <div class="w-full max-w-2xl">
         <div class="p-5 mt-10 w-4/5 mx-auto text-left">
           <div class="text-left mb-7">
             <NuxtLink to="/">

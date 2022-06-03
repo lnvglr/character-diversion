@@ -1,14 +1,10 @@
 <template>
 	<div class="flex items-center relative">
-	<svg
-		v-if="path"
-		:style="`width: ${fontSize}em; min-width: ${fontSize}em;`"
-		:viewBox="viewBox"
-		:transform="transform"
-		class="h-full"
-		>
-		<GlyphsG :path="path" :scale="scale" class="fill-black" />
-	</svg>
+		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em;`" :viewBox="viewBox"
+			:transform="transform" class="h-full" ref="svg">
+			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
+			<GlyphsG v-if="path" :path="path" :scale="scale" :class="pathClass" :strokeWidth="strokeWidth" />
+		</svg>
 	</div>
 </template>
 <script lang="ts">
@@ -26,17 +22,26 @@ export default {
 			type: Number,
 			default: 1
 		},
-		frame: Boolean
+		frame: Boolean,
+		pathClass: {
+			type: String,
+		}
 	},
 	data() {
 		return {
 			baselineOffset: 0,
 			padding: 1000,
-			decomposed: null
+			decomposed: null,
+			strokePadding: 1000,
+			strokeWidth: '1px',
 		}
 	},
 	mounted() {
-		// console.log(this.glyph)
+		if (this.$refs.svg) {
+			this.$nextTick(() => {
+				this.strokeWidth = 1000 / parseInt(window.getComputedStyle(this.$refs.svg).fontSize) + 'px'
+			})
+		}
 	},
 	watch: {
 		tuple: {
@@ -48,30 +53,35 @@ export default {
 		},
 	},
 	computed: {
-		// decomposed() {
-		// 	return this.glyph.decompose(this.tuple)
-		// },
 		path() {
 			return this.decomposed?.svgPath()
 		},
 		points() {
 			return this.decomposed?.points
 		},
-		width() {
+		characterWidth() {
 			const [limits] = this.points.slice(-3, -2)
 			return limits[0]
+		},
+		width() {
+			this.characterWidth + this.strokePadding * 2
 		},
 		scale() {
 			return 1000 / this.glyph.font.unitsPerEm
 		},
 		baseline() {
-			return this.glyph.points
+			console.log(this.points)
+			return this.points
 				.map((pt: number[]) => pt[1])
 				.reduce((a: number, b: number) => (a >= b ? a : b), 0)
 		},
+		boundaries() {
+			const xValues = this.points.map((pt: number[]) => pt[0])
+			return [Math.min(...xValues), Math.max(...xValues)]
+		},
 		viewBox() {
-			const offsetY = 0.5
-			return `0 ${ + this.baseline * -offsetY} ${this.width} ${1000 + this.baseline * offsetY}`
+			const offsetY = 300
+			return `${this.boundaries[0] - this.strokePadding} ${-offsetY} ${this.boundaries[1] + this.strokePadding * 2} ${1000 + offsetY}`
 		},
 		fontSize() {
 			return this.width / this.glyph.font.unitsPerEm
@@ -84,6 +94,6 @@ export default {
 </script>
 <style scoped>
 svg {
-	/* background: rgba(255,0,0,0.1) */
+	/* background: rgba(255, 0, 0, 0.1) */
 }
 </style>

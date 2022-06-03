@@ -1,5 +1,5 @@
 <template>
-  <Html :lang="locale" :class="$colorMode?.value">
+  <Html :lang="$i18n.locale" :class="$colorMode?.value">
 
   <Body class="
         antialiased
@@ -13,7 +13,8 @@
     <NuxtLayout name="frame">
       <template #header>
         <Transition name="slide">
-          <Header class="bg-mint-300 text-black" iconClass="text-black" v-if="showHeader">{{ $route.meta.name }}</Header>
+          <Header class="bg-mint-300 text-black" iconClass="text-black" v-if="showHeader">{{ $route.meta.name }}
+          </Header>
         </Transition>
       </template>
       <template #body>
@@ -34,7 +35,8 @@ import { glyphMethods, utils } from '@/composables/methods'
 export default {
   async setup() {
     const app = useNuxtApp()
-    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), ...useStrapiClient(), user: {} }
+    const client = <T>(contentType: string, data?: Partial<T>) => useStrapiClient()(contentType, { method: 'POST', body: data }) as Promise<T>
+    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), client, user: {} }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
     if (!app.$state) app.provide('state', reactive({ discourse, opinion }))
@@ -45,11 +47,6 @@ export default {
         name: 'page',
       },
     })
-  },
-  data() {
-    return {
-      locale: 'en'
-    }
   },
   computed: {
     showHeader() {

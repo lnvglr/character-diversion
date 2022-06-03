@@ -1,6 +1,5 @@
 export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 
-
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 // add cmap property to SamsaFont ts type
@@ -16,7 +15,7 @@ declare module '@/assets/samsa-core' {
   }
   interface SamsaGlyph {
     openType: {
-      is: string;
+      is?: string;
       lig?: string;
       base?: string;
       [stylisticSet: string]: string
@@ -89,46 +88,3 @@ export interface GlyphSpectrum {
 export interface TupleSpectrum {
   [name: string]: [min: number, max: number]
 }
-/**
-const discourse: Discourse = {
-  id: '2341',
-  attributes: {
-    title: 'new discourse',
-    content: 'new discourse',
-    fonts: [new SamsaFont()],
-    opinions: [
-      {
-        id: '2418',
-        attributes: {
-          title: 'i disagree',
-          spectrum: [
-            {
-              font: new SamsaFont(),
-              tupleSpectrum: [
-                {
-                  name: 'wdth',
-                  min: 0,
-                  max: 0.3,
-                },
-              ],
-              glyphSpectrum: [
-                'a',
-                {
-                  glyph: 'b',
-                  tupleSpectrum: [
-                    {
-                      name: 'wdth',
-                      min: 0,
-                      max: 0.6,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      },
-    ],
-  },
-}
- */

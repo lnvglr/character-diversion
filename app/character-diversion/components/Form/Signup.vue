@@ -1,5 +1,5 @@
 <template>
-  <form class="flex flex-col gap-2" @submit="signUp">
+  <form class="flex flex-col gap-2" @submit.prevent="signUp">
     <Input type="text" name="name" placeholder="Name" v-model="formData.name" />
     <Input type="email" name="email" placeholder="Email" v-model="formData.email" />
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
@@ -31,12 +31,14 @@ export default {
   methods: {
     async signUp(e: Event) {
       try {
-        e.preventDefault()
-        await axios
-          .post(`http://localhost:1337/api/auth/local/register`, this.formData)
+        this.$strapi.register(this.formData)
           .then((res) => {
             this.formData = {}
-            // this.$router.push('login')
+            this.$router.push('/')
+          })
+          .catch(({error}) => {
+            this.errorMsg = error.message
+            this.error = true
           })
       } catch (e) {
         console.error(e)

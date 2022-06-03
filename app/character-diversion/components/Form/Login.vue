@@ -1,14 +1,10 @@
 <template>
-  <form class="flex flex-col gap-2" @submit="login">
+  <form class="flex flex-col gap-2" @submit.prevent="login">
     <Input type="text" name="email" placeholder="Email" v-model="formData.identifier" />
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
-    <Button type="submit" :disabled="formData.password?.length < 3"
-      >Login<font-awesome-icon class="ml-3" :icon="['fas', 'arrow-right']"
-    /></Button>
-
-    <p class="my-2">
-      <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>
-    </p>
+    <Button type="submit" :disabled="formData.password?.length < 3" icon="arrow-right" class="lg"
+      >Login</Button>
+    <Button to="/forgot-password" class="my-2 clear">Forgot Password?</Button>
   </form>
 </template>
 <script lang="ts">
@@ -24,7 +20,6 @@ export default {
   },
   methods: {
     async login(e: Event) {
-      e.preventDefault()
       try {
         console.log(e)
         // await this.$strapi.login(this.formData)

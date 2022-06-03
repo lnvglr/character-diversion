@@ -8,7 +8,7 @@
     <span>
       <Truncate :string="file.name" />
       <span class="tag">{{ size(file.size) }}</span>
-      <Button class="small round symbol" @click.prevent="remove" color="alert">×</Button>
+      <Button class="xs round symbol" @click.prevent="remove" color="alert">×</Button>
     </span>
   </component>
 </template>

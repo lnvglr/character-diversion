@@ -1,5 +1,5 @@
 <template>
-	<path v-if="path" :d="path" :stroke-width="4 / scale"></path>
+	<path class="glyph-default" v-if="path" :d="path" :stroke-width="strokeWidth"></path>
 </template>
 <script lang="ts">
 export default {
@@ -10,7 +10,16 @@ export default {
 		scale: {
 			type: Number,
 			default: 1,
-		}
-	}
+		},
+		strokeWidth: {
+			type: String,
+			default: '1px',
+		},
+	},
 }
 </script>
+<style scoped>
+:global(:where(.glyph-default)) {
+	fill: black;
+}
+</style>

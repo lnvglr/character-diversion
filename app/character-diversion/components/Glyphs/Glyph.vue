@@ -116,18 +116,12 @@ export default {
     },
     assignGlyph(glyph: String) {
       if (glyph.length === 1) {
-        this.SamsaGlyph = this.font.glyphs[this.toUnicode(glyph)]
+        this.SamsaGlyph = this.font.glyphs[this.$f.glyphMethods.glyphToUnicode(glyph)]
         this.SamsaGlyphInstance =
           this.SamsaGlyph?.numContours < 0
             ? this.SamsaGlyph?.decompose(this.tuple)
             : this.SamsaGlyph?.instantiate(this.tuple)
       }
-    },
-    toUnicode(string: string | string[]): number | number[] {
-      if (typeof string === 'string') {
-        return this.font.cmap[string.charCodeAt(0)]
-      }
-      return string.map((e) => this.font.cmap[e.charCodeAt(0)])
     },
     SVG(tag: string) {
       return document.createElementNS('http://www.w3.org/2000/svg', tag)

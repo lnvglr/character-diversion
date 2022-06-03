@@ -1,13 +1,13 @@
 <template>
-<div class="ml-auto flex gap-2">
-  <span
+<div class="flex gap-2">
+  <Button
     v-for="locale in $i18n.availableLocales"
     :key="locale"
     @click="$i18n.locale = locale"
-    class="block rounded-xl bg-slate-200 hover:bg-slate-300 p-2"
-  >
-    <span class="text-s">{{ locales[locale] }}</span>
-  </span>
+    class="sm"
+    :class="{active: $i18n.locale === locale, secondary: $i18n.locale !== locale}"
+  >{{ locales[locale] }}
+  </Button>
 	</div>
 </template>
 

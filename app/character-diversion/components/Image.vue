@@ -1,5 +1,5 @@
 <template>
-	<img v-if="source?.data" :src="src" />
+	<img v-if="source?.data" :src="src" :style="`--aspect-ratio: ${aspectRatio}`" />
 </template>
 <script lang="ts">
 export default {
@@ -7,18 +7,26 @@ export default {
 		source: {
 			type: Object,
 		},
+		size: {
+			type: String,
+			default: 'small'
+		},
+		aspectRatio: {
+			type: String,
+			default: '1/1'
+		},
 	},
 	computed: {
 		src() {
-			return 'http://localhost:1337' + this.source.data.attributes.formats.small.url
+			console.log(process.env)
+			return 'http://localhost:1337' + this.source.data.attributes.formats[this.size].url
 		},
 	},
 }
 </script>
 <style scoped>
 img {
-	width: 100%;
-	aspect-ratio: 21/9;
+	aspect-ratio: var(--aspect-ratio);
 	object-fit: cover;
 }
 </style>

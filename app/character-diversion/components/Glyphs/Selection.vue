@@ -7,12 +7,15 @@
 			@mouseenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
 			<!-- @mousedown="active = true, first = k"
           @mouseenter="active && (last = k)" -->
-			<GlyphsMiniGlyph class="text-4xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :frame="true" />
+			<GlyphsMiniGlyph class="text-4xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" />
 			<Input type="checkbox" v-model="$state.opinion.form.attributes.glyphs" :value="glyph.id"
 				containerClass="absolute w-fit right-0 p-1 pointer-events-none" class="info z-10" />
 			<div v-if="glyph.openType?.is"
 				class="z-10 absolute bottom-0 right-0 text-xs px-1 m-1 rounded-sm bg-secondary-300/80">{{ glyph.openType.is
 				}}
+			</div>
+			<div v-else-if="glyph.openType?.base"
+				class="z-10 absolute bottom-0 right-0 text-xs px-1 m-1 rounded-sm bg-secondary-300/80">{{ $f.glyphMethods.getGlyphsById(glyph.openType?.base)}}
 			</div>
 			<div
 				v-if="hasOpinion(glyph.id).length > 0"

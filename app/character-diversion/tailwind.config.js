@@ -49,6 +49,15 @@ module.exports = {
     },
     extend: {
 
+      fontSize: {
+        '10xl': '160px',
+        '11xl': '176px',
+        '12xl': '192px',
+        '13xl': '208px',
+        '14xl': '224px',
+        '15xl': '240px',
+        '16xl': '256px',
+      },
       gridTemplateColumns: {
         // Complex site-specific row configuration
         'autofill-4': 'repeat(auto-fill, minmax(1rem, 1fr))',

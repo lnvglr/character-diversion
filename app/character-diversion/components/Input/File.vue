@@ -9,13 +9,13 @@
     v-bind="$attrs"
   >
     <div v-if="!moreSpace" style="pointer-events: none">
-      <span>{{$tc('files.uploadMax', { n: maxFiles })}}</span>
+      <span>{{$t('files.uploadMax', { n: maxFiles })}}</span>
     </div>
     <div v-else-if="active" style="pointer-events: none">
-      <span>{{$tc('files.drop', draggedFiles)}}</span>
+      <span>{{$t('files.drop', draggedFiles)}}</span>
     </div>
     <div v-else>
-      <i18n-t keypath="files.dropNotice" tag="span" for="browse">
+      <i18n-t keypath="files.dropNotice" tag="span" for="browse" scope="global">
         <label for="dropzoneFile">{{$t('files.browse')}}</label>
       </i18n-t>
       <small>{{$t('files.supported', { formats: accept.join(', ').toUpperCase(), size: "2 MB" })}}</small>

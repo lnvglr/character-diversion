@@ -6,6 +6,7 @@
         <p class="text-sm text-beige-500">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
           $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
         }}</p>
+        <p class="text-md">{{ $state.discourse.current.attributes.opinions.data?.length }} Opinions</p>
         <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
         <!-- <p class="text-md">{{$f.utils.relativeTime($state.discourse.current.attributes.createdAt)}}</p> -->
       </div>
@@ -14,12 +15,12 @@
         <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" color="info" />
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
-      <div class="grid grid-cols-autofill-32 gap-1 p-1" v-else>
+      <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
         <div
-          class="flex justify-center w-full h-32 bg-white rounded-md relative cursor-pointer border border-beige-100 overflow-hidden"
+          class="flex justify-center w-full h-64 bg-white rounded-md relative cursor-pointer border border-beige-100 overflow-hidden"
           v-for="(glyph, k) in $state.opinion.font.glyphs.filter((e: SamsaGlyph) => $state.opinion.form.attributes.glyphs.includes(e.id))"
           :key="glyph.id" :title="glyph.name">
-          <GlyphsMiniGlyph class="text-8xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :frame="true"
+          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-success-300 stroke-success-400" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :frame="true"
             :title="glyph.name" />
         </div>
       </div>

@@ -2,12 +2,14 @@
   <NuxtLayout>
     <div class="flex flex-col items-start gap-5">
       <h1 class="font-bold text-4xl" v-if="$strapi.user?.name">
-        <span>Good Morning, {{ $strapi.user?.name.split(' ')[0] }}!</span>
+        <span>{{$t('greeting', { name: $strapi.user?.name.split(' ')[0] })}}</span>
       </h1>
       <FormLogin v-else/>
       <hr />
-      <h3 class="font-bold text-xl">Appearence</h3>
-      <ButtonTheme />
+      <h3 class="font-bold text-xl">{{$t('appearence')}}</h3>
+      <ButtonTheme class="mb-5" />
+      <h3 class="font-bold text-xl">{{$t('language', $i18n.availableLocales.length)}}</h3>
+      <LanguageSwitcher class="mb-5" />
 
       <ButtonLogout color="alert" />
     </div>

@@ -18,12 +18,7 @@ interface DiscourseState {
 interface OpinionState {
   form: Opinion,
   active: Opinion,
-  axes: {
-    [tag: string]: number | string
-  }
-  glyphs: number[]
-  opinion: string
-  font: SamsaFontType
+  font: SamsaFont
   reset: () => void
 }
 export const discourse = reactive<DiscourseState>({
@@ -46,9 +41,6 @@ const defaultOpinion = {
 export const opinion = reactive<OpinionState>({
   form: defaultOpinion,
   active: defaultOpinion,
-  axes: {},
-  opinion: '',
-  glyphs: [],
   font: null,
   reset: (area: string = 'form') => {
     Object.assign(opinion[area], defaultOpinion)
@@ -83,25 +75,19 @@ const openTypeGlyphs = (font: SamsaFontType) => {
       glyph.name = (!['\x00'].includes(character) && glyph.name) && character
       return glyph
     }
-    if (! (glyph.id in font.cmapReverse)) {
-      glyph.openType = {
-        is: null
-      }
-      const ligature = glyph.name.split('_')
-      const alternate = glyph.name.split('.')
-      if (ligature.length > 1) {
-        glyph.openType.is = 'lig'
-        glyph.openType['lig'] = glyph.name
-      }
-      if (alternate.length > 1) {
-        const base = font.glyphs.find((e: SamsaGlyph) => e?.name === alternate[0])
-        if (base) {
-          glyph.openType.is = alternate[1]
-          glyph.openType.base = base.id
-          base.openType = {}
-          base.openType[alternate[1]] = glyph.id
-        }
-      }
+    const ligature = glyph.name.split('_')
+    const alternate = glyph.name.split('.')
+    const base = font.glyphs.find((e: SamsaGlyph) => e?.name === alternate[0])
+    glyph.openType = {
+      base: base?.id
+    }
+    if (ligature.length > 1) {
+      glyph.openType.is = 'lig'
+      glyph.openType['lig'] = glyph.name
+    }
+    if (! (glyph.id in font.cmapReverse) && base && alternate.length > 1) {
+      glyph.openType.is = alternate[1]
+      base.openType[alternate[1]] = glyph.id
     }
     return glyph
   })

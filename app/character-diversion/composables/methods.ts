@@ -1,6 +1,12 @@
-import { SamsaFont, SamsaFontAxes } from '@/types'
+import { SamsaFont, SamsaGlyph, SamsaFontAxes } from '@/types'
 import { opinion } from '@/composables/states'
 import { useRelativeTime } from '@/composables/relativeTime'
+
+const nameToUnicode = (string: string): number => {
+  if (string.length === 1) return string.charCodeAt(0)
+  const matchedGlyph = opinion.font.glyphs.find((g: SamsaGlyph) => g.name === string)
+  if (matchedGlyph) return opinion.font.cmapReverse[matchedGlyph.id]
+}
 
 export const glyphMethods = {
   getAxisByIndex: (index: number) =>
@@ -26,9 +32,14 @@ export const glyphMethods = {
           (e: number) => e !== id
         ))
   },
-  getGlyphsById: (glyphs: number[], font: SamsaFont): string => {
+  getGlyphsById: (
+    glyphs: number | number[],
+    font: SamsaFont = null
+  ): string => {
+    if (!font) font = opinion.font
     const map = font?.cmapReverse
-    if (!glyphs || !map) return ''
+    if (!glyphs || glyphs === 1 || !map) return ''
+    if (typeof glyphs === 'number') glyphs = [glyphs]
     return glyphs
       .map((id): string => {
         if (!(id in map)) {
@@ -41,11 +52,26 @@ export const glyphMethods = {
       })
       .join('')
   },
+  glyphToUnicode: (string: string | string[]): number | number[] => {
+    if (typeof string === 'string') {
+      return opinion.font.cmap[nameToUnicode(string)]
+    }
+    return string.map((e) => opinion.font.cmap[nameToUnicode(e)])
+  },
+  nameToUnicode: (e) => nameToUnicode(e),
 
   setPosition: () => {
-      opinion.form.attributes.axes = opinion.font?.axes.reduce((acc: Object, curr: SamsaFontAxes) => ({ ...acc, [curr.tag]: [curr.min, curr.max] }), {});
-    },
+    opinion.form.attributes.axes = opinion.font?.axes.reduce(
+      (acc: Object, curr: SamsaFontAxes) => ({
+        ...acc,
+        [curr.tag]: [curr.min, curr.max],
+      }),
+      {}
+    )
+  },
+  
 }
+
 export const utils = {
   invertObject: (object: Object) => {
     if (!object) return

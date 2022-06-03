@@ -1,13 +1,12 @@
 <template>
-  <form class="flex gap-2" @submit="forgotPassword">
+  <form class="input-group" @submit.prevent="forgotPassword">
     <Input type="text" name="email" placeholder="Email" v-model="email" />
-    <Button type="submit">
-      Send Email Link<font-awesome-icon class="ml-3" :icon="['fas', 'arrow-right']" />
+    <Button type="submit" icon="arrow-right" class="lg">
+      Send Email Link
     </Button>
   </form>
 </template>
 <script lang="ts">
-import axios from 'axios'
 export default {
   name: 'ForgotPassword',
 
@@ -20,17 +19,16 @@ export default {
   },
   methods: {
     async forgotPassword(e: Event) {
-      e.preventDefault()
       this.done = false
       this.error = false
-      axios
-        .post(`http://localhost:1337/api/auth/forgot-password`, {
+      this.$strapi.forgotPassword({
           email: this.email,
         })
         .then(() => {
           this.done = true
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e)
           this.error = true
         })
     },

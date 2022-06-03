@@ -101,8 +101,10 @@ export default {
     cursor: pointer;
   }
 
-  &:focus {
-    box-shadow: 0 0 0 3px var(--color-info-500);
+  &:focus, &:focus-visible {
+    box-shadow: 0 0 0 3px var(--color-info-200);
+    outline: none;
+    z-index: 10;
   }
 
   &:active, &.active {
@@ -144,11 +146,15 @@ export default {
     min-width: var(--size);
     max-width: var(--size);
   }
-  &.small {
+  &.xs {
     --size: var(--h-6);
     --padding: var(--p-0) var(--p-2);
   }
-  &.large {
+  &.sm {
+    --size: var(--h-8);
+    --padding: var(--p-1) var(--p-2);
+  }
+  &.lg {
     --size: var(--h-12);
     --padding: var(--p-4) var(--p-5);
   }
@@ -180,6 +186,35 @@ export default {
       }
       &.clear:hover {
         --background-color: var(--color-#{$color}-500);
+      }
+    }
+  }
+}
+// :global(.input-group > :is(.input, .button)) {
+//   &:first-child {
+//     border-top-right-radius: 0 !important;
+//     border-bottom-right-radius: 0 !important;
+//   }
+//   &:last-child {
+//     border-top-left-radius: 0 !important;
+//     border-bottom-left-radius: 0 !important;
+//   }
+// }
+</style>
+<style lang="scss">
+.input-group {
+  display: flex;
+  :is(input, .button) {
+    &:first-child {
+      &, &:before {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    &:last-child {
+      &, &:before {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
       }
     }
   }
