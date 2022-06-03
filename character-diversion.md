@@ -94,6 +94,15 @@ The benefit of recorded and structured discourse is that people can learn from i
 
 ### Features
 
+#### Linking Opinions to Glyphs
+
+At the core of user experience design lies the questions of what a user want to achieve and how to most intuitively enable them to to it swiftly. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achive that.
+
+There are several approaches to this problem:
+
+1. Users type their opinion and before posting it are presented with a (filterable) list of glyphs as well as, if applicable, range inputs for setting the spectra of the variable font axes.
+2. Current convention of denoting letter reference with a forward slash (/) is made use of and referenced letters are recognised from the text of the opinion and automatically linked
+
 ####Voting and Responding to Opinions and Comments
 
 #### Filtering Opinions and Comments
