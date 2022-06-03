@@ -9,5 +9,8 @@
   "files.supported": "only {formats} and maximum {size} per file",
   "files.supportedFormats": "only {formats}",
   "files.supportedSize": "maximum {size}",
-  "files.uploadMax": "you can upload a maximum of {n} file | You can upload a maximum of {n} files"
+  "files.uploadMax": "you can upload a maximum of {n} file | You can upload a maximum of {n} files",
+  "greeting": "Good Morning, {name}!",
+  "appearence": "Appearence",
+  "language": "Language | Languages"
 }

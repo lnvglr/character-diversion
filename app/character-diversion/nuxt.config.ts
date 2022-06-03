@@ -7,20 +7,8 @@ export default defineNuxtConfig({
     '@formkit/nuxt',
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
-    [
-      '@nuxtjs/i18n-edge',
-      i18n,
-    ],
   ],
-  env: {
-    strapiBaseUri:
-      process.env.API_URL ||
-      'https://character-diversion-backend.herokuapp.com/',
-  },
-  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa'],
-  formkit: {
-    configFile: './formkit.config.ts',
-  },
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa', '@intlify/nuxt3'],
   router: {
     // https://router.vuejs.org/api/#routeroptions
     options: {},
@@ -38,11 +26,19 @@ export default defineNuxtConfig({
       name: 'Character Diversion',
     },
   },
+  intlify: i18n,
   vite: {
     define: {
       __VUE_I18N_FULL_INSTALL__: true,
       __VUE_I18N_LEGACY_API__: false,
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
+  },
+  formkit: {
+    configFile: './formkit.config.ts',
+  },
+  strapi: {
+    url: process.env.STRAPI_URL || 'http://localhost:1337',
+    // url: process.env.STRAPI_URL || 'https://character-diversion-backend.herokuapp.com',
   }
 })
