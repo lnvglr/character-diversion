@@ -9,8 +9,8 @@ module.exports = ({ env }) => ({
       tls: true,
 
       auth: {
-          user: env('GMAIL_USER'),
-          pass: env('GMAIL_PASS'),
+        user: env('GMAIL_USER'),
+        pass: env('GMAIL_PASS'),
       },
       // ... any custom nodemailer options
     },
