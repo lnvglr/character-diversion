@@ -21,7 +21,6 @@ export default {
   data() {
     return {
       animationName: 'slide-left'
-
     }
   },
   async mounted() {

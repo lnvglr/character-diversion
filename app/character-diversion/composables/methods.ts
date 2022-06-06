@@ -80,6 +80,10 @@ export const utils = {
       return ret
     }, {})
   },
+  arrayContainsObject: (array: object[], object: object) => {
+    const objectInArray = array.find(item => Object.keys(item).every(key => item[key] === object[key]))
+    return objectInArray && array.indexOf(objectInArray)
+  },
   relativeTime(time: string) {
     return useRelativeTime(time)
   },

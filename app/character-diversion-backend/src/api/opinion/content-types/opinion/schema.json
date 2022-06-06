@@ -73,6 +73,14 @@
         }
       },
       "type": "json"
+    },
+    "annotations": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "json"
     }
   }
 }

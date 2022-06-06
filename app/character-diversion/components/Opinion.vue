@@ -10,11 +10,17 @@
             color="alert" icon="trash" /></span>
           <p class="text-sm">{{ opinion.attributes.title }}</p>
           <TransitionExpand>
-            <p v-if="active"><span class="mt-2 flex flex-wrap gap-1 items-center text-xs"><span
-                  class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-for="glyph in glyphs">{{ glyph }}</span><span
-                  class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-if="opinion.attributes.axes.length > 0">{{
+            <p v-if="active">
+            <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
+              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-for="glyph in glyphs">{{ glyph }}</span>
+              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-if="Object.keys(opinion.attributes.axes).length !== 0">{{
                       opinion.attributes.axes
-                  }}</span></span></p>
+                  }}</span>
+              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-if="opinion.attributes.annotations && Object.keys(opinion.attributes.annotations).length !== 0">{{
+                      opinion.attributes.annotations
+                  }}</span>
+            </span>
+          </p>
           </TransitionExpand>
         </div>
         <span class="flex gap-2 items-center text-slate-400 text-xs">

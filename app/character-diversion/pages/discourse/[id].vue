@@ -8,7 +8,7 @@
         }}</p>
         <p class="text-md">{{ $state.discourse.current.attributes.opinions.data?.length }} Opinions</p>
         <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
-        <!-- <p class="text-md">{{$f.utils.relativeTime($state.discourse.current.attributes.createdAt)}}</p> -->
+        <!-- <p class="text-md">{{ $state.opinion.form.attributes.annotations }}</p> -->
       </div>
       <div class="button-group mx-5 mb-10">
         <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all" color="info" />

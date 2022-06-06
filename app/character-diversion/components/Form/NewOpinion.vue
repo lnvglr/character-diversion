@@ -26,24 +26,20 @@ export default {
 		string() {
 			if (!this.$state.opinion.form.attributes) return ''
 			return this.$f.glyphMethods.getGlyphsById(this.$state.opinion.form.attributes.glyphs)
-			// const map = this.$state.opinion.font?.cmapReverse;
-			// if (!map) return ''
-			// return this.$state.opinion.form.attributes.glyphs.map((id: string) => {
-			// 	if (!(id in map)) {
-			// 		const SamsaGlyph = this.$state.opinion.font.glyphs[id];
-			// 		const lig = SamsaGlyph?.openType.lig;
-			// 		if (lig)
-			// 			return lig;
-			// 		id = SamsaGlyph?.openType.base;
-			// 	}
-			// 	return String.fromCharCode(map[id]);
-			// }).join("");
 		}
 	},
 	watch: {
 		'$state.opinion.form.attributes.title'(value: string) {
-			const pattern = /(?<=\/).+?(?=$|[].\s]|\s|\/)/ig;
-			const referenceGlyphs = this.$state.opinion.font.glyphs
+			// positive look behind                  (?<=\/)
+			// match 1 or more none white characters [\S]+?
+			// until positive look ahead             (?=
+			// - end of word                         $
+			// - period space                        \.\s
+			// - no non-word characters space        [[^\w.\s]]
+			// - space                               \s
+			//                                       )
+
+			const pattern = /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig;
 			const match = value?.match(pattern) || []
 			const matchedGlyphs = this.$f.glyphMethods.glyphToUnicode(match)
 			this.$state.opinion.form.attributes.glyphs = [...new Set(matchedGlyphs)];
@@ -51,10 +47,12 @@ export default {
 	},
 	methods: {
 		postOpinion() {
+			const { title, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
 			const opinion = {
-				title: this.$state.opinion.form.attributes.title,
-				glyphs: this.$state.opinion.form.attributes.glyphs,
-				axes: this.$state.opinion.form.attributes.axes,
+				title,
+				glyphs,
+				axes,
+				annotations,
 				discourse: this.$state.discourse.current,
 				author: this.$strapi.user
 			};

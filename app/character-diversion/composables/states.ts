@@ -2,7 +2,6 @@ import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType } from 
 import { reactive, ComputedRef } from 'vue'
 import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '~~/composables/methods'
-import { GlyphsFrame } from '~~/.nuxt/components'
 
 interface DiscourseState {
   id: {
@@ -16,8 +15,13 @@ interface DiscourseState {
   },
 }
 interface OpinionState {
-  form: Opinion,
-  active: Opinion,
+  form: Opinion
+  active: Opinion
+  annotationTool: {
+    id: number,
+    x: number,
+    y: number
+  },
   font: SamsaFont
   reset: () => void
 }
@@ -36,11 +40,17 @@ const defaultOpinion = {
     title: null,
     axes: {},
     glyphs: [],
+    annotations: {},
   }
 } as Opinion
 export const opinion = reactive<OpinionState>({
   form: defaultOpinion,
   active: defaultOpinion,
+  annotationTool: {
+    id: null,
+    x: 0,
+    y: 0
+  },
   font: null,
   reset: (area: string = 'form') => {
     Object.assign(opinion[area], defaultOpinion)

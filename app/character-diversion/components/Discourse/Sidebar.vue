@@ -1,7 +1,14 @@
 <template>
-	<div class="m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] overflow-scroll outline outline-8 outline-beige-200/90" :class="{ minimized: sidebarMinimized }">
+	<div
+		class="m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] overflow-scroll outline outline-8 outline-beige-200/90"
+		:class="{ minimized: sidebarMinimized }">
+
+		<pre>{{ $state.opinion.form.attributes.annotations }}</pre>
+		<!-- <pre>{{ $state.discourse.current.attributes.opinions }}</pre> -->
+		<!-- <pre>{{ $state.opinion.annotationTool }}</pre> -->
 		<Image :source="$state.discourse.current.attributes.featuredImage" />
-		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer" :class="{'border-b': !sidebarMinimized}" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
+		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
+			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
 		<ListOpinions v-if="!sidebarMinimized" @clicked="selectOpinion" />
 		<div class="p-5" v-if="$strapi.user && !sidebarMinimized">
 			<FormNewOpinion />
@@ -50,7 +57,9 @@ export default {
 			}
 			const selected = JSON.parse(JSON.stringify(opinion))
 			this.$state.opinion.active = selected
+			this.$state.opinion.form.attributes.axes = selected.attributes.axes
 			this.$state.opinion.form.attributes.glyphs = selected.attributes.glyphs
+			this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
 		},
 	},
 }

@@ -63,6 +63,13 @@ export interface Opinion {
     fontSpectrum?: FontSpectrum[]
     glyphs?: Array<GlyphSpectrum | string | number>
     tuple?: TupleSpectrum
+    annotations?: {
+      [id: number]: {
+        x: number
+        y: number
+        type?: string
+      }[]
+    }
     axes?: {
       [tag: string]: number[]
     }

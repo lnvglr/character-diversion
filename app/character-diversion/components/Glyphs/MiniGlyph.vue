@@ -1,9 +1,13 @@
 <template>
-	<div class="flex items-center relative">
+	<div class="flex items-center relative" :class="{'cursor-none': frame}">
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em;`" :viewBox="viewBox"
-			:transform="transform" class="h-full" ref="svg">
+			:transform="transform" class="h-full" ref="svg"
+			@mouseleave="$state.opinion.annotationTool.id = null"
+		>
+			<GlyphsGrid v-if="frame" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" />
 			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
-			<GlyphsG v-if="path" :path="path" :scale="scale" :class="pathClass" :strokeWidth="strokeWidth" />
+			<GlyphsG class="glyph-default" v-if="path" :path="path" :scale="scale" :class="pathClass" :strokeWidth="strokeWidth" />
+			<GlyphsAnnotationTool :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer" :scaling="scaling" />
 		</svg>
 	</div>
 </template>
@@ -34,13 +38,17 @@ export default {
 			decomposed: null,
 			strokePadding: 1000,
 			strokeWidth: '1px',
+			scaling: 1,
+			pointer: {}
 		}
 	},
 	mounted() {
 		if (this.$refs.svg) {
 			this.$nextTick(() => {
-				this.strokeWidth = 1000 / parseInt(window.getComputedStyle(this.$refs.svg).fontSize) + 'px'
+				this.scaling = (1000 / parseInt(window.getComputedStyle(this.$refs.svg).fontSize))
+				this.strokeWidth = this.scaling + 'px'
 			})
+			this.$refs.svg.addEventListener('mousemove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
 		}
 	},
 	watch: {
@@ -70,7 +78,6 @@ export default {
 			return 1000 / this.glyph.font.unitsPerEm
 		},
 		baseline() {
-			console.log(this.points)
 			return this.points
 				.map((pt: number[]) => pt[1])
 				.reduce((a: number, b: number) => (a >= b ? a : b), 0)
@@ -84,12 +91,12 @@ export default {
 			return `${this.boundaries[0] - this.strokePadding} ${-offsetY} ${this.boundaries[1] + this.strokePadding * 2} ${1000 + offsetY}`
 		},
 		fontSize() {
-			return this.width / this.glyph.font.unitsPerEm
+			return (this.characterWidth + this.strokePadding * 2) / this.glyph.font.unitsPerEm
 		},
 		transform() {
 			return `scale(${this.scale},-${this.scale})`
 		}
-	}
+	},
 }
 </script>
 <style scoped>
