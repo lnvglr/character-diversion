@@ -2,26 +2,40 @@
   <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
     <div class="grow overflow-auto">
       <div class="p-5 flex flex-col gap-5">
-        <h1 class="text-6xl font-bold">{{ $state.discourse.current.attributes.title }}</h1>
+        <h1 class="text-6xl font-bold font-user">{{ $state.discourse.current.attributes.title }}</h1>
         <p class="text-sm text-beige-500">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
           $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
         }}</p>
         <p class="text-md">{{ $state.discourse.current.attributes.opinions.data?.length }} Opinions</p>
         <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
-        <!-- <p class="text-md">{{ $state.opinion.form.attributes.annotations }}</p> -->
+        <p class="text-md">{{ $state.discourse.current.attributes.font.data.attributes.url }}</p>
+        <!-- <p class="text-md">{{ $state.opinion.active.attributes.glyphs }}</p>
+        <p class="text-md">{{ $state.opinion.form.attributes.glyphs }}</p>
+        <p class="text-md">{{ $state.opinion.active.attributes.annotations }}</p>
+        <p class="text-md">{{ $state.opinion.form.attributes.annotations }}</p> -->
       </div>
-      <div class="button-group mx-5 mb-10">
-        <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all" color="info" />
-        <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" color="info" />
+      <div class="flex px-5 mb-10 ">
+        <div class="button-group">
+          <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all"
+            color="info" />
+          <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" color="info" />
+        </div>
+        <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="pen" color="info" />
+      </div>
+
+      <div class="px-5" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
+        <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
+          type="range" :step="1" :min="axis.min" :max="axis.max" v-model="$state.opinion.form.attributes.axes[axis.tag]"
+          :label="axis.name" class="success" />
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
       <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
         <div
-          class="flex justify-center w-full h-64 bg-white rounded-md relative cursor-pointer border border-beige-100 overflow-hidden"
-          v-for="(glyph, k) in $state.opinion.font.glyphs.filter((e: SamsaGlyph) => $state.opinion.form.attributes.glyphs.includes(e.id))"
-          :key="glyph.id" :title="glyph.name">
-          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-success-300 stroke-success-400" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :frame="true"
-            :title="glyph.name" />
+          class="flex justify-center w-full h-64 bg-white rounded-md relative border border-beige-100 overflow-hidden"
+          v-for="glyph in previewGlyphs" :key="glyph.id" :title="glyph.name">
+          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
+            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
+            :annotations="true" />
         </div>
       </div>
     </div>
@@ -35,8 +49,35 @@ import { SamsaGlyph } from '@/types'
 export default {
   data() {
     return {
-      view: 'selection'
+      view: 'selection',
+      edit: false
     }
+  },
+  computed: {
+    previewGlyphs() {
+      const allGlyphs = this.$state.opinion.font.glyphs
+      const formGlyphs = this.$state.opinion.form.attributes.glyphs
+      const activeGlyphs = this.$state.opinion.active.attributes.glyphs
+      if (formGlyphs.length === 0 && activeGlyphs.length === 0) {
+        return allGlyphs
+      }
+      return allGlyphs.filter((e: SamsaGlyph) => formGlyphs.includes(e.id) || activeGlyphs.includes(e.id))
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log(this.$state.discourse.current?.attributes.font.data.attributes.url)
+      var newStyle = document.createElement('style');
+      newStyle.appendChild(document.createTextNode(`
+        @font-face {
+            font-family: 'user_selection';
+            src: url("http://localhost:1337${this.$state.discourse.current?.attributes.font.data.attributes.url}");
+        }
+        `));
+
+      document.head.appendChild(newStyle);
+    })
+
   },
   methods: {
     removeDiscourse(id: string) {
@@ -46,7 +87,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+:where(.font-user) {
+  font-family: user_selection;
+}
+
 .button-group {
   display: flex;
   gap: var(--border-default);

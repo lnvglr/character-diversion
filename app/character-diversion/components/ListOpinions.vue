@@ -1,10 +1,10 @@
 <template>
 	<ListGroupTransition :watcher="watcher">
-		<Opinion v-for="opinion in currentOpinions" :key="opinion.id" :opinion="opinion"
-			@clicked="$emit('clicked', opinion)" />
+		<Opinion v-for="opinion in currentOpinions" :key="opinion.id" :opinion="opinion" />
 	</ListGroupTransition>
 </template>
 <script lang="ts">
+import type { Opinion } from '@/types'
 export default {
 	computed: {
 		currentDiscourse() {

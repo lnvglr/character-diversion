@@ -1,13 +1,13 @@
 <template>
-	<div class="flex items-center relative" :class="{'cursor-none': frame}">
+	<div class="flex items-center relative" :class="{'cursor-none': edit}">
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em;`" :viewBox="viewBox"
 			:transform="transform" class="h-full" ref="svg"
 			@mouseleave="$state.opinion.annotationTool.id = null"
 		>
-			<GlyphsGrid v-if="frame" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" />
+			<!-- <GlyphsGrid v-if="annotations" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" /> -->
 			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
 			<GlyphsG class="glyph-default" v-if="path" :path="path" :scale="scale" :class="pathClass" :strokeWidth="strokeWidth" />
-			<GlyphsAnnotationTool :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer" :scaling="scaling" />
+			<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer" :scaling="scaling" />
 		</svg>
 	</div>
 </template>
@@ -26,7 +26,18 @@ export default {
 			type: Number,
 			default: 1
 		},
-		frame: Boolean,
+		frame: {
+			type: Boolean,
+			default: false,
+		},
+		annotations: {
+			type: Boolean,
+			default: false,
+		},
+		edit: {
+			type: Boolean,
+			default: false,
+		},
 		pathClass: {
 			type: String,
 		}

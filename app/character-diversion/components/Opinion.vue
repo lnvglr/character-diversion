@@ -1,26 +1,26 @@
 <template>
-  <div v-if="opinion" @click="$emit('clicked')">
+  <div v-if="opinion" @click="selectOpinion" class=" w-full">
     <div class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer border-b border-beige-300"
       :class="active && 'text-primary-500 bg-beige-100'">
       <div class="flex flex-col gap-2 w-full">
 
         <div class="relative">
           <span class="absolute top-1 right-0 text-xs">
-          <Button v-if="active" class=" ml-auto -mr-1 -my-1 clear xs" @click.stop="removeOpinion()"
-            color="alert" icon="trash" /></span>
-          <p class="text-sm">{{ opinion.attributes.title }}</p>
+            <Button v-if="active" class=" ml-auto -mr-1 -my-1 clear xs" @click.stop="removeOpinion()" color="alert"
+              icon="trash" /></span>
+          <p
+            class="text-sm"
+            v-html="`${opinion.attributes.title.replaceAll(/\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/ig, '<span class=\'bg-beige-200 px-1 rounded-sm\'>/$1</span>')}`"></p>
           <TransitionExpand>
             <p v-if="active">
-            <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
-              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-for="glyph in glyphs">{{ glyph }}</span>
-              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-if="Object.keys(opinion.attributes.axes).length !== 0">{{
+              <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
+                <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-for="glyph in glyphs">{{ glyph }}</span>
+                <span class="bg-beige-200 text-beige-500 px-2 rounded-sm"
+                  v-if="Object.keys(opinion.attributes.axes).length !== 0">{{
                       opinion.attributes.axes
                   }}</span>
-              <span class="bg-beige-200 text-beige-500 px-2 rounded-sm" v-if="opinion.attributes.annotations && Object.keys(opinion.attributes.annotations).length !== 0">{{
-                      opinion.attributes.annotations
-                  }}</span>
-            </span>
-          </p>
+              </span>
+            </p>
           </TransitionExpand>
         </div>
         <span class="flex gap-2 items-center text-slate-400 text-xs">
@@ -41,7 +41,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import RelativeTime from '@yaireo/relative-time'
 
 export default {
@@ -62,6 +62,20 @@ export default {
     },
   },
   methods: {
+
+		selectOpinion() {
+      const opinion = this.opinion
+			if (opinion === null || this.$state.opinion.active.id === opinion.id) {
+				this.$state.opinion.reset('active')
+				this.$state.opinion.reset('form')
+				return
+			}
+			const selected = JSON.parse(JSON.stringify(opinion))
+			this.$state.opinion.active = selected
+			this.$state.opinion.form.attributes.axes = selected.attributes.axes
+			// this.$state.opinion.form.attributes.glyphs = selected.attributes.glyphs
+			// this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
+		},
     removeOpinion() {
       this.$strapi.delete("opinions", this.opinion.id).then(({ data }) => {
         const opinions = this.$state.discourse.current.attributes.opinions

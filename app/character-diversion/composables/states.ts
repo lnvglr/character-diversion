@@ -44,8 +44,8 @@ const defaultOpinion = {
   }
 } as Opinion
 export const opinion = reactive<OpinionState>({
-  form: defaultOpinion,
-  active: defaultOpinion,
+  form: JSON.parse(JSON.stringify(defaultOpinion)),
+  active: JSON.parse(JSON.stringify(defaultOpinion)),
   annotationTool: {
     id: null,
     x: 0,
@@ -53,7 +53,8 @@ export const opinion = reactive<OpinionState>({
   },
   font: null,
   reset: (area: string = 'form') => {
-    Object.assign(opinion[area], defaultOpinion)
+    // opinion[area].id = defaultOpinion.id
+    opinion[area] = JSON.parse(JSON.stringify(defaultOpinion))
     glyphMethods.setPosition()
   }
 })

@@ -1,27 +1,22 @@
 <template>
 	<form v-if="$state.opinion.form.attributes">
-		<Input type="textarea" rows="10" placeholder="New opinion..." v-model="$state.opinion.form.attributes.title"
-			v-on:keyup.enter="postOpinion" />
-		<span v-for="g in string">{{ g }}</span>
+		<Input
+			type="textarea"
+			rows="5"
+			placeholder="New opinion..."
+			v-model="$state.opinion.form.attributes.title"
+			v-on:keyup.enter="postOpinion"
+		/>
+		<!-- <span v-for="g in string">{{ g }}</span> -->
 		<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
-		<div v-for="axis in axes" :key="axis.tag">
-			<Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes" type="range"
-				:step="1" :min="axis.min" :max="axis.max" v-model="$state.opinion.form.attributes.axes[axis.tag]"
-				:label="axis.name" class="success" />
-		</div>
 	</form>
 </template>
 
 <script lang="ts">
-import { SamsaGlyph } from "~~/types";
-
 export default {
 	computed: {
 		currentDiscourse() {
 			return this.$state.discourse.current;
-		},
-		axes() {
-			return this.$state.opinion.font?.axes;
 		},
 		string() {
 			if (!this.$state.opinion.form.attributes) return ''
@@ -39,8 +34,8 @@ export default {
 			// - space                               \s
 			//                                       )
 
-			const pattern = /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig;
-			const match = value?.match(pattern) || []
+			const PATTERN = /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig;
+			const match = value?.match(PATTERN) || []
 			const matchedGlyphs = this.$f.glyphMethods.glyphToUnicode(match)
 			this.$state.opinion.form.attributes.glyphs = [...new Set(matchedGlyphs)];
 		}
@@ -73,6 +68,7 @@ export default {
 						};
 					}
 					this.$state.opinion.form.attributes.title = "";
+					this.$state.opinion.form.attributes.annotations = {};
 				})
 		}
 	},
