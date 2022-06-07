@@ -4,7 +4,7 @@
       bg-beige-100
       border-t border-beige-200
       sm:border-r sm:border-0
-      dark:bg-mint-700 dark:border-mint-900
+      dark:bg-neutral-800 dark:border-neutral-900
     ">
     <ul :class="`flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5`">
       <li v-for="(route, index) in routes" :key="route" :class="{'mb-auto': index === routes.length - 1}" >
@@ -29,7 +29,9 @@
         </NuxtLink>
 
       </li>
+
       <ButtonTheme class="hidden sm:block mt-auto" :icon="true" :label="false" />
+      <LanguageSwitcher class="flex-col w-full px-3" :short="true" />
       <Button v-if="!$strapi.user" to="/login" class="hidden sm:block" icon="arrow-right-to-bracket" :label="false" />
       <ButtonLogout v-else class="hidden sm:block hover:bg-alert-500 hover:text-white hover:shadow-none" :icon="true" :label="false" />
     </ul>

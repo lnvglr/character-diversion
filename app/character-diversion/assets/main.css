@@ -2,38 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.page-back-enter-active,
+.page-back-leave-active,
 .page-enter-active,
 .page-leave-active {
   transition: all var(--transition-duration-300) var(--transition-timing-function-default);
 }
 
-.page-enter-from,
-.page-leave-to {
+.page-back-leave-to,
+.page-enter-from {
+  transform: translateX(100%) scale(1);
   opacity: 0;
 }
-
-.slide-right-enter-active,
-.slide-right-leave-active,
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: all var(--transition-duration-300) var(--transition-timing-function-default);
-}
-
-.slide-left-enter-from {
-  transform: translateX(100%);
-  opacity: 0.5;
-}
-.slide-left-leave-to {
-  transform: translateY(100%);
-  opacity: 0.5;
-}
-.slide-right-enter-from {
-  transform: scale(0.9);
-  opacity: 0.5;
-}
-.slide-right-leave-to {
-  transform: translateX(100%);
-  opacity: 0.5;
+.page-back-enter-from,
+.page-leave-to {
+  transform: translateX(0%) scale(0.95);
+  opacity: 0;
 }
 
 .slide-enter-active,
@@ -80,9 +64,17 @@
   opacity: 0;
   transform: scaleY(0.9) translate(0px, 0);
 }
-
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
 .fade-leave-active {
   position: absolute;
+}
+
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
 }

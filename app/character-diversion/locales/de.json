@@ -12,5 +12,10 @@
   "files.uploadMax": "Du kannst maximal {n} Datei hochladen | Du kannst maximal {n} Dateien hochladen",
   "greeting": "Guten Morgen, {name}!",
   "appearence": "Aussehen",
-  "language": "Sprache | Sprachen"
+  "language": "Sprache | Sprachen",
+  "new": "Neu",
+  "new.discourse": "Neuer Diskurs",
+  "new.opinion": "Neue Meinung",
+  "start.new.discourse": "Neuen Diskurs starten",
+  "edit": "Bearbeiten"
 }

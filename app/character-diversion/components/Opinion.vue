@@ -24,7 +24,7 @@
           </TransitionExpand>
         </div>
         <span class="flex gap-2 items-center text-slate-400 text-xs">
-          <Image class="w-5 h-5 object-cover rounded-full" :source="opinion.attributes.author?.data?.attributes?.avatar"
+          <Image class="w-5 h-5 object-cover rounded-full" :src="opinion.attributes.author?.data?.attributes?.avatar.data.attributes"
             size="thumbnail" />
           <span>{{ [opinion.attributes.author?.data?.attributes?.name, publishedAt].filter(e => e).join(' · ') }}</span>
         </span>
@@ -42,7 +42,6 @@
 </template>
 
 <script lang="ts">
-import RelativeTime from '@yaireo/relative-time'
 
 export default {
   props: {
@@ -58,7 +57,7 @@ export default {
       return this.$f.glyphMethods.getGlyphsById(this.opinion.attributes.glyphs)
     },
     publishedAt() {
-      return (new RelativeTime()).from(new Date(this.opinion.attributes.publishedAt))
+      return this.$f.utils.relativeTime(this.opinion.attributes.publishedAt)
     },
   },
   methods: {

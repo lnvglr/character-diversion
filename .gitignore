@@ -4,3 +4,7 @@
 .netlify
 # PWA
 sw.*
+
+___tesseract/
+tesseract.js/
+tesseract.js-core/

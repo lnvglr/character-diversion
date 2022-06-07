@@ -4,12 +4,12 @@
 
     <label
       :for="`${_.uid}`"
+      class="box flex items-center justify-center"
       :class="{
         active: selected,
       }"
       role="checkbox"
-    >
-      <div class="box flex items-center justify-center"><font-awesome-icon v-show="selected" :icon="['fa', 'check']"/></div>
+    ><font-awesome-icon v-show="selected" :icon="['fa', 'check']"/>
     </label>
   </div>
 </template>
@@ -59,13 +59,17 @@ input {
   opacity: 0;
   pointer-events: none;
 }
+:global(.dark .checkbox) {
+  --bg-color: var(--color-neutral-900);
+  // --color: var(--color-beige-300);
+}
 .checkbox {
   --bg-color: var(--color-white);
   --color: var(--color-beige-300);
   display: flex;
   max-width: 100%;
   label {
-    .box {
+    &.box {
       font-size: var(--text-xs);
       position: relative;
       color: white;
@@ -77,7 +81,7 @@ input {
       background-color: var(--color-white);
     }
     &.active {
-      .box {
+      &.box {
         --color: var(--color-hover);
         background-color: var(--bg-color);
       }

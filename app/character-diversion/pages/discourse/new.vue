@@ -1,25 +1,18 @@
 <template>
-  <div class="p-10 flex flex-col gap-5 max-w-xl mx-auto">
-    <h1 class="text-4xl font-bold">New Discourse</h1>
+  <NuxtLayout name="split" back="/discourse">
+    <template #title>{{ formData.title || $t('new.discourse') }}</template>
     <form @submit.prevent="postDiscourse" class="flex flex-col justify-center">
-      <Input type="text" name="title" v-model="formData.title" placeholder="Title" validation="required" />
-      <Input type="textarea" rows="3" name="content" v-model="formData.content" placeholder="Description" />
-      <!-- <FormKit type="select" placeholder="Choose Font..." v-model="formData.font" :options="availableOptions" /> -->
+      <Input type="text" name="title" v-model="formData.title" :placeholder="$t('title')" validation="required" />
+      <Input type="textarea" rows="3" name="content" v-model="formData.content" :placeholder="$t('content')" />
       <Input type="file" name="font" v-model="formData.font" :accept="['ttf', 'otf', 'jpg', 'png']" />
-      <Button type="submit" class="lg">Start New Discourse</Button>
+      <Button type="submit" class="lg">{{ $t('start.new.discourse') }}</Button>
     </form>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
+
 export default {
-  setup() {
-    const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
-    const availableOptions = Object.keys(fonts).map(e => e.split('fonts/')[1])
-    return {
-      availableOptions
-    }
-  },
   data() {
     return {
       formData: {
@@ -29,6 +22,9 @@ export default {
       }
     }
   },
+  async mounted() {
+    // console.log()
+  },
   methods: {
     postDiscourse(e: Event) {
       const formData = new FormData();
@@ -36,7 +32,7 @@ export default {
         ...this.formData,
         author: this.$strapi.user
       };
-      
+
       delete dataCompiled.font
       formData.append('data', JSON.stringify(dataCompiled));
       formData.append('files.font', this.formData.font[0], this.formData.font[0].name);
@@ -62,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+/* form {
   width: var(--max-w-sm);
-}
+} */
 </style>

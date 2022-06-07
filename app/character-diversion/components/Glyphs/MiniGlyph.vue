@@ -2,7 +2,7 @@
 	<div class="flex items-center relative" :class="{'cursor-none': edit}">
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em;`" :viewBox="viewBox"
 			:transform="transform" class="h-full" ref="svg"
-			@mouseleave="$state.opinion.annotationTool.id = null"
+			@pointerleave="$state.opinion.annotationTool.id = null"
 		>
 			<!-- <GlyphsGrid v-if="annotations" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" /> -->
 			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
@@ -59,7 +59,7 @@ export default {
 				this.scaling = (1000 / parseInt(window.getComputedStyle(this.$refs.svg).fontSize))
 				this.strokeWidth = this.scaling + 'px'
 			})
-			this.$refs.svg.addEventListener('mousemove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
+			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
 		}
 	},
 	watch: {

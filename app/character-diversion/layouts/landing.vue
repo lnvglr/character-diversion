@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col min-h-screen">
-		<main class="p-10 pb-40 bg-mint-300 text-black grow">
+		<main class="p-10 pb-40 bg-yellow-200 text-black grow">
 			<div class="max-w-4xl mx-auto">
 				<!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
@@ -10,7 +10,7 @@
 						Diversion—the most adequate platform for typographic discourse in the world.</div>
 					<div>
 						<NuxtLink to="/discourse">
-							<Button class="arrow" radius="pill" color="primary">Discover</Button>
+							<Button class="arrow bg-alert-200" radius="pill" color="primary">Discover</Button>
 						</NuxtLink>
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 <template>
-  <Html :lang="$i18n.locale" :class="$colorMode?.value">
+  <Html :lang="$i18n.locale" :class="$colorMode?.value" :dir="direction">
 
   <Body class="
         antialiased
@@ -50,20 +50,20 @@ export default {
   },
   computed: {
     showHeader() {
-      return !['/discourse', '/'].includes(this.$route.matched[0].path)
+      return !['/discourse', '/', '/profile'].includes(this.$route.matched[0].path)
+    },
+    direction() {
+      return ['he', 'ar'].includes(this.$i18n.locale) ? 'rtl' : 'ltr'
     }
   }
 }
 
 </script>
-<style scoped>
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.5s;
+<style>
+:where([dir="rtl"] *) {
+  text-align: right;
 }
-
-.page-enter,
-.page-leave-active {
-  opacity: 0;
+:where([lang="he"] *) {
+  font-family: var(--font-hebrew);
 }
 </style>

@@ -1,0 +1,22 @@
+{
+  "home" : "בית בית",
+  "explore": "חקר",
+  "profile": "פרופיל",
+  "files.browse": "עיין",
+  "files.drop": "שחרר קובץ | שחרר קבצים",
+  "files.dropNotice": "שחרר קבצים לכאן, או {0}",
+  "files.duplicate": "כבר העלית קובץ בשם זה",
+  "files.supported": "רק {formats} ומקסימום {size} לקובץ",
+  "files.supportedFormats": "רק {formats}",
+  "files.supportedSize": "מקסימום {size}",
+  "files.uploadMax": "אתה יכול להעלות מקסימום {n} קבצים | אתה יכול להעלות מקסימום {n} קבצים",
+  "greeting": "בוקר טוב, {name}!",
+  "appearence": "מראה",
+  "language": "שפה | שפות",
+  "new": "חדש",
+  "new.discourse": "שיח חדש",
+  "new.opinion": "דעה חדשה",
+  "start.new.discourse": "התחל שיח חדש",
+  "title": "כותרת",
+  "content": "תוכן"
+}

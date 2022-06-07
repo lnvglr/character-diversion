@@ -6,13 +6,7 @@
         <p class="text-sm text-beige-500">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
           $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
         }}</p>
-        <p class="text-md">{{ $state.discourse.current.attributes.opinions.data?.length }} Opinions</p>
         <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
-        <p class="text-md">{{ $state.discourse.current.attributes.font.data.attributes.url }}</p>
-        <!-- <p class="text-md">{{ $state.opinion.active.attributes.glyphs }}</p>
-        <p class="text-md">{{ $state.opinion.form.attributes.glyphs }}</p>
-        <p class="text-md">{{ $state.opinion.active.attributes.annotations }}</p>
-        <p class="text-md">{{ $state.opinion.form.attributes.annotations }}</p> -->
       </div>
       <div class="flex px-5 mb-10 ">
         <div class="button-group">
@@ -30,13 +24,13 @@
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
       <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
-        <div
-          class="flex justify-center w-full h-64 bg-white rounded-md relative border border-beige-100 overflow-hidden"
+        <Card
+          class="flex justify-center w-full h-64 relative overflow-hidden"
           v-for="glyph in previewGlyphs" :key="glyph.id" :title="glyph.name">
           <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
             :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
             :annotations="true" />
-        </div>
+        </Card>
       </div>
     </div>
 

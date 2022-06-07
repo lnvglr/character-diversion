@@ -6,7 +6,8 @@
 		<!-- <pre>{{ $state.opinion.form.attributes.annotations }}</pre> -->
 		<!-- <pre>{{ $state.discourse.current.attributes.opinions }}</pre> -->
 		<!-- <pre>{{ $state.opinion.annotationTool }}</pre> -->
-		<Image :source="$state.discourse.current.attributes.featuredImage" />
+		<!-- {{$state.discourse.current.attributes.featuredImage}} -->
+		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
 		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
 			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
 		<ListOpinions v-if="!sidebarMinimized" />

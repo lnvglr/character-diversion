@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout class="bg-beige-100 dark:bg-mint-700">
+  <NuxtLayout class="bg-beige-100 dark:bg-neutral-800" >
     <Transition :name="animationName" mode="out-in">
       <NuxtPage />
     </Transition>
@@ -10,17 +10,19 @@
 import { Discourse, SamsaFont } from "~~/types"
 
 export default {
-
   setup() {
     definePageMeta({
       name: 'Discourse',
       icon: 'bars-progress',
       order: 3,
+      layoutTransition: {
+        name: 'page',
+      }
     })
   },
   data() {
     return {
-      animationName: 'slide-left'
+      animationName: 'page'
     }
   },
   async mounted() {
@@ -44,7 +46,7 @@ export default {
       .catch(e => console.error(e))
       .finally(() => {
         this.$state.discourse.current = current
-        this.animationName = 'slide-right'
+        // this.animationName = 'slide'
       })
     },
   },
@@ -52,14 +54,9 @@ export default {
     '$route': {
       handler() {
         this.setCurrentDiscourse(this.$route.params.id)
+        console.log(this.$route)
+        // this.animationName === 'page-back'
       },
-      immediate: true
-    },
-    '$route.params.id': {
-      handler(id: string) {
-        this.setCurrentDiscourse(id)
-      },
-      deep: true,
       immediate: true
     },
   }

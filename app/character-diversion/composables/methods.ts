@@ -9,8 +9,10 @@ const nameToUnicode = (string: string): number => {
 }
 
 export const glyphMethods = {
-  getAxisByIndex: (index: number) =>
-    opinion.form.attributes.axes[opinion.font.axes[index]?.tag],
+  getAxisByIndex: (index: number) => {
+    const tag = opinion.font.axes[index]?.tag
+    opinion.form.attributes.axes[tag]
+  },
   getAxis: (tag: string) => opinion.form.attributes.axes[tag],
   getFontVariations: (index: number) =>
     opinion.form.attributes.axes
@@ -58,7 +60,7 @@ export const glyphMethods = {
     }
     return string.map((e) => opinion.font.cmap[nameToUnicode(e)])
   },
-  nameToUnicode: (e) => nameToUnicode(e),
+  nameToUnicode,
 
   setPosition: () => {
     opinion.form.attributes.axes = opinion.font?.axes.reduce(

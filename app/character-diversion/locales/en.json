@@ -1,7 +1,7 @@
 {
-  "home": "home",
+  "home": "Home",
   "explore": "Explore",
-  "profile": "profile",
+  "profile": "Profile",
   "files.browse": "browse",
   "files.drop": "drop file | drop files",
   "files.dropNotice": "Drop files here, or {0}",
@@ -12,5 +12,12 @@
   "files.uploadMax": "you can upload a maximum of {n} file | You can upload a maximum of {n} files",
   "greeting": "Good Morning, {name}!",
   "appearence": "Appearence",
-  "language": "Language | Languages"
+  "language": "Language | Languages",
+  "new": "New",
+  "new.discourse": "New Discourse",
+  "new.opinion": "New Opinion",
+  "start.new.discourse": "Start a new discourse",
+  "title": "Title",
+  "content": "Content",
+  "edit": "Bearbeiten"
 }

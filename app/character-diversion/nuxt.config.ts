@@ -4,7 +4,6 @@ import i18n from './config/i18n'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   modules: [
-    '@formkit/nuxt',
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
   ],
@@ -34,11 +33,8 @@ export default defineNuxtConfig({
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
   },
-  formkit: {
-    configFile: './formkit.config.ts',
-  },
   strapi: {
     url: process.env.STRAPI_URL || 'http://localhost:1337',
     // url: process.env.STRAPI_URL || 'https://character-diversion-backend.herokuapp.com',
-  }
+  },
 })

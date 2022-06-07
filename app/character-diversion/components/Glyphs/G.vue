@@ -20,6 +20,6 @@ export default {
 </script>
 <style scoped>
 :global(:where(.glyph-default)) {
-	fill: black;
+	fill: currentColor;
 }
 </style>

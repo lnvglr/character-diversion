@@ -6,21 +6,25 @@
     @click="$i18n.locale = locale"
     class="sm"
     :class="{active: $i18n.locale === locale, secondary: $i18n.locale !== locale}"
-  >{{ locales[locale] }}
+  >{{ short ? locale.toLocaleUpperCase() : locales[locale] }}
   </Button>
 	</div>
 </template>
 
 <script>
 export default {
-  mounted() {
-    console.log(this.$i18n)
+  props: {
+    short: {
+      type: Boolean,
+      default: false,
+    },
   },
 	data() {
 		return {
 			locales: {
 				de: 'Deutsch',
 				en: 'English',
+				he: 'עברית',
 			}
 		}
 	},

@@ -191,9 +191,22 @@ One particularly appealing concept is the atomic design system. It is constructe
 
 ## Outlook
 
-#### Potential Features
+### Shortcomings
 
-##### Image detection
+Exploring the design of a software for typographic discourse, I discovered a number of shortcomings.
+
+#### Specificity
+
+It lies in the nature of things, that specificity and specialization enables users to do one thing very well. 
+
+
+
+
+
+
+### Potential Features
+
+#### Image detection
 
 The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currenty those discourse are held by uploading imagery and even drawings of letterforms.
 

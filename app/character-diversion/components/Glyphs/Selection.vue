@@ -1,13 +1,13 @@
 <template>
 	<div class="grid grid-cols-autofill-16 gap-1 p-1" v-if="$state.opinion.font && $state.opinion.form.attributes">
-		<div
-			class="flex justify-center w-full h-16 bg-white rounded-md relative cursor-pointer border border-beige-100 hover:border-beige-200 hover:bg-neutral-50 overflow-hidden"
+		<Card
+			class="flex justify-center w-full h-16 relative overflow-hidden"
 			:class="{'opacity-10': dim(glyph.id)}"
 			v-for="(glyph, k) in $state.opinion.font.glyphs" :key="glyph.id" :title="glyph.name"
-			@mousedown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
-			@mouseenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
-			<!-- @mousedown="active = true, first = k"
-          @mouseenter="active && (last = k)" -->
+			@pointerdown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
+			@pointerenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
+			<!-- @pointerdown="active = true, first = k"
+          @pointerenter="active && (last = k)" -->
 			<GlyphsMiniGlyph class="text-4xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :annotations="true" />
 			<Input type="checkbox" v-model="$state.opinion.form.attributes.glyphs" :value="glyph.id"
 				containerClass="absolute w-fit right-0 p-1 pointer-events-none" class="info z-10" />
@@ -25,7 +25,7 @@
 				{{ opinionTitles(glyph.id).length
 				}}
 			</div>
-		</div>
+		</Card>
 	</div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
 		// }
 	},
 	mounted() {
-		window.addEventListener('mouseup', () => this.active = false);
+		window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {
 		dim(id: number) {

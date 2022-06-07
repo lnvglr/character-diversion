@@ -1,7 +1,7 @@
 <template>
   <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="color" class="button flex items-center justify-center gap-2">
     <slot></slot>
-    <font-awesome-icon v-if="icon" :icon="['fa', icon]" fixed-width />
+    <font-awesome-icon v-if="iconName" :icon="['fa', iconName || icon]" fixed-width />
   </component>
 </template>
 <script lang="ts">
@@ -40,6 +40,21 @@ export default {
         'alert',
       ].includes(e)
     }
+  },
+  computed: {
+    iconName() {
+      switch(this.$i18n.locale) {
+        case 'he':
+          if (this.icon === 'arrow-left') {
+            return 'arrow-right'
+          }
+          if (this.icon === 'arrow-right') {
+            return 'arrow-left'
+          }
+          break
+      }
+      return this.icon
+    },
   },
 }
 </script>

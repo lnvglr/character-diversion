@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Gramatika'],
+      hebrew: ['Assistant'],
     },
     colors: {
       primary: colors.orange,
@@ -20,7 +21,7 @@ module.exports = {
       alert: colors.red,
       black: colors.black,
       white: colors.white,
-      yellow: colors.yellow,
+      yellow: colors.amber,
       emerald: colors.emerald,
       mint: {
         "50": "#fcfffc",
