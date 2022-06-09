@@ -5,10 +5,11 @@
 			rows="5"
 			placeholder="New opinion..."
 			v-model="$state.opinion.form.attributes.title"
-			v-on:keyup.enter="postOpinion"
+			v-on:keyup.enter.exact="postOpinion"
 		/>
-		<small class="opacity-50 mb-2">{{$t('hinting.reference.glyphs.slash')}}</small>
-		<UITag v-for="g in string">{{ g }}</UITag><br/>
+		<Button :disabled="!canPost" class="w-full mb-1" color="success" @click="postOpinion">{{$t('share.opinion')}}</Button>
+		<small class="opacity-50">{{$t('hinting.reference.glyphs.slash')}}</small>
+		<UITag v-for="g in string">{{ g }}</UITag>
 		<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
 	</form>
 </template>
@@ -22,6 +23,10 @@ export default {
 		string() {
 			if (!this.$state.opinion.form.attributes) return ''
 			return this.$f.glyphMethods.getGlyphsById(this.$state.opinion.form.attributes.glyphs)
+		},
+		canPost() {
+			const { title } = this.$state.opinion.form.attributes
+			if (title !== null && title?.length > 1) return true
 		}
 	},
 	watch: {
@@ -37,14 +42,14 @@ export default {
 					)?.glyph.id
 				})
 				.filter(e => e)
-			console.log(font.postScriptMap)
-			// @todo 
+			// @todo include selected
 			this.$state.opinion.form.attributes.glyphs = [...new Set([...matchedGlyphs])].filter(e => e);
 		}
 	},
 	methods: {
 		postOpinion() {
 			const { title, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
+			if (!this.canPost) return
 			const opinion = {
 				title,
 				glyphs,

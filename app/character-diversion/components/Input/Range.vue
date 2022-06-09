@@ -1,30 +1,22 @@
 <template>
   <div
-    class="range-container relative mt-2 h-10 w-full"
-    :class="`${color} text-${color}-500/20`"
-    :data-min="dataMin"
-    :data-max="dataMax"
-  >
-    <div class="track" :style="style" >
-      <input
-        type="range"
-        ref="min"
-        :value="value[0]"
-        @input="input($event.target, 0)"
-        v-bind="$attrs"
-        :step="step"
-        class="absolute l-0 t-0"
-      />
-      <input
-        v-if="Array.isArray(modelValue) && value[1]"
-        type="range"
-        ref="max"
-        :value="value[1]"
-        @input="input($event.target, 1)"
-        v-bind="$attrs"
-        :step="step"
-        class="absolute l-0 t-0"
-      />
+    class="range-container relative w-full"
+    :class="{
+      [color]: true,
+      [`text-${color}-500/20`]: true,
+      inline: inlineRange
+    }"
+    :style="`
+      --hover-color: var(--color-${color}-600);
+      --handle-color: var(--color-${color}-500);
+      --track-fill: var(--color-${color}-400);
+      --inline-template: ${['3ch', '1fr', (Array.isArray(modelValue) && value[1]) && '3ch'].filter(e => e).join(' ')};
+    `"
+  :data-min="dataMin" :data-max="dataMax">
+    <div class="track" :style="style">
+      <input type="range" ref="min" :value="value[0]" @input="input($event.target, 0)" v-bind="$attrs" :step="step" />
+      <input v-if="Array.isArray(modelValue) && value[1]" type="range" ref="max" :value="value[1]"
+        @input="input($event.target, 1)" v-bind="$attrs" :step="step" />
     </div>
   </div>
 </template>
@@ -51,6 +43,10 @@ export default {
     gap: {
       type: Number,
     },
+    inlineRange: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     value() {
@@ -65,8 +61,8 @@ export default {
           (100 / (this.$attrs.max - this.$attrs.min)) *
           (val - this.$attrs.min)
         ).toFixed(this.decimalPlaces)};`
-      const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
-      const min = calc('min', this.value[1] !== null ? this.value[0] : '0')
+      const max = calc('max', this.value[1] ? this.value[1] : this.value[0])
+      const min = calc('min', this.value[1] ? this.value[0] : '0')
       return `${min} ${max}`
     },
     decimalPlaces() {
@@ -103,7 +99,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .range-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   --handle-size: 1em;
   --track-size: 0.5em;
   --outline-size: 0;
@@ -111,46 +114,54 @@ export default {
   --handle-color: black;
   --track-bg: var(--color-beige-200);
   --track-fill: black;
-  // color: var(--color-beige-200);
-
-
-  $colors: primary,
-  secondary,
-  info,
-  success,
-  warning,
-  alert;
-
-  @each $color in $colors {
-    &.#{$color} {
-      --handle-color: var(--color-#{$color}-600);
-      --track-fill: var(--color-#{$color}-300);
-      // color: var(--color-#{$color}-200);
-    }
-  }
 
   &:before,
   &:after {
     bottom: 0;
-    position: absolute;
     color: var(--text-color);
   }
+
   &:before {
     content: attr(data-min);
   }
+
   &:after {
+    position: absolute;
+    pointer-events: none;
     content: attr(data-max);
     right: 0;
+    top : 0;
+    text-align: end;
+  }
+
+  &.inline {
+    display: grid;
+    width: 100%;
+    grid-template-columns: var(--inline-template);
+    grid-template-rows: 1fr;
+
+    .track {
+      width: 100%;
+    }
+
+    &:before,
+    &:after {
+      position: relative
+    }
   }
 }
 
 :global(.dark .track) {
   --track-bg: var(--color-slate-700);
 }
+
 .track {
   --start: calc(var(--min) * 1%);
   --end: calc(var(--max) * 1%);
   position: relative;
+  height: 0;
+  top: 0.5em;
+
   &:before {
     content: '';
     position: absolute;
@@ -159,13 +170,11 @@ export default {
     top: 0;
     bottom: 0;
     border-radius: var(--rounded-default);
-    background: linear-gradient(
-      to right,
-      var(--track-bg) var(--start),
-      var(--track-fill) var(--start),
-      var(--track-fill) var(--end),
-      var(--track-bg) var(--end)
-    );
+    background: linear-gradient(to right,
+        var(--track-bg) var(--start),
+        var(--track-fill) var(--start),
+        var(--track-fill) var(--end),
+        var(--track-bg) var(--end));
   }
 }
 
@@ -186,10 +195,12 @@ input[type='range'] {
     -webkit-appearance: none;
     height: var(--track-size);
   }
+
   &::-moz-range-track {
     -moz-appearance: none;
     height: var(--track-size);
   }
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     cursor: pointer;
@@ -201,11 +212,16 @@ input[type='range'] {
     border-radius: var(--rounded-full);
     outline: var(--outline-size) solid currentColor;
     transition: outline var(--transition-duration-default);
+
+    &:hover {
+      --handle-color: var(--hover-color);
+    }
     &:active,
     &:focus {
       --outline-size: var(--outline-width-8);
     }
   }
+
   &::-moz-range-thumb {
     -webkit-appearance: none;
     cursor: pointer;
@@ -214,6 +230,14 @@ input[type='range'] {
     width: var(--handle-size);
     background-color: var(--handle-color);
     border-radius: var(--border-full);
+
+    &:hover {
+      --handle-color: var(--hover-color);
+    }
+    &:active,
+    &:focus {
+      --outline-size: var(--outline-width-8);
+    }
   }
 }
 </style>

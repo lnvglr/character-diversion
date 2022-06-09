@@ -81,6 +81,14 @@
         }
       },
       "type": "json"
+    },
+    "votes": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "json"
     }
   }
 }

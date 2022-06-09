@@ -4,7 +4,7 @@
 		border
 		bg-white
 		border-beige-200
-		hover:bg-beige-100
+		hover:bg-beige-50
 		hover:border-beige-300
 		dark:bg-neutral-900
 		dark:border-neutral-700

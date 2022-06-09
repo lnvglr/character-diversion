@@ -40,6 +40,7 @@ const defaultOpinion = {
   attributes: {
     title: null,
     axes: {},
+    activeAxes: [],
     glyphs: [],
     annotations: {},
   }
@@ -104,7 +105,7 @@ const mapGlyphs = (font: SamsaFontType) => {
   const literalMap = {}
   const nameMap = {}
   font.glyphs.forEach((glyph: SamsaGlyph) => {
-    const alternate = glyph.name.split('.')
+    const alternate = glyph.name?.split('.') || []
     const baseId = font.cmapReverse[glyph.id] ? glyph.id : font.glyphs.find((e: SamsaGlyph) => e?.name === alternate[0])?.id
     const unicode = font.cmapReverse[baseId]
     const unicodeHex = unicode && String(Number(unicode).toString(16)).padStart(4, '0').toLocaleUpperCase()

@@ -124,6 +124,15 @@ input {
 :is(textarea) {
   padding-top: calc(var(--padding-y) + 0.75em);
 }
+.input-container > :not(label) {
+  &[disabled=true] {
+    opacity: 0.5;
+    :is(input, textarea) {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
 .placeholder {
   position: absolute;
   z-index: 10;

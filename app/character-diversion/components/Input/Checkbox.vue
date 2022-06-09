@@ -1,15 +1,16 @@
 <template>
-  <div class="checkbox" role="checkbox">
+  <div class="checkbox" role="checkbox"
+    :style="`
+      --bg-color: var(--color-${color}-500);
+      --color-hover: var(--color-${color}-600);
+    `"
+    >
     <input :id="`${_.uid}`" type="checkbox" :checked="selected" :value="value" @change="updateInput">
 
-    <label
-      :for="`${_.uid}`"
-      class="box flex items-center justify-center"
-      :class="{
-        active: selected,
-      }"
-      role="checkbox"
-    ><font-awesome-icon v-show="selected" :icon="['fa', 'check']"/>
+    <label :for="`${_.uid}`" class="box flex items-center justify-center cursor-pointer" :class="{
+      active: selected,
+    }" role="checkbox">
+      <font-awesome-icon v-show="selected" :icon="['fa', 'check']" />
     </label>
   </div>
 </template>
@@ -25,6 +26,10 @@ export default {
     },
     modelValue: {
       default: false
+    },
+    color: {
+      type: String,
+      default: () => 'info',
     },
   },
   computed: {
@@ -59,15 +64,17 @@ input {
   opacity: 0;
   pointer-events: none;
 }
+
 :global(.dark .checkbox) {
   --bg-color: var(--color-neutral-900);
-  // --color: var(--color-beige-300);
 }
+
 .checkbox {
   --bg-color: var(--color-white);
   --color: var(--color-beige-300);
   display: flex;
   max-width: 100%;
+
   label {
     &.box {
       font-size: var(--text-xs);
@@ -79,28 +86,30 @@ input {
       box-shadow: inset 0 0 0 var(--border-default) var(--color);
       border-radius: var(--rounded-full);
       background-color: var(--color-white);
+      &:hover {
+        background-color: var(--color-beige-100);
+      }
     }
+
     &.active {
       &.box {
         --color: var(--color-hover);
         background-color: var(--bg-color);
+        &:hover {
+          background-color: var(--color-hover);
+        }
       }
     }
   }
-
-  $colors: primary,
-  secondary,
-  info,
-  success,
-  warning,
-  alert;
-
-  @each $color in $colors {
-    &.#{$color} {
-      --bg-color: var(--color-#{$color}-500);
-      --color-hover: var(--color-#{$color}-600);
+  &.lg {
+    label {
+      &.box {
+        font-size: var(--text-sm);
+        width: var(--w-6);
+        height: var(--h-6);
+        min-width: var(--w-6);
+      }
     }
   }
-
 }
 </style>

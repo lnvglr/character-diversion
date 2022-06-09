@@ -27,5 +27,7 @@
   "start.new.discourse": "Start a new discourse",
   "title": "Title",
   "content": "Content",
-  "edit": "Bearbeiten"
+  "edit": "Bearbeiten",
+  "opinion": "Opinion | Opinions",
+  "share.opinion": "Share opinion"
 }

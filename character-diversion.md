@@ -173,6 +173,8 @@ Another form of visually referencing what a user is critiquing, is marking eleme
 
 ####Voting and Responding to Opinions and Comments
 
+Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support.
+
 #### Filtering Opinions and Comments
 
 One goal of the platform is to creat and overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and (hash-)tags. 

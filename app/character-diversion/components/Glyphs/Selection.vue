@@ -50,7 +50,7 @@ export default {
 	computed: {
 		filteredGlyphs() {
 			return this.$state.opinion.font.glyphs.filter(
-				(glyph: SamsaGlyph) => glyph.name || (glyph.value && glyph.value !== '\x00')
+				(glyph: SamsaGlyph) => this.$state.opinion.font.glyphMap[glyph.id].literal
 			)
 		}
 	},

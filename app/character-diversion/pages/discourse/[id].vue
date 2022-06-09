@@ -2,7 +2,7 @@
   <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
     <div class="grow overflow-auto">
       <div class="p-5 flex flex-col gap-5">
-        <h1 class="text-6xl font-bold font-user">{{ $state.discourse.current.attributes.title }}</h1>
+        <h1 class="text-6xl font-bold">{{ $state.discourse.current.attributes.title }}</h1>
         <p class="text-sm text-beige-500">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
           $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
         }}</p>
@@ -11,18 +11,21 @@
       <div class="flex px-5 mb-10 ">
         <div class="button-group">
           <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all"
-            color="info" />
-          <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" color="info" />
+            />
+          <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" />
           <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn"
-            color="info" />
+            />
         </div>
-        <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="pen" color="info" />
+        <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="highlighter" />
       </div>
+      <div :class="`grid grid-cols-2`">
+      <div class="px-5 py-2 w-full max-w-full items-center grid grid-cols-[30px_minmax(90px,_1fr)]" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
 
-      <div class="px-5 w-96" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
+        <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag"/>
         <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
           type="range" :step="1" :min="axis.min" :max="axis.max"
-          v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" />
+          v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(90px,_1fr)]" :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
+      </div>
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
       <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">

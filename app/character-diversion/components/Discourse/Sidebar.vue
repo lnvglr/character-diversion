@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] overflow-scroll outline outline-8 outline-beige-200/90"
+		class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] overflow-scroll outline outline-8 outline-beige-200/90"
 		:class="{ minimized: sidebarMinimized }">
 
 		<!-- <pre>{{ $state.opinion.form.attributes.annotations }}</pre> -->
@@ -9,9 +9,9 @@
 		<!-- {{$state.discourse.current.attributes.featuredImage}} -->
 		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
 		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
-			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">Opinions</h3>
+			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
 		<ListOpinions v-if="!sidebarMinimized" />
-		<div class="p-5" v-if="$strapi.user && !sidebarMinimized">
+		<div class="p-2 sticky bottom-0 bg-beige-100 z-10 shadow-2xl mt-auto" style="--tw-ring-shadow: 0 -2px 3px #00000010; --tw-ring-offset-shadow: 0 -10px 20px #00000010" v-if="$strapi.user && !sidebarMinimized">
 			<FormNewOpinion />
 		</div>
 	</div>

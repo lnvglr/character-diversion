@@ -136,7 +136,7 @@ export default {
     }
   }
 
-  &[disabled=true] {
+  &[disabled=true], &[disabled] {
     opacity: 0.5;
     pointer-events: none;
     cursor: default;
@@ -165,7 +165,13 @@ export default {
     min-width: var(--size);
     max-width: var(--size);
   }
+  &.xxs {
+    font-size: var(--text-xs);
+    --size: var(--h-5);
+    --padding: var(--p-0) var(--p-1);
+  }
   &.xs {
+    font-size: var(--text-xs);
     --size: var(--h-6);
     --padding: var(--p-0) var(--p-2);
   }
@@ -189,6 +195,8 @@ export default {
 
   $colors: primary,
   secondary,
+  info,
+  beige,
   success,
   warning,
   alert;

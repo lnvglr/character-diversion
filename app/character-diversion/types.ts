@@ -84,6 +84,7 @@ export interface Opinion {
     glyphs?: Array<GlyphSpectrum | string | number>
     parsedGlyphs?: Array<number>
     tuple?: TupleSpectrum
+    votes: Vote[]
     annotations?: {
       [id: number]: {
         x: number
@@ -94,7 +95,13 @@ export interface Opinion {
     axes?: {
       [tag: string]: number[]
     }
+    activeAxes?: string[]
   }
+}
+export interface Vote {
+  user: string
+  value: 1 | -1
+  date: Date
 }
 export interface Comment {
   id: string

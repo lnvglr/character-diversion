@@ -4,24 +4,27 @@
       :class="active && 'bg-beige-100 -mt-[1px] border-y'">
       <div class="flex flex-col gap-2 w-full">
         <div class="relative">
-          <div class="float-right"><Button class="clear text-sm xs" :class="{'opacity-0 pointer-events-none': !active }" @click.stop="removeOpinion()" color="alert" icon="trash" /></div>
-          <p class="text-sm break-words" :class="active && 'text-primary-500'" v-html="parseOpinion.title"></p>
+          <div class="flex w-full">
+            <Vote :opinion="opinion" class="w-10" style="min-width: var(--w-7)" />
+            <div class="flex-1">
+              <div class="float-right" v-if="opinion.attributes.author.data.id === $strapi.user?.id"><Button class="clear text-sm xs"
+                  :class="{ 'opacity-0 pointer-events-none': !active }" @click.stop="removeOpinion()" color="alert"
+                  icon="trash" /></div>
+              <p class="text-sm break-words" v-html="parseOpinion.title"></p>
+            </div>
+          </div>
           <TransitionExpand>
-            <p v-if="active">
+            <div v-if="active && glyphs.length > 0">
               <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                 <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
-                <span class="bg-beige-200 text-beige-500 px-2 rounded-sm"
-                  v-if="false && Object.keys(opinion.attributes.axes).length !== 0">{{
-                      opinion.attributes.axes
-                  }}</span>
               </span>
-            </p>
+            </div>
           </TransitionExpand>
         </div>
-        <span class="flex gap-2 items-center text-slate-400 text-xs">
-          <Image class="w-5 h-5 object-cover rounded-full"
+        <span class="flex gap-2 items-center text-beige-400 text-xs">
+          <Image class="w-8 h-8 object-cover rounded-full"
             :src="opinion.attributes.author?.data?.attributes?.avatar.data?.attributes" size="thumbnail" />
-          <span>{{ [opinion.attributes.author?.data?.attributes?.name, publishedAt].filter(e => e).join(' · ') }}</span>
+          <span v-html="[`<b>${opinion.attributes.author?.data?.attributes?.name}</b>`, publishedAt].filter(e => e).join(' · ')"></span>
         </span>
       </div>
     </div>
@@ -37,9 +40,6 @@
 </template>
 
 <script lang="ts">
-import { Opinion } from "~~/types"
-import { h } from "vue"
-import UITag from "~~/components/UI/Tag.vue"
 
 export default {
   props: {
