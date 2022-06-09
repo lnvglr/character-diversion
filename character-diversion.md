@@ -2,9 +2,17 @@
 
 **The Platform for Typographic Discourse**
 
-##Introduction
+##Introduction (too much I, I, I)
 
-Start with how important discourse is for a democracy and how important it is to facilitate this discourse. 
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at whether characters connections within a given script (like ›n‹, ›m‹ and ›h‹) exist—or could exists—between Hebrew and Latin characters. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial.
+
+While initially, I wanted to find the right format to showacse my considerations, I quickly shifted my energy towards building a platform where, yes, I could showcase my considerations—but also enabled others to respond to them. It became clear to me that a platform specifically designed for typographic discourse does not exists and could, in fact, be useful beyond the application of presenting the results of my proposals.
+
+> Start with how important discourse is for a democracy and how important it is to facilitate this discourse. 
+
+This thesis is a plea to challenge conventions by enabling discourse. This paper is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
+
+To guide you through my thought process, I will first explain what conventions are (especially in the context of Latin and Hebrew typography) and why it is essential to question them from time to time. Next, discourse—the challenging of conventions—is elaborated on an prerequisites are established. This will lead me to the core of this paper, the documentation of the design and development of the platform »Character Diversion«—enabling people to discuss character diverging from their conventional shapes. As has been the plan for the better part of my working on this project, I will briefly recount my experiences modifying a number of typefaces according to my ideas of new character relationships and the process of showcasing them on »Character Diversion«. I will finish with an outlook to where »Character Diversion« could be taken to, which features are missing and in which scope the platform could actually be realised.
 
 ##Questioning Conventions (The Why)
 
@@ -34,9 +42,31 @@ Conventions emerge in a dialectic process but are not always established because
 
 Clearly some conventions are of great value today even if their practical origins are obsolete—nowadays, most text is written on a keyboard and writing from left to right brings barely any practical benefints, however changing the convention or removing it brings no appearant benefit and the change would cause great disruption. But for a democracy to stay alive, the status quo needs to be questioned (source) and in this spirit I ask for conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replace by more adequate conventions. 
 
-This process of questioning can happen quite naturally, as it has for millennia but it can also be initiated intentionally. And for this discourse a platform is required.
+This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and he next chapter deals with what is needed to do so.
 
 ##Enabling Discourse (The How)
+
+If discourse is necessary to re-evaluate conventions, how can this discourse be enabled? There are a number of prerequisites: (1) a (controversial) topic, (2) (people with) opinions, and (3) a platform (on which people with opinions can discuss controversial topics).
+
+To Michel Foucault (1971, p.10), the »will to truth« is the driving factor that forges discourse. He also links discourse to power, arguing that control of discourse will result in control of how th world is perceived. And also in the wider field of social theory, discourse is often examined as a gateway to power.
+
+...
+
+### Controvesial Topics
+
+In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and new potential character relationships between the Hebrew and Latin script. Both topics have controversial potential. Both also orbit around multiscript typography, what their differences bring and in which ways we can bring them together.
+
+It was only consequential to work in my thesis on enabling *typographic* discourse. As
+
+### People with Opinions
+
+### An Adequate Platform
+
+
+
+
+
+The platfrom needs to be suitable
 
 1. 
 
@@ -44,39 +74,23 @@ lack of forums that facilitates type specific discourse
 
 1. (come up with positive "why")
 
-###Analogue Discourse
-
-keywords:
-
-- control of discourse amounts to control of how the world is perceived
-  - social theory often studies discourse as a window into power
-- Michel Foucault
-- discourse
-  - generating knowledge
-  - 'will to truth' (Foucault, 1971, p.10f) is the major system of exclusion that forges discourse and which 'tends to exert a sort of pressure and something like a power of constraint on other discourses', (1970, cited in Shapiro 1984, p. 113-4).
-    - Foucault, The Order of Discours (1971, p.11)
-
 
 
 1. Enabling people to have this discourse by having an 
    1. overview
    2. interactivity
 
-### Digital Discourse
-
-
-
-Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilized discourse on the internet he contemplates on some of the issues of current forum software.
-
-> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
-
-
-
 ## A Platform for Typographic Discourse (The What)
 
 There are a number of conference formats and forums that that provide a platform for typographic discourse. 
 
 1. Platform
+
+### Digital Discourse
+
+Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilized discourse on the internet he contemplates on some of the issues and design decisions of current forum software.
+
+> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
 
 ### Concept
 
@@ -92,6 +106,20 @@ Character Diversion is a platform for typographic discourse. Accordingly, typogr
 
 The benefit of recorded and structured discourse is that people can learn from it without engaging in it. The discourse lives, on the other hand, from participation. The user experience in respect to the discourse needs to properly summarize and display the status quo of the discourse as well as shouw an easy entry point for engagement.
 
+#### Opinion
+
+While the discourse is the structure that defines the topic an dholds the conversation together, the opinions are what bring this structure to life.
+
+When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange, I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganizeing the ordering through a voting system? Or would this limit the livelyness of the discourse?
+
+I decided that opinions in fact needed more prominence.
+
+##### How are threads treated?
+
+Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
+
+A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions. 
+
 ### Features
 
 #### Linking Opinions to Glyphs
@@ -101,7 +129,47 @@ At the core of user experience design lies the questions of what a user want to 
 There are several approaches to this problem:
 
 1. Users type their opinion and before posting it are presented with a (filterable) list of glyphs as well as, if applicable, range inputs for setting the spectra of the variable font axes.
-2. Current convention of denoting letter reference with a forward slash (/) is made use of and referenced letters are recognised from the text of the opinion and automatically linked
+2. Current convention of denoting letter reference with a forward slash (/) is made use of and referenced letters are recognised from the text of the opinion and automatically linked.
+
+I decided to draw from both options: for this I created a lookup table for glyphs through which I can access all glyphs by entering either the literal glyph (/א), the postscript name of the glyph (/alef) and a name with a stylistic set extension (/alef.ss01). It also works on complex alternatives like /braceleft.case.ss01.
+
+```js
+{
+	'א': {
+    glyph: SamsaGlyph {
+      id: 54,
+      name: 'uni05D0',
+      font: SamsaFont { ... },
+      numPoints: 48,
+      numContours: 1,
+      ...
+    },
+    literal: "א",
+    name: "uni05D0",
+    postScript: "alef",
+    unicode: "1488",
+    unicodeHex: "05D0"
+	},
+	'alef': {
+    glyph: SamsaGlyph { ... },
+    literal: "א",
+    name: "uni05D0",
+    postScript: "alef",
+    unicode: "1488",
+    unicodeHex: "05D0"
+	}
+}
+```
+
+
+
+Another question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, the precise linking of opinions to glyphs is lost. 
+
+This could be tackled by indeed selecting an opinion and thus filtering the glyphs, and then highlighting specific glyphs by hovering over each reference or paragraph. The usability of this idea needs testing.
+
+#### Marking Elements in Glyphs
+
+Another form of visually referencing what a user is critiquing, is marking elements in a glyph and linking it to a particular opinion. A glyph can have multiple marks that are all linked to their corresponding opinion.
 
 ####Voting and Responding to Opinions and Comments
 
@@ -114,8 +182,6 @@ One goal of the platform is to creat and overview. In order to do that, the poss
 When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
 
 Due to its complext implementation, this feature may, however, be developed in the future.
-
-
 
 ### Architecture & Deployment
 
@@ -156,18 +222,28 @@ In recent years there has been a paradigm shift, however, towards a component ba
 A component is usually a generic shell which accepts data that will populate this shell.
 
 ```vue
+// CustomButton.vue
 <template>
-	<button :style="`background-color: ${color}">
-    {{label}}											  // ^^^^^
-   // ^^^^^
+	<button :style="`color: white; background-color: ${color}">
+    {{label}}
   </button>
 </template>
 <script>
   export default {
+    name: 'CustomButton',
     props: ['label', 'color'],
   }
 </script>
 ```
+
+```vue
+// App.vue
+<template>
+	<CustomButton color="#ff0000" label="Text in Button" />
+</template>
+```
+
+
 
 One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embeded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
@@ -180,8 +256,6 @@ One particularly appealing concept is the atomic design system. It is constructe
 5. Nuxt.js
 6. Strapi
 7. Heroku
-
-
 
 ## Case Study
 
@@ -211,3 +285,7 @@ It lies in the nature of things, that specificity and specialization enables use
 The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currenty those discourse are held by uploading imagery and even drawings of letterforms.
 
 A potential future feature of Character Diversion could be the option to upload an image instead of a font and have to app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to wide range of use cases.	
+
+
+
+### Conclusion
