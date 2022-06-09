@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="`range-container relative mt-2 h-10 w-full text-amber-500/20`"
+    class="range-container relative mt-2 h-10 w-full"
+    :class="`${color} text-${color}-500/20`"
     :data-min="dataMin"
     :data-max="dataMax"
   >
@@ -15,7 +16,7 @@
         class="absolute l-0 t-0"
       />
       <input
-        v-if="Array.isArray(modelValue)"
+        v-if="Array.isArray(modelValue) && value[1]"
         type="range"
         ref="max"
         :value="value[1]"
@@ -45,7 +46,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'amber',
+      default: 'primary',
     },
     gap: {
       type: Number,
@@ -106,15 +107,16 @@ export default {
   --handle-size: 1em;
   --track-size: 0.5em;
   --outline-size: 0;
-  --text-color: var(--color-slate-400);
+  --text-color: var(--color-beige-400);
   --handle-color: black;
-  --track-bg: var(--color-slate-200);
+  --track-bg: var(--color-beige-200);
   --track-fill: black;
-  color: var(--color-slate-200);
+  // color: var(--color-beige-200);
 
 
   $colors: primary,
   secondary,
+  info,
   success,
   warning,
   alert;
@@ -123,7 +125,7 @@ export default {
     &.#{$color} {
       --handle-color: var(--color-#{$color}-600);
       --track-fill: var(--color-#{$color}-300);
-      color: var(--color-#{$color}-200);
+      // color: var(--color-#{$color}-200);
     }
   }
 

@@ -19,10 +19,10 @@
         <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="pen" color="info" />
       </div>
 
-      <div class="px-5" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
+      <div class="px-5 w-96" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
         <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
-          type="range" :step="1" :min="axis.min" :max="axis.max" v-model="$state.opinion.form.attributes.axes[axis.tag]"
-          :label="axis.name" class="success" />
+          type="range" :step="1" :min="axis.min" :max="axis.max"
+          v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" />
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
       <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">
