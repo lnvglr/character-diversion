@@ -3,8 +3,8 @@
       h-full
       bg-beige-100
       border-t border-beige-200
-      sm:border-r sm:border-0
-      dark:bg-neutral-800 dark:border-neutral-900
+      ltr:sm:border-r rtl:sm:border-l sm:border-0
+      dark:bg-neutral-700 dark:border-neutral-900
     ">
     <ul :class="`flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5`">
       <li v-for="(route, index) in routes" :key="route" :class="{'mb-auto': index === routes.length - 1}" >
@@ -23,15 +23,16 @@
             h-16
             md:w-16 md:h-16
             dark:text-slate-200 dark:hover:bg-slate-600
-          ">
-          <font-awesome-icon :icon="[route.active ? 'fas' : 'fas', route.icon]" fixed-width class="fa-lg" />
+          "
+          >
+          <Icon :name="route.icon" class="fa-lg" />
           <span class="text-xs mt-2">{{ route.name }}</span>
         </NuxtLink>
 
       </li>
 
-      <ButtonTheme class="hidden sm:block mt-auto" :icon="true" :label="false" />
-      <LanguageSwitcher class="flex-col w-full px-3" :short="true" />
+      <LanguageSwitcher class="flex-col w-11 mt-auto" :short="true" />
+      <ButtonTheme class="hidden sm:block " :icon="true" :label="false" />
       <Button v-if="!$strapi.user" to="/login" class="hidden sm:block" icon="arrow-right-to-bracket" :label="false" />
       <ButtonLogout v-else class="hidden sm:block hover:bg-alert-500 hover:text-white hover:shadow-none" :icon="true" :label="false" />
     </ul>
@@ -71,12 +72,11 @@ export default {
         .filter(e => e.meta?.order)
         .sort((a, b) => a.meta.order - b.meta.order)
         .map(({ name, meta, path, memory }) => {
-          // console.log(active)
+          path = memory || path
+          if (path === '/profile' && !this.$strapi.user) path = '/login'
           return {
-            // name,
-            // name: this.$t(name).toHeaderCase(),
             name: meta?.name || name[0].toUpperCase() + name.slice(1),
-            path: memory || path,
+            path,
             icon: meta?.icon || name,
             active: this.$route.name === name,
           }
@@ -91,7 +91,7 @@ li a:hover {
   /* transform: translate(-2px,-2px); */
 }
 .router-link-active {
-  color: var(--color-primary-600);
+  color: var(--color-primary-500);
 }
 :global(.dark .router-link-active) {
   color: var(--color-primary-400);

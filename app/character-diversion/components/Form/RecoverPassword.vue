@@ -27,8 +27,7 @@ export default {
         .then(() => {
           this.done = true
         })
-        .catch((e) => {
-          console.log(e)
+        .catch(() => {
           this.error = true
         })
     },

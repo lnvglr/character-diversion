@@ -26,7 +26,6 @@
         <hr />
         <ButtonLogout color="alert" />
       </div>
-      <FormLogin v-else />
     </div>
   </NuxtLayout>
 </template>
@@ -41,9 +40,21 @@ export default {
     })
   },
   async mounted() {
-
-    this.$strapi.user = await this.$strapi.findOne('users', this.$strapi.user.id, { populate: ['avatar'] })
-    // console.log(await this.$strapi.findOne('users', this.$strapi.user.id, { populate: ['avatar'] }))
+  },
+  watch: {
+    '$strapi.user': {
+      handler() {
+        if (this.$strapi.user?.id && !this.$strapi.user.avatar) {
+          this.$strapi.findOne('users', this.$strapi.user.id, { populate: ['avatar'] }).then(({avatar}) => {
+            this.$strapi.user.avatar = avatar
+          console.log(avatar)
+          // console.log(this.$strapi.user)
+        })
+        }
+      },
+      deep: true,
+      immediate: true
+    },
   }
 }
 </script>

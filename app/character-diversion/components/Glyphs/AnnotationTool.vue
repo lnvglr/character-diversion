@@ -30,6 +30,9 @@ export default {
 		scaling: {
 			type: Number
 		},
+		height: {
+			type: Number,
+		},
 		edit: {
 			type: Boolean,
 			default: false
@@ -40,10 +43,11 @@ export default {
 			hoverRemove: false,
 		}
 	},
+	mounted() {
+	},
 	methods: {
 		activateOpinion(id: string) {
 			const opinions = this.$state.discourse.current.attributes.opinions.data
-			console.log(opinions)
 			const opinion = opinions.find((opinion: Opinion) => opinion.id === id)
 			const selected = JSON.parse(JSON.stringify(opinion))
 			this.$state.opinion.active = selected
@@ -66,6 +70,7 @@ export default {
 				y: this.pointerPosition.y,
 				// type: 'point'
 			})
+			this.$state.opinion.form.attributes.glyphs = [...new Set([...this.$state.opinion.form.attributes.glyphs, this.glyph.id])]
 		},
 	},
 	computed: {
@@ -87,7 +92,6 @@ export default {
 			this.$state.discourse.current.attributes.opinions.data.forEach((opinion: Opinion) => {
 				if (opinion.attributes.annotations) {
 					opinion.attributes.annotations[this.glyph.id]?.forEach((e) => {
-						console.log(this.currentAnnotations, e, this.$f.utils.arrayContainsObject(this.currentAnnotations, e))
 						if (this.$f.utils.arrayContainsObject(this.currentAnnotations, e) === undefined) {
 							annotations.push({...e, opinionId: opinion.id})
 						}
@@ -107,8 +111,8 @@ export default {
 		pointer({ x, y }) {
 			this.$state.opinion.annotationTool = {
 				id: this.glyph.id,
-				x: (x * this.scaling) - 1013 | 0,
-				y: (y * this.scaling) + (464) - this.scaling * 145 | 0
+				x: (x * this.scaling) - 1000 | 0,
+				y: (y * this.scaling) - this.height * 9 | 0
 			}
 		}
 	}

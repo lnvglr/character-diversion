@@ -1,10 +1,10 @@
 <template>
   <div class="max-w-4xl mx-auto">
     <div class="flex items-center justify-between gap-5 w-full mb-10 dark:text-white">
-      <h1 class="lg:text-8xl md:text-6xl sm:text-4xl text-2xl font-bold">Discover Discourses</h1>
-      <Button to="/discourse/new" key="remove" class="
-        ml-auto
-      " icon="plus">New Discourse</Button>
+      <h1 class="lg:text-8xl md:text-6xl sm:text-4xl text-2xl font-bold">{{$t('discover.discourses')}}</h1>
+      <Button v-if="$strapi.user" to="/discourse/new" key="remove" color="primary" class="
+        ml-auto lg
+      " icon="plus">{{$t('new.discourse')}}</Button>
     </div>
     <div class="discourses-container">
       <DiscourseCard v-for="discourseItem in discourses" :key="discourseItem.id" :discourse="discourseItem"
@@ -35,9 +35,6 @@ export default {
     },
   },
   methods: {
-    removeDiscourse(id: string) {
-      this.$strapi.delete('discourses', id).then(({ data }) => (delete discourse.id[data.id]))
-    },
   }
 }
 </script>

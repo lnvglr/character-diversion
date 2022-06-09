@@ -7,7 +7,8 @@
 			v-model="$state.opinion.form.attributes.title"
 			v-on:keyup.enter="postOpinion"
 		/>
-		<!-- <span v-for="g in string">{{ g }}</span> -->
+		<small class="opacity-50 mb-2">{{$t('hinting.reference.glyphs.slash')}}</small>
+		<UITag v-for="g in string">{{ g }}</UITag><br/>
 		<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
 	</form>
 </template>
@@ -25,19 +26,20 @@ export default {
 	},
 	watch: {
 		'$state.opinion.form.attributes.title'(value: string) {
-			// positive look behind                  (?<=\/)
-			// match 1 or more none white characters [\S]+?
-			// until positive look ahead             (?=
-			// - end of word                         $
-			// - period space                        \.\s
-			// - no non-word characters space        [[^\w.\s]]
-			// - space                               \s
-			//                                       )
-
-			const PATTERN = /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig;
-			const match = value?.match(PATTERN) || []
-			const matchedGlyphs = this.$f.glyphMethods.glyphToUnicode(match)
-			this.$state.opinion.form.attributes.glyphs = [...new Set(matchedGlyphs)];
+			const match = (value?.match(this.$f.glyphMethods.regexPattern) || []).map((e: string) => e.slice(1))
+			const font = this.$state.opinion.font
+			const matchedGlyphs = 
+				match.map(e => {
+					return (
+						font.literalMap[e] ||
+						font.postScriptMap[e] ||
+						font.nameMap[e]
+					)?.glyph.id
+				})
+				.filter(e => e)
+			console.log(font.postScriptMap)
+			// @todo 
+			this.$state.opinion.form.attributes.glyphs = [...new Set([...matchedGlyphs])].filter(e => e);
 		}
 	},
 	methods: {
@@ -69,6 +71,7 @@ export default {
 					}
 					this.$state.opinion.form.attributes.title = "";
 					this.$state.opinion.form.attributes.annotations = {};
+					this.$state.opinion.active = JSON.parse(JSON.stringify(data))
 				})
 		}
 	},

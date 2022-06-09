@@ -2,7 +2,7 @@
   <main class="flex justify-center h-screen">
     <div class="w-full max-w-2xl">
       <div class="p-5 mt-10 w-4/5 mx-auto text-left">
-        <Button :to="back" class="clear mb-5 block" icon="arrow-left" style="width: var(--size)" />
+        <Button :to="back" class="clear mb-5" icon="arrow-left" style="width: var(--size)" />
         <h1 class="font-bold text-left text-4xl sm:text-6xl mb-10">
           <slot name="title"></slot>
         </h1>

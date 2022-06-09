@@ -33,10 +33,6 @@ export default {
       type: Object as () => SamsaFont,
     }
   },
-  mounted() {
-    console.log(this.font.cmap)
-    console.log(this.font.glyphs)
-  },
   computed: {
     glyphs() {
       return [...new Set(this.string.split(''))]

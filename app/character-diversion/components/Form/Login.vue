@@ -4,7 +4,9 @@
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
     <Button type="submit" :disabled="formData.password?.length < 3" icon="arrow-right" class="lg"
       >Login</Button>
-    <Button to="/forgot-password" class="my-2 clear">Forgot Password?</Button>
+    <Button to="/forgot-password" class="my-2 clear inline">{{$t('forgot.password')}}</Button>
+    <hr />
+    <p>{{$t('no.account.yet')}} <Button to="/register" class="clear inline">{{$t('register')}}</Button></p>
   </form>
 </template>
 <script lang="ts">
@@ -21,14 +23,8 @@ export default {
   methods: {
     async login(e: Event) {
       try {
-        console.log(e)
-        // await this.$strapi.login(this.formData)
-        // this.$strapi.user = (await this.$strapi.login(this.formData)).user.value
         this.$strapi.login(this.formData)
-
-        // this.$strapi.login(this.formData).then(({value}) => this.$strapi.user = value)
         this.$router.push('/profile')
-        // this.$router.go()
       } catch (e) {}
     },
   },

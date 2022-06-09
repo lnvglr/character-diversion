@@ -71,7 +71,17 @@ export const glyphMethods = {
       {}
     )
   },
-  
+  // positive look behind                  (?<=\/) <=== not working in safari
+  // match 1 or more none white characters [\S]+?
+  // until positive look ahead             (?=
+  // - end of word                         $
+  // - period space                        \.\s
+  // - no non-word characters space        [[^\w.\s]]
+  // - space                               \s
+  //                                       )
+  // regexPattern: /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
+  regexPattern: /\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
+
 }
 
 export const utils = {

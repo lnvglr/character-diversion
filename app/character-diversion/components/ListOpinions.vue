@@ -4,7 +4,6 @@
 	</ListGroupTransition>
 </template>
 <script lang="ts">
-import type { Opinion } from '@/types'
 export default {
 	computed: {
 		currentDiscourse() {
@@ -14,7 +13,6 @@ export default {
 			return this.currentDiscourse?.attributes.opinions?.data;
 		},
 		watcher() {
-			// return [this.currentOpinions]
 			return [this.currentOpinions, this.$state.opinion.active.id]
 		}
 	},

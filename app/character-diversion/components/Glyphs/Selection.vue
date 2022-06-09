@@ -3,7 +3,7 @@
 		<Card
 			class="flex justify-center w-full h-16 relative overflow-hidden"
 			:class="{'opacity-10': dim(glyph.id)}"
-			v-for="(glyph, k) in $state.opinion.font.glyphs" :key="glyph.id" :title="glyph.name"
+			v-for="(glyph, k) in filteredGlyphs" :key="glyph.id" :title="glyph.name"
 			@pointerdown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
 			@pointerenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
 			<!-- @pointerdown="active = true, first = k"
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { Opinion } from '~/types'
+import { Opinion, SamsaGlyph } from '~/types'
 export default {
 	data() {
 		return {
@@ -46,6 +46,13 @@ export default {
 		// last(a, b) {
 		//   this.select(b)
 		// }
+	},
+	computed: {
+		filteredGlyphs() {
+			return this.$state.opinion.font.glyphs.filter(
+				(glyph: SamsaGlyph) => glyph.name || (glyph.value && glyph.value !== '\x00')
+			)
+		}
 	},
 	mounted() {
 		window.addEventListener('pointerup', () => this.active = false);

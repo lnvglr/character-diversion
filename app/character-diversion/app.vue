@@ -5,15 +5,16 @@
         antialiased
         duration-300
         transition-colors
-        text-gray-800
-        dark:text-gray-200
-        bg-white
-        dark:bg-gray-900
+        text-neutral-800
+        dark:text-neutral-200
+        bg-beige-100
+        dark:bg-neutral-700
+        font-sans
       ">
     <NuxtLayout name="frame">
       <template #header>
         <Transition name="slide">
-          <Header class="bg-mint-300 text-black" iconClass="text-black" v-if="showHeader">{{ $route.meta.name }}
+          <Header class="bg-beige-300 text-black" iconClass="text-black" v-if="showHeader">{{ $route.meta.name }}
           </Header>
         </Transition>
       </template>
@@ -65,5 +66,8 @@ export default {
 }
 :where([lang="he"] *) {
   font-family: var(--font-hebrew);
+}
+body {
+  font-family: var(--font-sans);
 }
 </style>

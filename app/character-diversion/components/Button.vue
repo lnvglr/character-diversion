@@ -1,7 +1,7 @@
 <template>
-  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="color" class="button flex items-center justify-center gap-2">
+  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="color" class="button items-center justify-center gap-2">
     <slot></slot>
-    <font-awesome-icon v-if="iconName" :icon="['fa', iconName || icon]" fixed-width />
+    <Icon v-if="iconName" :name="iconName || icon" />
   </component>
 </template>
 <script lang="ts">
@@ -69,14 +69,21 @@ export default {
   }
 }
 :global(:where(.button)) {
+  display: flex;
+  margin: 0 calc(var(--border-default) * -2);
+  --border-color: transparent;
+  --background-color: var(--color-neutral-800);
+  border: none;
+  font-size: 1em;
+}
+:global(:where(.dark .button)) {
+  --color:  var(--color-neutral-800);
+  --background-color:  var(--color-neutral-200);
   margin: 0 calc(var(--border-default) * -2);
 }
 :where(.button) {
   --size: var(--h-8);
-  --font-size: inherit;
   --color: white;
-  --background-color: black;
-  --border-color: transparent;
   --padding: var(--p-2) var(--p-3);
   --bg-opacity: 1;
   --border-radius: var(--rounded-md);
@@ -85,11 +92,8 @@ export default {
   position: relative;
   padding: var(--padding);
   text-align: center;
-  font-size: var(--font-size);
   line-height: 1.1;
-  border: none;
   color: var(--color);
-  // background-color: var(--background-color);
   box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
   text-align: center;
   transition: all var(--transition-duration-default) ease-in-out;
@@ -191,16 +195,14 @@ export default {
 
   @each $color in $colors {
     &.#{$color} {
-      --background-color: var(--color-#{$color}-500);
-
+      &, &.clear:hover {
+        --background-color: var(--color-#{$color}-500);
+      }
       &:not(.clear):hover {
         --color: white;
 				--bg-opacity: 1;
-        --background-color: var(--color-#{$color}-700);
+        --background-color: var(--color-#{$color}-600);
         --border-color: var(--background-color);
-      }
-      &.clear:hover {
-        --background-color: var(--color-#{$color}-500);
       }
     }
   }

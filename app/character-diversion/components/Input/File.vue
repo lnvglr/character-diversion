@@ -77,10 +77,8 @@ export default {
   },
   methods: {
     checkFiles(input) {
-      console.log(input.files[0])
       this.callout = [];
       [...input.files].forEach((file) => {
-        console.log(file.type)
         if (file.type.includes('font')) {
           this.addFile(file)
         } else {

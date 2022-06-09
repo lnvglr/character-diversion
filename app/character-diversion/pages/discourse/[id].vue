@@ -13,6 +13,8 @@
           <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all"
             color="info" />
           <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" color="info" />
+          <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn"
+            color="info" />
         </div>
         <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="pen" color="info" />
       </div>
@@ -23,15 +25,30 @@
           :label="axis.name" class="success" />
       </div>
       <GlyphsSelection v-if="view === 'selection'" />
+      <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">
+        <Card class="flex justify-center w-full h-96 relative overflow-hidden" v-for="glyph in previewGlyphs"
+          :key="glyph.id" :title="glyph.name">
+          <GlyphsMiniGlyph class="text-16xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
+            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
+            :annotations="true" :intersection="true" />
+        </Card>
+      </div>
       <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
-        <Card
-          class="flex justify-center w-full h-64 relative overflow-hidden"
-          v-for="glyph in previewGlyphs" :key="glyph.id" :title="glyph.name">
+        <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
+          :key="glyph.id" :title="glyph.name">
           <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
             :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
             :annotations="true" />
         </Card>
       </div>
+      <!-- <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
+        <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
+          :key="glyph.id" :title="glyph.name">
+          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
+            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
+            :annotations="true" />
+        </Card>
+      </div> -->
     </div>
 
     <DiscourseSidebar />
@@ -59,19 +76,6 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      console.log(this.$state.discourse.current?.attributes.font.data.attributes.url)
-      var newStyle = document.createElement('style');
-      newStyle.appendChild(document.createTextNode(`
-        @font-face {
-            font-family: 'user_selection';
-            src: url("http://localhost:1337${this.$state.discourse.current?.attributes.font.data.attributes.url}");
-        }
-        `));
-
-      document.head.appendChild(newStyle);
-    })
-
   },
   methods: {
     removeDiscourse(id: string) {
@@ -82,10 +86,6 @@ export default {
 </script>
 
 <style lang="scss">
-:where(.font-user) {
-  font-family: user_selection;
-}
-
 .button-group {
   display: flex;
   gap: var(--border-default);

@@ -2,22 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.page-back-enter-active,
-.page-back-leave-active,
-.page-enter-active,
-.page-leave-active {
-  transition: all var(--transition-duration-300) var(--transition-timing-function-default);
+small {
+  font-size: var(--text-xs);
+  display: inline-block;
 }
 
-.page-back-leave-to,
-.page-enter-from {
-  transform: translateX(100%) scale(1);
-  opacity: 0;
-}
-.page-back-enter-from,
-.page-leave-to {
-  transform: translateX(0%) scale(0.95);
-  opacity: 0;
+
+
+
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/IBMPlexSansVar-Roman.ttf') format('ttf');
 }
 
 .slide-enter-active,
@@ -71,7 +67,7 @@
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.5s;
+  transition: var(--transition-duration-300) var(--transition-timing-function-default);
 }
 
 .page-enter,

@@ -5,7 +5,7 @@
     :key="locale"
     @click="$i18n.locale = locale"
     class="sm"
-    :class="{active: $i18n.locale === locale, secondary: $i18n.locale !== locale}"
+    :class="{primary: $i18n.locale === locale, clear: $i18n.locale !== locale}"
   >{{ short ? locale.toLocaleUpperCase() : locales[locale] }}
   </Button>
 	</div>

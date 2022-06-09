@@ -23,7 +23,7 @@ export default {
 		logout() {
 			this.$strapi.logout()
 			this.$strapi.user = undefined
-			this.$router.push('/profile')
+			this.$router.push('/login')
 		},
 	},
 }

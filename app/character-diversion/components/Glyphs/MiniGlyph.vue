@@ -1,14 +1,19 @@
 <template>
-	<div class="flex items-center relative" :class="{'cursor-none': edit}">
-		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em;`" :viewBox="viewBox"
-			:transform="transform" class="h-full" ref="svg"
-			@pointerleave="$state.opinion.annotationTool.id = null"
-		>
-			<!-- <GlyphsGrid v-if="annotations" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" /> -->
+	<div class="flex items-center relative select-none"
+		:class="{ 'cursor-none': edit }">
+		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
+			:viewBox="viewBox" class="pointer-events-none" ref="svgFrame"></svg>
+		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
+			:viewBox="viewBox" class="h-full absolute" ref="svg" @pointerleave="$state.opinion.annotationTool.id = null">
+			<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" />
 			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
-			<GlyphsG class="glyph-default" v-if="path" :path="path" :scale="scale" :class="pathClass" :strokeWidth="strokeWidth" />
-			<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer" :scaling="scaling" />
+			<GlyphsGlyph v-if="path" :path="path" :scale="scale" :class="{ 'fill-info-500': intersection }"
+				:strokeWidth="strokeWidth" />
+			<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :scale="scale" :class="'fill-alert-500'" :strokeWidth="strokeWidth" />
+			<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer"
+				:height="height" :scaling="scaling" />
 		</svg>
+		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none" style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
 	</div>
 </template>
 <script lang="ts">
@@ -38,18 +43,28 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		grid: {
+			type: Boolean,
+			default: false,
+		},
 		pathClass: {
 			type: String,
-		}
+		},
+		intersection: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	data() {
 		return {
 			baselineOffset: 0,
 			padding: 1000,
 			decomposed: null,
+			decomposedAlt: null,
 			strokePadding: 1000,
 			strokeWidth: '1px',
 			scaling: 1,
+			height: 0,
 			pointer: {}
 		}
 	},
@@ -61,11 +76,18 @@ export default {
 			})
 			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
 		}
+		if (this.$refs.svgFrame && this.$refs.svg) {
+			this.$nextTick(() => {
+				this.height = (this.$refs.svg.getBoundingClientRect().height - this.$refs.svgFrame.getBoundingClientRect().height)
+
+			})
+		}
 	},
 	watch: {
 		tuple: {
 			handler() {
 				this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
+				this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
 			},
 			deep: true,
 			immediate: true
@@ -74,6 +96,9 @@ export default {
 	computed: {
 		path() {
 			return this.decomposed?.svgPath()
+		},
+		pathAlt() {
+			return this.intersection && this.decomposedAlt?.svgPath()
 		},
 		points() {
 			return this.decomposed?.points

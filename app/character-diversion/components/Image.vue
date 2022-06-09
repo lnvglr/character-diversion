@@ -18,8 +18,6 @@ export default {
 	},
 	computed: {
 		source() {
-			// console.log('this.src?.formats[this.size]?.url')
-			console.log(this.src)
 			return 'http://localhost:1337' + this.src?.formats[this.size]?.url
 		},
 	},

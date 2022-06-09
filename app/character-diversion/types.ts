@@ -11,9 +11,22 @@ declare module '@/assets/samsa-core' {
     cmapReverse: {
       [glyphId: number]: number
     }
+    glyphMap: {
+      [glyphId: number]: GlyphMap
+    }
+    literalMap: {
+      [glyph: string]: GlyphMap
+    }
+    postScriptMap: {
+      [postScriptName: string]: GlyphMap
+    }
+    nameMap: {
+      [glyphName: string]: GlyphMap
+    }
     axes: SamsaFontAxes
   }
   interface SamsaGlyph {
+    value: string
     openType: {
       is?: string;
       lig?: string;
@@ -31,6 +44,13 @@ export interface SamsaFontAxes {
   min: number
   name: string
   tag: string
+}
+export interface GlyphMap {
+  glyph: SamsaGlyph
+  literal: string
+  unicode: number,
+  unicodeHex: string,
+  postScript: string
 }
 // import { Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 // export interface Strapi4RequestParamsObject extends Omit<Strapi4RequestParams, 'populate'> {
@@ -62,6 +82,7 @@ export interface Opinion {
     comments?: Comment[]
     fontSpectrum?: FontSpectrum[]
     glyphs?: Array<GlyphSpectrum | string | number>
+    parsedGlyphs?: Array<number>
     tuple?: TupleSpectrum
     annotations?: {
       [id: number]: {

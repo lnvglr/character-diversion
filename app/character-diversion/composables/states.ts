@@ -1,7 +1,8 @@
-import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType } from '~/types'
+import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '~/types'
 import { reactive, ComputedRef } from 'vue'
 import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '~~/composables/methods'
+import unicodeTable from '~~/composables/unicode-table'
 
 interface DiscourseState {
   id: {
@@ -70,7 +71,13 @@ export const useSamsaFont = (fontName: string) =>
           if (e.errors.length > 0) {
             reject(e)
           } else {
+            console.log(e)
             e.cmapReverse = utils.invertObject(e.cmap)
+            const map = mapGlyphs(e)
+            e.glyphMap = map.glyphMap
+            e.literalMap = map.literalMap
+            e.postScriptMap = map.postScriptMap
+            e.nameMap = map.nameMap
             e.glyphs = openTypeGlyphs(e)
             resolve(e)
           }
@@ -78,12 +85,59 @@ export const useSamsaFont = (fontName: string) =>
       })
     }
   )
+const mapGlyphs = (font: SamsaFontType) => {
+  // const newMap = {}
+  // unicodeTable.split('\n').map((e: string) => e.split(';')).forEach((e: string[], i: number) => {
+  //   const codes = e[1].split(' ')
+  //   if (!e[0].includes('afii')) {
+  //   codes.forEach((code: string, k: number) => {
+  //     if (!newMap[code]) newMap[code] = e[0]
+  //   })
+  // }
+    // newMap[e[1]] = e[0]
+    // if (!(e[1] in newMap)) {
+    // }
+  // })
+  // console.log(JSON.stringify(newMap))
+  const glyphMap = {}
+  const postScriptMap = {}
+  const literalMap = {}
+  const nameMap = {}
+  font.glyphs.forEach((glyph: SamsaGlyph) => {
+    const alternate = glyph.name.split('.')
+    const baseId = font.cmapReverse[glyph.id] ? glyph.id : font.glyphs.find((e: SamsaGlyph) => e?.name === alternate[0])?.id
+    const unicode = font.cmapReverse[baseId]
+    const unicodeHex = unicode && String(Number(unicode).toString(16)).padStart(4, '0').toLocaleUpperCase()
+    const map = {
+      glyph,
+      unicode,
+      unicodeHex,
+      name: glyph.name,
+      literal: unicode && String.fromCharCode(unicode),
+      postScript: unicodeHex && [unicodeTable[unicodeHex], ...alternate.slice(1)].filter(e => e).join('.'),
+    }
 
+    glyphMap[glyph.id] = map
+    postScriptMap[map.postScript] = map
+    literalMap[map.literal] = map
+    nameMap[map.name] = map
+  })
+
+  console.timeEnd('test')
+  return {
+    glyphMap,
+    postScriptMap,
+    literalMap,
+    nameMap
+  }
+}
+// @todo use samsafont feature lookup table
 const openTypeGlyphs = (font: SamsaFontType) => {
   return font.glyphs.map((glyph: SamsaGlyph) => {
     if (! glyph.name) {
-      const character = String.fromCharCode(Number(font.cmapReverse[glyph.id]))
+      const character = font.glyphMap[glyph.id].literal
       glyph.name = (!['\x00'].includes(character) && glyph.name) && character
+      glyph.value = character
       return glyph
     }
     const ligature = glyph.name.split('_')
@@ -96,9 +150,9 @@ const openTypeGlyphs = (font: SamsaFontType) => {
       glyph.openType.is = 'lig'
       glyph.openType['lig'] = glyph.name
     }
-    if (! (glyph.id in font.cmapReverse) && base && alternate.length > 1) {
+    if (! (glyph.id in font.cmapReverse) && base && alternate?.[1]) {
       glyph.openType.is = alternate[1]
-      base.openType[alternate[1]] = glyph.id
+      // base.openType[String(alternate[1])] = glyph.id
     }
     return glyph
   })

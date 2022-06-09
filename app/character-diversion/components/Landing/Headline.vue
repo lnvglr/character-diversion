@@ -41,7 +41,7 @@ const transformedHeadline = computed(() => {
 
 <style lang="scss">
 .headline {
-  --font-size: var(--text-8xl);
+  --font-size: var(--text-9xl);
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;

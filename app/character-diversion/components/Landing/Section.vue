@@ -1,6 +1,6 @@
 <template>
   <div class="container mb-40 gap-10">
-    <div class="bg-white text-black rounded-lg overflow-hidden relative outline outline-1 outline-black shadow-[5px_5px_0_0_black]">
+    <div class="">
       <!-- <Noise class="text-amber-900 bg-yellow-600" style="--offset-start: -150;"><div class="p-5"><slot name="image"></slot></div></Noise> -->
       <slot name="image"></slot>
     </div>
