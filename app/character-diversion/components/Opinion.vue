@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts">
-
 export default {
   props: {
     opinion: {
@@ -55,21 +54,25 @@ export default {
       return this.$state.opinion.active.id && (this.$state.opinion.active.id !== this.opinion.id)
     },
     glyphs() {
-      const extra = this.opinion.attributes.glyphs.filter((e: number) => !this.parseOpinion.parsedGlyphs.includes(e))
-      return this.$f.glyphMethods.getGlyphsById(extra)
+      const extra = []
+      this.opinion.attributes.glyphs.forEach((glyph: number) => {
+        if (!this.parseOpinion.parsedGlyphs.includes(glyph)) extra.push(this.$state.opinion.font.glyphMap[glyph].literal)
+      })
+      return extra
     },
     publishedAt() {
       return this.$f.utils.relativeTime(this.opinion.attributes.publishedAt)
     },
     parseOpinion() {
       const parsedGlyphs = []
-      const title = this.opinion.attributes.title.replaceAll(this.$f.glyphMethods.regexPattern, (e: string) => {
+      const titleRaw = this.opinion.attributes.title.replaceAll(this.$f.glyphMethods.regexPattern, (e: string) => {
         if (this.$f.utils.invertObject(this.opinion.attributes.glyphs)[this.$f.glyphMethods.glyphToUnicode(e.slice(1))]) {
           parsedGlyphs.push(this.$f.glyphMethods.glyphToUnicode(e.slice(1)))
           return `<span class='glyph-tag'>${e}</span>`
         }
         return e
       })
+      const title = this.active ? titleRaw : titleRaw.substring(0, 160) + (titleRaw.length > 180 ? ' ...' : '');
       return {
         title,
         parsedGlyphs,
