@@ -1,8 +1,26 @@
 <template>
-  <div v-if="opinion" class="flex flex-col text-beige-400 justify-center items-center self-start -ml-1 mr-1">
-		<Button @click.stop="up" icon="angle-up" class="clear xxs" :color="userVote === 1 ? 'primary' : 'beige'" />
-		<small class="font-bold" :title="`Upvotes: ${positives}, Downvotes: ${negatives}`">{{voteCount}}</small>
-		<Button @click.stop="down" icon="angle-down" class="clear xxs" :color="userVote === -1 ? 'primary' : 'beige'" />
+  <div
+		v-if="opinion"
+		class="flex flex-col text-beige-400 justify-center items-center self-start -ml-1 mr-1"
+	>
+		<Button
+			@click.stop="up"
+			icon="angle-up"
+			class="clear xxs"
+			:color="userVote === 1 ? 'primary' : 'beige'"
+			:title="`Upvote`"
+		/>
+		<small
+			:title="`Upvotes: ${positives}, Downvotes: ${negatives}`"
+			class="font-bold"
+		>{{voteCount}}</small>
+		<Button
+			@click.stop="down"
+			icon="angle-down"
+			class="clear xxs"
+			:title="`Downvote`"
+			:color="userVote === -1 ? 'primary' : 'beige'"
+		/>
   </div>
 </template>
 
@@ -47,7 +65,7 @@ export default {
 				value,
 				date: new Date(),
 			})
-			console.log(await this.$strapi.update('opinions', this.opinion.id, { votes: this.opinion.attributes.votes }))
+			await this.$strapi.update('opinions', this.opinion.id, { votes: this.opinion.attributes.votes })
 		},
 	}
 }
