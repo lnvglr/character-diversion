@@ -78,6 +78,7 @@ export interface Opinion {
     content?: string
     author?: string
     createdAt?: Date
+    publishedAt?: Date
     updatedAt?: Date
     comments?: Comment[]
     fontSpectrum?: FontSpectrum[]
