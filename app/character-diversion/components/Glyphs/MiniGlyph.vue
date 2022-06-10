@@ -1,6 +1,5 @@
 <template>
-	<div class="flex items-center relative select-none"
-		:class="{ 'cursor-none': edit }">
+	<div class="flex items-center relative select-none" :class="{ 'cursor-none': edit }">
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
 			:viewBox="viewBox" class="pointer-events-none" ref="svgFrame"></svg>
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
@@ -13,7 +12,8 @@
 			<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer"
 				:height="height" :scaling="scaling" />
 		</svg>
-		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none" style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
+		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none"
+			style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
 	</div>
 </template>
 <script lang="ts">
@@ -54,6 +54,7 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		watcher: Array
 	},
 	data() {
 		return {
@@ -68,10 +69,7 @@ export default {
 	},
 	mounted() {
 		if (this.$refs.svg) {
-			this.$nextTick(() => {
-				this.scaling = (this.glyph.font.unitsPerEm / parseInt(window.getComputedStyle(this.$refs.svg).fontSize))
-				this.strokeWidth = this.scaling + 'px'
-			})
+			this.setScaling()
 			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
 		}
 		if (this.$refs.svgFrame && this.$refs.svg) {
@@ -82,6 +80,13 @@ export default {
 		}
 	},
 	watch: {
+		watcher: {
+			handler() {
+				this.setScaling()
+				this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
+			},
+			deep: true,
+		},
 		tuple: {
 			handler() {
 				this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
@@ -96,7 +101,7 @@ export default {
 			return this.decomposed?.svgPath()
 		},
 		pathAlt() {
-			return this.intersection && this.decomposedAlt?.svgPath()
+			return this.intersection && typeof this.decomposedAlt?.svgPath === 'function' && this.decomposedAlt.svgPath()
 		},
 		points() {
 			return this.decomposed?.points
@@ -131,6 +136,16 @@ export default {
 			return `scale(${this.scale},-${this.scale})`
 		}
 	},
+	methods: {
+		setScaling() {
+			if (!window || !this.$refs.svg) return
+			const style = window.getComputedStyle(this.$refs.svg)
+			this.$nextTick(() => {
+				this.scaling = (this.glyph.font.unitsPerEm / parseInt(style.fontSize))
+				this.strokeWidth = this.scaling + 'px'
+			})
+		}
+	}
 }
 </script>
 <style scoped>

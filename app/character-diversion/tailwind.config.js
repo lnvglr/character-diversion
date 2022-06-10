@@ -26,11 +26,11 @@ const colors =  {
   },
   beige: {
     50: 'hsl(60,27%,98%)',
-    100: 'hsl(55,22%,96%)',
-    200: 'hsl(50,18%,90%)',
-    300: 'hsl(45,17%,83%)',
-    400: 'hsl(40,15%,60%)',
-    500: 'hsl(35,12%,35%)',
+    100: 'hsl(50,22%,96%)',
+    200: 'hsl(43,18%,90%)',
+    300: 'hsl(39,17%,83%)',
+    400: 'hsl(37,13%,60%)',
+    500: 'hsl(35,10%,35%)',
     600: 'hsl(30,8%,32%)',
     700: 'hsl(30,12%,25%)',
     800: 'hsl(25,17%,15%)',
@@ -40,7 +40,12 @@ const colors =  {
 
 module.exports = {
   content: [],
-  safelist: Object.keys(colors).map(color => `text-${color}-500/20`),
+  safelist:[
+    ...Object.keys(colors).map(color => `text-${color}-500/20`),
+    ...['16', '32', '64', '80'].map(e => `h-${e}`),
+    ...['16', '32', '64', '80'].map(e => `grid-cols-autofill-${e}`),
+    ...['2xl', '4xl', '8xl', '10xl'].map(e => `text-${e}`),
+  ],
   tailwindcss: {
     viewer: true,
   },

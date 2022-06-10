@@ -56,15 +56,11 @@ To Michel Foucault (1971, p.10), the »will to truth« is the driving factor tha
 
 In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and new potential character relationships between the Hebrew and Latin script. Both topics have controversial potential. Both also orbit around multiscript typography, what their differences bring and in which ways we can bring them together.
 
-It was only consequential to work in my thesis on enabling *typographic* discourse. As
+It was only consequential to work in my thesis on enabling *typographic* discourse.
 
 ### People with Opinions
 
-### An Adequate Platform
-
-
-
-
+### Adequate Platforms
 
 The platfrom needs to be suitable
 
@@ -175,15 +171,11 @@ Another form of visually referencing what a user is critiquing, is marking eleme
 
 Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support.
 
+This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be intepreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
+
 #### Filtering Opinions and Comments
 
 One goal of the platform is to creat and overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and (hash-)tags. 
-
-#### Versioning
-
-When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
-
-Due to its complext implementation, this feature may, however, be developed in the future.
 
 ### Architecture & Deployment
 
@@ -287,6 +279,15 @@ It lies in the nature of things, that specificity and specialization enables use
 The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currenty those discourse are held by uploading imagery and even drawings of letterforms.
 
 A potential future feature of Character Diversion could be the option to upload an image instead of a font and have to app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to wide range of use cases.	
+
+#### Multiple Fonts and Font Instances
+
+
+#### Versioning
+
+When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
+
+Due to its complext implementation, this feature may, however, be developed in the future.
 
 
 

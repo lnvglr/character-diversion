@@ -1,15 +1,32 @@
 <template>
-	<div class="grid grid-cols-autofill-16 gap-1 p-1" v-if="$state.opinion.font && $state.opinion.form.attributes">
+	<div
+		v-if="$state.opinion.font && $state.opinion.form.attributes"
+		class="grid gap-1 p-1"
+		:class="`grid-cols-autofill-${gridSize}`"
+	>
 		<Card
 			:hoverable="$state.opinion.formActive"
-			class="flex justify-center w-full h-16 relative overflow-hidden"
-			:class="{ 'opacity-10': dim(glyph.id), 'cursor-pointer': $state.opinion.formActive }"
+			class="flex justify-center w-full relative overflow-hidden"
+			:class="{
+				'opacity-10': dim(glyph.id),
+				'cursor-pointer': $state.opinion.formActive,
+				[`h-${gridSize}`]: true
+			}"
 			v-for="(glyph, k) in filteredGlyphs" :key="glyph.id" :title="glyph.name"
 			@pointerdown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
 			@pointerenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
 			<!-- @pointerdown="active = true, first = k"
           @pointerenter="active && (last = k)" -->
-			<GlyphsMiniGlyph class="text-4xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :annotations="true" />
+			<GlyphsMiniGlyph
+				:class="`text-${fontSize}`"
+				:glyph="glyph"
+				:tuple="$state.opinion.form.attributes.axes"
+				:annotations="annotations"
+				:frame="frame"
+				:edit="edit"
+				:intersection="intersection"
+				:watcher="[gridSize]"
+			/>
 			<Input
 				v-if="$state.opinion.formActive"
 				type="checkbox"
@@ -39,6 +56,32 @@
 <script lang="ts">
 import { Opinion, SamsaGlyph } from '~/types'
 export default {
+	props: {
+		gridSize: {
+			type: String,
+			default: '16',
+		},
+		fontSize: {
+			type: String,
+			default: '2xl',
+		},
+		frame: {
+			type: Boolean,
+			default: false,
+		},
+		annotations: {
+			type: Boolean,
+			default: true,
+		},
+		edit: {
+			type: Boolean,
+			default: false,
+		},
+		intersection: {
+			type: Boolean,
+			default: false,
+		},
+	},
 	data() {
 		return {
 			active: false,

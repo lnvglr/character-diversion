@@ -5,8 +5,8 @@
 				v-model="$state.opinion.form.attributes.title" :submitOnEnter="true" @enter="postOpinion"
 				@cancel="$state.opinion.formActive = false" />
 			<Button :disabled="!canPost" class="w-full mb-1" color="success" type="submit">{{ $t('share.opinion') }}</Button>
-			<small class="opacity-50">{{ $t('hinting.reference.glyphs.slash') }}</small>
-			<UITag v-for="g in string">{{ g }}</UITag>
+			<!-- <small class="opacity-50">{{ $t('hinting.reference.glyphs.slash') }}</small> -->
+			<div><UITag v-for="g in string">{{ g }}</UITag></div>
 			<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
 		</form>
 	</TransitionExpand>

@@ -31,7 +31,7 @@
   "opinion": "Opinion | Opinions",
   "share.opinion": "Share opinion",
   "describe.discourse": "Give a brief account of what you want to discuss.",
-  "describe.opinion": "Voice your opinion and link the glyphs you are referencing.",
+  "describe.opinion": "Voice your opinion and link the glyphs you are referencing by prepending a slash (/A) or by selecting them.",
   "submit.with.enter": "Submit with enter",
   "cancel": "Cancel"
 }

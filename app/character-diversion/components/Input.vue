@@ -1,5 +1,6 @@
 <template>
   <div class="input-container" :class="containerClass">
+    <label class="placeholder" v-if="label && type === 'range'">{{ label }}</label>
     <component
       :is="is"
       :type="type"
@@ -18,7 +19,7 @@
       <small v-if="submitOnEnter" class="text-beige-400">{{$t('submit.with.enter')}}</small>
       <div class="mt-2 ml-auto h-0"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs" color="beige" :title="$t('cancel')" /></div>
     </div>
-    <label class="placeholder" v-if="label">{{ label }}</label>
+    <label class="placeholder absolute" v-if="label && type !== 'range'">{{ label }}</label>
   </div>
 </template>
 
@@ -166,7 +167,6 @@ input {
   }
 }
 .placeholder {
-  position: absolute;
   z-index: 10;
   pointer-events: none;
   max-width: 100%;

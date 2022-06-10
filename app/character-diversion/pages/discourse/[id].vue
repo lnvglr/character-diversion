@@ -22,28 +22,37 @@
       <div class="px-5 py-2 w-full max-w-full items-center grid grid-cols-[30px_minmax(90px,_1fr)]" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
 
         <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag"/>
-        <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
+        <Input
+          v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
           type="range" :step="1" :min="axis.min" :max="axis.max"
           v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(90px,_1fr)]" :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
       </div>
       </div>
-      <GlyphsSelection v-if="view === 'selection'" />
-      <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">
+      <GlyphsSelection
+        :gridSize="view === 'selection' ? '16' :  (view === 'intersect' ? '80' : '64')" 
+        :fontSize="view === 'selection' ? '4xl' : '10xl'"
+        :frame="view !== 'selection'"
+        :edit="view !== 'selection' && $state.opinion.formActive"
+        :annotations="view !== 'selection' && $state.opinion.formActive"
+        :intersection="view === 'intersect'"
+      />
+      <!-- <GlyphsSelection v-if="view === 'selection'" gridSize="16" fontSize="2xl" /> -->
+      <!-- <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">
         <Card class="flex justify-center w-full h-96 relative overflow-hidden" v-for="glyph in previewGlyphs"
           :key="glyph.id" :title="glyph.name" :hoverable="false">
           <GlyphsMiniGlyph class="text-16xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
             :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="$state.opinion.formActive"
             :annotations="true" :intersection="true" />
         </Card>
-      </div>
-      <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
+      </div> -->
+      <!-- <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
         <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
           :key="glyph.id" :title="glyph.name" :hoverable="false">
           <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
             :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="$state.opinion.formActive"
             :annotations="true" />
         </Card>
-      </div>
+      </div> -->
       <!-- <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
         <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
           :key="glyph.id" :title="glyph.name">
@@ -72,10 +81,11 @@ export default {
       const allGlyphs = this.$state.opinion.font.glyphs
       const formGlyphs = this.$state.opinion.form.attributes.glyphs
       const activeGlyphs = this.$state.opinion.active.attributes.glyphs
-      if (formGlyphs.length === 0 && activeGlyphs.length === 0) {
+      const selectedGlyphs = this.$state.opinion.selectedGlyphs
+      if (formGlyphs.length === 0 && activeGlyphs.length === 0 && selectedGlyphs.length === 0) {
         return allGlyphs
       }
-      return allGlyphs.filter((e: SamsaGlyph) => formGlyphs.includes(e.id) || activeGlyphs.includes(e.id))
+      return allGlyphs.filter((e: SamsaGlyph) => formGlyphs.includes(e.id) || activeGlyphs.includes(e.id) || selectedGlyphs.includes(e.id))
     },
   },
   mounted() {

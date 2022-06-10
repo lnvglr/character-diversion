@@ -1,10 +1,10 @@
 <template>
 	<circle v-for="annotation in allAnnotations" :cx="annotation.x" :cy="annotation.y" :r="radius"
-		class="fill-beige-300/10 stroke-beige-400/30 stroke" :class="{ 'pointer-events-none': edit, 'hover:fill-info-500/20 hover:stroke-info-500/70 cursor-pointer': !edit }" :stroke-width="strokeWidth" @click="activateOpinion(annotation.opinionId)"/>
+		class="fill-beige-300/10 stroke-beige-400/30 stroke" :class="{ 'pointer-events-none': edit, 'hover:fill-success-500/20 hover:stroke-success-500/70 cursor-pointer': !edit }" :stroke-width="strokeWidth" @click="activateOpinion(annotation.opinionId)"/>
 	<circle v-if="show" :cx="pointerPosition.x" :cy="pointerPosition.y" :r="radius / 1.25"
-		class="fill-info-500/20 stroke-info-500/70 stroke" :stroke-width="strokeWidth" @click="addAnnotation" />
+		class="fill-success-500/20 stroke-success-500/70 stroke" :stroke-width="strokeWidth" @click="addAnnotation" />
 	<circle v-for="annotation in currentAnnotations" :cx="annotation.x" :cy="annotation.y" :r="radius"
-		class="fill-yellow-500/20 stroke-yellow-500/50 stroke hover:fill-alert-500/20 hover:stroke-alert-500/50"
+		class="fill-primary-500/20 stroke-primary-500/50 stroke hover:fill-alert-500/20 hover:stroke-alert-500/50"
 		:class="{ 'pointer-events-none': !edit || $f.utils.arrayContainsObject(allAnnotations, annotation)}"
 		:stroke-width="strokeWidth" @click="removeAnnotation(annotation)" @pointerenter="hoverRemove = true"
 		@pointerleave="hoverRemove = false" />
