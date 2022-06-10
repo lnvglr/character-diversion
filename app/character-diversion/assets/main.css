@@ -13,7 +13,7 @@ small {
 
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/IBMPlexSansVar-Roman.ttf') format('ttf');
+  src: url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('ttf');
 }
 
 .slide-enter-active,
