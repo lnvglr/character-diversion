@@ -1,22 +1,28 @@
 <template>
   <div class="input-container" :class="containerClass">
-    <label v-if="label" :for="_.uid">{{ label }}</label>
     <component
       :is="is"
       :type="type"
-      :id="_.uid"
       v-model="modelValue"
       @update:modelValue="updateValue"
       v-bind="$attrs"
       :empty="empty || null"
       class="rounded-md border-beige-300 w-full focus:outline-info-500"
-      :class="{ border }"
+      :class="{ border, hasLabel: label }"
+      :placeholder="!label ? placeholder : null"
+      :maxlength="maxlength"
+      @keydown.enter.exact="enter"
     />
-    <label class="placeholder" v-if="placeholder" :for="_.uid">{{ placeholder }}</label>
+    <div class="absolute bottom-2 left-3 w-full pr-5 flex gap-2 items-baseline">
+      <CharacterCounter v-if="maxlength" :value="modelValue" :maxlength="maxlength" />
+      <small v-if="submitOnEnter" class="text-beige-400">{{$t('submit.with.enter')}}</small>
+      <div class="mt-2 ml-auto h-0"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs" color="beige" :title="$t('cancel')" /></div>
+    </div>
+    <label class="placeholder" v-if="label">{{ label }}</label>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   setup() {
     const InputDefault = resolveComponent('InputDefault')
@@ -49,6 +55,13 @@ export default {
     },
     'containerClass': {
       type: String,
+    },
+    maxlength: {
+      type: Number,
+    },
+    submitOnEnter: {
+      type: Boolean,
+      default: false,
     },
   },
   inheritAttrs: false,
@@ -93,6 +106,17 @@ export default {
       }
       this.$emit('update:modelValue', value)
     },
+    enter(e: Event) {
+      if (this.submitOnEnter) {
+        e.preventDefault()
+        this.$emit('enter')
+      }
+    },
+    cancel() {
+      if (this.$attrs.onCancel) {
+        this.$emit('cancel')
+      }
+    },
   },
 }
 </script>
@@ -112,17 +136,25 @@ input {
 :global(:where(input, textarea)) {
   display: block;
 }
-:global(form :is(input, textarea, .dropzone)) {
+:global(form :is(.input-container)) {
   margin-bottom: var(--m-2);
 }
 :global(form input) {
   width: 100%;
 }
 :is(input, textarea):not([type=range]) {
-  padding: calc(var(--padding-y) + 0.625em) var(--padding-x) 0;
-}
-:is(textarea) {
-  padding-top: calc(var(--padding-y) + 0.75em);
+
+  padding: var(--padding-y) var(--padding-x);
+  &.hasLabel {
+    padding-top: calc(var(--padding-y) + 0.625em);
+    padding-bottom: 0;
+    &:is(textarea) {
+      padding-top: calc(var(--padding-y) + 0.875em);
+    }
+  }
+  &::placeholder {
+    color: var(--color-beige-400)
+  }
 }
 .input-container > :not(label) {
   &[disabled=true] {

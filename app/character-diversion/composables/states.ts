@@ -18,6 +18,8 @@ interface DiscourseState {
 interface OpinionState {
   form: Opinion
   active: Opinion
+  formActive: Boolean
+  selectedGlyphs: number[]
   annotationTool: {
     id: number,
     x: number,
@@ -47,7 +49,9 @@ const defaultOpinion = {
 } as Opinion
 export const opinion = reactive<OpinionState>({
   form: JSON.parse(JSON.stringify(defaultOpinion)),
+  formActive: false,
   active: JSON.parse(JSON.stringify(defaultOpinion)),
+  selectedGlyphs: [],
   annotationTool: {
     id: null,
     x: 0,
@@ -120,7 +124,7 @@ const mapGlyphs = (font: SamsaFontType) => {
 
     glyphMap[glyph.id] = map
     postScriptMap[map.postScript] = map
-    literalMap[map.literal] = map
+    if (!literalMap[map.literal]) literalMap[map.literal] = map
     nameMap[map.name] = map
   })
 

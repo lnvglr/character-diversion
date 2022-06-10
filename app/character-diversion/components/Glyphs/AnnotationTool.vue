@@ -112,7 +112,7 @@ export default {
 			this.$state.opinion.annotationTool = {
 				id: this.glyph.id,
 				x: (x * this.scaling) - 1000 | 0,
-				y: (y * this.scaling) - this.height * 9 | 0
+				y: (y * this.scaling) - this.scaling - 280 | 0
 			}
 		}
 	}

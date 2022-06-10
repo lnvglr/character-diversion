@@ -1,16 +1,23 @@
 <template>
 	<div class="grid grid-cols-autofill-16 gap-1 p-1" v-if="$state.opinion.font && $state.opinion.form.attributes">
 		<Card
+			:hoverable="$state.opinion.formActive"
 			class="flex justify-center w-full h-16 relative overflow-hidden"
-			:class="{'opacity-10': dim(glyph.id)}"
+			:class="{ 'opacity-10': dim(glyph.id), 'cursor-pointer': $state.opinion.formActive }"
 			v-for="(glyph, k) in filteredGlyphs" :key="glyph.id" :title="glyph.name"
 			@pointerdown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
 			@pointerenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
 			<!-- @pointerdown="active = true, first = k"
           @pointerenter="active && (last = k)" -->
 			<GlyphsMiniGlyph class="text-4xl" :glyph="glyph" :tuple="$state.opinion.form.attributes.axes" :annotations="true" />
-			<Input type="checkbox" v-model="$state.opinion.form.attributes.glyphs" :value="glyph.id"
-				containerClass="absolute w-fit right-0 p-1 pointer-events-none" class="info z-10" />
+			<Input
+				v-if="$state.opinion.formActive"
+				type="checkbox"
+				v-model="$state.opinion.selectedGlyphs"
+				:value="glyph.id"
+				containerClass="absolute w-fit right-0 p-1 pointer-events-none"
+				class="info z-10"
+			/>
 			<div v-if="glyph.openType?.is"
 				class="z-10 absolute bottom-0 right-0 text-xs px-1 m-1 rounded-sm bg-secondary-300/80">{{ glyph.openType.is
 				}}

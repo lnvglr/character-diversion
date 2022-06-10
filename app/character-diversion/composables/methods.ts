@@ -4,7 +4,9 @@ import { useRelativeTime } from '@/composables/relativeTime'
 
 const nameToUnicode = (string: string): number => {
   if (string.length === 1) return string.charCodeAt(0)
-  const matchedGlyph = opinion.font.glyphs.find((g: SamsaGlyph) => g.name === string)
+  const matchedGlyph = opinion.font.glyphs.find(
+    (g: SamsaGlyph) => g.name === string
+  )
   if (matchedGlyph) return opinion.font.cmapReverse[matchedGlyph.id]
 }
 
@@ -27,12 +29,15 @@ export const glyphMethods = {
         )
       : [],
   toggleGlyph: (id: number, value: boolean = null) => {
-    const add = !!value || !opinion.form.attributes.glyphs.includes(id)
-    add
-      ? opinion.form.attributes.glyphs.push(id)
-      : (opinion.form.attributes.glyphs = opinion.form.attributes.glyphs.filter(
-          (e: number) => e !== id
-        ))
+    if (!opinion.formActive) return
+    const add = !!value || !opinion.selectedGlyphs.includes(id);
+    if (add) {
+      opinion.selectedGlyphs.push(id)
+    } else {
+      (opinion.selectedGlyphs = opinion.selectedGlyphs.filter(
+        (e: number) => e !== id
+      ))
+    }
   },
   getGlyphsById: (
     glyphs: number | number[],
@@ -46,7 +51,7 @@ export const glyphMethods = {
       .map((id): string => {
         if (!(id in map)) {
           const SamsaGlyph = font.glyphs[id]
-          const lig = SamsaGlyph?.openType.lig
+          const lig = SamsaGlyph?.openType?.lig
           if (lig) return lig
           id = SamsaGlyph?.openType.base
         }
@@ -80,8 +85,7 @@ export const glyphMethods = {
   // - space                               \s
   //                                       )
   // regexPattern: /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
-  regexPattern: /\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
-
+  regexPattern: /\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/gi,
 }
 
 export const utils = {
@@ -93,7 +97,9 @@ export const utils = {
     }, {})
   },
   arrayContainsObject: (array: object[], object: object) => {
-    const objectInArray = array.find(item => Object.keys(item).every(key => item[key] === object[key]))
+    const objectInArray = array.find((item) =>
+      Object.keys(item).every((key) => item[key] === object[key])
+    )
     return objectInArray && array.indexOf(objectInArray)
   },
   relativeTime(time: string) {

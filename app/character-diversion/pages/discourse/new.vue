@@ -3,7 +3,7 @@
     <template #title>{{ formData.title || $t('new.discourse') }}</template>
     <form @submit.prevent="postDiscourse" class="flex flex-col justify-center">
       <Input type="text" name="title" v-model="formData.title" :placeholder="$t('title')" validation="required" />
-      <Input type="textarea" rows="3" name="content" v-model="formData.content" :placeholder="$t('content')" />
+      <Input type="textarea" name="content" v-model="formData.content" :placeholder="$t('describe.discourse')" :maxlength="500" />
       <Input type="file" name="font" v-model="formData.font" :accept="['ttf', 'otf', 'jpg', 'png']" />
       <Button type="submit" class="lg">{{ $t('start.new.discourse') }}</Button>
     </form>

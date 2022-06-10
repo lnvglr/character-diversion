@@ -58,10 +58,8 @@ export default {
 	data() {
 		return {
 			baselineOffset: 0,
-			padding: 1000,
 			decomposed: null,
 			decomposedAlt: null,
-			strokePadding: 1000,
 			strokeWidth: '1px',
 			scaling: 1,
 			height: 0,
@@ -71,7 +69,7 @@ export default {
 	mounted() {
 		if (this.$refs.svg) {
 			this.$nextTick(() => {
-				this.scaling = (1000 / parseInt(window.getComputedStyle(this.$refs.svg).fontSize))
+				this.scaling = (this.glyph.font.unitsPerEm / parseInt(window.getComputedStyle(this.$refs.svg).fontSize))
 				this.strokeWidth = this.scaling + 'px'
 			})
 			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
@@ -108,10 +106,11 @@ export default {
 			return limits[0]
 		},
 		width() {
-			this.characterWidth + this.strokePadding * 2
+			this.characterWidth + this.glyph.font.unitsPerEm * 2
 		},
 		scale() {
-			return 1000 / this.glyph.font.unitsPerEm
+			return 1
+			// return 1000 / this.glyph.font.unitsPerEm
 		},
 		baseline() {
 			return this.points
@@ -123,11 +122,10 @@ export default {
 			return [Math.min(...xValues), Math.max(...xValues)]
 		},
 		viewBox() {
-			const offsetY = 300
-			return `${this.boundaries[0] - this.strokePadding} ${-offsetY} ${this.boundaries[1] + this.strokePadding * 2} ${1000 + offsetY}`
+			return `${this.boundaries[0] - this.glyph.font.unitsPerEm} 0 ${this.boundaries[1] + this.glyph.font.unitsPerEm * 2} ${this.glyph.font.unitsPerEm}`
 		},
 		fontSize() {
-			return (this.characterWidth + this.strokePadding * 2) / this.glyph.font.unitsPerEm
+			return (this.characterWidth + this.glyph.font.unitsPerEm * 2) / this.glyph.font.unitsPerEm
 		},
 		transform() {
 			return `scale(${this.scale},-${this.scale})`

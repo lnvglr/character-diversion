@@ -136,7 +136,7 @@ export default {
     }
   }
 
-  &[disabled=true], &[disabled] {
+  &[disabled=true] {
     opacity: 0.5;
     pointer-events: none;
     cursor: default;
@@ -173,7 +173,7 @@ export default {
   &.xs {
     font-size: var(--text-xs);
     --size: var(--h-6);
-    --padding: var(--p-0) var(--p-2);
+    --padding: var(--p-0) var(--p-1);
   }
   &.sm {
     --size: var(--h-8);
@@ -202,7 +202,7 @@ export default {
   alert;
 
   @each $color in $colors {
-    &.#{$color} {
+    &.#{"" + $color} {
       &, &.clear:hover {
         --background-color: var(--color-#{$color}-500);
       }

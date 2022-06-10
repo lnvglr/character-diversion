@@ -10,10 +10,10 @@
 		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
 		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
 			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
-		<ListOpinions v-if="!sidebarMinimized" />
-		<div class="p-2 sticky bottom-0 bg-beige-100 z-10 shadow-2xl mt-auto" style="--tw-ring-shadow: 0 -2px 3px #00000010; --tw-ring-offset-shadow: 0 -10px 20px #00000010" v-if="$strapi.user && !sidebarMinimized">
+		<div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10" v-if="$strapi.user && !sidebarMinimized">
 			<FormNewOpinion />
 		</div>
+		<ListOpinions v-if="!sidebarMinimized" />
 	</div>
 </template>
 
