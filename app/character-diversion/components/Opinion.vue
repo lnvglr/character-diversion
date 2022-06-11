@@ -94,6 +94,13 @@ export default {
       }
     },
   },
+  watch: {
+    active(active: boolean) {
+      if (active && this.$el) {
+        this.$el.scrollIntoView({ block: "nearest", behavior: 'smooth' })
+      }
+    },
+  },
   methods: {
     selectOpinion() {
       const opinion = this.opinion
