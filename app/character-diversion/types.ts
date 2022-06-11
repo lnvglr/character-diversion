@@ -87,11 +87,7 @@ export interface Opinion {
     tuple?: TupleSpectrum
     votes: Vote[]
     annotations?: {
-      [id: number]: {
-        x: number
-        y: number
-        type?: string
-      }[]
+      [id: number]: Annotation[]
     }
     axes?: {
       [tag: string]: number[]
@@ -103,6 +99,12 @@ export interface Vote {
   user: string
   value: 1 | -1
   date: Date
+}
+export interface Annotation {
+  x: number
+  y: number
+  type?: string
+  opinionId?: string
 }
 export interface Comment {
   id: string

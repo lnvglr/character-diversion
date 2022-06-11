@@ -11,7 +11,7 @@ export default {
 			return this.$state.discourse.current;
 		},
 		currentOpinions() {
-			return this.currentDiscourse?.attributes.opinions?.data.sort((a: Opinion, b: Opinion) => this.countVotes(b) - this.countVotes(a)
+			return this.currentDiscourse?.attributes.opinions?.data.sort((a: Opinion, b: Opinion) => this.score(b) - this.score(a)
 			);
 		},
 		watcher() {
@@ -22,7 +22,13 @@ export default {
 		countVotes(opinion: Opinion) {
 			if (!opinion.attributes.votes) return 0
 			return opinion.attributes.votes?.map(e => e.value).reduce((a, b) => a + b, 0)
-			// return opinion.attributes.votes?.reduce((a: Vote, b: number) => a.value + b.value, 0);
+		},
+		score(opinion: Opinion) {
+			if (!opinion) return 0
+			let score = this.countVotes(opinion) * 5
+			const threshold = (new Date(opinion.attributes.updatedAt).getTime() + (1000 * 60 * 60) - new Date().getTime()) / 100000 | 0
+			score += Math.max(0, threshold)
+			return score
 		}
 	},
 }

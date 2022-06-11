@@ -1,16 +1,24 @@
 <template>
-	<div class="flex items-center relative select-none" :class="{ 'cursor-none': edit }">
+	<div class="flex items-center relative select-none">
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
-			:viewBox="viewBox" class="pointer-events-none" ref="svgFrame"></svg>
+			:viewBox="viewBox.join(' ')" class="pointer-events-none" ref="svgFrame"></svg>
 		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
-			:viewBox="viewBox" class="h-full absolute" ref="svg" @pointerleave="$state.opinion.annotationTool.id = null">
+			:viewBox="viewBox.join(' ')" class="h-full absolute" ref="svg" @pointerleave="$state.opinion.annotationTool.id = null">
 			<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" />
 			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
 			<GlyphsGlyph v-if="path" :path="path" :scale="scale" :class="{ 'fill-info-500': intersection }"
 				:strokeWidth="strokeWidth" />
 			<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :scale="scale" :class="'fill-alert-500'" :strokeWidth="strokeWidth" />
-			<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth" :pointer="pointer"
-				:height="height" :scaling="scaling" />
+			<GlyphsAnnotationTool
+				v-if="annotations"
+				:edit="edit"
+				:glyph="glyph"
+				:strokeWidth="strokeWidth"
+				:pointer="pointer"
+				:height="height"
+				:scaling="scaling"
+				:offset="offset"
+			/>
 		</svg>
 		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none"
 			style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
@@ -64,19 +72,13 @@ export default {
 			strokeWidth: '1px',
 			scaling: 1,
 			height: 0,
-			pointer: {}
+			pointer: {},
 		}
 	},
 	mounted() {
-		if (this.$refs.svg) {
+		if (this.$refs.svgFrame && this.$refs.svg) {
 			this.setScaling()
 			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
-		}
-		if (this.$refs.svgFrame && this.$refs.svg) {
-			this.$nextTick(() => {
-				this.height = (this.$refs.svg.getBoundingClientRect().height - this.$refs.svgFrame.getBoundingClientRect().height)
-
-			})
 		}
 	},
 	watch: {
@@ -126,11 +128,22 @@ export default {
 			const xValues = this.points.map((pt: number[]) => pt[0])
 			return [Math.min(...xValues), Math.max(...xValues)]
 		},
+		offset() {
+			return {
+				x: this.glyph.font.unitsPerEm * 10,
+				y: this.glyph.font.unitsPerEm / 4
+			}
+		},
 		viewBox() {
-			return `${this.boundaries[0] - this.glyph.font.unitsPerEm} 0 ${this.boundaries[1] + this.glyph.font.unitsPerEm * 2} ${this.glyph.font.unitsPerEm}`
+			return [
+				this.boundaries[0] - this.offset.x / 2,
+				-this.offset.y,
+				this.boundaries[1] + this.offset.x,
+				this.glyph.font.unitsPerEm + this.offset.y
+			]
 		},
 		fontSize() {
-			return (this.characterWidth + this.glyph.font.unitsPerEm * 2) / this.glyph.font.unitsPerEm
+			return (this.characterWidth + this.offset.x) / this.glyph.font.unitsPerEm
 		},
 		transform() {
 			return `scale(${this.scale},-${this.scale})`
@@ -143,7 +156,9 @@ export default {
 			this.$nextTick(() => {
 				this.scaling = (this.glyph.font.unitsPerEm / parseInt(style.fontSize))
 				this.strokeWidth = this.scaling + 'px'
+				this.height = (this.$refs.svg.getBoundingClientRect().height - this.$refs.svgFrame.getBoundingClientRect().height) / 2
 			})
+
 		}
 	}
 }

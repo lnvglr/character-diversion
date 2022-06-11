@@ -1,16 +1,53 @@
 <template>
-	<circle v-for="annotation in allAnnotations" :cx="annotation.x" :cy="annotation.y" :r="radius"
-		class="fill-beige-300/10 stroke-beige-400/30 stroke" :class="{ 'pointer-events-none': edit, 'hover:fill-success-500/20 hover:stroke-success-500/70 cursor-pointer': !edit }" :stroke-width="strokeWidth" @click="activateOpinion(annotation.opinionId)"/>
-	<circle v-if="show" :cx="pointerPosition.x" :cy="pointerPosition.y" :r="radius / 1.25"
-		class="fill-success-500/20 stroke-success-500/70 stroke" :stroke-width="strokeWidth" @click="addAnnotation" />
-	<circle v-for="annotation in currentAnnotations" :cx="annotation.x" :cy="annotation.y" :r="radius"
-		class="fill-primary-500/20 stroke-primary-500/50 stroke hover:fill-alert-500/20 hover:stroke-alert-500/50"
-		:class="{ 'pointer-events-none': !edit || $f.utils.arrayContainsObject(allAnnotations, annotation)}"
-		:stroke-width="strokeWidth" @click="removeAnnotation(annotation)" @pointerenter="hoverRemove = true"
-		@pointerleave="hoverRemove = false" />
+	<!-- all annotationa -->
+	<circle
+		v-for="annotation in allAnnotations"
+		:cx="annotation.x"
+		:cy="annotation.y"
+		:r="radius"
+		class="fill-beige-300/10 stroke-beige-400/30 stroke"
+		:class="{
+			'pointer-events-none': edit,
+			'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': !edit
+		}"
+		:stroke-width="strokeWidth"
+		@click="activateOpinion(annotation.opinionId)"
+	/>
+
+	<!-- pointer -->
+	<circle
+		v-if="show"
+		:cx="pointerPosition.x"
+		:cy="pointerPosition.y"
+		:r="radius / 1.25"
+		class="fill-success-500/20 stroke-success-500/70 stroke"
+		:class="{ 'cursor-none': show }"
+		:stroke-width="strokeWidth"
+		@click="addAnnotation"
+	/>
+
+	<!-- newly added annotations -->
+	<circle
+		v-for="annotation in currentAnnotations"
+		:cx="annotation.x"
+		:cy="annotation.y"
+		:r="radius"
+		class="
+			stroke
+			fill-primary-500/20
+			stroke-primary-500/50
+			hover:fill-alert-500/20
+			hover:stroke-alert-500/50
+		"
+		:class="{ 'pointer-events-none': $f.utils.arrayContainsObject(allAnnotations, annotation)}"
+		:stroke-width="strokeWidth"
+		@click="removeAnnotation(annotation)"
+		@pointerenter="hoverRemove = true"
+		@pointerleave="hoverRemove = false"
+	/>
 </template>
 <script lang="ts">
-import { SamsaGlyph, Opinion } from "~~/types"
+import { SamsaGlyph, Opinion, Annotation } from "~~/types"
 export default {
 	props: {
 		glyph: {
@@ -36,14 +73,15 @@ export default {
 		edit: {
 			type: Boolean,
 			default: false
+		},
+		offset: {
+			type: Number
 		}
 	},
 	data() {
 		return {
 			hoverRemove: false,
 		}
-	},
-	mounted() {
 	},
 	methods: {
 		activateOpinion(id: string) {
@@ -52,7 +90,10 @@ export default {
 			const selected = JSON.parse(JSON.stringify(opinion))
 			this.$state.opinion.active = selected
 		},
-		removeAnnotation(annotation: object) {
+		removeAnnotation(annotation: Annotation) {
+			if (this.$state.opinion.active.id, annotation.opinionId) {
+				return this.$state.opinion.reset('active')
+			}
 			const annotations = this.$state.opinion.form.attributes.annotations[this.glyph.id]
 			annotations.splice(this.$f.utils.arrayContainsObject(annotations, annotation), 1)
 			this.hoverRemove = false
@@ -70,7 +111,10 @@ export default {
 				y: this.pointerPosition.y,
 				// type: 'point'
 			})
-			this.$state.opinion.form.attributes.glyphs = [...new Set([...this.$state.opinion.form.attributes.glyphs, this.glyph.id])]
+			this.$state.opinion.selectedGlyphs = [...new Set([...this.$state.opinion.selectedGlyphs, this.glyph.id])]
+		},
+		addOpinionId( annotation: Annotation, opinion: Opinion) {
+			return { ...annotation, opinionId: opinion.id }
 		},
 	},
 	computed: {
@@ -78,27 +122,27 @@ export default {
 			const currentAnnotations = []
 			const formAnnotation = this.$state.opinion.form.attributes.annotations?.[this.glyph.id]
 			const activeAnnotation = this.$state.opinion.active.attributes.annotations?.[this.glyph.id]
+			const add = (a: Annotation, o: Opinion) => this.addOpinionId(a, o)
 			if (formAnnotation) {
-				currentAnnotations.push(...formAnnotation)
+				currentAnnotations.push(...formAnnotation.map((a: Annotation) => add(a, this.$state.opinion.form)))
 			}
 			if (activeAnnotation) {
-				currentAnnotations.push(...activeAnnotation)
+				currentAnnotations.push(...activeAnnotation.map((a: Annotation) => add(a, this.$state.opinion.active)))
 			}
-
 			return currentAnnotations
 		},
 		allAnnotations() {
-			const annotations = []
-			this.$state.discourse.current.attributes.opinions.data.forEach((opinion: Opinion) => {
-				if (opinion.attributes.annotations) {
-					opinion.attributes.annotations[this.glyph.id]?.forEach((e) => {
-						if (this.$f.utils.arrayContainsObject(this.currentAnnotations, e) === undefined) {
-							annotations.push({...e, opinionId: opinion.id})
-						}
-					})
-				}
+			const allAnnotations = []
+			const opinions = this.$state.discourse.current.attributes.opinions.data
+			opinions.forEach((opinion: Opinion) => {
+				const annotations = opinion.attributes.annotations
+				if (!annotations) return
+				annotations?.[this.glyph.id]?.forEach((annotation: Annotation) => {
+					if (this.currentAnnotations.some((a: Annotation) => a.opinionId === opinion.id)) return
+					allAnnotations.push(this.addOpinionId(annotation, opinion))
+				})
 			})
-			return annotations
+			return allAnnotations
 		},
 		pointerPosition() {
 			return this.$state.opinion.annotationTool
@@ -111,8 +155,8 @@ export default {
 		pointer({ x, y }) {
 			this.$state.opinion.annotationTool = {
 				id: this.glyph.id,
-				x: (x * this.scaling) - 1000 | 0,
-				y: (y * this.scaling) - this.scaling - 280 | 0
+				x: (x * this.scaling) - this.offset.x / 2 | 0,
+				y: (y * this.scaling) - this.height * this.scaling - this.offset.y | 0
 			}
 		}
 	}

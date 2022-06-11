@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import type { SamsaFontAxes, Opinion } from '@/types'
+import type { SamsaFontAxes } from '@/types'
 export default {
 	data() {
 		return {

@@ -29,38 +29,13 @@
       </div>
       </div>
       <GlyphsSelection
-        :gridSize="view === 'selection' ? '16' :  (view === 'intersect' ? '80' : '64')" 
-        :fontSize="view === 'selection' ? '4xl' : '10xl'"
+        :gridSize="view === 'selection' ? '16' :  (view === 'detail' ? '64' : '80')" 
+        :fontSize="view === 'selection' ? '4xl' : (view === 'detail' ? '8xl' : '16xl')"
         :frame="view !== 'selection'"
         :edit="view !== 'selection' && $state.opinion.formActive"
-        :annotations="view !== 'selection' && $state.opinion.formActive"
+        :annotations="view !== 'selection'"
         :intersection="view === 'intersect'"
       />
-      <!-- <GlyphsSelection v-if="view === 'selection'" gridSize="16" fontSize="2xl" /> -->
-      <!-- <div class="grid grid-cols-autofill-96 gap-1 p-1" v-else-if="view === 'intersect'">
-        <Card class="flex justify-center w-full h-96 relative overflow-hidden" v-for="glyph in previewGlyphs"
-          :key="glyph.id" :title="glyph.name" :hoverable="false">
-          <GlyphsMiniGlyph class="text-16xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
-            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="$state.opinion.formActive"
-            :annotations="true" :intersection="true" />
-        </Card>
-      </div> -->
-      <!-- <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
-        <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
-          :key="glyph.id" :title="glyph.name" :hoverable="false">
-          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
-            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="$state.opinion.formActive"
-            :annotations="true" />
-        </Card>
-      </div> -->
-      <!-- <div class="grid grid-cols-autofill-64 gap-1 p-1" v-else>
-        <Card class="flex justify-center w-full h-64 relative overflow-hidden" v-for="glyph in previewGlyphs"
-          :key="glyph.id" :title="glyph.name">
-          <GlyphsMiniGlyph class="text-10xl" pathClass="fill-neutral-800 stroke-neutral-900" :glyph="glyph"
-            :tuple="$state.opinion.form.attributes.axes" :frame="true" :title="glyph.name" :edit="edit"
-            :annotations="true" />
-        </Card>
-      </div> -->
     </div>
 
     <DiscourseSidebar />

@@ -1,6 +1,7 @@
 import { SamsaFont, SamsaGlyph, SamsaFontAxes } from '@/types'
 import { opinion } from '@/composables/states'
 import { useRelativeTime } from '@/composables/relativeTime'
+import md from '@/composables/markdown'
 
 const nameToUnicode = (string: string): number => {
   if (string.length === 1) return string.charCodeAt(0)
@@ -30,13 +31,13 @@ export const glyphMethods = {
       : [],
   toggleGlyph: (id: number, value: boolean = null) => {
     if (!opinion.formActive) return
-    const add = !!value || !opinion.selectedGlyphs.includes(id);
+    const add = !!value || !opinion.selectedGlyphs.includes(id)
     if (add) {
       opinion.selectedGlyphs.push(id)
     } else {
-      (opinion.selectedGlyphs = opinion.selectedGlyphs.filter(
+      opinion.selectedGlyphs = opinion.selectedGlyphs.filter(
         (e: number) => e !== id
-      ))
+      )
     }
   },
   getGlyphsById: (
@@ -104,5 +105,8 @@ export const utils = {
   },
   relativeTime(time: string) {
     return useRelativeTime(time)
+  },
+  renderMarkdown(markdown: string) {
+    return md.render(markdown)
   },
 }

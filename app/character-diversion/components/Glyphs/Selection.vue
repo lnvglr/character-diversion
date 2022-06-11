@@ -12,9 +12,10 @@
 				'cursor-pointer': $state.opinion.formActive,
 				[`h-${gridSize}`]: true
 			}"
-			v-for="(glyph, k) in filteredGlyphs" :key="glyph.id" :title="glyph.name"
-			@pointerdown="active = true, $f.glyphMethods.toggleGlyph(glyph.id)"
-			@pointerenter="active && $f.glyphMethods.toggleGlyph(glyph.id)">
+			v-for="(glyph, k) in filteredGlyphs"
+			:key="glyph.id"
+			@pointerdown="active = toggleGlyph, clickable && $f.glyphMethods.toggleGlyph(glyph.id)"
+			@pointerenter="clickable && active && $f.glyphMethods.toggleGlyph(glyph.id)">
 			<!-- @pointerdown="active = true, first = k"
           @pointerenter="active && (last = k)" -->
 			<GlyphsMiniGlyph
@@ -26,25 +27,36 @@
 				:edit="edit"
 				:intersection="intersection"
 				:watcher="[gridSize]"
+				:title="glyph.name"
 			/>
 			<Input
 				v-if="$state.opinion.formActive"
 				type="checkbox"
 				v-model="$state.opinion.selectedGlyphs"
 				:value="glyph.id"
-				containerClass="absolute w-fit right-0 p-1 pointer-events-none"
+				containerClass="absolute w-fit right-0 p-1"
 				class="info z-10"
+				@click.prevent
 			/>
-			<div v-if="glyph.openType?.is"
-				class="z-10 absolute bottom-0 right-0 text-xs px-1 m-1 rounded-sm bg-secondary-300/80">{{ glyph.openType.is
-				}}
-			</div>
-			<div v-else-if="glyph.openType?.base"
-				class="z-10 absolute bottom-0 right-0 text-xs px-1 m-1 rounded-sm bg-secondary-300/80">{{ $f.glyphMethods.getGlyphsById(glyph.openType?.base)}}
-			</div>
+			<div v-if="$state.opinion.font.glyphMap[glyph.id]"
+				class="z-10 absolute bottom-0 right-0 px-1 m-1 rounded-sm bg-beige-200/80"
+				:class="{
+					'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
+					'text-xs': gridSize < 30,
+					'text-sm': gridSize >= 30,
+				}"
+				v-html="glyphName(glyph, gridSize < 30)"
+				@pointerdown="clickable = false, appendGlyph(glyph)"
+				@pointerup="clickable = true"
+				:title="$state.opinion.formActive ? $t('insert.into.opinion', { glyph: '/' + glyphName(glyph) }) : ''"
+			/>
 			<div
 				v-if="hasOpinion(glyph.id).length > 0"
-				class="z-10 absolute bottom-0 flex items-center justify-center left-0 text-[0.5rem] font-bold px-1 m-1 rounded-full text-white bg-primary-500/80 w-3 h-3"
+				class="z-10 absolute bottom-0 flex items-center justify-center left-0 font-bold px-1 m-1 rounded-full text-white bg-primary-500/80"
+				:class="{
+					'w-3 h-3 text-[0.5rem] ': gridSize < 30,
+					'w-4 h-4 text-xs': gridSize >= 30,
+				}"
 				:title="opinionTitles(glyph.id).join(', ')">
 				{{ opinionTitles(glyph.id).length
 				}}
@@ -85,6 +97,7 @@ export default {
 	data() {
 		return {
 			active: false,
+			clickable: true
 			// first: null,
 			// last: null
 		}
@@ -108,6 +121,20 @@ export default {
 		window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {
+		glyphName(glyph: SamsaGlyph, literal = false) {
+			const g = this.$state.opinion.font.glyphMap[glyph.id];
+			return literal || g.postScript === '' ? g.literal : g.postScript
+		},
+		appendGlyph(glyph: SamsaGlyph) {
+			if (!this.$state.opinion.formActive) return
+			const title = this.$state.opinion.form.attributes.title
+			const glyphReference = '/' + this.glyphName(glyph)
+			if (!title) return this.$state.opinion.form.attributes.title = glyphReference
+			if (title.trim().endsWith(glyphReference)) {
+				return this.$state.opinion.form.attributes.title = title.substring(0, title.length - glyphReference.length - 1 )
+			}
+			this.$state.opinion.form.attributes.title = title.trim() + ' ' + glyphReference
+		},
 		dim(id: number) {
 			return (this.$state.opinion.active.attributes.glyphs.length > 0 && !this.$state.opinion.active.attributes.glyphs.find((g: number) => g === id)) || (this.$state.opinion.form.attributes.glyphs.length > 0 && !this.$state.opinion.form.attributes.glyphs.find((g: number) => g === id))
 		},

@@ -47,7 +47,6 @@ export default {
         if (this.$strapi.user?.id && !this.$strapi.user.avatar) {
           this.$strapi.findOne('users', this.$strapi.user.id, { populate: ['avatar'] }).then(({avatar}) => {
             this.$strapi.user.avatar = avatar
-          console.log(avatar)
           // console.log(this.$strapi.user)
         })
         }

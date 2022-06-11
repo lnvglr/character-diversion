@@ -61,6 +61,7 @@ export const opinion = reactive<OpinionState>({
   reset: (area: string = 'form') => {
     // opinion[area].id = defaultOpinion.id
     opinion[area] = JSON.parse(JSON.stringify(defaultOpinion))
+    if (area === 'form') opinion.formActive = false
     glyphMethods.setPosition()
   }
 })
@@ -76,7 +77,6 @@ export const useSamsaFont = (fontName: string) =>
           if (e.errors.length > 0) {
             reject(e)
           } else {
-            console.log(e)
             e.cmapReverse = utils.invertObject(e.cmap)
             const map = mapGlyphs(e)
             e.glyphMap = map.glyphMap
@@ -91,19 +91,6 @@ export const useSamsaFont = (fontName: string) =>
     }
   )
 const mapGlyphs = (font: SamsaFontType) => {
-  // const newMap = {}
-  // unicodeTable.split('\n').map((e: string) => e.split(';')).forEach((e: string[], i: number) => {
-  //   const codes = e[1].split(' ')
-  //   if (!e[0].includes('afii')) {
-  //   codes.forEach((code: string, k: number) => {
-  //     if (!newMap[code]) newMap[code] = e[0]
-  //   })
-  // }
-    // newMap[e[1]] = e[0]
-    // if (!(e[1] in newMap)) {
-    // }
-  // })
-  // console.log(JSON.stringify(newMap))
   const glyphMap = {}
   const postScriptMap = {}
   const literalMap = {}
@@ -113,13 +100,14 @@ const mapGlyphs = (font: SamsaFontType) => {
     const baseId = font.cmapReverse[glyph.id] ? glyph.id : font.glyphs.find((e: SamsaGlyph) => e?.name === alternate[0])?.id
     const unicode = font.cmapReverse[baseId]
     const unicodeHex = unicode && String(Number(unicode).toString(16)).padStart(4, '0').toLocaleUpperCase()
+    const suffix = alternate.slice(1)
     const map = {
       glyph,
       unicode,
       unicodeHex,
       name: glyph.name,
       literal: unicode && String.fromCharCode(unicode),
-      postScript: unicodeHex && [unicodeTable[unicodeHex], ...alternate.slice(1)].filter(e => e).join('.'),
+      postScript: unicodeHex && [unicodeTable[unicodeHex] || ' ', ...suffix].filter(e => e).join('.').trim(),
     }
 
     glyphMap[glyph.id] = map
@@ -127,8 +115,6 @@ const mapGlyphs = (font: SamsaFontType) => {
     if (!literalMap[map.literal]) literalMap[map.literal] = map
     nameMap[map.name] = map
   })
-
-  console.timeEnd('test')
   return {
     glyphMap,
     postScriptMap,

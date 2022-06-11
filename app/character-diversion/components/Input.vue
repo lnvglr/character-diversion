@@ -14,10 +14,11 @@
       :maxlength="maxlength"
       @keydown.enter.exact="enter"
     />
-    <div class="absolute bottom-2 left-3 w-full pr-5 flex gap-2 items-baseline">
+    <div v-if="maxlength || submitOnEnter || $attrs.onCancel" class="absolute bottom-2 left-3 w-full pr-4 flex gap-2 items-center -mb-1">
       <CharacterCounter v-if="maxlength" :value="modelValue" :maxlength="maxlength" />
       <small v-if="submitOnEnter" class="text-beige-400">{{$t('submit.with.enter')}}</small>
-      <div class="mt-2 ml-auto h-0"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs" color="beige" :title="$t('cancel')" /></div>
+      <small v-if="allowMarkdown" class="text-beige-400">{{$t('markdown.is.allowed')}}</small>
+      <div class="ml-auto"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs" color="beige" :title="$t('cancel')" /></div>
     </div>
     <label class="placeholder absolute" v-if="label && type !== 'range'">{{ label }}</label>
   </div>
@@ -61,6 +62,10 @@ export default {
       type: Number,
     },
     submitOnEnter: {
+      type: Boolean,
+      default: false,
+    },
+    allowMarkdown: {
       type: Boolean,
       default: false,
     },

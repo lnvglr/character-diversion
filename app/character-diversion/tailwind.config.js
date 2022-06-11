@@ -1,5 +1,5 @@
 const defaultColors = require('tailwindcss/colors')
-const colors =  {
+const colors = {
   primary: defaultColors.orange,
   secondary: defaultColors.slate,
   neutral: defaultColors.stone,
@@ -37,21 +37,47 @@ const colors =  {
     900: 'hsl(25,19%,10%)',
   },
 }
+const grid = [
+  '4',
+  '8',
+  '12',
+  '16',
+  '20',
+  '24',
+  '28',
+  '32',
+  '36',
+  '40',
+  '44',
+  '48',
+  '52',
+  '56',
+  '60',
+  '64',
+  '72',
+  '80',
+  '96',
+  '128',
+  '160',
+]
 
 module.exports = {
   content: [],
-  safelist:[
-    ...Object.keys(colors).map(color => `text-${color}-500/20`),
-    ...['16', '32', '64', '80'].map(e => `h-${e}`),
-    ...['16', '32', '64', '80'].map(e => `grid-cols-autofill-${e}`),
-    ...['2xl', '4xl', '8xl', '10xl'].map(e => `text-${e}`),
+  safelist: [
+    ...Object.keys(colors).map((color) => `text-${color}-500/20`),
+    ...grid.map((e) => `h-${e}`),
+    ...grid.map(
+      (e) => `grid-cols-autofill-${e}`
+    ),
+    ...['2xl', '4xl', '8xl', '10xl', '12xl', '13xl', '14xl','15xl', '16xl'].map((e) => `text-${e}`),
+    ...['none', '2', '3', '4', '5', '6'].map((e) => `line-clamp-${e}`),
   ],
   tailwindcss: {
     viewer: true,
   },
   theme: {
     fontFamily: {
-      sans: [ 'Inter', 'Gramatika', 'sans-serif'],
+      sans: ['Inter', 'Gramatika', 'sans-serif'],
       hebrew: ['Assistant'],
     },
     colors,
@@ -65,33 +91,17 @@ module.exports = {
         '15xl': '240px',
         '16xl': '256px',
       },
-      gridTemplateColumns: {
-        // Complex site-specific row configuration
-        'autofill-4': 'repeat(auto-fill, minmax(1rem, 1fr))',
-        'autofill-8': 'repeat(auto-fill, minmax(2rem, 1fr))',
-        'autofill-12': 'repeat(auto-fill, minmax(3rem, 1fr))',
-        'autofill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
-        'autofill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
-        'autofill-24': 'repeat(auto-fill, minmax(6rem, 1fr))',
-        'autofill-28': 'repeat(auto-fill, minmax(7rem, 1fr))',
-        'autofill-32': 'repeat(auto-fill, minmax(8rem, 1fr))',
-        'autofill-36': 'repeat(auto-fill, minmax(9rem, 1fr))',
-        'autofill-40': 'repeat(auto-fill, minmax(10rem, 1fr))',
-        'autofill-44': 'repeat(auto-fill, minmax(11rem, 1fr))',
-        'autofill-48': 'repeat(auto-fill, minmax(12rem, 1fr))',
-        'autofill-52': 'repeat(auto-fill, minmax(13rem, 1fr))',
-        'autofill-56': 'repeat(auto-fill, minmax(14rem, 1fr))',
-        'autofill-60': 'repeat(auto-fill, minmax(15rem, 1fr))',
-        'autofill-64': 'repeat(auto-fill, minmax(16rem, 1fr))',
-        'autofill-72': 'repeat(auto-fill, minmax(18rem, 1fr))',
-        'autofill-80': 'repeat(auto-fill, minmax(20rem, 1fr))',
-        'autofill-96': 'repeat(auto-fill, minmax(24rem, 1fr))',
-        'autofill-128': 'repeat(auto-fill, minmax(32rem, 1fr))',
-        'autofill-160': 'repeat(auto-fill, minmax(40rem, 1fr))',
-      },
+      gridTemplateColumns: grid.reduce((acc, curr) => {
+        return { ...acc, [`autofill-${curr}`]: `repeat(auto-fill, minmax(${curr/4}rem, 1fr))` }
+      }, {}),
+      height: {
+        '128': '32rem',
+        '160': '40rem',
+      }
     },
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
     require('tailwind-css-variables')({
       screens: false,
       lineHeight: false,
