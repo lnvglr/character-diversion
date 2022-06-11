@@ -9,6 +9,7 @@ interface DiscourseState {
     [id: string]: Discourse
   }
   current: ComputedRef<Discourse>
+  search: string
   new: {
     title: string,
     content: string,
@@ -31,6 +32,7 @@ interface OpinionState {
 export const discourse = reactive<DiscourseState>({
   id: {},
   current: null,
+  search: '',
   new: {
     title: null,
     content: null,

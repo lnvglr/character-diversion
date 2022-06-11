@@ -44,20 +44,7 @@ export default {
 	},
 	watch: {
 		'$state.opinion.form.attributes.title'(value: string) {
-			const match = (value?.match(this.$f.glyphMethods.regexPattern) || []).map((e: string) => e.slice(1))
-			const font = this.$state.opinion.font
-			const matchedGlyphs =
-				match
-					.map(e => {
-						return (
-							font.literalMap[e] ||
-							font.postScriptMap[e] ||
-							font.nameMap[e]
-						)?.glyph.id
-					})
-					.filter(e => e)
-			// // @todo include selected
-
+			const matchedGlyphs = this.$f.glyphMethods.match(value)
 			this.$state.opinion.form.attributes.glyphs = [...new Set([...this.$state.opinion.selectedGlyphs, ...matchedGlyphs])].filter(e => e);
 		}
 	},

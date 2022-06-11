@@ -87,6 +87,19 @@ export const glyphMethods = {
   //                                       )
   // regexPattern: /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
   regexPattern: /\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/gi,
+  match: (string: string) => {
+    if (!string) return []
+    const match = (string.trim().match(glyphMethods.regexPattern) || []).map((e: string) => e.slice(1))
+			return match
+					.map(e => {
+						return (
+							opinion.font.literalMap[e] ||
+							opinion.font.postScriptMap[e] ||
+							opinion.font.nameMap[e]
+						)?.glyph.id
+					})
+					.filter(e => e)
+  }
 }
 
 export const utils = {

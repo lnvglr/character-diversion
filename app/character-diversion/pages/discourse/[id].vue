@@ -8,7 +8,7 @@
         }}</p>
         <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
       </div>
-      <div class="flex px-5 mb-10 ">
+      <div class="flex item-center px-5 mb-10 justify-between">
         <div class="button-group">
           <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all"
             />
@@ -16,6 +16,7 @@
           <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn"
             />
         </div>
+        <Input type="text" v-model="$state.discourse.search" placeholder="Search" containerClass="text-bold w-auto sm" />
         <!-- <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="highlighter" /> -->
       </div>
       <div :class="`grid grid-cols-2`">
