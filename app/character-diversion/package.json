@@ -37,7 +37,8 @@
     "markdown-it": "^13.0.1",
     "sharp": "^0.30.6",
     "tesseract.js": "^2.1.5",
-    "text-title-case": "^1.0.2"
+    "text-title-case": "^1.0.2",
+    "vue-virtual-scroller": "^2.0.0-alpha.1"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.0.3",

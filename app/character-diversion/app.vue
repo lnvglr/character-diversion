@@ -51,7 +51,8 @@ export default {
   },
   computed: {
     showHeader() {
-      return !['/discourse', '/', '/profile'].includes(this.$route.matched[0].path)
+      return false
+      // return !['/discourse', '/', '/profile'].includes(this.$route.matched[0].path)
     },
     direction() {
       return ['he', 'ar'].includes(this.$i18n.locale) ? 'rtl' : 'ltr'

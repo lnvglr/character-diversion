@@ -13,10 +13,10 @@
           <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all"
             />
           <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" />
-          <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn"
+        <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn"
             />
         </div>
-        <Input type="text" v-model="$state.discourse.search" placeholder="Search" containerClass="text-bold w-auto sm" />
+        <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..." containerClass="text-bold w-auto sm" />
         <!-- <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="highlighter" /> -->
       </div>
       <div :class="`grid grid-cols-2`">
@@ -30,12 +30,12 @@
       </div>
       </div>
       <GlyphsSelection
-        :gridSize="view === 'selection' ? '16' :  (view === 'detail' ? '64' : '80')" 
-        :fontSize="view === 'selection' ? '4xl' : (view === 'detail' ? '8xl' : '16xl')"
-        :frame="view !== 'selection'"
+        :gridSize="view === 'selection' ? '12' :  (view === 'detail' ? '64' : '80')"
+        :fontSize="view === 'selection' ? '2xl' : (view === 'detail' ? '8xl' : '16xl')"
         :edit="view !== 'selection' && $state.opinion.formActive"
         :annotations="view !== 'selection'"
         :intersection="view === 'intersect'"
+        :frame="view !== 'selection'" 
       />
     </div>
 
@@ -44,32 +44,12 @@
 </template>
 
 <script lang="ts">
-import { SamsaGlyph } from '@/types'
 export default {
   data() {
     return {
-      view: 'selection',
+      view: 'detail',
       edit: false
     }
-  },
-  computed: {
-    previewGlyphs() {
-      const allGlyphs = this.$state.opinion.font.glyphs
-      const formGlyphs = this.$state.opinion.form.attributes.glyphs
-      const activeGlyphs = this.$state.opinion.active.attributes.glyphs
-      const selectedGlyphs = this.$state.opinion.selectedGlyphs
-      if (formGlyphs.length === 0 && activeGlyphs.length === 0 && selectedGlyphs.length === 0) {
-        return allGlyphs
-      }
-      return allGlyphs.filter((e: SamsaGlyph) => formGlyphs.includes(e.id) || activeGlyphs.includes(e.id) || selectedGlyphs.includes(e.id))
-    },
-  },
-  mounted() {
-  },
-  methods: {
-    removeDiscourse(id: string) {
-      this.$strapi.delete("discourses", id).then(({ data }) => delete this.$state.discourse.id[data.id]);
-    },
   },
 }
 </script>

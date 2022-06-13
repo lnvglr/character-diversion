@@ -1,11 +1,13 @@
-import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '~/types'
 import { reactive, ComputedRef } from 'vue'
+import { useNuxtApp, useRoute } from '#app'
+import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '~/types'
+
 import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '~~/composables/methods'
 import unicodeTable from '~~/composables/unicode-table'
 
 interface DiscourseState {
-  id: {
+  all: {
     [id: string]: Discourse
   }
   current: ComputedRef<Discourse>
@@ -15,6 +17,8 @@ interface DiscourseState {
     content: string,
     files: object
   },
+  setCurrent: (id: string) => void
+  fetch: () => void
 }
 interface OpinionState {
   form: Opinion
@@ -30,7 +34,7 @@ interface OpinionState {
   reset: () => void
 }
 export const discourse = reactive<DiscourseState>({
-  id: {},
+  all: {},
   current: null,
   search: '',
   new: {
@@ -38,11 +42,48 @@ export const discourse = reactive<DiscourseState>({
     content: null,
     files: null
   },
+  setCurrent: (id: string) => {
+    const current = discourse.all[id as keyof typeof discourse.all]
+    if (!current) return discourse.current = null
+    useSamsaFont(current.attributes.font?.data?.attributes.url)
+      .then((font: SamsaFont) => opinion.font = font)
+      .catch(e => console.error(e))
+      .finally(() => discourse.current = current)
+  },
+  fetch: () => {
+    new Promise(
+      (resolve, reject) => {
+        useNuxtApp().$strapi.find('discourses', {
+          // @todo: pull opinions only for current discourse
+          // then remove data key and spread opinions.data to opinions
+          populate: [
+            'featuredImage',
+            'font',
+            'author',
+            'author.avatar',
+            'opinions.author',
+            'opinions.author.avatar',
+            'opinions.comments.author',
+            'opinions.comments.author.avatar'
+          ],
+          sort: ['publishedAt:desc'],
+        })
+          .then(({data}) => {
+            discourse.all = data.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
+            discourse.setCurrent(useRoute().params.id)
+            resolve(discourse.all)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      }
+    )
+  }
 })
 const defaultOpinion = {
   id: null,
   attributes: {
-    title: null,
+    content: null,
     axes: {},
     activeAxes: [],
     glyphs: [],
@@ -80,6 +121,7 @@ export const useSamsaFont = (fontName: string) =>
             reject(e)
           } else {
             e.cmapReverse = utils.invertObject(e.cmap)
+            e.config.unicodeTable = unicodeTable
             const map = mapGlyphs(e)
             e.glyphMap = map.glyphMap
             e.literalMap = map.literalMap

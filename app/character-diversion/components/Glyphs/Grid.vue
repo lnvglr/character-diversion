@@ -15,10 +15,6 @@
 <script lang="ts">
 export default {
 	props: {
-		scale: {
-			type: Number,
-			default: 1,
-		},
 		width: {
 			type: Number,
 			default: 0,

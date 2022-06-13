@@ -30,15 +30,15 @@ export default {
     color: {
       type: String,
       default: '',
-      validator: (e: string) => [
-        '',
-        'primary',
-        'secondary',
-        'info',
-        'success',
-        'warning',
-        'alert',
-      ].includes(e)
+      // validator: (e: string) => [
+      //   '',
+      //   'primary',
+      //   'secondary',
+      //   'info',
+      //   'success',
+      //   'warning',
+      //   'alert',
+      // ].includes(e)
     }
   },
   computed: {
@@ -136,7 +136,7 @@ export default {
     }
   }
 
-  &[disabled=true] {
+  &[disabled]:not([disabled=false]) {
     opacity: 0.5;
     pointer-events: none;
     cursor: default;

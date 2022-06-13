@@ -7,10 +7,6 @@ export default {
 		path: {
 			type: String,
 		},
-		scale: {
-			type: Number,
-			default: 1,
-		},
 		strokeWidth: {
 			type: String,
 			default: '1px',

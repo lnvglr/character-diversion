@@ -14,7 +14,7 @@
               <p
                 class="line-clamp-3 text-sm break-words"
                 :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
-                v-html="parseOpinion.title"
+                v-html="parseOpinion.content"
               />
             </div>
           </div>
@@ -76,7 +76,7 @@ export default {
     },
     parseOpinion() {
       const parsedGlyphs = []
-      const titleRaw = this.opinion.attributes.title.replaceAll(this.$f.glyphMethods.regexPattern, (glyph: string) => {
+      const contentRaw = this.opinion.attributes.content?.replaceAll(this.$f.glyphMethods.regexPattern, (glyph: string) => {
         if (this.$f.utils.invertObject(this.opinion.attributes.glyphs)[this.$f.glyphMethods.glyphToUnicode(glyph.slice(1))]) {
           parsedGlyphs.push(this.$f.glyphMethods.glyphToUnicode(glyph.slice(1)))
           return `<span class='glyph-tag'>${glyph}</span>`
@@ -84,12 +84,9 @@ export default {
         return glyph
 
       })
-      // const title = this.active ? titleRaw : titleRaw.substring(0, 160) + (titleRaw.length > 180 ? ' ...' : '');
-      const title = titleRaw
-
-
+      const content = this.$f.utils.renderMarkdown(contentRaw)
       return {
-        title: this.$f.utils.renderMarkdown(title),
+        content,
         parsedGlyphs,
       }
     },
@@ -112,6 +109,7 @@ export default {
       const selected = JSON.parse(JSON.stringify(opinion))
       this.$state.opinion.active = selected
       this.$state.opinion.form.attributes.axes = selected.attributes.axes
+      this.$state.opinion.formActive = false
       // this.$state.opinion.form.attributes.glyphs = selected.attributes.glyphs
       // this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
     },

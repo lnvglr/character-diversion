@@ -35,5 +35,8 @@
   "submit.with.enter": "Submit with enter",
   "cancel": "Cancel",
   "insert.into.opinion": "Insert {glyph} into opinion",
-  "markdown.is.allowed": "Markdown is allowed"
+  "markdown.is.allowed": "Markdown is allowed",
+  "vote.up": "Vote up",
+  "vote.down": "Vote down",
+  "vote.not.allowed": "You are not allowed to vote on your own opinions."
 }

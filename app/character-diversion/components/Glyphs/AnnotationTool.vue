@@ -1,37 +1,40 @@
 <template>
-	<!-- all annotationa -->
-	<circle
-		v-for="annotation in allAnnotations"
-		:cx="annotation.x"
-		:cy="annotation.y"
-		:r="radius"
-		class="fill-beige-300/10 stroke-beige-400/30 stroke"
-		:class="{
-			'pointer-events-none': edit,
-			'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': !edit
-		}"
-		:stroke-width="strokeWidth"
-		@click="activateOpinion(annotation.opinionId)"
-	/>
-
 	<!-- pointer -->
 	<circle
 		v-if="show"
 		:cx="pointerPosition.x"
 		:cy="pointerPosition.y"
-		:r="radius / 1.25"
+		:r="annotationRadius / 1.25"
 		class="fill-success-500/20 stroke-success-500/70 stroke"
 		:class="{ 'cursor-none': show }"
 		:stroke-width="strokeWidth"
-		@click="addAnnotation"
+		@click="addAnnotation()"
 	/>
+	<!-- all annotations -->
+	<circle
+		v-for="annotation in allAnnotations"
+		:cx="annotation.x"
+		:cy="annotation.y"
+		:r="annotationRadius"
+		class="fill-beige-300/10 stroke-beige-400/30 stroke"
+		:class="{
+			// 'pointer-events-none': edit,
+			// 'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': !edit
+			'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': true
+		}"
+		:stroke-width="strokeWidth"
+		@click="edit ? addAnnotation(annotation) : activateOpinion(annotation.opinionId)"
+		@pointerenter="hoverRemove = true"
+		@pointerleave="hoverRemove = false"
+	/>
+
 
 	<!-- newly added annotations -->
 	<circle
 		v-for="annotation in currentAnnotations"
 		:cx="annotation.x"
 		:cy="annotation.y"
-		:r="radius"
+		:r="annotationRadius"
 		class="
 			stroke
 			fill-primary-500/20
@@ -59,7 +62,7 @@ export default {
 		},
 		radius: {
 			type: Number,
-			default: 150
+			default: 200
 		},
 		pointer: {
 			type: Object
@@ -75,7 +78,7 @@ export default {
 			default: false
 		},
 		offset: {
-			type: Number
+			type: Object
 		}
 	},
 	data() {
@@ -98,19 +101,16 @@ export default {
 			annotations.splice(this.$f.utils.arrayContainsObject(annotations, annotation), 1)
 			this.hoverRemove = false
 		},
-		addAnnotation() {
-			this.pointerPosition = null
+		addAnnotation(annotation = null) {
+			// this.$state.opinion.annotationTool = null
 			if (!this.$state.opinion.form.attributes.annotations) {
 				this.$state.opinion.form.attributes.annotations = {}
 			}
 			if (!(this.glyph.id in this.$state.opinion.form.attributes.annotations)) {
 				this.$state.opinion.form.attributes.annotations[this.glyph.id] = []
 			}
-			this.$state.opinion.form.attributes.annotations[this.glyph.id].push({
-				x: this.pointerPosition.x,
-				y: this.pointerPosition.y,
-				// type: 'point'
-			})
+			const { x, y } = annotation || this.pointerPosition
+			this.$state.opinion.form.attributes.annotations[this.glyph.id].push({ x, y })
 			this.$state.opinion.selectedGlyphs = [...new Set([...this.$state.opinion.selectedGlyphs, this.glyph.id])]
 		},
 		addOpinionId( annotation: Annotation, opinion: Opinion) {
@@ -118,6 +118,9 @@ export default {
 		},
 	},
 	computed: {
+		annotationRadius() {
+			return this.radius * this.$state.opinion.font.unitsPerEm / 1000
+		},
 		currentAnnotations() {
 			const currentAnnotations = []
 			const formAnnotation = this.$state.opinion.form.attributes.annotations?.[this.glyph.id]
@@ -139,6 +142,9 @@ export default {
 				if (!annotations) return
 				annotations?.[this.glyph.id]?.forEach((annotation: Annotation) => {
 					if (this.currentAnnotations.some((a: Annotation) => a.opinionId === opinion.id)) return
+					const newAnnotation = this.addOpinionId(annotation, opinion)
+					const existingReference = allAnnotations.find(({x, y}) => annotation.x === x && annotation.y === y)
+					if (existingReference) return
 					allAnnotations.push(this.addOpinionId(annotation, opinion))
 				})
 			})
@@ -148,7 +154,13 @@ export default {
 			return this.$state.opinion.annotationTool
 		},
 		show() {
-			return this.edit && this.glyph.id === this.pointerPosition.id && this.pointerPosition.x !== null && this.pointerPosition.y !== null && !this.hoverRemove
+			return (
+				this.edit &&
+				this.glyph.id === this.pointerPosition.id &&
+				this.pointerPosition.x !== null &&
+				this.pointerPosition.y !== null &&
+				!this.hoverRemove
+			)
 		}
 	},
 	watch: {

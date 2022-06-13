@@ -2,7 +2,7 @@ export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runti
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
-// add cmap property to SamsaFont ts type
+
 declare module '@/assets/samsa-core' {
   interface SamsaFont {
     cmap: {
@@ -28,9 +28,9 @@ declare module '@/assets/samsa-core' {
   interface SamsaGlyph {
     value: string
     openType: {
-      is?: string;
-      lig?: string;
-      base?: string;
+      is?: string
+      lig?: string
+      base?: string
       [stylisticSet: string]: string
     }
   }
@@ -52,40 +52,35 @@ export interface GlyphMap {
   unicodeHex: string,
   postScript: string
 }
-// import { Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
-// export interface Strapi4RequestParamsObject extends Omit<Strapi4RequestParams, 'populate'> {
-//   populate: string | Array<string> | { [key: string]: Strapi4RequestParamsObject };
-// }
+
+//==============================================================
+
 export interface Discourse {
-  id: string;
+  id: string
   attributes: {
-    title: string;
-    content: string;
-    author?: string;
-    createdAt?: Date;
-    publishedAt?: Date;
-    updatedAt?: Date;
-    opinions?: Opinion[];
-    SamsaFont: SamsaFont;
-    fonts: SamsaFont[];
-    font: string;
+    title: string
+    content: string
+    author?: Author
+    createdAt?: string
+    publishedAt?: string
+    updatedAt?: string
+    opinions?: Opinion[]
+    font: string
   }
 }
 export interface Opinion {
   id: string
   attributes: {
-    title?: string
-    content?: string
-    author?: string
-    createdAt?: Date
-    publishedAt?: Date
-    updatedAt?: Date
+    content: string
+    author?: Author
+    createdAt?: string
+    publishedAt?: string
+    updatedAt?: string
     comments?: Comment[]
-    fontSpectrum?: FontSpectrum[]
-    glyphs?: Array<GlyphSpectrum | string | number>
-    parsedGlyphs?: Array<number>
-    tuple?: TupleSpectrum
-    votes: Vote[]
+    responseTo?: number
+    responses?: number[]
+    glyphs?: number[]
+    votes?: Vote[]
     annotations?: {
       [id: number]: Annotation[]
     }
@@ -95,10 +90,20 @@ export interface Opinion {
     activeAxes?: string[]
   }
 }
+export interface Author {
+  id: number
+  createdAt: string
+  email: string
+  name: string
+  username: string
+  role: object
+  avatar: object
+}
+
 export interface Vote {
-  user: string
-  value: 1 | -1
-  date: Date
+  author: string
+  value: number
+  createdAt: string
 }
 export interface Annotation {
   x: number
@@ -110,19 +115,6 @@ export interface Comment {
   id: string
   name: string
   author: string
-  createdAt: Date
-  updatedAt: Date
-}
-export interface FontSpectrum {
-  font: SamsaFont
-  glyphSpectrum?: Array<GlyphSpectrum | string>
-  tupleSpectrum?: TupleSpectrum[]
-}
-export interface GlyphSpectrum {
-  glyph: string
-  samsaGlyph?: SamsaGlyph
-  tupleSpectrum?: TupleSpectrum[]
-}
-export interface TupleSpectrum {
-  [name: string]: [min: number, max: number]
+  createdAt: string
+  updatedAt: string
 }

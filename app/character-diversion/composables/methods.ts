@@ -116,10 +116,10 @@ export const utils = {
     )
     return objectInArray && array.indexOf(objectInArray)
   },
-  relativeTime(time: string) {
+  relativeTime: (time: string) => {
     return useRelativeTime(time)
   },
-  renderMarkdown(markdown: string) {
+  renderMarkdown: (markdown: string): string => {
     return md.render(markdown)
   },
 }

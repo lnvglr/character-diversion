@@ -1,31 +1,24 @@
 <template>
-	<div class="flex items-center relative select-none">
-		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
-			:viewBox="viewBox.join(' ')" class="pointer-events-none" ref="svgFrame"></svg>
-		<svg v-if="path || frame" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
-			:viewBox="viewBox.join(' ')" class="h-full absolute" ref="svg" @pointerleave="$state.opinion.annotationTool.id = null">
-			<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" :scale="scale" />
-			<GlyphsFrame v-if="frame" :scale="scale" :end="characterWidth" :strokeWidth="strokeWidth" />
-			<GlyphsGlyph v-if="path" :path="path" :scale="scale" :class="{ 'fill-info-500': intersection }"
-				:strokeWidth="strokeWidth" />
-			<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :scale="scale" :class="'fill-alert-500'" :strokeWidth="strokeWidth" />
-			<GlyphsAnnotationTool
-				v-if="annotations"
-				:edit="edit"
-				:glyph="glyph"
-				:strokeWidth="strokeWidth"
-				:pointer="pointer"
-				:height="height"
-				:scaling="scaling"
-				:offset="offset"
-			/>
+	<div class="flex items-center relative select-none" ref="container">
+		<svg :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`" :viewBox="viewBox.join(' ')"
+			class="pointer-events-none" ref="svgFrame"></svg>
+		<svg ref="svg" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
+			class="h-full absolute" @pointerleave="$state.opinion.annotationTool.id = null" :viewBox="viewBox.join(' ')">
+			<g v-if="path">
+				<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" />
+				<GlyphsFrame v-if="frame" :end="characterWidth" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph :path="path" :class="{ 'fill-info-500': intersection }" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-alert-500'" :strokeWidth="strokeWidth" />
+				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"
+					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" />
+			</g>
 		</svg>
 		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none"
 			style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
 	</div>
 </template>
 <script lang="ts">
-import { SamsaGlyph } from "~~/types"
+import { SamsaGlyph } from "@/types"
 
 export default {
 	props: {
@@ -66,39 +59,45 @@ export default {
 	},
 	data() {
 		return {
-			baselineOffset: 0,
 			decomposed: null,
 			decomposedAlt: null,
-			strokeWidth: '1px',
+			strokeWidth: '10px',
+			transform: 'scale(1,-1)',
 			scaling: 1,
 			height: 0,
 			pointer: {},
+			observer: new IntersectionObserver(e => this.checkView(e[0])),
+			inView: false,
+			pointerListener: null,
 		}
 	},
 	mounted() {
-		if (this.$refs.svgFrame && this.$refs.svg) {
-			this.setScaling()
-			this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
-		}
+		this.observer.observe(this.$refs.container);
+		this.setScaling()
 	},
 	watch: {
 		watcher: {
 			handler() {
 				this.setScaling()
-				this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
 			},
 			deep: true,
 		},
-		tuple: {
+		decomposeWatcher: {
 			handler() {
-				this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
-				this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
+				setTimeout(() => {
+					if (this.inView) {
+						this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
+						this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
+					}
+				}, 0)
 			},
 			deep: true,
-			immediate: true
 		},
 	},
 	computed: {
+		decomposeWatcher() {
+			return [this.tuple, this.inView]
+		},
 		path() {
 			return this.decomposed?.svgPath()
 		},
@@ -108,23 +107,17 @@ export default {
 		points() {
 			return this.decomposed?.points
 		},
-		characterWidth() {
-			const [limits] = this.points.slice(-3, -2)
-			return limits[0]
+		characterWidth(): number {
+			return this.$state.opinion.font.widths[this.glyph.id]
 		},
 		width() {
 			this.characterWidth + this.glyph.font.unitsPerEm * 2
 		},
 		scale() {
 			return 1
-			// return 1000 / this.glyph.font.unitsPerEm
-		},
-		baseline() {
-			return this.points
-				.map((pt: number[]) => pt[1])
-				.reduce((a: number, b: number) => (a >= b ? a : b), 0)
 		},
 		boundaries() {
+			if (!this.points) return [0, this.characterWidth]
 			const xValues = this.points.map((pt: number[]) => pt[0])
 			return [Math.min(...xValues), Math.max(...xValues)]
 		},
@@ -144,18 +137,21 @@ export default {
 		},
 		fontSize() {
 			return (this.characterWidth + this.offset.x) / this.glyph.font.unitsPerEm
-		},
-		transform() {
-			return `scale(${this.scale},-${this.scale})`
 		}
 	},
 	methods: {
+		checkView({ isIntersecting }) {
+			this.inView = isIntersecting
+		},
 		setScaling() {
 			if (!window || !this.$refs.svg) return
 			const style = window.getComputedStyle(this.$refs.svg)
 			this.$nextTick(() => {
 				this.scaling = (this.glyph.font.unitsPerEm / parseInt(style.fontSize))
 				this.strokeWidth = this.scaling + 'px'
+				if (!this.pointerListener) this.pointerListener = this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
+
+				if (!this.$refs.svgFrame) return
 				this.height = (this.$refs.svg.getBoundingClientRect().height - this.$refs.svgFrame.getBoundingClientRect().height) / 2
 			})
 
@@ -164,7 +160,4 @@ export default {
 }
 </script>
 <style scoped>
-svg {
-	/* background: rgba(255, 0, 0, 0.1) */
-}
 </style>

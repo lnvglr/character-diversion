@@ -7,7 +7,7 @@
 export default {
 	props: {
 		value: {
-			type:[Number, Boolean],
+			type: String,
 		},
 		maxlength: {
 			type: Number,

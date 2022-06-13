@@ -1,27 +1,35 @@
 <template>
 	<TransitionExpand>
-		<form v-if="$state.opinion.form.attributes && $state.opinion.formActive" @submit.prevent="postOpinion">
+		<form v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive" @submit.prevent="postOpinion">
 			<Input 
 				type="textarea" 
-				maxlength="500" 
+				:maxlength="500" 
 				:placeholder="$t('describe.opinion')"
-				v-model="$state.opinion.form.attributes.title" 
+				v-model="$state.opinion.form.attributes.content" 
 				:submitOnEnter="true" 
 				:allowMarkdown="true" 
 				@enter="postOpinion"
 				@cancel="$state.opinion.reset('form')" 
 			/>
-			<Button :disabled="!canPost" class="w-full mb-1" color="success" type="submit">{{ $t('share.opinion') }}</Button>
+			<div class="flex gap-1 w-full mb-1">
+			<Button
+				class="clear w-full"
+				color="alert"
+				@click="$state.opinion.reset('form')"
+			>{{ $t('cancel') }}</Button>
+			<Button :disabled="!canPost" class="w-full" color="success" type="submit">{{ $t('share.opinion') }}</Button>
+			</div>
 			<!-- <small class="opacity-50">{{ $t('hinting.reference.glyphs.slash') }}</small> -->
-			<div>
-				<UITag v-for="g in string">{{ g }}</UITag>
+			<div v-if="selectedGlyphs.length > 0">
+				<font-awesome-icon :icon="['fas', 'circle-check']" class="text-beige-400 mr-2" />
+				<UITag v-for="g in selectedGlyphs">{{ g }}</UITag>
 			</div>
 			<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
 		</form>
 	</TransitionExpand>
 	<TransitionExpand>
 		<div v-if="!$state.opinion.formActive">
-			<Button class="w-full mb-1" color="success" @click="$state.opinion.formActive = true"
+			<Button class="w-full mb-1" color="success" @click="openOpinionForm"
 				label="{{$t('new.opinion')}}" icon="plus" />
 		</div>
 	</TransitionExpand>
@@ -33,27 +41,32 @@ export default {
 		currentDiscourse() {
 			return this.$state.discourse.current;
 		},
-		string() {
-			if (!this.$state.opinion.form.attributes) return ''
-			return this.$f.glyphMethods.getGlyphsById(this.$state.opinion.form.attributes.glyphs)
+		selectedGlyphs() {
+			console.log(this.$state.opinion.selectedGlyphs)
+			if (!this.$state.opinion.selectedGlyphs) return []
+			return this.$f.glyphMethods.getGlyphsById([...new Set([...this.$state.opinion.form.attributes.glyphs, ...this.$state.opinion.selectedGlyphs])])
 		},
 		canPost() {
-			const { title } = this.$state.opinion.form.attributes
-			if (title !== null && title?.length > 1) return true
+			const { content } = this.$state.opinion.form.attributes
+			if (content !== null && content?.length > 1) return true
 		},
 	},
 	watch: {
-		'$state.opinion.form.attributes.title'(value: string) {
+		'$state.opinion.form.attributes.content'(value: string) {
 			const matchedGlyphs = this.$f.glyphMethods.match(value)
 			this.$state.opinion.form.attributes.glyphs = [...new Set([...this.$state.opinion.selectedGlyphs, ...matchedGlyphs])].filter(e => e);
 		}
 	},
 	methods: {
+		openOpinionForm() {
+			if (!this.$strapi.user) return this.$router.push('/login')
+			this.$state.opinion.formActive = true
+		},
 		postOpinion() {
-			const { title, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
+			const { content, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
 			if (!this.canPost) return
 			const opinion = {
-				title,
+				content,
 				glyphs,
 				axes,
 				annotations,
@@ -76,9 +89,11 @@ export default {
 							data: [data],
 						};
 					}
-					this.$state.opinion.form.attributes.title = "";
+					this.$state.opinion.form.attributes.content = "";
 					this.$state.opinion.form.attributes.annotations = {};
 					this.$state.opinion.active = JSON.parse(JSON.stringify(data))
+					this.$state.opinion.selectedGlyphs = []
+					this.$state.opinion.formActive = false
 				})
 		}
 	},

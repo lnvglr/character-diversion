@@ -19,36 +19,12 @@ export default {
     })
   },
   async mounted() {
-    const response = await this.$strapi.find('discourses', {
-      populate: ['featuredImage', 'font', 'author', 'author.avatar', 'opinions.author', 'opinions.author.avatar', 'opinions.comments.author', 'opinions.comments.author.avatar'],
-      sort: ['publishedAt:desc'],
-    })
-    // const discourses = ([...response.data]).reverse();
-    const discourses = response.data;
-    this.$state.discourse.id = discourses.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
-    this.setCurrentDiscourse(this.$route.params.id)
-
-  },
-  methods: {
-    setCurrentDiscourse(id: string) {
-      const current = this.$state.discourse.id[id as keyof typeof discourse.id]
-      if (!current) return this.$state.discourse.current = null
-      useSamsaFont(current.attributes.font?.data?.attributes.url)
-        .then((font: SamsaFont) => {
-          this.$state.opinion.font = font
-        })
-        .catch(e => console.error(e))
-        .finally(() => {
-          this.$state.discourse.current = current
-          // this.animationName = 'slide'
-        })
-    },
+    this.$state.discourse.fetch()
   },
   watch: {
     '$route': {
       handler() {
-        this.setCurrentDiscourse(this.$route.params.id)
-        // this.animationName === 'page-back'
+        this.$state.discourse.setCurrent(this.$route.params.id)
       },
       immediate: true
     },

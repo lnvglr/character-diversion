@@ -2,9 +2,9 @@
   <NuxtLayout name="split" back="/discourse">
     <template #title>{{ formData.title || $t('new.discourse') }}</template>
     <form @submit.prevent="postDiscourse" class="flex flex-col justify-center">
-      <Input type="text" name="title" v-model="formData.title" :placeholder="$t('title')" validation="required" />
+      <Input type="text" name="title" v-model="formData.title" :placeholder="$t('title')" validation="required" class="lg" />
       <Input type="textarea" name="content" v-model="formData.content" :placeholder="$t('describe.discourse')" :maxlength="500" />
-      <Input type="file" name="font" v-model="formData.font" :accept="['ttf', 'otf', 'jpg', 'png']" />
+      <Input type="file" name="font" v-model="formData.font" :accept="['ttf', 'otf']" :maxFiles="1" />
       <Button type="submit" class="lg">{{ $t('start.new.discourse') }}</Button>
     </form>
   </NuxtLayout>
@@ -48,7 +48,7 @@ export default {
           })
         })
         .then(({ data }) => {
-          this.$state.discourse.id[data.id] = data
+          this.$state.discourse.all[data.id] = data
           this.$router.push(`/discourse/${data.id}`)
         })
     }

@@ -28,7 +28,7 @@ export default {
   computed: {
     discourses() {
       return Object
-        .values(this.$state.discourse.id)
+        .values(this.$state.discourse.all)
         .sort((a: Discourse, b: Discourse) => {
           return Number(new Date(b.attributes.publishedAt)) - Number(new Date(a.attributes.publishedAt))
         })

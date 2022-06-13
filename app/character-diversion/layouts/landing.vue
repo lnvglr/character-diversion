@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col min-h-screen">
-		<main class="p-10 pb-40 bg-alert-200 text-black grow">
+		<main class="p-10 pb-40 bg-beige-200 text-black grow">
 			<div class="max-w-4xl mx-auto">
 				<!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { Discourse } from '~~/types'
+import { Discourse } from '@/types'
 export default {
 	data() {
 		return {
@@ -50,11 +50,14 @@ export default {
 			letter: 'r'
 		}
 	},
+	mounted() {
+    this.$state.discourse.fetch()
+	},
 	computed: {
 		discourses() {
 			const n = 3
 			const d = Object
-				.values(this.$state.discourse.id)
+				.values(this.$state.discourse.all)
 				.sort((a: Discourse, b: Discourse) => {
 					return Number(new Date(a.attributes.publishedAt)) - Number(new Date(b.attributes.publishedAt))
 				})
@@ -90,7 +93,7 @@ export default {
 	--ry: -15deg;
 	border-radius: var(--rounded-md);
 	transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz)) translateY(var(--ty));
-	background-color: var(--color-alert-200);
+	background-color: var(--color-beige-200);
 	transition: var(--transition-duration-300) var(--transition-timing-function-default);
 
 	&>* {

@@ -5,7 +5,7 @@
 		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
 		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
 			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
-		<div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10" v-if="$strapi.user && !sidebarMinimized">
+		<div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10" v-if="!sidebarMinimized">
 			<FormNewOpinion />
 		</div>
 		<ListOpinions v-if="!sidebarMinimized" class="overflow-scroll" />
