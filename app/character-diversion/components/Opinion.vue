@@ -12,7 +12,7 @@
                   class="clear text-sm xs" :class="{ 'opacity-0 pointer-events-none': !active }"
                   @click.stop="removeOpinion()" color="alert" icon="trash" /></div>
               <p
-                class="line-clamp-3 text-sm break-words"
+                class="line-clamp-3 text-sm break-words markdown"
                 :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
                 v-html="parseOpinion.content"
               />
@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-
+import { Opinion } from "~~/types"
 export default {
   props: {
     opinion: {
@@ -117,7 +117,7 @@ export default {
       this.$strapi.delete("opinions", this.opinion.id).then(({ data }) => {
         const opinions = this.$state.discourse.current.attributes.opinions
         if (opinions?.data) {
-          opinions.data = opinions.data.filter((e) => e.id !== data.id)
+          opinions.data = opinions.data.filter((e: Opinion) => e.id !== data.id)
         }
         this.$state.opinion.reset('active')
       });
@@ -128,13 +128,6 @@ export default {
 
 <style lang="scss">
 .opinion {
-  a {
-    color: var(--color-info-500);
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
   .opinion-title {
     text-overflow: ellipsis;
     overflow: hidden;

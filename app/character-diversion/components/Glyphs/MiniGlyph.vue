@@ -4,17 +4,17 @@
 			class="pointer-events-none" ref="svgFrame"></svg>
 		<svg ref="svg" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
 			class="h-full absolute" @pointerleave="$state.opinion.annotationTool.id = null" :viewBox="viewBox.join(' ')">
-			<g v-if="path">
+			<g>
 				<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" />
 				<GlyphsFrame v-if="frame" :end="characterWidth" :strokeWidth="strokeWidth" />
 				<GlyphsGlyph :path="path" :class="{ 'fill-info-500': intersection }" :strokeWidth="strokeWidth" />
-				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-alert-500'" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-primary-500'" :strokeWidth="strokeWidth" />
 				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"
 					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" />
 			</g>
 		</svg>
-		<div v-if="!path" class="font-user absolute w-full left-0 text-center pointer-events-none"
-			style="padding-bottom: 0.24em;">{{ glyph.value }}</div>
+		<div v-if="!path"
+			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.opinion.font.glyphMap[glyph.id].literal }}</div>
 	</div>
 </template>
 <script lang="ts">
@@ -108,7 +108,7 @@ export default {
 			return this.decomposed?.points
 		},
 		characterWidth(): number {
-			return this.$state.opinion.font.widths[this.glyph.id]
+			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.opinion.font.widths[this.glyph.id]
 		},
 		width() {
 			this.characterWidth + this.glyph.font.unitsPerEm * 2
@@ -160,4 +160,7 @@ export default {
 }
 </script>
 <style scoped>
+.font-user {
+	font-variation-settings: var(--font-variation-settings)
+}
 </style>

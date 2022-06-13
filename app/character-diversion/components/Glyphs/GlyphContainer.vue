@@ -19,7 +19,7 @@
 			:frame="frame"
 			:edit="edit"
 			:intersection="intersection"
-			:watcher="[gridSize]"
+			:watcher="[gridSize, intersection]"
 			:title="glyph.name"
 		/>
 		<Input
@@ -103,7 +103,6 @@ export default {
 	},
 	methods: {
 		checkView({ isIntersecting }) {
-			console.log(isIntersecting)
 			this.inView = isIntersecting
 		},
 		glyphName(glyph: SamsaGlyph, literal = false) {

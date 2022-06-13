@@ -3,10 +3,10 @@
     <div class="grow overflow-auto">
       <div class="p-5 flex flex-col gap-5">
         <h1 class="text-6xl font-bold">{{ $state.discourse.current.attributes.title }}</h1>
-        <p class="text-sm text-beige-500">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
+        <p class="text-sm text-beige-400">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
           $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
         }}</p>
-        <p class="text-md">{{ $state.discourse.current.attributes.content }}</p>
+        <p class="text-md max-w-lg">{{ $state.discourse.current.attributes.content }}</p>
       </div>
       <div class="flex item-center px-5 mb-10 justify-between">
         <div class="button-group">
@@ -35,7 +35,8 @@
         :edit="view !== 'selection' && $state.opinion.formActive"
         :annotations="view !== 'selection'"
         :intersection="view === 'intersect'"
-        :frame="view !== 'selection'" 
+        :frame="view !== 'selection'"
+        :style="style"
       />
     </div>
 
@@ -49,6 +50,16 @@ export default {
     return {
       view: 'detail',
       edit: false
+    }
+  },
+  mounted() {
+  },
+  computed: {
+    style() {
+      const axes = Object.entries(this.$state.opinion.form.attributes.axes).map(axis => {
+        return `'${axis[0]}' ${axis[1][0]}`;
+      }).join(', ')
+      return `--font-variation-settings: ${axes}`
     }
   },
 }

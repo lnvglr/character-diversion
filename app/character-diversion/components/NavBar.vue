@@ -31,10 +31,10 @@
 
       </li>
 
-      <LanguageSwitcher class="flex-col w-11 mt-auto" :short="true" />
-      <ButtonTheme class="hidden sm:block " :icon="true" :label="false" />
+      <!-- <LanguageSwitcher class="flex-col w-11 mt-auto" :short="true" />
+      <ButtonTheme class="hidden sm:block " :icon="true" :label="false" /> -->
       <Button v-if="!$strapi.user" to="/login" class="hidden sm:block" icon="arrow-right-to-bracket" :label="false" />
-      <ButtonLogout v-else class="hidden sm:block hover:bg-alert-500 hover:text-white hover:shadow-none" :icon="true" :label="false" />
+      <ButtonLogout v-else class="clear hidden sm:block" color="alert" :icon="true" :label="false" />
     </ul>
   </nav>
 </template>

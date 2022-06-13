@@ -119,7 +119,8 @@ export default {
 	},
 	computed: {
 		annotationRadius() {
-			return this.radius * this.$state.opinion.font.unitsPerEm / 1000
+			const scale = (1 / this.scaling) * 30
+			return this.radius * this.$state.opinion.font.unitsPerEm / 1000 / scale
 		},
 		currentAnnotations() {
 			const currentAnnotations = []

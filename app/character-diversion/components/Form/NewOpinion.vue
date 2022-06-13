@@ -29,8 +29,8 @@
 	</TransitionExpand>
 	<TransitionExpand>
 		<div v-if="!$state.opinion.formActive">
-			<Button class="w-full mb-1" color="success" @click="openOpinionForm"
-				label="{{$t('new.opinion')}}" icon="plus" />
+			<Button class="w-full" color="success lg" @click="openOpinionForm"
+				:label="$t('new.opinion')" icon="plus">{{$t('new.opinion')}}</Button>
 		</div>
 	</TransitionExpand>
 </template>
@@ -42,7 +42,6 @@ export default {
 			return this.$state.discourse.current;
 		},
 		selectedGlyphs() {
-			console.log(this.$state.opinion.selectedGlyphs)
 			if (!this.$state.opinion.selectedGlyphs) return []
 			return this.$f.glyphMethods.getGlyphsById([...new Set([...this.$state.opinion.form.attributes.glyphs, ...this.$state.opinion.selectedGlyphs])])
 		},

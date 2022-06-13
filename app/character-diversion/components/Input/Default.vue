@@ -52,7 +52,7 @@ export default {
       setTimeout(() => {
         if (this.type === 'textarea' && this.element) {
           this.element.setAttribute('style', `height: auto;`)
-          this.element.setAttribute('style', `height: ${this.element.scrollHeight + 2}px;`)
+          this.element.setAttribute('style', `height: ${this.element.scrollHeight + 20}px;`)
         }
       }, 0)
     },

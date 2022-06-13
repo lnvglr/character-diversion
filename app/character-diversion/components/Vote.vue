@@ -47,7 +47,7 @@ export default {
 			return this.positives - this.negatives
 		},
 		ownOpinion() {
-			return this.$strapi.user.id === this.opinion.attributes.author.data.id
+			return this.$strapi.user?.id === this.opinion.attributes.author.data.id
 		}
   },
   methods: {

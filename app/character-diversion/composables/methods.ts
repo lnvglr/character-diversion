@@ -72,7 +72,7 @@ export const glyphMethods = {
     opinion.form.attributes.axes = opinion.font?.axes.reduce(
       (acc: Object, curr: SamsaFontAxes) => ({
         ...acc,
-        [curr.tag]: [curr.min, curr.max],
+        [curr.tag]: [curr.default, curr.max],
       }),
       {}
     )

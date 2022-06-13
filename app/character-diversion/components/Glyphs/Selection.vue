@@ -93,7 +93,6 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(this.$strapi.user)
 		// window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {

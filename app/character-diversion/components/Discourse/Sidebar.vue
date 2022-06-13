@@ -34,14 +34,9 @@ export default {
 	watch: {
 		axes: {
 			handler() {
-				this.setPosition();
+				this.$f.glyphMethods.setPosition();
 			},
 			immediate: true,
-		},
-	},
-	methods: {
-		setPosition() {
-			this.$state.opinion.form.attributes.axes = this.$state.opinion.font?.axes.reduce((acc: Object, curr: SamsaFontAxes) => ({ ...acc, [curr.tag]: [curr.min, curr.max] }), {});
 		},
 	},
 }
