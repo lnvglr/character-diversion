@@ -109,12 +109,13 @@ export const opinion = reactive<OpinionState>({
   }
 })
 
-export const useSamsaFont = (fontName: string) =>
-  new Promise(
+export const useSamsaFont = (fontName: string) => {
+  const app = useNuxtApp()
+  return new Promise(
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
       new SamsaFont({
-        url: 'http://localhost:1337' + fontName,
+        url: app.$strapi.api.url + fontName,
         // url: '../assets/fonts/' + fontName,
         callback: (e: SamsaFont) => {
           if (e.errors.length > 0) {
@@ -134,6 +135,7 @@ export const useSamsaFont = (fontName: string) =>
       })
     }
   )
+}
 const mapGlyphs = (font: SamsaFontType) => {
   const glyphMap = {}
   const postScriptMap = {}

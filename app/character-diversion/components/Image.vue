@@ -18,7 +18,7 @@ export default {
 	},
 	computed: {
 		source() {
-			return 'http://localhost:1337' + this.src?.formats[this.size]?.url
+			return this.$strapi.api.url + this.src?.formats[this.size]?.url
 		},
 	},
 }

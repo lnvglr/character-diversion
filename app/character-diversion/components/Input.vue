@@ -172,7 +172,7 @@ input {
   }
 }
 
-.input-container> :not(label) {
+.input-container > :not(label) {
   &[disabled=true] {
     opacity: 0.5;
 

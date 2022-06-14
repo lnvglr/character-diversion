@@ -1,9 +1,9 @@
 <template>
   <form class="flex flex-col gap-2" @submit.prevent="signUp">
-    <Input type="text" name="name" placeholder="Name" v-model="formData.name" />
-    <Input type="email" name="email" placeholder="Email" v-model="formData.email" />
-    <Input type="password" name="password" placeholder="Password" v-model="formData.password" />
-    <Button type="submit" class="">Sign up</Button>
+    <Input type="text" name="name" placeholder="Name" v-model="formData.name" class="lg" />
+    <Input type="email" name="email" placeholder="Email" v-model="formData.email" class="lg" />
+    <Input type="password" name="password" placeholder="Password" v-model="formData.password" class="lg" />
+    <Button type="submit" class="lg">Sign up</Button>
     <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
   </form>
 </template>

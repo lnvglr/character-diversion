@@ -42,6 +42,15 @@ const transformedHeadline = computed(() => {
 <style lang="scss">
 .headline {
   --font-size: var(--text-9xl);
+  @media screen and (max-width: 1024px) {
+    --font-size: var(--text-7xl);
+  }
+  @media screen and (max-width: 768px) {
+    --font-size: var(--text-6xl);
+  }
+  @media screen and (max-width: 480px) {
+    --font-size: var(--text-5xl);
+  }
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
@@ -90,31 +99,35 @@ const transformedHeadline = computed(() => {
       z-index: 10;
       left: 0;
       margin-top: -2em;
-      margin-left: -9em;
+      margin-left: calc(var(--font-size) * -1);
+
+      @media screen and (max-width: 480px) {
+        display: none;
+      }
     }
     & {
       &[data-count='0'] {
         --Y: 0.02em;
-        font-family: Aldrich;
+        font-family: Aldrich, var(--font-sans);
         font-size: 0.975em;
         vertical-align: 0.01em;
         .comment {
           background-color: var(--color-info-600);
-        margin-left: -1em;
+          margin-left: -1em;
         }
       }
       &[data-count='2'] {
         --Y: -0.02em;
         vertical-align: -0.001em;
-        font-family: Inter;
+        font-family: Inter, var(--font-sans);
         font-size: 0.962em;
         .comment {
           background-color: var(--color-emerald-500);
-          margin-top: 9em;
+          margin-top: var(--font-size);
+          transform: translateX(50%);
         }
       }
     }
-
   }
 }
 </style>

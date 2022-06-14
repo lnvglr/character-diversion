@@ -1,11 +1,11 @@
 <template>
-	<div class="flex flex-col min-h-screen">
+	<div class="flex flex-col">
 		<main class="p-10 pb-40 bg-beige-200 text-black grow">
 			<div class="max-w-4xl mx-auto">
 				<!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
 				<LandingHeadline :headline="headine" :letter="letter" class="mt-24 mb-12" />
-				<div class="max-w-xl items-center mx-auto mb-48 flex gap-5">
+				<div class="max-w-xl mx-auto mb-48 flex gap-5 flex-col sm:flex-row items-start sm:items-center">
 					<div>Designers and foundries explore, discuss, and work on their typefaces on Character
 						Diversion—the most adequate platform for typographic discourse in the world.</div>
 					<div>

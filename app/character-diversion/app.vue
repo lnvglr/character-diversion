@@ -37,7 +37,7 @@ export default {
   async setup() {
     const app = useNuxtApp()
     const client = <T>(contentType: string, data?: Partial<T>) => useStrapiClient()(contentType, { method: 'POST', body: data }) as Promise<T>
-    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), client, user: {} }
+    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), api: useRuntimeConfig().public.strapi, client, user: {} }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
     if (!app.$state) app.provide('state', reactive({ discourse, opinion }))

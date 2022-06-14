@@ -19,14 +19,14 @@
         <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..." containerClass="text-bold w-auto sm" />
         <!-- <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="highlighter" /> -->
       </div>
-      <div :class="`grid grid-cols-2`">
-      <div class="px-5 py-2 w-full max-w-full items-center grid grid-cols-[30px_minmax(90px,_1fr)]" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
+      <div :class="`flex flex-wrap`">
+      <div class="px-5 py-2 flex-1 max-w-full items-center grid grid-cols-[25px_minmax(300px,_1fr)]" v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
 
         <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag"/>
         <Input
           v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
           type="range" :step="1" :min="axis.min" :max="axis.max"
-          v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(90px,_1fr)]" :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
+          v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info" :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]" :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
       </div>
       </div>
       <GlyphsSelection

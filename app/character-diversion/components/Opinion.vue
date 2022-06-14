@@ -21,7 +21,7 @@
           <TransitionExpand>
             <div v-if="active && glyphs.length > 0">
               <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
-                <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
+                <UITag v-for="glyph in glyphs">{{ glyph }}</UITag><UITag>@ {{Object.entries(opinion.attributes.axes).map(e => `${e[0]}: ${e[1][0]}`!).join(', ')}}</UITag>
               </span>
             </div>
           </TransitionExpand>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <TransitionExpand>
-      <div v-if="active && opinion.attributes.comments?.data.length > 0">
+      <div v-if="active && (opinion.attributes.comments?.data.length > 0)">
         <div class="p-5 border-b border-beige-300 bg-white">
           <div v-for="comment in opinion.attributes.comments?.data" :key="comment.id">{{ comment.attributes.content }}
           </div>
@@ -90,6 +90,9 @@ export default {
         parsedGlyphs,
       }
     },
+  },
+  mounted() {
+    console.log(this.$state.opinion.font)
   },
   watch: {
     active(active: boolean) {

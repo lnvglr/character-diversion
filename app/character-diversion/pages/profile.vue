@@ -9,8 +9,8 @@
           <h3 class="font-bold text-2xl ">{{ $t('profile') }}</h3><Button class=" clear">{{ $t('edit')
           }}</Button>
         </div>
-        <div class="flex gap-5 items-center">
-          <Image :src="$strapi.user?.avatar" size="small" class="w-20 border border-beige-200 rounded-full" />
+        <div class="flex gap-5 items-center" v-if="$strapi.user.avatar">
+          <Image :src="$strapi.user.avatar" size="small" class="w-20 border border-beige-200 rounded-full" />
           <div class="flex flex-col">
             <span class="font-bold">{{ $strapi.user.name }}</span>
             <span class="text-neutral-500">{{ $strapi.user.email }}</span>

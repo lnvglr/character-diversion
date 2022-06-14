@@ -14,13 +14,13 @@
 			:title="`Upvotes: ${positives}, Downvotes: ${negatives}`"
 			class="font-bold"
 		>{{voteCount}}</small>
-		<Button
+		<!-- <Button
 			@click.stop="vote(-1)"
 			icon="angle-down"
 			class="clear xxs"
 			:title="ownOpinion ? $t('vote.not.allowed') : $t('vote.down')"
 			:color="userVote === -1 ? 'primary' : 'beige'"
-		/>
+		/> -->
   </div>
 </template>
 

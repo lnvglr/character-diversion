@@ -8,7 +8,7 @@
     ">
     <ul :class="`flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5`">
       <li v-for="(route, index) in routes" :key="route" :class="{'mb-auto': index === routes.length - 1}" >
-        <NuxtLink :to="route.path" class="
+        <NuxtLink v-if="route.icon" :to="route.path" class="
             flex flex-col
             items-center
             justify-center

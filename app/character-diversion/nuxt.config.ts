@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
   ],
+  strapi: {
+    url: process.env.API_BASE || 'http://localhost:1337',
+  },
   buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa', '@intlify/nuxt3'],
   router: {
     // https://router.vuejs.org/api/#routeroptions
@@ -32,9 +35,5 @@ export default defineNuxtConfig({
       __VUE_I18N_LEGACY_API__: false,
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
-  },
-  strapi: {
-    url: process.env.STRAPI_URL || 'http://localhost:1337',
-    // url: process.env.STRAPI_URL || 'https://character-diversion-backend.herokuapp.com',
   },
 })
