@@ -1,70 +1,114 @@
-#Character Diversion
+# Character Diversion
 
 **The Platform for Typographic Discourse**
 
-##Introduction (too much I, I, I)
+## Introduction
 
-In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at whether characters connections within a given script (like ›n‹, ›m‹ and ›h‹) exist—or could exists—between Hebrew and Latin characters. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial.
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. Ans so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, I refer to my proposal *Cross-Script Character Relationships*. 
 
-While initially, I wanted to find the right format to showacse my considerations, I quickly shifted my energy towards building a platform where, yes, I could showcase my considerations—but also enabled others to respond to them. It became clear to me that a platform specifically designed for typographic discourse does not exists and could, in fact, be useful beyond the application of presenting the results of my proposals.
+After submitting my proposals, I initially looked for the right medium to showacse my considerations, where my thought was to create an interactive web site, where the potential character relationships were presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of how letter shapes might look like in the future.
 
-> Start with how important discourse is for a democracy and how important it is to facilitate this discourse. 
-
-This thesis is a plea to challenge conventions by enabling discourse. This paper is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
-
-To guide you through my thought process, I will first explain what conventions are (especially in the context of Latin and Hebrew typography) and why it is essential to question them from time to time. Next, discourse—the challenging of conventions—is elaborated on an prerequisites are established. This will lead me to the core of this paper, the documentation of the design and development of the platform »Character Diversion«—enabling people to discuss character diverging from their conventional shapes. As has been the plan for the better part of my working on this project, I will briefly recount my experiences modifying a number of typefaces according to my ideas of new character relationships and the process of showcasing them on »Character Diversion«. I will finish with an outlook to where »Character Diversion« could be taken to, which features are missing and in which scope the platform could actually be realised.
-
-##Questioning Conventions (The Why)
-
-###What are conventions (for)?
-
-According to Andrei Marmor (2009, preface, p. x), conventions are »rules that regulate human conduct«. He consitues that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
-
-In the typographic sense this means that some conventions can be explained with practical reasons—like writing from left to right because the majority of a population is right handed—while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain (example?).
-
-###Conventions in Hebrew and Latin Typography
-
-The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are living scripts. On their way to the 21st century they took very different paths, however. The two scripts developed distinct typographic conventions. This differenciation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
-
-The Jewish tradition perceived both the Hebrew alphabet as well as the language as sacred. This is one of the reasons for why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (source). 
-
-In its very early days, Latin (like Greek and Etruscan and other Phoenecian descendant like Hebrew) were written from right to left. As writing replaced chiselling, the Latin adopted the baustrophedon style which meant it could be written both from left to right and from right to left. After the first century BC almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
-
-Initially the character shapes of the Latin alphabet were mono-lined symbols with no stress and no serifs. This changed during the 1st century and the reason for this is mostly technical (Tselentis et al., 2012). The origins of serifs and stroke contrast, for example, are considered to lie in the Roman lapidary practice (i.e. the practice of shaping stone). Letters were painted on stone with a flat stiff brush—not a quill or a reed—and then chiseled into the surface (Friggeri, 2001). Hebrew characters developed stress and stroke contrast only more than a millenium later, and convened to a horizontal stress (as opposed to Latin vertical stress). The serif-like in-strokes in traditional Hebrew lettering, have technological origins, however different from Latin (Stern, 2003).
-
-Many of those conventions were created and altered due to social and technological influences. Among other reasons, the Jewish people were scattered mostly around Europe living in the diaspora and faced continuous persecution, which prevented them from adapting the scribal letterforms to the context of typesetting. This way, the refinements that were made to the Latin script following the invention of the printing press were not applied to Hebrew (Wittner et al., 2018). 
-
-I want to argue that some societies were subjected to the same techonolical innovations, yet they developed different conventions. Some immigrants hold on to their native culture to retain their identity and do so even more strongly than the people living in their home land (Kumar & Steenkamp, 2013). A mechanism of self-preservation the Jewish living in the diaspora surely applied. This may be yet another reason for why typographic conventions diverged even though societies lived side by side (more so in the physical space, and maybe less so in the social space (?)).
-
-### Questioning Typographic Convention (go more specific to »typographic«)
-
-Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technogical circumstance or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation. But as our society strives for innovation, progress and adapting to new circumstances, our conventions need to change with us.
-
-Clearly some conventions are of great value today even if their practical origins are obsolete—nowadays, most text is written on a keyboard and writing from left to right brings barely any practical benefints, however changing the convention or removing it brings no appearant benefit and the change would cause great disruption. But for a democracy to stay alive, the status quo needs to be questioned (source) and in this spirit I ask for conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replace by more adequate conventions. 
-
-This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and he next chapter deals with what is needed to do so.
-
-##Enabling Discourse (The How)
-
-If discourse is necessary to re-evaluate conventions, how can this discourse be enabled? There are a number of prerequisites: (1) a (controversial) topic, (2) (people with) opinions, and (3) a platform (on which people with opinions can discuss controversial topics).
-
-To Michel Foucault (1971, p.10), the »will to truth« is the driving factor that forges discourse. He also links discourse to power, arguing that control of discourse will result in control of how th world is perceived. And also in the wider field of social theory, discourse is often examined as a gateway to power.
+My research has shown, that non of the platforms where type designers discuss their work, were *designed* specifically for typographic discourse. They were either forums designed for general discourse with typography being the core topic (typedrawers.com) or platforms designed for typography but not for discourse (futurefonts.com).
 
 ...
 
-### Controvesial Topics
+This thesis is a plea to challenge conventions by enabling discourse. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
 
-In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and new potential character relationships between the Hebrew and Latin script. Both topics have controversial potential. Both also orbit around multiscript typography, what their differences bring and in which ways we can bring them together.
+> ????? »The more things change, the more they stay the same.«
+> — Jean-Baptiste Alphonse Karr
 
-It was only consequential to work in my thesis on enabling *typographic* discourse.
+To guide you through my thought process, I will first explain what conventions are (especially in the context of Latin and Hebrew typography) and why it is essential to question them from time to time. Next, discourse—the challenging of conventions—is elaborated on and prerequisites for discourse are established. This will lead me to the core of this paper, the documentation of the design and development of the platform *Character Diversion*—enabling people to discuss characters diverging from their conventional shapes as well as the caracter shapes of the fonts people design in general.
+
+I will briefly recount my experiences modifying a number of typefaces according to my ideas of new character relationships and the process of showcasing them on *Character Diversion*. I will finish with an outlook to where *Character Diversion* could be taken to, which features are missing and in which scope the platform could actually be realised.
+
+## Questioning Conventions
+
+### What are conventions and what are they for?
+
+According to Andrei Marmor (2009, preface, p. x), conventions are »rules that regulate human conduct«. He consitues that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
+
+> Kulturelle Konventionen wirken sowohl auf subjektiver und intersubjektiver als auch auf struktureller und strukturierender Ebene. Sie sind beteiligt bei Prozessen der Kommunikationsbildung, d.h. der Produktion, Aushandlung und Zuordnung einer Bedeutung zu einem für kulturell gehaltenen Gegenstand, der Textualisierung und Diskursivierung von Kultur, sowie der Regelung der Teilnahme im soziokulturellen Feld.
+>
+> —BÜSCHER-ULBRICH, KADENBACH, KINDERMANN (HG.)
+
+In the typographic sense this means that some conventions can be explained with practical reasons while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain (**example?**).
+
+The rhythm of ascenders and descenders in Latin script words, gives an often unique silhouette to those words improving their readability (**source**). Ascenders and descenders are letter shape convetions that have evolved over centuries and bring with them a very practical benefit that is still relevant todat.
+
+Writing from left to right had practical reasons, too: the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboeard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
+
+![Cippus Perusinus](https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg)
+
+Finally, there are conventions of ornamentation, like the drop shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason and they breaking them would not cause chaos to the western world—they are because they have grown to be and just has they have come, they have the ability to go, if a critical mass chooses to. 
+
+### Conventions in Hebrew and Latin Typography → maybe move this to the case study?
+
+*The coventions of the Latin and the Hebrew script specifically were a major element in the research for my proposal »Cross-Script Character Relationships« and so the following paragraphs will reference a lot of this research.*
+
+The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are alive and well. On their way to the 21st century they took very different paths, however. The two scripts developed distinct structural and typographic conventions. This differenciation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
+
+The Jewish tradition perceived both the Hebrew alphabet as well as the language as sacred. This is one of the reasons for why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
+
+As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendant like Hebrew) written from right to left. As writing replaced chiselling, Latin adopted the baustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
+
+Initially the character shapes of the Latin alphabet were mono-lined symbols with no stress and no serifs. This changed during the 1st century CE and the reason for this is mostly technical (Tselentis et al., 2012). The origins of serifs and stroke contrast, for example, are considered to lie in the Roman lapidary practice (i.e. the practice of shaping stone). Letters were painted on stone with a flat stiff brush—not a quill or a reed—and then chiseled into the surface (Friggeri, 2001). Hebrew characters developed stress and stroke contrast only more than a millenium later, and convened to a horizontal stress (as opposed to Latin vertical stress). The serif-like in-strokes (referred to as tags) in traditional Hebrew lettering, have technological origins, however different from Latin (Stern, 2003).
+
+Many of those conventions were created and altered due to social and technological influences. Among other reasons, the Jewish people were scattered mostly around Europe, living in the diaspora and facing continuous persecution, which prevented them from adapting the scribal letterforms to the context of typesetting. This way, the refinements that were made to the Latin script following the invention of the printing press were not applied to Hebrew (Wittner et al., 2018).
+
+> Es muß sich alles ändern, damit es bleibt, wie es ist.
+> G.T. di lampedusa, Der Gattopardo, 1958
+
+The fact that some societies were subjected to the same techonolical innovations, yet they developed different conventions, could be cause by how some minorities adapt while others defend their heritage. Some immigrants hold on to their native culture to retain their identity and do so even more strongly than the people living in their home land (Kumar & Steenkamp, 2013). A mechanism of self-preservation the Jewish living in the diaspora surely applied. This may be yet another reason for why typographic conventions diverged even though societies lived side by side.
+
+### Questioning Typographic Convention
+
+Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technogical circumstance or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink shaped tail of the letter ›j‹. But as our society strives for innovation, progress and adapting to new circumstances, our conventions need to change with us.
+
+As previously established, some conventions are of great value today even if their practical origins are obsolete. But for a democracy to stay alive, the status quo needs to be questioned (**source**) and in this spirit I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
+
+This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and he next chapter deals with what is needed to do so.
+
+## Enabling Discourse
+
+If discourse is necessary to re-evaluate conventions, how can this discourse be enabled and encouraged? I divided the prerequisites into three elements: (1) a (controversial) topic, (2) (people with) opinions, and (3) a platform (on which people with opinions can discuss controversial topics).
+
+<img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/Untitled_Artwork.png" alt="Untitled_Artwork" style="zoom:10%;" />
+
+To Michel Foucault (1971, p.10), the »will to truth« is the driving factor that forges discourse. He also links discourse to power, arguing that control of discourse will result in control of how th world is perceived.
+
+And also in the wider field of social theory, discourse is often examined as a gateway to power.
+
+...
+
+> Der Begriff »Innovation« richtet sich [...] auf die Wirkung einer Neuerung auf ein entsprechendes System, eine Struktur, eine *diskursive* Formation oder ein soziokulturelles Feld.
+>
+> —BÜSCHER-ULBRICH, KADENBACH, KINDERMANN (HG.)
+
+### Controversial Topics
+
+In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the Introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics have the potential for controvertial discourse. Both orbit around multiscript typography, about the potential implications of typographic differences between scripts and in how we can alter typographic conventions to  bring script closer together.
+
+Without controversy, without the potential to disagreement there is no discourse. Everything else is non-discoursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and exncourage unconventional approaches. (**what is the concequence?**)
 
 ### People with Opinions
 
+For discourse to live, it needs participants who bring with them diverse opinions.
+
+A platform for typographic discourse needs to be accessible, it n
+
 ### Adequate Platforms
 
-The platfrom needs to be suitable
+In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is language-based comminication. In many fields in which discourse is carried out, such as sociology, political science and anthopology, using language as the basis for communication seems quite adequate. And although typography is tightly linked with language, I have come to question whether discourse around typography should be *based* on language.
 
-1. 
+There are a number of platforms for typographic discourse, analogue conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text based—in fact they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language.
+
+*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique.
+
+
+
+In this sense, *Character Diversion* 
+
+
 
 lack of forums that facilitates type specific discourse
 
@@ -76,23 +120,31 @@ lack of forums that facilitates type specific discourse
    1. overview
    2. interactivity
 
+
+
+--
+
+So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to 
+
 ## A Platform for Typographic Discourse (The What)
 
 There are a number of conference formats and forums that that provide a platform for typographic discourse. 
 
 1. Platform
 
-### Digital Discourse
-
-Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilized discourse on the internet he contemplates on some of the issues and design decisions of current forum software.
-
-> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
-
 ### Concept
 
 In an attempt to buld a platfrom that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. For this I distinguish between three kinds of discourse: the one that orbits around a specific type design project, another one that asks fundamental questions of where we want to take typography going forward and the last one that lives without a platform in the streets, backyards and lunch rooms.
 
 The former is predominantly led by independent type designers and enthusiasts (source?). The second has been pushed by renowned designers in the form 
+
+...
+
+Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilized discourse on the internet he contemplates on some of the issues and design decisions of current forum software.
+
+> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
+
+...
 
 ### User Interface
 
@@ -167,7 +219,7 @@ This could be tackled by indeed selecting an opinion and thus filtering the glyp
 
 Another form of visually referencing what a user is critiquing, is marking elements in a glyph and linking it to a particular opinion. A glyph can have multiple marks that are all linked to their corresponding opinion.
 
-####Voting and Responding to Opinions and Comments
+#### Voting and Responding to Opinions and Comments
 
 Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support.
 
@@ -181,25 +233,84 @@ One goal of the platform is to creat and overview. In order to do that, the poss
 
 #### Information Structure
 
-1. Home
-2. Discover Discourses
-   1. New Discourse
-   2. Discourse
-      1. Title
-      2. Description
-      3. Author
-      4. Font(s)
-      5. Opinion
-         1. Content
-         2. Author
-         3. Font(s)
-         4. Glyphs
-            1. Marked Areas
-         5. Tuple Spectrum
-         6. Comments
-            1. Content
-            2. Author
-3. Profile
+##### Nav Bar
+
+Home, Discover, Profile
+
+*Character Diversion* is written in TypeScript, a strongly typed programming language that builds on JavaScript. It is a language that helps developers build their projects and spot bugs before their occur in a production site or app. There is a lot that can be said about TypeScript—relevant to this paper is that it enables the developer to defines data object structures and peek at those structres in the development process. It also helped me understand how discourse and opinions need to be structured and references. I will illustrate the structre of discourses and opinions in the same way their are defined in the project.
+
+```typescript
+export interface Discourse {
+  id: string
+  attributes: {
+    title: string
+    content: string
+    font: string
+    author?: Author
+    createdAt?: string
+    publishedAt?: string
+    updatedAt?: string
+    opinions?: Opinion[]
+  }
+}
+```
+
+While lowercase types like `number` or `string` are primitives, types with an uppercase starting character like `Discourse` or `Opinion` are interfaces referenceing an object type. Empty brackets after a type (`[]`), signify an array of the type. In the `Discourse` interface, `opinions` is typed with `Opinion[]` referenceing the `Opinion` interface. A question mark after the key (`?`) makes this key optional to an interface (TypeScript Documentation, 2022). 
+
+```typescript
+export interface Opinion {
+  id: string
+  attributes: {
+    content: string
+    author?: Author
+    createdAt?: string
+    publishedAt?: string
+    updatedAt?: string
+    responseTo?: number
+    responses?: number[]
+    glyphs?: number[]
+    votes?: Vote[]
+    annotations?: {
+      [id: number]: Annotation[]
+    }
+    axes?: {
+      [tag: string]: number[]
+    }
+    activeAxes?: string[]
+  }
+}
+```
+
+```typescript
+export interface Author {
+  id: number
+  createdAt: string
+  email: string
+  name: string
+  username: string
+  role: object
+  avatar: object
+}
+```
+
+```typescript
+export interface Vote {
+  author: string
+  value: number
+  createdAt: string
+}
+```
+
+```typescript
+export interface Annotation {
+  x: number
+  y: number
+  type?: string
+  opinionId?: string
+}
+```
+
+
 
 #### Structuring Opinions
 
@@ -241,6 +352,8 @@ A component is usually a generic shell which accepts data that will populate thi
 
 One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embeded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
+![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
+
 #### Node.js CMS
 
 1. HTML/CSS
@@ -253,11 +366,15 @@ One particularly appealing concept is the atomic design system. It is constructe
 
 ## Case Study
 
-###Non-Conventional Hebrew-Latin Character Relationships
+### Non-Conventional Hebrew-Latin Character Relationships
+
+
 
 
 
 ## Outlook
+
+
 
 ### Shortcomings
 
@@ -282,12 +399,16 @@ A potential future feature of Character Diversion could be the option to upload 
 
 #### Multiple Fonts and Font Instances
 
+As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold.
+
+**With the support for variable fonts, ...**
+
 
 #### Versioning
 
 When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
 
-Due to its complext implementation, this feature may, however, be developed in the future.
+Due to its complex implementation, this feature may, however, be developed in the future.
 
 
 
