@@ -1,8 +1,9 @@
 <template>
-  <div v-if="opinion" @click="selectOpinion" class="opinion w-full duration-300"
-    :class="{ 'opacity-30': inactive }">
-    <div class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer border-b border-beige-300"
-      :class="active && 'bg-beige-100 -mt-[1px] border-y'">
+  <div v-if="opinion" @click="selectOpinion" class="opinion w-full duration-300 border-b border-beige-300 last:border-0"
+    :class="{ 'opacity-30': inactive,
+    'border-y -mt-[1px]': active }">
+    <div class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer "
+      :class="active && 'bg-beige-100'">
       <div class="flex flex-col gap-2 w-full">
         <div class="relative">
           <div class="flex w-full">

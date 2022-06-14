@@ -44,13 +44,21 @@
 			@pointerup="clickable = true"
 			:title="$state.opinion.formActive ? $t('insert.into.opinion', { glyph: '/' + glyphName(glyph) }) : ''" />
 		<div v-if="hasOpinion(glyph.id).length > 0"
-			class="z-10 absolute bottom-0 flex items-center justify-center left-0 font-bold px-1 m-1 rounded-full text-white bg-primary-500/80"
-			:class="{
-				'w-3 h-3 text-[0.5rem] ': gridSize < 30,
-				'w-4 h-4 text-xs': gridSize >= 30,
-			}" :title="opinionTitles(glyph.id).join(', ')">
-			{{ opinionTitles(glyph.id).length }}
+			class="z-10 absolute bottom-2 left-2">
+			<VDropdown :distance="12" :skidding="-8" placement="bottom-start">
+				<button class="flex items-center justify-center font-bold rounded-full text-white bg-primary-500/80"
+					:class="{
+						'w-3 h-3 text-[0.5rem] ': gridSize < 30,
+						'w-5 h-5 text-xs': gridSize >= 30,
+					}">
+					{{ opinionTitles(glyph.id).length }}
+				</button>
+				<template #popper>
+					<ListOpinions v-if="hasOpinion(glyph.id).length > 0" :opinions="hasOpinion(glyph.id)" class="w-[360px] min-w-[360px]" />
+				</template>
+			</VDropdown>
 		</div>
+
 	</Card>
 	</div>
 </template>
@@ -58,7 +66,6 @@
 <script lang="ts">
 import { Opinion, SamsaGlyph } from '~/types'
 export default {
-	components: ['GlyphContanier'],
 	props: {
 		glyph: {
 			type: Object,
@@ -122,10 +129,10 @@ export default {
 		dim(id: number) {
 			// return (this.$state.opinion.active.attributes.glyphs.length > 0 && !this.$state.opinion.active.attributes.glyphs.find((g: number) => g === id)) || (this.$state.opinion.form.attributes.glyphs.length > 0 && !this.$state.opinion.form.attributes.glyphs.find((g: number) => g === id))
 		},
-		hasOpinion(id: string) {
+		hasOpinion(id: number) {
 			return this.$state.discourse.current.attributes.opinions.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))
 		},
-		opinionTitles(id: string) {
+		opinionTitles(id: number) {
 			return this.hasOpinion(id).map((opinion: Opinion) => opinion.attributes.content).filter((opinion: Opinion) => opinion)
 		},
 	},

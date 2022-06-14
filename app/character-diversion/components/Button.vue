@@ -154,7 +154,7 @@ export default {
     // background-color: transparent;
     box-shadow: none;
     --bg-opacity: 0;
-    &:hover {
+    &:hover, &.active {
       --background-color: var(--color-info-500);
       --bg-opacity: 0.1;
     }

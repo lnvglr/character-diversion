@@ -8,7 +8,7 @@
 		<div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10" v-if="!sidebarMinimized">
 			<FormNewOpinion />
 		</div>
-		<ListOpinions v-if="!sidebarMinimized" class="overflow-scroll" />
+		<ListOpinions v-if="!sidebarMinimized && $state.discourse.current" :opinions="$state.discourse.current.attributes.opinions?.data" class="border-b border-beige-300" />
 	</div>
 </template>
 

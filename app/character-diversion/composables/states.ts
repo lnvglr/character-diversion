@@ -12,6 +12,9 @@ interface DiscourseState {
   }
   current: ComputedRef<Discourse>
   search: string
+  filter: {
+    [key: string]: boolean
+  }
   new: {
     title: string,
     content: string,
@@ -37,6 +40,7 @@ export const discourse = reactive<DiscourseState>({
   all: {},
   current: null,
   search: '',
+  filter: {},
   new: {
     title: null,
     content: null,

@@ -53,7 +53,8 @@ export default {
 	data() {
 		return {
 			active: false,
-			clickable: true
+			clickable: true,
+			opinionFilter: false
 			// first: null,
 			// last: null
 		}
@@ -68,21 +69,14 @@ export default {
 	},
 	computed: {
 		filteredGlyphs() {
-			const q = this.$state.discourse.search?.trim()
-			const content = this.$state.opinion.form.attributes.content?.trim()
-			let references = content
-			if (content === undefined && q !== undefined && q !== '') {
-				references = q.split(',').join(' ').split(' ').map((e: string) => '/' + e).join('')
-			}
-			const matchedGlyphs = this.$f.glyphMethods.match(references)
-			const selectedGlyphs = this.$state.opinion.selectedGlyphs
 			const glyphs = (
 				this.$state.opinion.font.glyphs
 				.filter(
 					(glyph: SamsaGlyph) => {
 						if (
 							this.$state.opinion.font.glyphMap[glyph.id].literal &&
-							(matchedGlyphs.length === 0 || matchedGlyphs.includes(glyph.id) || selectedGlyphs.includes(glyph.id))
+							this.filterByOpinions(glyph.id) &&
+							this.matchGlyphs(glyph.id)
 						) {
 							return glyph
 						}
@@ -96,6 +90,21 @@ export default {
 		// window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {
+		filterByOpinions(id: number) {
+			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0
+			return true
+		},
+		matchGlyphs(id: number) {
+			const q = this.$state.discourse.search?.trim()
+			const content = this.$state.opinion.form.attributes.content?.trim()
+			let references = content
+			if (content === undefined && q !== undefined && q !== '') {
+				references = q.split(/(\,|\s)/).filter((e: string) => e !== ' ').map((e: string) => '/' + e).join('')
+			}
+			const matchedGlyphs = this.$f.glyphMethods.match(references)
+			const selectedGlyphs = this.$state.opinion.selectedGlyphs
+			return matchedGlyphs.length === 0 || matchedGlyphs.includes(id) || selectedGlyphs.includes(id)
+		},
 		glyphName(glyph: SamsaGlyph, literal = false) {
 			const g = this.$state.opinion.font.glyphMap[glyph.id];
 			return literal || g.postScript === '' ? g.literal : g.postScript

@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
   },
-  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa', '@intlify/nuxt3'],
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa', '@intlify/nuxt3', 'floating-vue/nuxt'],
   router: {
     // https://router.vuejs.org/api/#routeroptions
     options: {},
