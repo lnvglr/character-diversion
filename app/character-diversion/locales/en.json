@@ -38,5 +38,6 @@
   "markdown.is.allowed": "Markdown is allowed",
   "vote.up": "Vote up",
   "vote.down": "Vote down",
-  "vote.not.allowed": "You are not allowed to vote on your own opinions."
+  "vote.not.allowed": "You are not allowed to vote on your own opinions.",
+  "filter": "Filter"
 }

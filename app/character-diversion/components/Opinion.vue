@@ -86,9 +86,6 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log(this.$state.opinion.font)
-  },
   watch: {
     active(active: boolean) {
       if (active && this.$el) {

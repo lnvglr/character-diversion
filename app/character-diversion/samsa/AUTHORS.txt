@@ -1,4 +1,0 @@
-# This is the official list of Samsa authors for copyright purposes.
-# This file is distinct from the CONTRIBUTORS files.
-
-Google, LLC
