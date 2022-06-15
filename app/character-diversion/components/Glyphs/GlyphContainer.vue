@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { Opinion, SamsaGlyph } from '~/types'
 export default defineComponent({
 	props: {
