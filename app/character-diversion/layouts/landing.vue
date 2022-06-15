@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { Discourse } from '@/types'
+import { Discourse } from '~/types'
 export default {
 	data() {
 		return {

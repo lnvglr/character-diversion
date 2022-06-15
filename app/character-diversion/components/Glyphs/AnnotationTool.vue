@@ -50,7 +50,7 @@
 	/>
 </template>
 <script lang="ts">
-import { SamsaGlyph, Opinion, Annotation } from "~~/types"
+import { SamsaGlyph, Opinion, Annotation } from "~/types"
 export default {
 	props: {
 		glyph: {
@@ -119,8 +119,8 @@ export default {
 	},
 	computed: {
 		annotationRadius() {
-			const scale = (1 / this.scaling) * 30
-			return this.radius * this.$state.opinion.font.unitsPerEm / 1000 / scale
+			const scale = (1 / this.scaling) * 15
+			return this.radius / scale
 		},
 		currentAnnotations() {
 			const currentAnnotations = []

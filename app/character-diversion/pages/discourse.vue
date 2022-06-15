@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Discourse, SamsaFont } from "~~/types"
+import { Discourse, SamsaFont } from "~/types"
 
 export default {
   setup() {

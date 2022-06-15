@@ -1,36 +1,29 @@
 <template>
 	<TransitionExpand>
-		<form v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive" @submit.prevent="postOpinion">
-			<Input 
-				type="textarea" 
-				:maxlength="500" 
-				:placeholder="$t('describe.opinion')"
-				v-model="$state.opinion.form.attributes.content" 
-				:submitOnEnter="true" 
-				:allowMarkdown="true" 
-				@enter="postOpinion"
-				@cancel="$state.opinion.reset('form')" 
-			/>
+		<form v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive"
+			@submit.prevent="postOpinion">
+			<Input type="textarea" :maxlength="500" :placeholder="$t('describe.opinion')"
+				v-model="$state.opinion.form.attributes.content" :submitOnEnter="true" :allowMarkdown="true"
+				@enter="postOpinion" @cancel="$state.opinion.reset('form')" />
+			<TransitionExpand>
+				<div v-if="selectedGlyphs.length > 0">
+					<div>
+						<font-awesome-icon :icon="['fas', 'circle-check']" class="text-beige-400 mr-2" />
+						<UITag v-for="g in selectedGlyphs">{{ g }}</UITag>
+					</div>
+				</div>
+			</TransitionExpand>
 			<div class="flex gap-1 w-full mb-1">
-			<Button
-				class="clear w-full"
-				color="alert"
-				@click="$state.opinion.reset('form')"
-			>{{ $t('cancel') }}</Button>
-			<Button :disabled="!canPost" class="w-full" color="success" type="submit">{{ $t('share.opinion') }}</Button>
+				<Button class="clear w-full" color="alert" @click="$state.opinion.reset('form')">{{ $t('cancel') }}</Button>
+				<Button :disabled="!canPost" class="w-full" color="success" type="submit">{{ $t('share.opinion') }}</Button>
 			</div>
-			<!-- <small class="opacity-50">{{ $t('hinting.reference.glyphs.slash') }}</small> -->
-			<div v-if="selectedGlyphs.length > 0">
-				<font-awesome-icon :icon="['fas', 'circle-check']" class="text-beige-400 mr-2" />
-				<UITag v-for="g in selectedGlyphs">{{ g }}</UITag>
-			</div>
-			<!-- <Input type="text" placeholder="Glyphs" v-model="string" /> -->
 		</form>
 	</TransitionExpand>
 	<TransitionExpand>
 		<div v-if="!$state.opinion.formActive">
-			<Button class="w-full" color="success lg" @click="openOpinionForm"
-				:label="$t('new.opinion')" icon="plus">{{$t('new.opinion')}}</Button>
+			<Button class="w-full" color="success lg" @click="openOpinionForm" :label="$t('new.opinion')" icon="plus">{{
+					$t('new.opinion')
+			}}</Button>
 		</div>
 	</TransitionExpand>
 </template>

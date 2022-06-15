@@ -44,9 +44,12 @@ export interface SamsaFontAxes {
   min: number
   name: string
   tag: string
+  valueMin?: number
+  valueMax?: number
 }
 export interface GlyphMap {
   glyph: SamsaGlyph
+  name: string
   literal: string
   unicode: number,
   unicodeHex: string,

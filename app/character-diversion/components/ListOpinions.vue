@@ -1,5 +1,5 @@
 <template>
-	<ListGroupTransition :watcher="watcher" class="overflow-scroll">
+	<ListGroupTransition :watcher="watcher" class="overflow-scroll" v-if="currentOpinions.length > 0">
 		<Opinion v-for="opinion in currentOpinions" :key="opinion.id" :opinion="opinion" />
 	</ListGroupTransition>
 </template>

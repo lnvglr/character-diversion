@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import FileCard from '@/components/UI/FileCard.vue'
-// import Callout from '@/components/UI/Callout.vue'
+import FileCard from '~/components/UI/FileCard.vue'
+// import Callout from '~/components/UI/Callout.vue'
 
 export default {
   name: 'DropZone',

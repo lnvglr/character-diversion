@@ -31,13 +31,20 @@
   </Html>
 </template>
 <script lang="ts">
-import { discourse, opinion } from '@/composables/states'
-import { glyphMethods, utils } from '@/composables/methods'
+import { discourse, opinion } from '~/composables/states'
+import { glyphMethods, utils } from '~/composables/methods'
 export default {
   async setup() {
     const app = useNuxtApp()
     const client = <T>(contentType: string, data?: Partial<T>) => useStrapiClient()(contentType, { method: 'POST', body: data }) as Promise<T>
-    const strapi = { ...useStrapi4(), ...useStrapiAuth(), ...useStrapiUser(), api: useRuntimeConfig().public.strapi, client, user: {} }
+    const strapi = {
+      ...useStrapi4(),
+      ...useStrapiAuth(),
+      ...useStrapiUser(),
+      client,
+      api: useRuntimeConfig().public.strapi,
+      user: {}
+    }
     strapi.user = await strapi.fetchUser()
     if (!app.$strapi) app.provide('strapi', reactive(strapi))
     if (!app.$state) app.provide('state', reactive({ discourse, opinion }))

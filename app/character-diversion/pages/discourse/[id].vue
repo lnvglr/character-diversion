@@ -3,23 +3,18 @@
     <div class="grow overflow-auto">
       <div class="p-5 flex flex-col gap-5">
         <h1 class="text-6xl font-bold">{{ $state.discourse.current.attributes.title }}</h1>
-        <p class="text-sm text-beige-400">{{ [$state.discourse.current.attributes.author?.data?.attributes.name,
-          $f.utils.relativeTime($state.discourse.current.attributes.createdAt)].filter(e => e).join(' · ')
-        }}</p>
+        <Author :post="$state.discourse.current" class="text-sm" />
         <p class="text-md max-w-lg">{{ $state.discourse.current.attributes.content }}</p>
       </div>
       <div class="flex item-center px-5 mb-10 justify-between">
         <div class="button-group">
-          <Button @click="view = 'selection'" :class="{ active: view === 'selection' }" icon="border-all" />
-          <Button @click="view = 'detail'" :class="{ active: view === 'detail' }" icon="eye" />
-          <Button @click="view = 'intersect'" :class="{ active: view === 'intersect' }" icon="diagram-venn" />
+          <Button v-for="(viewObject, name) in views" @click="view = name" :class="{ active: view === name }" :icon="viewObject.icon" :title="viewObject.label" />
         </div>
         <Button @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion" icon="filter"
-          class="ml-auto mr-2 clear" :title="$t('filter')"
+        class="ml-auto mr-2 clear" :title="$t('filter')"
           :class="{ active: $state.discourse.filter.opinion }" />
         <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..."
           containerClass="text-bold w-auto sm" />
-        <!-- <Button @click="edit = !edit" :class="{ active: edit }" class="ml-auto" icon="highlighter" /> -->
       </div>
       <div :class="`flex flex-wrap`">
         <div class="px-5 py-2 flex-1 max-w-full items-center grid grid-cols-[25px_minmax(300px,_1fr)]"
@@ -33,10 +28,15 @@
             :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
         </div>
       </div>
-      <GlyphsSelection :gridSize="view === 'selection' ? '12' : (view === 'detail' ? '64' : '80')"
-        :fontSize="view === 'selection' ? '2xl' : (view === 'detail' ? '8xl' : '16xl')"
-        :edit="view !== 'selection' && $state.opinion.formActive" :annotations="view !== 'selection'"
-        :intersection="view === 'intersect'" :frame="view !== 'selection'" :style="style" />
+      <GlyphsSelection
+        :gridSize="views[view].gridSize"
+        :fontSize="views[view].fontSize"
+        :edit="views[view].edit && $state.opinion.formActive"
+        :annotations="views[view].annotations"
+        :intersection="views[view].intersection"
+        :frame="views[view].frame"
+        :style="style"
+      />
     </div>
 
     <DiscourseSidebar />
@@ -48,7 +48,42 @@ export default {
   data() {
     return {
       view: 'detail',
-      edit: false
+      views: {
+        overview: {
+          label: 'Overview',
+          icon: 'border-all',
+          gridSize: '12',
+          fontSize: '2xl',
+        },
+        detail: {
+          label: 'Detail',
+          icon: 'eye',
+          gridSize: '64',
+          fontSize: '8xl',
+          edit: true,
+          annotations: true,
+          frame: true
+        },
+        intersect: {
+          label: 'Intersection',
+          icon: 'diagram-venn',
+          gridSize: '80',
+          fontSize: '16xl',
+          edit: true,
+          annotations: true,
+          intersection: true,
+          frame: true
+        },
+        path: {
+          label: 'Path',
+          icon: 'bezier-curve',
+          gridSize: '80',
+          fontSize: '16xl',
+          edit: true,
+          annotations: true,
+          frame: true
+        }
+      }
     }
   },
   mounted() {

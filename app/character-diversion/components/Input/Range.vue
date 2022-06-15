@@ -221,6 +221,8 @@ input[type='range'] {
     }
   }
   &::-webkit-slider-thumb {
+    cursor: pointer;
+    pointer-events: auto;
     -webkit-appearance: none;
     height: var(--handle-size);
     width: var(--handle-size);

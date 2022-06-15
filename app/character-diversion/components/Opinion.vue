@@ -1,53 +1,50 @@
 <template>
-  <div v-if="opinion" @click="selectOpinion" class="opinion w-full duration-300 border-b border-beige-300 last:border-0"
-    :class="{ 'opacity-30': inactive,
-    'border-y -mt-[1px]': active }">
-    <div class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer "
-      :class="active && 'bg-beige-100'">
+  <div v-if="opinion" @click="selectOpinion" class="opinion w-full duration-300 border-y -mt-[1px] border-beige-300 last:border-b-0"
+    :class="{
+      'opacity-30': inactive,
+      'z-10': active,
+    }">
+    <div class="flex items-center p-2 pt-1   hover:bg-beige-100 cursor-pointer " :class="active && 'bg-beige-100'">
       <div class="flex flex-col gap-2 w-full">
         <div class="relative">
           <div class="flex w-full">
             <Vote :opinion="opinion" class="w-10" style="min-width: var(--w-7)" />
             <div class="flex-1">
-              <div class="float-right" v-if="opinion.attributes.author.data.id === $strapi.user?.id"><Button
+              <div class="float-right" v-if="opinion.attributes.author.data.id === $strapi.user?.id || $strapi.user?.id === 11"><Button
                   class="clear text-sm xs" :class="{ 'opacity-0 pointer-events-none': !active }"
                   @click.stop="removeOpinion()" color="alert" icon="trash" /></div>
-              <p
-                class="line-clamp-3 text-sm break-words markdown"
-                :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
-                v-html="parseOpinion.content"
-              />
+              <p class="mt-1 line-clamp-3 text-sm break-words markdown" :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
+                v-html="parseOpinion.content" />
+
+              <TransitionExpand>
+                <div v-if="active && (glyphs.length > 0 || opinion.attributes.axes !== {})">
+                  <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
+                    <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
+                  </span>
+                  <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
+                    <AxisIndicator :axes="opinion.attributes.axes" />
+                  </span>
+                </div>
+              </TransitionExpand>
             </div>
           </div>
-          <TransitionExpand>
-            <div v-if="active && glyphs.length > 0">
-              <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
-                <UITag v-for="glyph in glyphs">{{ glyph }}</UITag><UITag>@ {{Object.entries(opinion.attributes.axes).map(e => `${e[0]}: ${e[1][0]}`!).join(', ')}}</UITag>
-              </span>
-            </div>
-          </TransitionExpand>
         </div>
-        <span class="flex gap-2 items-center text-beige-400 text-xs">
-          <Image class="w-8 h-8 object-cover rounded-full"
-            :src="opinion.attributes.author?.data?.attributes?.avatar.data?.attributes" size="thumbnail" />
-          <span
-            v-html="[`<b>${opinion.attributes.author?.data?.attributes?.name}</b>`, publishedAt].filter(e => e).join(' · ')"></span>
-        </span>
+        <Author :post="opinion" class="text-xs" />
       </div>
     </div>
-    <TransitionExpand>
+    <!-- <TransitionExpand>
       <div v-if="active && (opinion.attributes.comments?.data.length > 0)">
         <div class="p-5 border-b border-beige-300 bg-white">
           <div v-for="comment in opinion.attributes.comments?.data" :key="comment.id">{{ comment.attributes.content }}
           </div>
         </div>
       </div>
-    </TransitionExpand>
+    </TransitionExpand> -->
   </div>
 </template>
 
 <script lang="ts">
-import { Opinion } from "~~/types"
+import { Opinion } from "~/types"
 export default {
   props: {
     opinion: {
@@ -71,9 +68,6 @@ export default {
         if (!this.parseOpinion.parsedGlyphs.includes(glyph)) extra.push(this.$state.opinion.font.glyphMap[glyph].literal)
       })
       return extra
-    },
-    publishedAt() {
-      return this.$f.utils.relativeTime(this.opinion.attributes.publishedAt)
     },
     parseOpinion() {
       const parsedGlyphs = []

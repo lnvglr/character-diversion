@@ -1,10 +1,10 @@
 import { reactive, ComputedRef } from 'vue'
 import { useNuxtApp, useRoute } from '#app'
-import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '~/types'
+import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '@/types'
 
 import { SamsaFont } from '@/assets/samsa-core'
-import { utils, glyphMethods } from '~~/composables/methods'
-import unicodeTable from '~~/composables/unicode-table'
+import { utils, glyphMethods } from '@/composables/methods'
+import unicodeTable from '@/composables/unicode-table'
 
 interface DiscourseState {
   all: {
@@ -77,7 +77,7 @@ export const discourse = reactive<DiscourseState>({
             discourse.setCurrent(useRoute().params.id)
             resolve(discourse.all)
           })
-          .catch(err => {
+          .catch((err: Error) => {
             reject(err)
           })
       }
@@ -105,7 +105,7 @@ export const opinion = reactive<OpinionState>({
     y: 0
   },
   font: null,
-  reset: (area: string = 'form') => {
+  reset: (area: string = 'form'): void => {
     // opinion[area].id = defaultOpinion.id
     opinion[area] = JSON.parse(JSON.stringify(defaultOpinion))
     if (area === 'form') opinion.formActive = false
@@ -158,7 +158,7 @@ const mapGlyphs = (font: SamsaFontType) => {
       name: glyph.name,
       literal: unicode && String.fromCharCode(unicode),
       postScript: unicodeHex && [unicodeTable[unicodeHex] || ' ', ...suffix].filter(e => e).join('.').trim(),
-    }
+    } as GlyphMap
 
     glyphMap[glyph.id] = map
     postScriptMap[map.postScript] = map

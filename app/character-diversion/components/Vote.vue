@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Vote } from "~~/types"
+import { Vote } from "~/types"
 export default {
   props: {
     opinion: {

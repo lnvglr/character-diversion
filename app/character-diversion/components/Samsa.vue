@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-const fonts = import.meta.glob('@/public/fonts/*.{ttf,otf}')
-import { SamsaFont, SamsaGlyph } from '@/types'
+const fonts = import.meta.glob('~/public/fonts/*.{ttf,otf}')
+import { SamsaFont, SamsaGlyph } from '~/types'
 
 export default {
   name: 'Samsa',

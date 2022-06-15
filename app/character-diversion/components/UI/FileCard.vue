@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Truncate from '@/components/UI/Truncate.vue'
+import Truncate from '~/components/UI/Truncate.vue'
 export default {
   name: 'File',
   components: { Truncate },

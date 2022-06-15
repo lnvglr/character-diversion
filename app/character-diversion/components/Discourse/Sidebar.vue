@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts">
-import type { SamsaFontAxes } from '@/types'
 export default {
 	data() {
 		return {

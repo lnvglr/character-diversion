@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { SamsaGlyph } from "@/types"
+import { SamsaGlyph } from "~/types"
 
 export default {
 	props: {
