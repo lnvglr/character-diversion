@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { Opinion, SamsaGlyph } from '~/types'
-export default defineComponent({
+export default {
 	props: {
 		glyph: {
 			type: Object,
@@ -125,7 +125,7 @@ export default defineComponent({
 			return this.hasOpinion(id).map((opinion: Opinion) => opinion.attributes.content).filter((opinion: Opinion) => opinion)
 		},
 	},
-})
+}
 </script>
 
 <style lang="scss">

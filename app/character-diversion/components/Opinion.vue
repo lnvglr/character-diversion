@@ -15,7 +15,6 @@
                   @click.stop="removeOpinion()" color="alert" icon="trash" /></div>
               <p class="mt-1 line-clamp-3 text-sm break-words markdown" :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
                 v-html="parseOpinion.content" />
-
               <TransitionExpand>
                 <div v-if="active && (glyphs.length > 0 || opinion.attributes.axes !== {})">
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
