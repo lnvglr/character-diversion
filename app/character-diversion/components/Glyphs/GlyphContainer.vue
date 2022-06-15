@@ -44,7 +44,6 @@
 import { defineComponent } from 'vue'
 import { Opinion, SamsaGlyph } from '~/types'
 export default defineComponent({
- inject:['$state'],
 	props: {
 		glyph: {
 			type: Object,
