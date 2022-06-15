@@ -10,7 +10,7 @@
   </form>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   name: 'Login',
 
   data() {
@@ -28,5 +28,5 @@ export default {
       } catch (e) {}
     },
   },
-}
+})
 </script>

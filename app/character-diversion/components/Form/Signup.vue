@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   data() {
     return {
       formData: {} as { name: string; email: string; password: string; username: string },
@@ -55,7 +55,7 @@ export default {
 				.replace(/\-\-+/g, '-')
 		}
   },
-}
+})
 </script>
 
 

@@ -1,7 +1,12 @@
+import { StrapiUser } from '@nuxtjs/strapi/dist/runtime/types'
+import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
 export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+import { ComputedRef } from 'vue'
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
+
+
 
 declare module '@/assets/samsa-core' {
   interface SamsaFont {
@@ -120,4 +125,58 @@ export interface Comment {
   author: string
   createdAt: string
   updatedAt: string
+}
+
+
+
+
+
+
+
+
+export interface DiscourseState {
+  all: {
+    [id: string]: Discourse
+  }
+  current: ComputedRef<Discourse>
+  search: string
+  filter: {
+    [key: string]: boolean
+  }
+  new: {
+    title: string,
+    content: string,
+    files: object
+  },
+  setCurrent: (id: string) => void
+  fetch: () => void
+}
+export interface OpinionState {
+  form: Opinion
+  active: Opinion
+  formActive: Boolean
+  selectedGlyphs: number[]
+  annotationTool: {
+    id: number,
+    x: number,
+    y: number
+  },
+  font: SamsaFont
+  reset: () => void
+}
+
+type Strapi = typeof useStrapi4 & typeof useStrapiAuth & typeof useStrapiUser & {
+  client: typeof useStrapiClient
+  api: typeof publicRuntimeConfig
+  user: StrapiUser
+}
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $state: {
+      discourse: DiscourseState
+      opinion: OpinionState
+    },
+    $strapi: Strapi
+  }
 }

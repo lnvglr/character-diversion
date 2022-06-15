@@ -15,7 +15,7 @@
   </div>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   model: {
     prop: 'modelValue',
     event: 'change'
@@ -55,7 +55,7 @@ export default {
       this.$emit('update:modelValue', isChecked)
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

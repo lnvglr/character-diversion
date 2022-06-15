@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Opinion, Discourse } from "~/types"
 
-export default {
+export default defineComponent({
 	props: {
 		post: {
 			type: Object as () => Discourse | Opinion
@@ -24,5 +24,5 @@ export default {
 			return this.$f.utils.relativeTime(this.post.attributes.publishedAt)
 		},
 	}
-}
+})
 </script>

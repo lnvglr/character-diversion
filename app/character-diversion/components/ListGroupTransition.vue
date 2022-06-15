@@ -9,7 +9,7 @@
 	</div>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
 	props: ['watcher'],
 	data() {
 		return {
@@ -53,7 +53,7 @@ export default {
 			}, this.duration)
 		}
 	},
-}
+})
 </script>
 <style lang="scss" scoped>
 .activeTransition {

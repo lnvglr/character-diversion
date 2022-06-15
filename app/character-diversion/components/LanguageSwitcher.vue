@@ -12,7 +12,7 @@
 </template>
 
 <script>
-export default {
+export default defineComponent({
   props: {
     short: {
       type: Boolean,
@@ -33,5 +33,5 @@ export default {
     //   return this.$i18n.availableLocales?.filter((i) => i.code !== this.$i18n.locale)
     // },
   },
-}
+})
 </script>

@@ -22,7 +22,7 @@
 import { Opinion, SamsaGlyph } from '~/types'
 import GlyphContanier from '~/components/Glyphs/GlyphContainer.vue'
 import { RecycleScroller} from 'vue-virtual-scroller'
-export default {
+export default defineComponent({
 	components: { RecycleScroller, GlyphContanier },
 	props: {
 		gridSize: {
@@ -135,7 +135,7 @@ export default {
 		// if (remove > this.last) this.$f.glyphMethods.toggleGlyph(remove, false)
 		// },
 	},
-}
+})
 </script>
 
 <style lang="scss">

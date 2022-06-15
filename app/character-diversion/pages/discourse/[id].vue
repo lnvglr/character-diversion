@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   data() {
     return {
       view: 'detail',
@@ -96,7 +96,7 @@ export default {
       return `--font-variation-settings: ${axes}`
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

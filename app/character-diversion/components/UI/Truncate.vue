@@ -3,7 +3,7 @@
 </template>
 
 <script>
-export default {
+export default defineComponent({
   name: 'Truncate',
   props: {
     string: String,
@@ -56,7 +56,7 @@ export default {
       return result;
     }
   },
-}
+})
 </script>
 
 

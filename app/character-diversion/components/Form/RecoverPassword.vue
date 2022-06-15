@@ -7,7 +7,7 @@
   </form>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   name: 'ForgotPassword',
 
   data() {
@@ -32,5 +32,5 @@ export default {
         })
     },
   },
-}
+})
 </script>

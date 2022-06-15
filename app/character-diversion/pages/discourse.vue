@@ -5,47 +5,48 @@
 </template>
 
 <script lang="ts">
-import { Discourse, SamsaFont } from "~/types"
+import { Discourse } from "~/types";
 
-export default {
+export default defineComponent({
   setup() {
     definePageMeta({
-      name: 'Discourse',
-      icon: 'bars-progress',
+      name: "Discourse",
+      icon: "bars-progress",
       order: 3,
       layoutTransition: {
-        name: 'page',
-      }
-    })
+        name: "page",
+      },
+    });
   },
   async mounted() {
-    this.$state.discourse.fetch()
+    this.$state.discourse.fetch();
   },
   watch: {
-    '$route': {
+    $route: {
       handler() {
-        this.$state.discourse.setCurrent(this.$route.params.id)
+        this.$state.discourse.setCurrent(this.$route.params.id);
       },
-      immediate: true
+      immediate: true,
     },
-    '$state.discourse.current': {
+    "$state.discourse.current": {
       handler(current: Discourse) {
         if (!current) {
-          this.$state.opinion.reset('active')
-          return
+          this.$state.opinion.reset("active");
+          return;
         }
-        const dicourseFont = document.createElement('style');
-        dicourseFont.appendChild(document.createTextNode(`@font-face {
+        const dicourseFont = document.createElement("style");
+        dicourseFont.appendChild(
+          document.createTextNode(`@font-face {
           font-family: 'dicourseFont';
           src: url("${this.$strapi.api.url}${current.attributes.font.data.attributes.url}");
-        }`));
+        }`)
+        );
         document.head.appendChild(dicourseFont);
       },
-      deep: true
+      deep: true,
     },
-  }
-}
-
+  },
+});
 </script>
 
 <style>

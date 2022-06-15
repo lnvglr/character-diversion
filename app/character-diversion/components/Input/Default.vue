@@ -10,7 +10,7 @@
   />
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   props: {
     type: {
       type: String,
@@ -57,7 +57,7 @@ export default {
       }, 0)
     },
   },
-}
+})
 </script>
 <style scoped>
 textarea {

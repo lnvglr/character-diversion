@@ -21,7 +21,7 @@
   </div>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   props: {
     type: {
       type: String,
@@ -96,7 +96,7 @@ export default {
       this.$emit('update:modelValue', newValues)
     },
   },
-}
+})
 </script>
 <style lang="scss" scoped>
 input {

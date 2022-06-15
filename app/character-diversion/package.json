@@ -8,8 +8,10 @@
   },
   "scripts": {
     "start": "node_modules/nuxt/bin/nuxt.js start -c ./nuxt.config.js",
+    "start-local": "nuxt start",
     "heroku-postbuild": "nuxt build",
     "build": "node_modules/nuxt/bin/nuxt.js build -c ./nuxt.config.js",
+    "build-local": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"

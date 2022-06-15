@@ -12,7 +12,7 @@
   </main>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   props: {
     background: {
       type: String,
@@ -23,7 +23,7 @@ export default {
       default: '/',
     },
   },
-}
+})
 </script>
 <style lang="scss" scoped>
 .background {

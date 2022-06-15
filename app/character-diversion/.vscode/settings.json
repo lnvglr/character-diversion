@@ -1,0 +1,213 @@
+{
+	"files.eol": "\n",
+	"editor.wordWrap": "on",
+	"editor.multiCursorModifier": "ctrlCmd",
+	"editor.insertSpaces": false,
+	"editor.parameterHints": false,
+	"editor.renderWhitespace": "all",
+	"editor.rulers": [
+		100
+	],
+	"git.ignoreMissingGitWarning": true,
+	"git.confirmSync": false,
+	"git.autofetch": true,
+	"atomKeymap.promptV3Features": true,
+	"auto-close-tag.SublimeText3Mode": true,
+	"workbench.startupEditor": "newUntitledFile",
+	"nasc-touchbar.jumpToBracket": true,
+	"phpcs.executablePath": "/Users/Leon/.composer/vendor/squizlabs/php_codesniffer/bin/phpcs",
+	"phpcs.standard": "WordPress",
+	"phpcbf.standard": "WordPress",
+	"highlight-matching-tag.styles": {
+		"opening": {
+			"full": {
+				"custom": {
+					"borderWidth": "1px",
+					"borderStyle": "solid",
+					"borderColor": "rgba(255,255,255,.5)",
+					"borderRadius": "2px",
+					"backgroundColor": "rgba(0,0,0,.5)"
+				}
+			},
+			"left": {
+				"custom": {
+					"borderWidth": "0",
+					"borderStyle": "solid"
+				}
+			},
+			"right": {
+				"custom": {
+					"borderWidth": "0",
+					"borderStyle": "solid"
+				}
+			}
+		}
+	},
+	"nasc-touchbar.addCursorBelow": false,
+	"nasc-touchbar.togglePanel": false,
+	"nasc-touchbar.indent": true,
+	"nasc-touchbar.outdent": true,
+	"nasc-touchbar.rename": false,
+	"nasc-touchbar.showCommands": false,
+	"nasc-touchbar.showReferences": true,
+	"nasc-touchbar.selectNext": false,
+	"nasc-touchbar.toggleWhiteSpace": true,
+	"nasc-touchbar.blockComment": true,
+	"workbench.colorTheme": "Community Material Theme High Contrast",
+	"editor.tabSize": 2,
+	"C_Cpp.updateChannel": "Insiders",
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"scssFormatter.singleQuote": true,
+	"scssFormatter.useTabs": true,
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "Wscats.vue"
+	},
+	"[php]": {
+		"editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+	},
+	"prettier.semi": false,
+	"prettier.singleQuote": true,
+	"printWidth": 100,
+	"vetur.format.defaultFormatterOptions": {
+		"prettier": {
+			"semi": false,
+			"singleQuote": true,
+			"printWidth": 100
+		}
+	},
+	"editor.minimap.renderCharacters": false,
+	"intelephense.stubs": [
+		"apache",
+		"bcmath",
+		"bz2",
+		"calendar",
+		"com_dotnet",
+		"Core",
+		"ctype",
+		"curl",
+		"date",
+		"dba",
+		"dom",
+		"enchant",
+		"exif",
+		"FFI",
+		"fileinfo",
+		"filter",
+		"fpm",
+		"ftp",
+		"gd",
+		"gettext",
+		"gmp",
+		"hash",
+		"iconv",
+		"imap",
+		"intl",
+		"json",
+		"ldap",
+		"libxml",
+		"mbstring",
+		"meta",
+		"mysqli",
+		"oci8",
+		"odbc",
+		"openssl",
+		"pcntl",
+		"pcre",
+		"PDO",
+		"pdo_ibm",
+		"pdo_mysql",
+		"pdo_pgsql",
+		"pdo_sqlite",
+		"pgsql",
+		"Phar",
+		"posix",
+		"pspell",
+		"readline",
+		"Reflection",
+		"session",
+		"shmop",
+		"SimpleXML",
+		"snmp",
+		"soap",
+		"sockets",
+		"sodium",
+		"SPL",
+		"sqlite3",
+		"standard",
+		"superglobals",
+		"sysvmsg",
+		"sysvsem",
+		"sysvshm",
+		"tidy",
+		"tokenizer",
+		"xml",
+		"xmlreader",
+		"xmlrpc",
+		"xmlwriter",
+		"xsl",
+		"Zend OPcache",
+		"zip",
+		"zlib",
+		"wordpress",
+		"/Users/Leon/.composer/vendor/paulthewalton/acf-pro-stubs"
+	],
+	"intelephense.files.maxSize": 5000000,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"explorer.confirmDragAndDrop": false,
+	"intelephense.files.associations": [
+		"*.module",
+		"*.php",
+		"*.phtml"
+	],
+	"php-docblocker.author": {
+		"name": "Leon Vogler",
+		"email": "post@leonvogler.de"
+	},
+	"eslint.codeAction.showDocumentation": {
+		"enable": true
+	},
+	// "editor.formatOnSave": true,
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"security.workspace.trust.untrustedFiles": "open",
+	"editor.quickSuggestions": null,
+	"svg.preview.mode": "svg",
+	"editor.fontLigatures": null,
+	"mssql.connections": [
+		{
+			"server": "{{put-server-name-here}}",
+			"database": "{{put-database-name-here}}",
+			"user": "{{put-username-here}}",
+			"password": ""
+		}
+	],
+	"editor.accessibilitySupport": "off",
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.formatOnSave": false,
+	"bracketPairColorizer.depreciation-notice": false,
+	"bracket-pair-colorizer-2.depreciation-notice": false,
+	"editor.inlineSuggest.enabled": true,
+	"window.zoomLevel": 1,
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.tokenColorCustomizations": {},
+	"vue3snippets.enable-compile-vue-file-on-did-save-code": true
+}

@@ -10,7 +10,7 @@
 </template>
 <script lang="ts">
 import { Discourse } from '~/types'
-export default {
+export default defineComponent({
 	name: 'Discourse Card',
 	props: {
 		discourse: Object as () => Discourse,
@@ -24,7 +24,7 @@ export default {
       this.$strapi.delete('discourses', id).then(({ data }) => (delete discourse.id[data.id]))
     },
 	}
-}
+})
 </script>
 <style>
 </style>

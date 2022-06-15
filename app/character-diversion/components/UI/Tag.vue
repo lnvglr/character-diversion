@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
 	name: "Tag",
-}
+})
 </script>
 
 <style lang="scss">

@@ -2,7 +2,7 @@
 	<img v-if="src" :src="source" :style="`--aspect-ratio: ${aspectRatio}`" />
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
 	props: {
 		src: {
 			type: Object,
@@ -21,7 +21,7 @@ export default {
 			return this.$strapi.api.url + this.src?.formats[this.size]?.url
 		},
 	},
-}
+})
 </script>
 <style scoped>
 img {

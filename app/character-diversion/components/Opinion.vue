@@ -1,23 +1,47 @@
 <template>
-  <div v-if="opinion" @click="selectOpinion" class="opinion w-full duration-300 border-y -mt-[1px] border-beige-300 last:border-b-0"
+  <div
+    v-if="opinion"
+    @click="selectOpinion"
+    class="opinion w-full duration-300 border-y -mt-[1px] border-beige-300 last:border-b-0"
     :class="{
       'opacity-30': inactive,
       'z-10': active,
-    }">
-    <div class="flex items-center p-2 pt-1   hover:bg-beige-100 cursor-pointer " :class="active && 'bg-beige-100'">
+    }"
+  >
+    <div
+      class="flex items-center p-2 pt-1 hover:bg-beige-100 cursor-pointer"
+      :class="active && 'bg-beige-100'"
+    >
       <div class="flex flex-col gap-2 w-full">
         <div class="relative">
           <div class="flex w-full">
             <Vote :opinion="opinion" class="w-10" style="min-width: var(--w-7)" />
             <div class="flex-1">
-              <div class="float-right" v-if="opinion.attributes.author.data.id === $strapi.user?.id || $strapi.user?.id === 11"><Button
-                  class="clear text-sm xs" :class="{ 'opacity-0 pointer-events-none': !active }"
-                  @click.stop="removeOpinion()" color="alert" icon="trash" /></div>
-              <p class="mt-1 line-clamp-3 text-sm break-words markdown" :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
-                v-html="parseOpinion.content" />
+              <div
+                class="float-right"
+                v-if="
+                  opinion.attributes.author.data.id === $strapi.user?.id ||
+                  $strapi.user?.id === 11
+                "
+              >
+                <Button
+                  class="clear text-sm xs"
+                  :class="{ 'opacity-0 pointer-events-none': !active }"
+                  @click.stop="removeOpinion()"
+                  color="alert"
+                  icon="trash"
+                />
+              </div>
+              <p
+                class="mt-1 line-clamp-3 text-sm break-words markdown"
+                :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
+                v-html="parseOpinion.content"
+              />
 
               <TransitionExpand>
-                <div v-if="active && (glyphs.length > 0 || opinion.attributes.axes !== {})">
+                <div
+                  v-if="active && (glyphs.length > 0 || opinion.attributes.axes !== {})"
+                >
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                     <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
                   </span>
@@ -44,81 +68,89 @@
 </template>
 
 <script lang="ts">
-import { Opinion } from "~/types"
-export default {
+import { Opinion } from "~/types";
+export default defineComponent({
   props: {
     opinion: {
-      type: Object,
+      type: Object as () => Opinion,
     },
   },
   data() {
-    return {
-    }
+    return {};
   },
   computed: {
     active() {
-      return this.$state.opinion.active.id === this.opinion.id
+      return this.$state.opinion.active.id === this.opinion.id;
     },
     inactive() {
-      return this.$state.opinion.active.id && (this.$state.opinion.active.id !== this.opinion.id)
+      return (
+        this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion.id
+      );
     },
     glyphs() {
-      const extra = []
+      const extra = [];
       this.opinion.attributes.glyphs.forEach((glyph: number) => {
-        if (!this.parseOpinion.parsedGlyphs.includes(glyph)) extra.push(this.$state.opinion.font.glyphMap[glyph].literal)
-      })
-      return extra
+        if (!this.parseOpinion.parsedGlyphs.includes(glyph))
+          extra.push(this.$state.opinion.font.glyphMap[glyph].literal);
+      });
+      return extra;
     },
     parseOpinion() {
-      const parsedGlyphs = []
-      const contentRaw = this.opinion.attributes.content?.replaceAll(this.$f.glyphMethods.regexPattern, (glyph: string) => {
-        if (this.$f.utils.invertObject(this.opinion.attributes.glyphs)[this.$f.glyphMethods.glyphToUnicode(glyph.slice(1))]) {
-          parsedGlyphs.push(this.$f.glyphMethods.glyphToUnicode(glyph.slice(1)))
-          return `<span class='glyph-tag'>${glyph}</span>`
+      const parsedGlyphs = [];
+      const contentRaw = this.opinion.attributes.content?.replaceAll(
+        this.$f.glyphMethods.regexPattern,
+        (glyph: string) => {
+          if (
+            this.$f.utils.invertObject(this.opinion.attributes.glyphs)[
+              this.$f.glyphMethods.glyphToUnicode(glyph.slice(1))
+            ]
+          ) {
+            parsedGlyphs.push(this.$f.glyphMethods.glyphToUnicode(glyph.slice(1)));
+            return `<span class='glyph-tag'>${glyph}</span>`;
+          }
+          return glyph;
         }
-        return glyph
-
-      })
-      const content = this.$f.utils.renderMarkdown(contentRaw)
+      );
+      const content = this.$f.utils.renderMarkdown(contentRaw);
       return {
         content,
         parsedGlyphs,
-      }
+      };
     },
   },
   watch: {
     active(active: boolean) {
       if (active && this.$el) {
-        this.$el.scrollIntoView({ block: "nearest", behavior: 'smooth' })
+        this.$el.scrollIntoView({ block: "nearest", behavior: "smooth" });
       }
     },
   },
   methods: {
     selectOpinion() {
-      const opinion = this.opinion
+      const opinion = this.opinion;
       if (opinion === null || this.$state.opinion.active.id === opinion.id) {
-        this.$state.opinion.reset('active')
-        this.$state.opinion.reset('form')
-        return
+        this.$state.opinion.reset("active");
+        this.$state.opinion.reset("form");
+        return;
       }
-      const selected = JSON.parse(JSON.stringify(opinion))
-      this.$state.opinion.active = selected
-      this.$state.opinion.form.attributes.axes = selected.attributes.axes
-      this.$state.opinion.formActive = false
+      const selected = JSON.parse(JSON.stringify(opinion));
+      this.$state.opinion.active = selected;
+      this.$state.opinion.form.attributes.axes = selected.attributes.axes;
+      this.$state.opinion.formActive = false;
       // this.$state.opinion.form.attributes.glyphs = selected.attributes.glyphs
       // this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
     },
     removeOpinion() {
       this.$strapi.delete("opinions", this.opinion.id).then(({ data }) => {
-        const opinions = this.$state.discourse.current.attributes.opinions
+        const opinions = this.$state.discourse.current.attributes.opinions;
         if (opinions?.data) {
-          opinions.data = opinions.data.filter((e: Opinion) => e.id !== data.id)
+          opinions.data = opinions.data.filter((e: Opinion) => e.id !== data.id);
         }
-        this.$state.opinion.reset('active')
+        this.$state.opinion.reset("active");
       });
     },
-  }
-}
+  },
+});
 </script>
 
 <style lang="scss">

@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   setup() {
     const InputDefault = resolveComponent('InputDefault')
     const InputRange = resolveComponent('InputRange')
@@ -121,7 +121,7 @@ export default {
       }
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

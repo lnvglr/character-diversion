@@ -15,7 +15,7 @@
 
 <script>
 import Truncate from '~/components/UI/Truncate.vue'
-export default {
+export default defineComponent({
   name: 'File',
   components: { Truncate },
   props: {
@@ -38,7 +38,7 @@ export default {
       this.$emit('remove', this.index)
     }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

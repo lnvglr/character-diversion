@@ -1,41 +1,11 @@
-import { reactive, ComputedRef } from 'vue'
+import { reactive } from 'vue'
 import { useNuxtApp, useRoute } from '#app'
-import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap } from '@/types'
+import type { Opinion, Discourse, SamsaGlyph, SamsaFont as SamsaFontType, GlyphMap, DiscourseState, OpinionState } from '@/types'
 
 import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '@/composables/methods'
 import unicodeTable from '@/composables/unicode-table'
 
-interface DiscourseState {
-  all: {
-    [id: string]: Discourse
-  }
-  current: ComputedRef<Discourse>
-  search: string
-  filter: {
-    [key: string]: boolean
-  }
-  new: {
-    title: string,
-    content: string,
-    files: object
-  },
-  setCurrent: (id: string) => void
-  fetch: () => void
-}
-interface OpinionState {
-  form: Opinion
-  active: Opinion
-  formActive: Boolean
-  selectedGlyphs: number[]
-  annotationTool: {
-    id: number,
-    x: number,
-    y: number
-  },
-  font: SamsaFont
-  reset: () => void
-}
 export const discourse = reactive<DiscourseState>({
   all: {},
   current: null,
