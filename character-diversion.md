@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. Ans so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, I refer to my proposal *Cross-Script Character Relationships*. 
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. Ans so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, I refer to my proposal *Cross-Script Character Relationships*.
 
 After submitting my proposals, I initially looked for the right medium to showacse my considerations, where my thought was to create an interactive web site, where the potential character relationships were presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of how letter shapes might look like in the future.
 
@@ -21,7 +21,7 @@ To guide you through my thought process, I will first explain what conventions a
 
 I will briefly recount my experiences modifying a number of typefaces according to my ideas of new character relationships and the process of showcasing them on *Character Diversion*. I will finish with an outlook to where *Character Diversion* could be taken to, which features are missing and in which scope the platform could actually be realised.
 
-## Questioning Conventions
+## Challenging Conventions
 
 ### What are conventions and what are they for?
 
@@ -37,7 +37,7 @@ The rhythm of ascenders and descenders in Latin script words, gives an often uni
 
 Writing from left to right had practical reasons, too: the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboeard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
 
-![Cippus Perusinus](https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg)
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg" alt="Cippus Perusinus" style="zoom:15%;" />
 
 Finally, there are conventions of ornamentation, like the drop shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason and they breaking them would not cause chaos to the western world—they are because they have grown to be and just has they have come, they have the ability to go, if a critical mass chooses to. 
 
@@ -92,21 +92,21 @@ Without controversy, without the potential to disagreement there is no discourse
 
 ### People with Opinions
 
-For discourse to live, it needs participants who bring with them diverse opinions.
-
-A platform for typographic discourse needs to be accessible, it n
+For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible.
 
 ### Adequate Platforms
 
-In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is language-based comminication. In many fields in which discourse is carried out, such as sociology, political science and anthopology, using language as the basis for communication seems quite adequate. And although typography is tightly linked with language, I have come to question whether discourse around typography should be *based* on language.
+In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is language-based communication. In many fields in which discourse is carried out, such as sociology, political science and anthropology, using language as the basis for communication seems quite adequate. And although typography is tightly linked with language, I have come to question whether discourse around typography should be *based* on language.
 
 There are a number of platforms for typographic discourse, analogue conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text based—in fact they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language.
 
-*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique.
+*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be agnostic to its content may be one of its greatest strengths and its weaknesses. 
 
-
+<img src="/Users/Leon/Sites/character-diversion-mono/documentation/Screenshot 2022-06-14 at 17.15.21.png" alt="Screenshot 2022-06-14 at 17.15.21" style="zoom:30%;" />
 
 In this sense, *Character Diversion* 
+
+
 
 
 
@@ -126,7 +126,7 @@ lack of forums that facilitates type specific discourse
 
 So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to 
 
-## A Platform for Typographic Discourse (The What)
+## A Platform for Typographic Discourse
 
 There are a number of conference formats and forums that that provide a platform for typographic discourse. 
 
@@ -134,11 +134,9 @@ There are a number of conference formats and forums that that provide a platform
 
 ### Concept
 
-In an attempt to buld a platfrom that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. For this I distinguish between three kinds of discourse: the one that orbits around a specific type design project, another one that asks fundamental questions of where we want to take typography going forward and the last one that lives without a platform in the streets, backyards and lunch rooms.
+In an attempt to buld a platfrom that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. For this I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions of where we want to take typography going forward.
 
-The former is predominantly led by independent type designers and enthusiasts (source?). The second has been pushed by renowned designers in the form 
-
-...
+The former is predominantly led by independent type designers and enthusiasts (source?). The second has been pushed by renowned designers in the form of conferences.
 
 Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilized discourse on the internet he contemplates on some of the issues and design decisions of current forum software.
 
@@ -149,6 +147,10 @@ Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civi
 ### User Interface
 
 Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. User experience and interfaces need to communicate clearly what the app does and how to use it.
+
+#### Layout
+
+With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. 
 
 #### Discourse
 
@@ -231,11 +233,13 @@ One goal of the platform is to creat and overview. In order to do that, the poss
 
 ### Architecture & Deployment
 
-#### Information Structure
+The app is divided into three main areas represented by links in the main navigation of the platform: Home, Discover and Profile.
 
-##### Nav Bar
+
 
 Home, Discover, Profile
+
+#### Information Structure
 
 *Character Diversion* is written in TypeScript, a strongly typed programming language that builds on JavaScript. It is a language that helps developers build their projects and spot bugs before their occur in a production site or app. There is a lot that can be said about TypeScript—relevant to this paper is that it enables the developer to defines data object structures and peek at those structres in the development process. It also helped me understand how discourse and opinions need to be structured and references. I will illustrate the structre of discourses and opinions in the same way their are defined in the project.
 
@@ -316,11 +320,15 @@ export interface Annotation {
 
 A major question to overcome was the structure of opinions and how to design the interface.
 
-#### JavaScript Framework
+#### Underlying Technology
+
+Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android etc. which you would download onto your device, while a web based app is basically a website that behaves almost like native app. Building a web app requires you to build only one (1) app, whereas when designing natively you may end up developing several apps for each platform (i.e. iOS, Android etc.).
+
+This means that *Character Diversion* is build with HTML, CSS, and JavaScript. More specifically, I used the open source JavaScript framework Vue.js (writing TypeScript and implemented with Nuxt.js) to build the front end application and the headless open source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction and the ability to install *Character Diversion* as a PWA (progressive web app).
 
 ##### Component Based Approach
 
-For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript) (source). All styles would be written in a large CSS file and the same would be done with JavaScript. 
+For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript) (**source**). All styles would be written in a large CSS file and the same would be done with JavaScript. 
 
 In recent years there has been a paradigm shift, however, towards a component based approach. In this approach, a website or an app would be divided into smaller elements and then the markup, styles and functionality for each element would be stored in a sperate file. Like many JavaScript frameworks, Vue.js uses a component based approach to front end development. 
 
@@ -350,27 +358,47 @@ A component is usually a generic shell which accepts data that will populate thi
 
 
 
-One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embeded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
+One particularly appealing concept is the atomic design system, introduced. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embeded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
-
-#### Node.js CMS
-
-1. HTML/CSS
-2. JavaScript
-3. TypeScript
-4. Vue.js
-5. Nuxt.js
-6. Strapi
-7. Heroku
 
 ## Case Study
 
 ### Non-Conventional Hebrew-Latin Character Relationships
 
+I chose a way of cross referencing the two pillars of this thesis. I built a platform to showcase my considerations on non-conventional character relationships between Hebrew and Latin. At the same time I am using the non-conventional character relationships to showcase the usability of the platform I built.
+
+The design and architecture of the platform has already been discussed at length. And most of my considerations on non-conventional character relationships have been played out in my proposal *Cross-Script Character Relationships*. In this chapter I will give a brief account on the implementation of my considerations and the experience of uploading the project to *Character Diversion*.
+
+#### Modification of letterforms
+
+I decided to reduce my modifications to two character relationships: (1) the Psiah/Tail connection between the Hebrew letter tav (›ת‹) and the Latin small letter ›j‹, (2) the shoulder of the Latin letters ›n‹, ›m‹ and ›h‹ as well as the Hebrew letters ›ב‹, ›ה‹, ›ח‹, ›כ‹, ›ך‹, ›מ‹, ›ם‹, ›פ‹, ›ף‹, ›ר‹, ›ת‹.
+
+Having two types of character relationships meant I would need two axes in the variable font: PSIA (Psiah[1]) and SHLD (Shoulder) [2]. The first typeface I modified was Fedra, by type designer Peter Biľak, a typeface with beautiful letter forms both in Hebrew and in Latin. Fedra has a noticeable stroke contrast and the stress angle of the Hebrew is conventionally perpendicular to that of the Latin letter forms. This had implications as to how reusable components would be across the two scripts.
+
+> [1] Psiah is the what the tail of the Hebrew letter tav is referred to.
+
+> [2] Variable fonts can contain more axes than anyone would (probably) ever need. The axes have 4-character tags that are used to set their CSS values. There are five registered axes, their tag is, by convention, written in lowercase letters, while the tags of custom axes are written in all caps.
+
+**Registered axes**
+
+| Axis name    | Axis tag |
+| ------------ | ------ |
+| Weight       | `wght` |
+| Width        | `wdth` |
+| Slant        | `slnt` |
+| Optical Size | `opsz` |
+| Italics      | `ital` |
+
+I made a copy of the bold weight font file of Fedra and opened it in the font editing software *Glyphs*. Since the two axes Psiah and Shoulder do not apply to all characters, I did not set up regular master layers. Instead I used Virtual Masters which are masters that can be applied to selected glyphs. This meant that depending on whether a certain character was affected by both axes, one axis or no axis had an impact on how many masters this particular character would have. While the Latin letter ›j‹ was only affected by the Psiah axis resulting in two master for two extremes, the Hebrew letter tav (›ת‹) was affected by both axes, resulting in four masters for all possible combination of extremes.
+
+<img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/resources/Screenshot 2022-06-14 at 20.20.33.png" alt="Screenshot 2022-06-14 at 20.20.33" style="zoom:10%;" />
+
+<img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/resources/Screenshot 2022-06-14 at 20.22.20.png" alt="Screenshot 2022-06-14 at 20.22.20" style="zoom:10%;" />
 
 
 
+#### Publication on *Character Diversion*
 
 ## Outlook
 
