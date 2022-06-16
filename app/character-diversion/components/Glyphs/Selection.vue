@@ -14,6 +14,7 @@
 			:annotations="annotations"
 			:intersection="intersection"
 			:frame="frame"
+			:outline="outline"
 		/>
 	</div>
 </template>
@@ -46,6 +47,10 @@ export default defineComponent({
 			default: false,
 		},
 		intersection: {
+			type: Boolean,
+			default: false,
+		},
+		outline: {
 			type: Boolean,
 			default: false,
 		},
@@ -83,7 +88,7 @@ export default defineComponent({
 					}
 				)
 			)
-			return glyphs.slice(0, 500)
+			return glyphs.slice(2, 500)
 		}
 	},
 	mounted() {

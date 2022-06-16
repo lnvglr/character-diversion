@@ -1,10 +1,11 @@
 <template>
   <div class="flex flex-col">
+    <Header class="bg-beige-200" iconClass="text-black">Character Diversion</Header>
     <main class="p-10 pb-40 bg-beige-200 text-black grow">
       <div class="max-w-4xl mx-auto">
         <!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
-        <LandingHeadline :headline="headine" :letter="letter" class="mt-24 mb-12" />
+        <LandingHeadline :headline="headine" :letter="letter" class="mt-12 mb-12" />
         <div
           class="max-w-xl mx-auto mb-48 flex gap-5 flex-col sm:flex-row items-start sm:items-center"
         >
@@ -37,16 +38,16 @@
           </template>
           <template #title>Discover</template>
           <template #description
-            >New discourses on type are uploaded on a daily basis, discover
-            them!</template
+            >Explore discourses type and discover a new way to delve into the world of
+            typography, one character at a time. them!</template
           >
         </LandingSection>
         <LandingSection>
           <template #image><img src="/images/sushi.png" /></template>
           <template #title>Discuss</template>
           <template #description
-            >New discourses on type are uploaded on a daily basis, discover
-            them!</template
+            >On Character Diversion we're crowdsourcing opinions on new fonts and
+            character shapes. We want to hear what you think!</template
           >
         </LandingSection>
         <LandingSection>
@@ -67,17 +68,17 @@ import { Discourse } from "~/types";
 export default defineComponent({
   data() {
     return {
-      headine: "Character Diversion",
-      letter: "r",
+      headine: "Everyone has an ospinsion on type. It's time to share it.",
+      letter: "S",
     };
   },
   mounted() {
     this.$state.discourse.fetch();
   },
   computed: {
-    discourses() {
+    discourses(): Discourse[] {
       const n = 3;
-      const d = Object.values(this.$state.discourse.all).sort(
+      const d = Object.values<Discourse>(this.$state.discourse.all).sort(
         (a: Discourse, b: Discourse) => {
           return (
             Number(new Date(a.attributes.publishedAt)) -

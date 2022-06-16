@@ -1,74 +1,104 @@
 <template>
-  <h1 class="headline font-bold uppercase" v-html="transformedHeadline"></h1>
+  <!-- <h1 class="headline font-bold uppercase" v-html="transformedHeadline"></h1> -->
+  <h1 class="headline font-bold uppercase">
+    <template v-for="word in transformedHeadline" :key="word" class="">
+      <span v-if="word.length === 1" class="nowrap inline-block">{{ word[0] }}</span>
+      <span v-else class="inline-block">
+        <template v-for="(part, i) in word">
+          <span v-if="part === ''" class="relative z-0">
+            <VDropdown
+              :distance="12"
+              :skidding="-8"
+              placement="bottom-start"
+              class="letter absolute left-0 top-0"
+            >
+              <button class="text-inherit uppercase"></button>
+              <template #popper>
+                <ListOpinions :opinions="$f.glyphMethods.glyphHasOpinion(3, 57)"
+                  class="w-[360px] min-w-[360px]" />
+              </template>
+            </VDropdown>
+            <span class="relative pointer-events-none" :data-count="i">{{letter}}</span>
+          </span>
+          <span v-else class="relative z-10 pointer-events-none">{{ part }}</span>
+        </template>
+      </span>
+    </template>
+  </h1>
 </template>
 
-<script setup lang="ts">
-const props = defineProps({
-  headline: {
-    type: String,
-    default: 'Character Diversion',
+<script lang="ts">
+export default {
+  setup() {},
+  props: {
+    headline: {
+      type: String,
+      default: "Character Diversion",
+    },
+    letter: {
+      type: String,
+      default: "r",
+    },
+    comments: {
+      type: Array,
+      default: ["Too boxy", "This is the original shape", "This is just right"],
+    },
   },
-  letter: {
-    type: String,
-    default: 'r',
+  computed: {
+    transformedHeadline() {
+      return this.headline.split(" ").map((word) => {
+        return word.split(this.letter.toLowerCase());
+      });
+    },
   },
-  comments: {
-    type: Array,
-    default: ['Too boxy', 'This is the original shape', 'This is just right'],
-  },
-})
-const transformedHeadline = computed(() => {
-  let letter = -1
-  return props.headline
-    .split(' ')
-    .map(
-      (e) =>
-        `<span class='word'>${e
-          .split('')
-          .map((f) => {
-            if (f.toLocaleLowerCase() === props.letter.toLocaleLowerCase()) {
-              letter++
-              return `<span class='letter' data-count='${letter}'>${f}<span class='comment'>${props.comments[letter]}</span></span>`
-            } else {
-              return f
-            }
-          })
-          .join('')}</span>`
-    )
-    .join(' ')
-})
+};
 </script>
 
 <style lang="scss">
 .headline {
-  --font-size: var(--text-9xl);
+  --font-size: var(--text-8xl);
   @media screen and (max-width: 1024px) {
-    --font-size: var(--text-7xl);
-  }
-  @media screen and (max-width: 768px) {
     --font-size: var(--text-6xl);
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     --font-size: var(--text-5xl);
   }
+  @media screen and (max-width: 480px) {
+    --font-size: var(--text-4xl);
+  }
+  & > * {
+    margin-right: 0.5ex;
+  }
+  font-family: "Gramatika", var(--font-sans);
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
-  text-align: center;
+  // text-align: center;
   line-height: 1.1;
   .word {
     white-space: nowrap;
   }
   .letter {
-    --Y: 0;
-    position: relative;
-    height: var(--font-size);
-    line-height: 0;
+    --Y: 0.05em;
+    --size: var(--font-size);
+    position: absolute;
+    transform: translateX(-0.17em);
+    // top: 0;
+    // left: 0;
+    button {
+      // background: #ffaaaa80;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: calc(1em / 6);
+      border-radius: var(--rounded-lg);
+    }
+
     &::before,
     &:after {
-      --size: var(--font-size);
-      content: '';
-      width: var(--size);
+      pointer-events: none;
+      content: "";
+      width: 1em;
       left: 50%;
       display: block;
       position: absolute;
@@ -76,14 +106,13 @@ const transformedHeadline = computed(() => {
     }
     &::before {
       border-bottom: 1px solid currentColor;
-      bottom: 20px;
+      bottom: 0.24em;
     }
     &::after {
       border-radius: var(--rounded-lg);
       border: 1px solid currentColor;
-      height: var(--size);
-      bottom: 0;
-      bottom: calc(var(--size) / 16);
+      height: 1em;
+      bottom: calc(1em / 16);
     }
     .comment {
       position: absolute;
@@ -105,27 +134,25 @@ const transformedHeadline = computed(() => {
         display: none;
       }
     }
-    & {
-      &[data-count='0'] {
-        --Y: 0.02em;
-        font-family: Aldrich, var(--font-sans);
-        font-size: 0.975em;
-        vertical-align: 0.01em;
-        .comment {
-          background-color: var(--color-info-600);
-          margin-left: -1em;
-        }
+    & ~ [data-count="1"] {
+      --Y: 0.02em;
+      font-family: Aldrich, var(--font-sans);
+      font-size: 0.975em;
+      vertical-align: 0.01em;
+      .comment {
+        background-color: var(--color-info-600);
+        margin-left: -1em;
       }
-      &[data-count='2'] {
-        --Y: -0.02em;
-        vertical-align: -0.001em;
-        font-family: Inter, var(--font-sans);
-        font-size: 0.962em;
-        .comment {
-          background-color: var(--color-emerald-500);
-          margin-top: var(--font-size);
-          transform: translateX(50%);
-        }
+    }
+    & ~ [data-count="2"] {
+      --Y: -0.02em;
+      vertical-align: -0.001em;
+      font-family: Inter, var(--font-sans);
+      font-size: 0.962em;
+      .comment {
+        background-color: var(--color-emerald-500);
+        margin-top: var(--font-size);
+        transform: translateX(50%);
       }
     }
   }

@@ -9,14 +9,6 @@
     <div class="discourses-container">
       <DiscourseCard v-for="discourseItem in discourses" :key="discourseItem.id" :discourse="discourseItem"
        />
-      <!-- <NuxtLink v-for="discourseItem in discourses" :key="discourseItem.id" :to="`/discourse/${discourseItem.id}`"
-        class="flex flex-col justify-start min-h-[200px] p-5 gap-2 rounded-md border border-beige-300 bg-beige-50 hover:bg-white h-24 hover:shadow-[10px_10px_0_0_black] duration-100">
-        <h2 class="text-2xl font-bold leading-5">
-          {{ discourseItem.attributes.title }} {{ discourseItem.id }}
-        </h2>
-        <span> {{ discourseItem.attributes.author.data?.attributes.name }}</span>
-        <span class="mt-auto"> {{ $f.utils.relativeTime(discourseItem.attributes.publishedAt) }}</span>
-      </NuxtLink> -->
     </div>
   </div>
 </template>
