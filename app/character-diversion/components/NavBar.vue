@@ -1,6 +1,7 @@
 <template>
   <nav class="
       h-full
+      md:mr-3
       bg-beige-100
       border-t border-beige-200
       ltr:sm:border-r rtl:sm:border-l sm:border-0
@@ -21,6 +22,7 @@
             active:text-primary-600
             w-16
             h-16
+
             md:w-16 md:h-16
             dark:text-slate-200 dark:hover:bg-slate-600
           "

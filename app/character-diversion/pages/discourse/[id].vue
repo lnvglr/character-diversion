@@ -1,12 +1,7 @@
 <template>
   <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
     <div class="grow overflow-auto">
-      <div class="p-5 flex flex-col gap-5">
-        <h1 class="text-6xl font-bold">{{ $state.discourse.current.attributes.title }}</h1>
-        <Author :post="$state.discourse.current" class="text-sm" />
-        <p class="text-md max-w-lg markdown" v-html="$f.utils.renderMarkdown($state.discourse.current.attributes.content)"></p>
-      </div>
-      <div class="flex item-center px-5 mb-10 justify-between">
+      <div class="flex item-center my-5 mx-2 justify-between">
         <div class="button-group">
           <Button v-for="(viewObject, name) in views" @click="view = name" :class="{ active: view === name }" :icon="viewObject.icon" :title="viewObject.label" />
         </div>

@@ -1,9 +1,13 @@
 <template>
 	<div
-		class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] outline outline-8 outline-beige-200/90 overflow-hidden"
+		class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 outline outline-8 outline-beige-200/90 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
 		:class="{ minimized: sidebarMinimized }">
-		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
-		<h3 class="text-lg font-bold p-5 flex w-full hover:bg-white cursor-pointer" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
+		<!-- <Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" /> -->
+		<div class="p-5 hover:bg-white cursor-pointer" @click="sidebarMinimized = !sidebarMinimized">
+			<h1 class="text-2xl font-bold flex w-full">{{$state.discourse.current.attributes.title}}</h1>
+			<Author :post="$state.discourse.current" class="text-sm my-2" />
+			<p class="text-md max-w-lg markdown" v-html="$f.utils.renderMarkdown($state.discourse.current.attributes.content)"></p>
+		</div>
 		<div class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10" 
 		:class="{ 'border-b-0': sidebarMinimized }"
 		v-if="!sidebarMinimized || $state.opinion.formActive">

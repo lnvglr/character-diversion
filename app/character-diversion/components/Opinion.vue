@@ -37,10 +37,9 @@
                 :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
                 v-html="parseOpinion.content"
               />
-
               <TransitionExpand>
                 <div
-                  v-if="active && (glyphs.length > 0 || opinion.attributes.axes !== {})"
+                  v-if="active && (glyphs.length > 0 || Object.values(opinion.attributes.axes).length > 0)"
                 >
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                     <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
