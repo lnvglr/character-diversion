@@ -100,19 +100,11 @@ In the original meaning of the word, discourse is described as an oral or writte
 
 There are a number of platforms for typographic discourse, analogue conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text based—in fact they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language.
 
-*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be agnostic to its content may be one of its greatest strengths and its weaknesses. 
+*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be oblivious to its content may be one of its greatest strengths and its weaknesses. 
 
 <img src="/Users/Leon/Sites/character-diversion-mono/documentation/Screenshot 2022-06-14 at 17.15.21.png" alt="Screenshot 2022-06-14 at 17.15.21" style="zoom:30%;" />
 
 In this sense, *Character Diversion* 
-
-
-
-
-
-lack of forums that facilitates type specific discourse
-
-1. (come up with positive "why")
 
 
 
@@ -146,11 +138,13 @@ Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civi
 
 ### User Interface
 
-Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. User experience and interfaces need to communicate clearly what the app does and how to use it.
+Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse lie at the heart of the application.
+
+User experience and interfaces need to communicate clearly what the app does and how to use it.
 
 #### Layout
 
-With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. 
+With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. They should either be the entry point into the discussion, 
 
 #### Discourse
 
