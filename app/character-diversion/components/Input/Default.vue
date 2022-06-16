@@ -6,7 +6,7 @@
     v-bind="$attrs"
     :type="clearPassword ? 'text' : type"
     :ref="uid"
-    rows="4"
+    rows="3"
   />
 </template>
 <script lang="ts">
@@ -52,7 +52,7 @@ export default {
       setTimeout(() => {
         if (this.type === 'textarea' && this.element) {
           this.element.setAttribute('style', `height: auto;`)
-          this.element.setAttribute('style', `height: ${this.element.scrollHeight + 20}px;`)
+          this.element.setAttribute('style', `height: ${this.element.scrollHeight + 2}px;`)
         }
       }, 0)
     },
@@ -61,6 +61,7 @@ export default {
 </script>
 <style scoped>
 textarea {
+  padding-bottom: var(--p-7) !important;
   resize: none;
 }
 </style>
