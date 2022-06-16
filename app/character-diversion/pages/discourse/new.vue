@@ -12,10 +12,10 @@
       />
       <Input
         type="textarea"
-        name="content"
-        v-model="formData.content"
+        :maxlength="1000"
         :placeholder="$t('describe.discourse')"
-        :maxlength="500"
+        v-model="formData.content"
+        :allowMarkdown="true"
       />
       <Input
         type="file"
@@ -24,7 +24,7 @@
         :accept="['ttf', 'otf']"
         :maxFiles="1"
       />
-      <Button type="submit" class="lg">{{ $t("start.new.discourse") }}</Button>
+      <Button type="submit" :disabled="!formData.font?.[0]" class="lg">{{ $t("start.new.discourse") }}</Button>
     </form>
   </NuxtLayout>
 </template>
@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     postDiscourse(e: Event) {
+      if (!this.formData.font[0]) return
       const formData = new FormData();
       const dataCompiled = {
         ...this.formData,
