@@ -5,7 +5,7 @@
   </component>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'Button',
   setup() {
 		const NuxtLink = resolveComponent('NuxtLink')
@@ -56,7 +56,7 @@ export default defineComponent({
       return this.icon
     },
   },
-})
+}
 </script>
 
 <style lang="scss" scoped>

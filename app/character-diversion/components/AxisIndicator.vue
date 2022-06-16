@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 import { SamsaFontAxes } from "~/types"
-export default defineComponent({
+export default {
 	name: 'Axis Indicator',
 	props: {
 		axes: Object,
@@ -27,7 +27,7 @@ export default defineComponent({
 		return {
 		}
 	},
-})
+}
 </script>
 <style scoped>
 .bar {

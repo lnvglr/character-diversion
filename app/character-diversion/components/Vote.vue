@@ -26,7 +26,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import type { Opinion, Vote } from "~/types";
-export default defineComponent({
+export default {
   props: {
     opinion: Object as () => Opinion,
   },
@@ -80,7 +80,7 @@ export default defineComponent({
       });
     },
   },
-});
+}
 </script>
 
 <style></style>

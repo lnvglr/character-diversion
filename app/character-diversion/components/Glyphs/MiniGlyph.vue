@@ -20,7 +20,7 @@
 <script lang="ts">
 import { SamsaGlyph } from "~/types"
 
-export default defineComponent({
+export default {
 	props: {
 		glyph: {
 			type: Object as () => SamsaGlyph
@@ -161,7 +161,7 @@ export default defineComponent({
 
 		}
 	}
-})
+}
 </script>
 <style scoped>
 .font-user {

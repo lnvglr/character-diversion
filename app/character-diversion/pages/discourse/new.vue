@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
   data() {
     return {
       formData: {
@@ -81,7 +81,7 @@ export default defineComponent({
         });
     },
   },
-});
+}
 </script>
 
 <style scoped>

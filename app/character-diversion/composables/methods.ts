@@ -62,9 +62,9 @@ export const glyphMethods = {
   },
   glyphToUnicode: (string: string | string[]): number | number[] => {
     if (typeof string === 'string') {
-      return opinion.font.cmap[nameToUnicode(string)]
+      return opinion.font?.cmap[nameToUnicode(string)]
     }
-    return string.map((e) => opinion.font.cmap[nameToUnicode(e)])
+    return string.map((e) => opinion.font?.cmap[nameToUnicode(e)])
   },
   nameToUnicode,
 

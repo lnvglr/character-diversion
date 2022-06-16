@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   name: 'ForgotPassword',
 
   data() {
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   methods: {
   },
-})
+}
 </script>
 
 <style>

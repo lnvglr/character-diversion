@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import { Opinion } from "~/types";
-export default defineComponent({
+export default {
   props: {
     opinion: {
       type: Object as () => Opinion,
@@ -150,7 +150,7 @@ export default defineComponent({
       });
     },
   },
-});
+}
 </script>
 
 <style lang="scss">

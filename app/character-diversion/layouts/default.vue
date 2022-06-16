@@ -5,7 +5,7 @@
 </template>
 
 <script>
-export default defineComponent({})
+export default {}
 </script>
 
 <style>

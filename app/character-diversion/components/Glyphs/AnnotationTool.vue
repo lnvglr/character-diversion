@@ -51,7 +51,7 @@
 </template>
 <script lang="ts">
 import { SamsaGlyph, Opinion, Annotation } from "~/types"
-export default defineComponent({
+export default {
 	props: {
 		glyph: {
 			type: Object as () => SamsaGlyph
@@ -173,7 +173,7 @@ export default defineComponent({
 			}
 		}
 	}
-})
+}
 </script>
 <style scoped>
 svg {

@@ -15,14 +15,14 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
 	props: {
 		hoverable: {
 			type: Boolean,
 			default: true,
 		}
 	}
-})
+}
 </script>
 <style>
 </style>

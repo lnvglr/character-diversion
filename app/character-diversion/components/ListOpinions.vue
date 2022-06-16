@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { Opinion } from "~/types"
-export default defineComponent({
+export default {
 	props: {
 		opinions: {
 			type: Array,
@@ -34,5 +34,5 @@ export default defineComponent({
 			return score
 		}
 	},
-})
+}
 </script>

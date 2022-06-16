@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-export default defineComponent({
+export default {
 	props: {
 		value: {
 			type: String,
@@ -24,7 +24,7 @@ export default defineComponent({
 			return this.characterCountdown < (this.maxlength / 10)
 		},
 	}
-})
+}
 </script>
 
 <style scoped>

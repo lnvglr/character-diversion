@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
   computed: {
     currentDiscourse() {
       return this.$state.discourse.current;
@@ -125,7 +125,7 @@ export default defineComponent({
         });
     },
   },
-});
+}
 </script>
 
 <style></style>

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
 	props: {
 		width: {
 			type: Number,
@@ -30,7 +30,7 @@ export default defineComponent({
 			sm: 50
 		}
 	}
-})
+}
 </script>
 <style scoped>
 path {

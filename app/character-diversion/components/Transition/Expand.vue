@@ -17,7 +17,7 @@
   </transition>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
   name: "TransitionExpand",
   props: {
     opacity: {
@@ -142,7 +142,7 @@ export default defineComponent({
       });
     },
   },
-});
+}
 </script>
 
 <style scoped>

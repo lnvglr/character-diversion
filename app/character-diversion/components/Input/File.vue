@@ -48,7 +48,7 @@
 import FileCard from '~/components/UI/FileCard.vue'
 // import Callout from '~/components/UI/Callout.vue'
 
-export default defineComponent({
+export default {
   name: 'DropZone',
   components: {
     FileCard,
@@ -128,7 +128,7 @@ export default defineComponent({
       deep: true,
     },
   },
-})
+}
 </script>
 
 <style lang="scss" scoped>

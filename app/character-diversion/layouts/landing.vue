@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Discourse } from "~/types";
-export default defineComponent({
+export default {
   data() {
     return {
       headine: "Everyone has an ospinsion on type. It's time to share it.",
@@ -89,7 +89,7 @@ export default defineComponent({
       return d.slice(-n);
     },
   },
-});
+}
 </script>
 
 <style lang="scss" scoped>
