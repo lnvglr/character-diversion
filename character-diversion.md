@@ -39,6 +39,8 @@ Writing from left to right had practical reasons, too: the Romans adopted left-t
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg" alt="Cippus Perusinus" style="zoom:15%;" />
 
+[caption: Cippus Perusinus]
+
 Finally, there are conventions of ornamentation, like the drop shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason and they breaking them would not cause chaos to the western world—they are because they have grown to be and just has they have come, they have the ability to go, if a critical mass chooses to. 
 
 ### Conventions in Hebrew and Latin Typography → maybe move this to the case study?
@@ -70,25 +72,23 @@ This process of challenging conventions can happen quite naturally, as it has fo
 
 ## Enabling Discourse
 
-If discourse is necessary to re-evaluate conventions, how can this discourse be enabled and encouraged? I divided the prerequisites into three elements: (1) a (controversial) topic, (2) (people with) opinions, and (3) a platform (on which people with opinions can discuss controversial topics).
+If discourse is necessary to re-evaluate conventions, how can this discourse be enabled and encouraged? For discourse to emerge, three elements cannot be absent: (1) an issue, (2) opinions on the issue, and (3) a platform (on which people with opinions can discuss issues).
 
 <img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/Untitled_Artwork.png" alt="Untitled_Artwork" style="zoom:10%;" />
 
-To Michel Foucault (1971, p.10), the »will to truth« is the driving factor that forges discourse. He also links discourse to power, arguing that control of discourse will result in control of how th world is perceived.
+[venn diagram]
 
-And also in the wider field of social theory, discourse is often examined as a gateway to power.
 
-...
 
 > Der Begriff »Innovation« richtet sich [...] auf die Wirkung einer Neuerung auf ein entsprechendes System, eine Struktur, eine *diskursive* Formation oder ein soziokulturelles Feld.
 >
 > —BÜSCHER-ULBRICH, KADENBACH, KINDERMANN (HG.)
 
-### Controversial Topics
+### Issues
 
-In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the Introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics have the potential for controvertial discourse. Both orbit around multiscript typography, about the potential implications of typographic differences between scripts and in how we can alter typographic conventions to  bring script closer together.
+In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics are material for controversial discourse. Both orbit around multi script typography, about the possible implications of typographic differences between scripts and how we can alter typographic conventions to bring script closer together.
 
-Without controversy, without the potential to disagreement there is no discourse. Everything else is non-discoursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and exncourage unconventional approaches. (**what is the concequence?**)
+Without controversy, without the potential to disagreement there is no discourse. Everything else is non-discoursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the concequence?**). 
 
 ### People with Opinions
 
@@ -223,9 +223,9 @@ Another form of visually referencing what a user is critiquing, is marking eleme
 
 #### Voting and Responding to Opinions and Comments
 
-Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support.
+As established before, discourse thrives on differences of opinion. A vital feature for *Character Diversion* is responding to opinions with the option to agree or disagree.
 
-This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be intepreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
+Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be intepreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
 
 #### Filtering Opinions and Comments
 
@@ -362,11 +362,11 @@ One particularly appealing concept is the atomic design system, introduced. It i
 
 ![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
 
-## Case Study
+## Case Studies
 
 ### Non-Conventional Hebrew-Latin Character Relationships
 
-I chose a way of cross referencing the two pillars of this thesis. I built a platform to showcase my considerations on non-conventional character relationships between Hebrew and Latin. At the same time I am using the non-conventional character relationships to showcase the usability of the platform I built.
+I chose a way of cross referencing the two pillars of this thesis. I built a platform to showcase my considerations on non-conventional character relationships between Hebrew and Latin. And at the same time I am using the non-conventional character relationships to showcase the usability of the platform I built.
 
 The design and architecture of the platform has already been discussed at length. And most of my considerations on non-conventional character relationships have been played out in my proposal *Cross-Script Character Relationships*. In this chapter I will give a brief account on the implementation of my considerations and the experience of uploading the project to *Character Diversion*.
 
@@ -396,9 +396,16 @@ I made a copy of the bold weight font file of Fedra and opened it in the font ed
 
 <img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/resources/Screenshot 2022-06-14 at 20.22.20.png" alt="Screenshot 2022-06-14 at 20.22.20" style="zoom:10%;" />
 
+As can be seen in figure
+
 
 
 #### Publication on *Character Diversion*
+
+
+### The New Hebrew Typography
+
+
 
 ## Outlook
 
