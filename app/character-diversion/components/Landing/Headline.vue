@@ -9,13 +9,13 @@
             <VDropdown
               :distance="12"
               :skidding="-8"
-              :shown="true"
               placement="bottom-start"
               class="letter absolute left-0 top-0"
             >
               <button class="text-inherit uppercase"></button>
               <template #popper>
-                <div class="p-5 py-3">{{comments[i]}}</div>
+                <ListOpinions :opinions="$f.glyphMethods.glyphHasOpinion(3, 57)"
+                  class="w-[360px] min-w-[360px]" />
               </template>
             </VDropdown>
             <span class="relative pointer-events-none" :data-count="i">{{letter}}</span>

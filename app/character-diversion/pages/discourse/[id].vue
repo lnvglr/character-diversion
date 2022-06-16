@@ -59,7 +59,7 @@ export default {
           label: 'Detail',
           icon: 'eye',
           gridSize: '64',
-          fontSize: '8xl',
+          fontSize: '10xl',
           edit: true,
           annotations: true,
           frame: true
@@ -81,7 +81,8 @@ export default {
           fontSize: '16xl',
           edit: true,
           annotations: true,
-          frame: true
+          frame: true,
+          outline: true
         }
       }
     }
