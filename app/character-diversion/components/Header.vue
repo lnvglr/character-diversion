@@ -11,12 +11,12 @@
   </header>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
   props: {
     iconClass: {
       type: String,
       default: "text-primary-500",
     },
   },
-});
+}
 </script>

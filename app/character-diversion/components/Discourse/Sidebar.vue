@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
 	data() {
 		return {
 			sidebarMinimized: false
@@ -38,7 +38,7 @@ export default defineComponent({
 			immediate: true,
 		},
 	},
-})
+}
 </script>
 
 <style scoped>

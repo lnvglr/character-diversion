@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
 	props: {
 		end: {
 			type: Number,
@@ -16,7 +16,7 @@ export default defineComponent({
 			default: '1px',
 		},
 	},
-})
+}
 </script>
 <style scoped>
 line {

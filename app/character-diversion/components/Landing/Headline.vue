@@ -36,7 +36,7 @@ const transformedHeadline = computed(() => {
           .join('')}</span>`
     )
     .join(' ')
-})
+}
 </script>
 
 <style lang="scss">

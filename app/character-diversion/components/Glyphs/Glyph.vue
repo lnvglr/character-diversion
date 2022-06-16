@@ -2,7 +2,7 @@
 	<path class="glyph-default" v-if="path" :d="path" :stroke-width="strokeWidth"></path>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
 	props: {
 		path: {
 			type: String,
@@ -12,7 +12,7 @@ export default defineComponent({
 			default: '1px',
 		},
 	},
-})
+}
 </script>
 <style scoped>
 :global(:where(.glyph-default)) {

@@ -24,7 +24,7 @@
 <script lang="ts">
 import { Discourse } from '~/types'
 
-export default defineComponent({
+export default {
   computed: {
     discourses() {
       return Object
@@ -36,7 +36,7 @@ export default defineComponent({
   },
   methods: {
   }
-})
+}
 </script>
 
 <style lang="scss">

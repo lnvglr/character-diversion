@@ -6,7 +6,7 @@
 	</Button>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
 	setup() {
 	},
 	props: {
@@ -26,5 +26,5 @@ export default defineComponent({
 			this.$router.push('/login')
 		},
 	},
-})
+}
 </script>

@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Discourse } from "~/types";
 
-export default defineComponent({
+export default {
   setup() {
     definePageMeta({
       name: "Discourse",
@@ -46,7 +46,7 @@ export default defineComponent({
       deep: true,
     },
   },
-});
+}
 </script>
 
 <style>

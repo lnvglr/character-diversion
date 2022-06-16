@@ -28,7 +28,7 @@
 <script lang="ts">
 import { discourse, opinion } from "~/composables/states";
 import { glyphMethods, utils } from "~/composables/methods";
-export default defineComponent({
+export default {
   async setup() {
     const app = useNuxtApp();
     const client = <T>(contentType: string, data?: Partial<T>) =>
@@ -61,7 +61,7 @@ export default defineComponent({
       return ["he", "ar"].includes(this.$i18n.locale) ? "rtl" : "ltr";
     },
   },
-});
+}
 </script>
 <style>
 :where([dir="rtl"] *) {

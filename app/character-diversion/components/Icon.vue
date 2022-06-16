@@ -4,7 +4,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   name: 'Icon',
   props: {
     name: String,
@@ -19,7 +19,7 @@ export default defineComponent({
       }
     }
   },
-})
+}
 </script>
 <style>
 svg {

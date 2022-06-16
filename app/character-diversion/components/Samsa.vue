@@ -16,7 +16,7 @@
 const fonts = import.meta.glob('~/public/fonts/*.{ttf,otf}')
 import { SamsaFont, SamsaGlyph } from '~/types'
 
-export default defineComponent({
+export default {
   name: 'Samsa',
   props: {
     tuple: {
@@ -38,7 +38,7 @@ export default defineComponent({
       return [...new Set(this.string.split(''))]
     },
   },
-})
+}
 </script>
 
 <style>

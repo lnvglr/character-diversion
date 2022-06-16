@@ -40,7 +40,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   mounted() {
     // console.log(this.$route)
     // console.log(this.$router.options.routes)
@@ -83,7 +83,7 @@ export default defineComponent({
         })
     },
   },
-})
+}
 </script>
 
 <style scoped>

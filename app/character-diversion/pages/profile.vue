@@ -31,7 +31,7 @@
 </template>
 
 <script>
-export default defineComponent({
+export default {
   setup() {
     definePageMeta({
       name: 'Profile',
@@ -55,7 +55,7 @@ export default defineComponent({
       immediate: true
     },
   }
-})
+}
 </script>
 
 <style>

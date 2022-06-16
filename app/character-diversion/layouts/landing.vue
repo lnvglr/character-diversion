@@ -64,7 +64,7 @@
 
 <script lang="ts">
 import { Discourse } from "~/types";
-export default defineComponent({
+export default {
   data() {
     return {
       headine: "Character Diversion",
@@ -88,7 +88,7 @@ export default defineComponent({
       return d.slice(-n);
     },
   },
-});
+}
 </script>
 
 <style lang="scss" scoped>

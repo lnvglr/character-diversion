@@ -12,8 +12,6 @@ definePageMeta({
 	// icon: 'binoculars',
 	// order: 2,
 })
-
-
 </script>
 
 <style>

@@ -2,9 +2,9 @@
   <button><slot></slot></button>
 </template>
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'Button Default',
-})
+}
 </script>
 
 <style lang="scss" scoped>

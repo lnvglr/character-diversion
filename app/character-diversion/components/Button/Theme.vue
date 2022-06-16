@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-export default defineComponent({
+export default {
   data() {
     return {
       icons: {
@@ -34,7 +34,7 @@ export default defineComponent({
       this.$colorMode.preference = themes[(i + 1) % themes.length]
     }
   }
-})
+}
 </script>
 
 <style>
