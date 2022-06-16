@@ -79,8 +79,9 @@ export default {
 				.filter(
 					(glyph: SamsaGlyph) => {
 						if (
-							this.$state.opinion.font.glyphMap[glyph.id].literal &&
-							this.filterByOpinions(glyph.id) &&
+							this.removeEmpty(glyph.id) &&
+							// this.$state.opinion.font.glyphMap[glyph.id].literal
+							// this.filterByOpinions(glyph.id) &&
 							this.matchGlyphs(glyph.id)
 						) {
 							return glyph
@@ -88,13 +89,18 @@ export default {
 					}
 				)
 			)
-			return glyphs.slice(2, 500)
+			return glyphs
 		}
 	},
 	mounted() {
 		// window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {
+		removeEmpty(id: number) {
+			const name = this.$state.opinion.font.glyphMap[id].name
+			// return true
+			return 'space' !== name && '.notdef' !== name
+		},
 		filterByOpinions(id: number) {
 			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0
 			return true

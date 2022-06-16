@@ -22,20 +22,7 @@
 				}" v-html="glyphName(glyph, gridSize < 30)" @pointerdown="clickable = false, appendGlyph(glyph)"
 				@pointerup="clickable = true"
 				:title="$state.opinion.formActive ? $t('insert.into.opinion', { glyph: '/' + glyphName(glyph) }) : ''" />
-			<div v-if="hasOpinion(glyph.id).length > 0" class="z-10 absolute bottom-2 left-2">
-				<VDropdown :distance="12" :skidding="-8" placement="bottom-start">
-					<button class="flex items-center justify-center font-bold rounded-full text-white bg-primary-500/80" :class="{
-						'w-3 h-3 text-[0.5rem] ': gridSize < 30,
-						'w-5 h-5 text-xs': gridSize >= 30,
-					}" @pointerdown="clickable = false, $state.opinion.reset('active')" @pointerup="clickable = true">
-						{{ opinionTitles(glyph.id).length }}
-					</button>
-					<template #popper>
-						<ListOpinions v-if="hasOpinion(glyph.id).length > 0" :opinions="hasOpinion(glyph.id)"
-							class="w-[360px] min-w-[360px]" />
-					</template>
-				</VDropdown>
-			</div>
+			<OpinionLink :glyph="glyph" :size="gridSize >= 30 ? 'lg' : 'md'" @pointerdown="clickable = false" @pointerup="clickable = true" />
 		</Card>
 	</div>
 </template>
@@ -116,13 +103,9 @@ export default {
 			this.$state.opinion.form.attributes.content = content.trim() + ' ' + glyphReference
 		},
 		dim(id: number) {
-			return (this.$state.opinion.active.attributes.glyphs.length > 0 && !this.$state.opinion.active.attributes.glyphs.find((g: number) => g === id)) || (this.$state.opinion.form.attributes.glyphs.length > 0 && !this.$state.opinion.form.attributes.glyphs.find((g: number) => g === id))
-		},
-		hasOpinion(id: number) {
-			return this.$f.glyphMethods.glyphHasOpinion(id)
-		},
-		opinionTitles(id: number) {
-			return this.hasOpinion(id).map((opinion: Opinion) => opinion.attributes.content).filter((opinion: Opinion) => opinion)
+			const active = this.$state.opinion.active.attributes.glyphs
+			const form = this.$state.opinion.form.attributes.glyphs
+			return (active.length > 0 && !active.find((g: number) => g === id)) || (form.length > 0 && !form.find((g: number) => g === id))
 		},
 	},
 }

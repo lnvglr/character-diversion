@@ -1,11 +1,12 @@
 <template>
 	<div
-		class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] outline outline-8 outline-beige-200/90"
+		class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 w-[360px] min-w-[360px] outline outline-8 outline-beige-200/90 overflow-hidden"
 		:class="{ minimized: sidebarMinimized }">
 		<Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" />
-		<h3 class="text-lg font-bold border-beige-300 p-5 flex w-full hover:bg-white cursor-pointer"
-			:class="{ 'border-b': !sidebarMinimized }" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
-		<div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10" v-if="!sidebarMinimized">
+		<h3 class="text-lg font-bold p-5 flex w-full hover:bg-white cursor-pointer" @click="sidebarMinimized = !sidebarMinimized">{{$t('opinion', 2)}}</h3>
+		<div class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10" 
+		:class="{ 'border-b-0': sidebarMinimized }"
+		v-if="!sidebarMinimized || $state.opinion.formActive">
 			<FormNewOpinion />
 		</div>
 		<ListOpinions v-if="!sidebarMinimized && $state.discourse.current" :opinions="$state.discourse.current.attributes.opinions?.data" class="border-b border-beige-300" />
