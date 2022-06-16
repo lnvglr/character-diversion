@@ -1,4 +1,4 @@
-import { SamsaFont, SamsaGlyph, SamsaFontAxes } from '@/types'
+import { Opinion, SamsaFont, SamsaGlyph, SamsaFontAxes, Discourse } from '@/types'
 import { opinion } from '@/composables/states'
 import { useRelativeTime } from '@/composables/relativeTime'
 import md from '@/composables/markdown'
@@ -99,7 +99,19 @@ export const glyphMethods = {
 						)?.glyph.id
 					})
 					.filter(e => e)
-  }
+  },
+  glyphHasOpinion(id: number, discourseId: number = null): Opinion[] {
+    let d: Discourse
+    if (!discourseId && !discourse.current) return
+    if (discourseId && discourseId in discourse.all) {
+      d = discourse.all[discourseId]
+    } else if (discourse.current) {
+      d = discourse.current
+    } else {
+      return
+    }
+    return d.attributes.opinions.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))
+  },
 }
 
 export const utils = {
