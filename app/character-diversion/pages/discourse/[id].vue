@@ -18,7 +18,7 @@
           <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" />
           <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
             type="range" :step="1" :min="axis.min" :max="axis.max"
-            v-model="$state.opinion.form.attributes.axes[axis.tag][0]" :label="axis.name" color="info"
+            v-model="$state.opinion.form.attributes.axes[axis.tag]" :label="axis.name" color="info"
             :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]"
             :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
         </div>

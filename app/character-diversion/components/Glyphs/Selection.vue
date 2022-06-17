@@ -17,14 +17,20 @@
 			:outline="outline"
 		/>
 	</div>
+	<div class="w-full p-20 flex flex-col items-center justify-center gap-5">
+		<span>{{filteredGlyphs.length}} glyphs shown</span>
+		<div class="flex items-center justify-center gap-2">
+			<Button @click="limit = limit - 100" class="clear lg" v-if="100 < filteredGlyphs.length" icon="minus">Show fewer</Button>
+			<Button @click="limit = limit + 100" class="lg" v-if="$state.opinion.font.glyphs.length > limit" icon="plus">Show more</Button>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
 import { Opinion, SamsaGlyph } from '~/types'
 import GlyphContanier from '~/components/Glyphs/GlyphContainer.vue'
-import { RecycleScroller} from 'vue-virtual-scroller'
 export default {
-	components: { RecycleScroller, GlyphContanier },
+	components: { GlyphContanier },
 	props: {
 		gridSize: {
 			type: String,
@@ -59,7 +65,8 @@ export default {
 		return {
 			active: false,
 			clickable: true,
-			opinionFilter: false
+			opinionFilter: false,
+			limit: 100,
 			// first: null,
 			// last: null
 		}
@@ -81,7 +88,8 @@ export default {
 						if (
 							this.removeEmpty(glyph.id) &&
 							// this.$state.opinion.font.glyphMap[glyph.id].literal
-							// this.filterByOpinions(glyph.id) &&
+							this.filterByActive(glyph.id) &&
+							this.filterByOpinions(glyph.id) &&
 							this.matchGlyphs(glyph.id)
 						) {
 							return glyph
@@ -89,7 +97,7 @@ export default {
 					}
 				)
 			)
-			return glyphs
+			return glyphs.slice(0, this.limit)
 		}
 	},
 	mounted() {
@@ -105,6 +113,10 @@ export default {
 			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0
 			return true
 		},
+		filterByActive(id: number) {
+			const active = this.$state.opinion.active.attributes.glyphs
+			return active.length === 0 || active.includes(id)
+		},
 		matchGlyphs(id: number) {
 			const q = this.$state.discourse.search?.trim()
 			const content = this.$state.opinion.form.attributes.content?.trim()
@@ -114,7 +126,7 @@ export default {
 			}
 			const matchedGlyphs = this.$f.glyphMethods.match(references)
 			const selectedGlyphs = this.$state.opinion.selectedGlyphs
-			return matchedGlyphs.length === 0 || matchedGlyphs.includes(id) || selectedGlyphs.includes(id)
+			return matchedGlyphs.length === 0 || (matchedGlyphs.includes(id) || selectedGlyphs.includes(id))
 		},
 		glyphName(glyph: SamsaGlyph, literal = false) {
 			const g = this.$state.opinion.font.glyphMap[glyph.id];

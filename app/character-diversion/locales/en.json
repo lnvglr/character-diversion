@@ -7,6 +7,7 @@
   "register": "Register",
   "already.logged.in": "You are already logged in.",
   "no.account.yet": "No account yet?",
+  "have.account": "You have an account?",
   "forgot.password": "Forgot password?",
   "files.browse": "browse",
   "files.drop": "drop file | drop files",

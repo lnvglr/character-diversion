@@ -1,11 +1,11 @@
 <template>
-  <div v-if="linkedOpinions(glyph.id).length > 0" class="z-10 absolute bottom-2 left-2">
+  <div v-if="linkedOpinions(glyph.id).length > 0" class="">
     <VDropdown :distance="12" :skidding="-8" placement="bottom-start">
       <button
         class="flex items-center justify-center font-bold rounded-full text-white bg-primary-500/80"
-        :class="size === 'sm' ? 'w-3 h-3 text-[0.5rem]' : 'w-5 h-5 text-xs'"
-        @click="$state.opinion.reset('active')"
+        :class="size === 'lg' ? 'w-5 h-5 text-xs' : 'w-3 h-3 text-[0.5rem]'"
       >
+        <!-- @click="$state.opinion.reset('active')" -->
         {{ linkedOpinions(glyph.id).length }}
       </button>
       <template #popper>
@@ -27,6 +27,7 @@ export default {
     },
     size: {
       type: String,
+      default: 'sm'
     },
   },
   methods: {

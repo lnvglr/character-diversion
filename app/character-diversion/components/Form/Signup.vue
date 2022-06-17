@@ -5,6 +5,8 @@
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" class="lg" />
     <Button type="submit" class="lg">Sign up</Button>
     <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
+    <hr />
+    <p>{{$t('have.account')}} <Button to="/login" class="clear inline">{{$t('login')}}</Button></p>
   </form>
 </template>
 

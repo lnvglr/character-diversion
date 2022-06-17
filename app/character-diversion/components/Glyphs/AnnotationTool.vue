@@ -119,8 +119,9 @@ export default {
 	},
 	computed: {
 		annotationRadius() {
-			const scale = (1 / this.scaling) * 15
-			return this.radius / scale
+			// const scale = (1 / this.scaling) * 15
+			// return this.radius / scale
+			return this.radius / 1.25
 		},
 		currentAnnotations() {
 			const currentAnnotations = []
