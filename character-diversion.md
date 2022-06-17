@@ -100,29 +100,33 @@ In the original meaning of the word, discourse is described as an oral or writte
 
 There are a number of platforms for typographic discourse, analogue conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text based—in fact they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language.
 
-*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be oblivious to its content may be one of its greatest strengths and its weaknesses. 
+One of the great struggles of user interface design (frankly, of all design), is finding the balance between on the one hand predicting the user's needs, making smart decisions for them and consequently decluttering the interface and on the other hand giving them the feeling of agency and enabling them to accomplish their specific goals.
+
+*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be oblivious to its content may be one of its greatest strengths and its weaknesses. While it does not force its users into the confines of too specific design, enabling them to use the platform according to their needs, the platform also lacks the tools to intuitively and interactively explore the discussions.
 
 <img src="/Users/Leon/Sites/character-diversion-mono/documentation/Screenshot 2022-06-14 at 17.15.21.png" alt="Screenshot 2022-06-14 at 17.15.21" style="zoom:30%;" />
 
-In this sense, *Character Diversion* 
+An adequate platform knows its users and knows the topics they discuss and finds a good balance between focussing the tools to what the user predictably seek out to do and leaving room for their particular use of the platform. In this sense, *Character Diversion* will be two things: a standalone platform that is simply very specific and a proof of concept for a potential plugin to already existing platforms missing this kind of discourse functionality. 
 
+As a standalone platform it has been designed specifically for critiquing letterforms and discussing their place in the mid term development of typography. 
 
-
-1. Enabling people to have this discourse by having an 
-   1. overview
-   2. interactivity
-
-
-
---
-
-So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to 
+As a plugin *Character Diversion* could eventually be implemented in a larger typographic forum, with a preexisting community, giving it the possibility to upgrade lively type communities with a tool for very specific type discussions.
 
 ## A Platform for Typographic Discourse
 
 There are a number of conference formats and forums that that provide a platform for typographic discourse. 
 
 1. Platform
+
+2. 
+
+   1. Enabling people to have this discourse by having an 
+      1. overview
+      2. interactivity
+
+   
+
+   --
 
 ### Concept
 
@@ -134,17 +138,25 @@ Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civi
 
 > »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
 
+
+
 ...
+
+
+
+So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to
+
+
 
 ### User Interface
 
-Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse lie at the heart of the application.
+Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. 
 
 User experience and interfaces need to communicate clearly what the app does and how to use it.
 
 #### Layout
 
-With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. They should either be the entry point into the discussion, 
+With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion, or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
 
 #### Discourse
 
@@ -152,17 +164,23 @@ The benefit of recorded and structured discourse is that people can learn from i
 
 #### Opinion
 
-While the discourse is the structure that defines the topic an dholds the conversation together, the opinions are what bring this structure to life.
+While the discourse is the structure that defines the topic and holds the conversation together, the opinions are what bring this structure to life.
 
-When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange, I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganizeing the ordering through a voting system? Or would this limit the livelyness of the discourse?
+When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganizeing the ordering through a voting system? Or would this limit the livelyness of the discourse?
 
 I decided that opinions in fact needed more prominence.
 
-##### How are threads treated?
+##### Sorting and Filtering (Coming soon)
+
+By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
+
+One goal of the platform is to create overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
+
+##### How are threads treated? (Coming soon)
 
 Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
 
-A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions. 
+A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions.
 
 ### Features
 
@@ -220,10 +238,6 @@ Another form of visually referencing what a user is critiquing, is marking eleme
 As established before, discourse thrives on differences of opinion. A vital feature for *Character Diversion* is responding to opinions with the option to agree or disagree.
 
 Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be intepreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
-
-#### Filtering Opinions and Comments
-
-One goal of the platform is to creat and overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and (hash-)tags. 
 
 ### Architecture & Deployment
 
@@ -390,11 +404,17 @@ I made a copy of the bold weight font file of Fedra and opened it in the font ed
 
 <img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/resources/Screenshot 2022-06-14 at 20.22.20.png" alt="Screenshot 2022-06-14 at 20.22.20" style="zoom:10%;" />
 
-As can be seen in figure
+As can be seen in figure (**x** and **y**), the linked character fragments do not share the same exact component. In fact, the proportions of the fragment are quite different—and for good reason. With the modification of Fedra, I did not change the entire set of glyphs and so I needed to stick to the stress angle of each script. It is for the Hebrew letters a horizontal stress and for the Latin letters a vertical stress. This meant that the Psiah of the Hebrew Tav (›ת‹) is narrower and has a thicker ›foot‹ than the corresponding Latin letter ›t‹.
 
+At the core of the modifications lies the idea that those newly established character relationships could potentially become conventional, meaning a certain level of predictability is involved. Multi script typefaces with character sets of both Hebrew and Latin script would predictably treat inter-script character groups similarly. The Latin ›j‹ and the Hebrew Tav (›ת‹) would consistently behave similarly. The Tav could look more like the original Jay or the Jay could tend more towards the original Tav—either way, both would look as though there is some inherent connection.
 
+To demonstrate this, I implemented a Hebraised and a Latinised version in the two extremes of a variable font axis. This implementation and usage of variable font technology is primarily for demonstration purposes [note]. For the purposes of this project, however, moving the axis would not enable the users of the font to determine the character shape for later use but instead to see certain cross-script character groups change, signifying the newly established relationship.
+
+[note] The idea to design fonts with many variable font axes and using those axes not for changing generic parameters but for fluidly changing ornaments and treatment of serifs is quite intriguing.
 
 #### Publication on *Character Diversion*
+
+
 
 
 ### The New Hebrew Typography
