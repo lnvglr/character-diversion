@@ -239,6 +239,25 @@ As established before, discourse thrives on differences of opinion. A vital feat
 
 Today, many social media platforms offer the possibility to react to content in many differenciated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be intepreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
 
+#### Image detection
+
+The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currenty those discourse are held by uploading imagery and even drawings of letterforms.
+
+A potential future feature of Character Diversion could be the option to upload an image instead of a font and have to app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to wide range of use cases.
+
+#### Multiple Fonts and Font Instances
+
+As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold.
+
+**With the support for variable fonts, ...**
+
+
+#### Versioning
+
+When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
+
+Due to its complex implementation, this feature may, however, be developed in the future.
+
 ### Architecture & Deployment
 
 The app is divided into three main areas represented by links in the main navigation of the platform: Home, Discover and Profile.
@@ -366,7 +385,7 @@ A component is usually a generic shell which accepts data that will populate thi
 
 
 
-One particularly appealing concept is the atomic design system, introduced. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embeded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
+One particularly appealing concept is the atomic design system, introduced. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
 
@@ -419,7 +438,11 @@ To demonstrate this, I implemented a Hebraised and a Latinised version in the tw
 
 ### The New Hebrew Typography
 
+In my research on latinisation of Hebrew typography, I came across *The New Hebrew Typography* by Hugh J. Shonfield. It is an attempt at reimagining the Hebrew typography way beyond the bounds of typography. Not so much did he develop a typeface or range of typefaces, he developed new conventions for the Hebrew script, heavily inspired by the Latin script. He implemented a cameral system, giving Hebrew lower case characters, he removed the five final forms (›ך‹, ›ם‹, ›ן‹, ›ף‹, ›ץ‹), added vertical stress and real serifs (different from the already existing tags).
 
+Most of what I could find about *The New Hebrew Typography* were rants about how terrible the ideas were, how illegible the letter forms and—quite frankly—how low the quality of execution. What I could not find, was a constructive inspection of each letter, each consideration and discourse about the considerations driven by the Hebrew type design community.
+
+This experience was another bit, which inspired me to work on this project. The notion that some ideas, however wild and unpopular they may seem at first, at least deserve a platform to be discussed. For this reason I uploaded to *Character Diversion* a font designed after the principle of *The New Hebrew Typography*.
 
 ## Outlook
 
@@ -434,30 +457,6 @@ Exploring the design of a software for typographic discourse, I discovered a num
 It lies in the nature of things, that specificity and specialization enables users to do one thing very well. 
 
 
-
-
-
-
-### Potential Features
-
-#### Image detection
-
-The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currenty those discourse are held by uploading imagery and even drawings of letterforms.
-
-A potential future feature of Character Diversion could be the option to upload an image instead of a font and have to app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to wide range of use cases.	
-
-#### Multiple Fonts and Font Instances
-
-As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold.
-
-**With the support for variable fonts, ...**
-
-
-#### Versioning
-
-When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasable to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
-
-Due to its complex implementation, this feature may, however, be developed in the future.
 
 
 

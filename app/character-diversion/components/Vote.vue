@@ -9,7 +9,7 @@
       class="clear xxs"
       :color="userVote === 1 ? 'primary' : 'beige'"
       :title="ownOpinion ? $t('vote.not.allowed') : $t('vote.up')"
-      v-if="!ownOpinion"
+      :disabled="ownOpinion"
     />
     <small :title="`Upvotes: ${positives}, Downvotes: ${negatives}`" class="font-bold">{{
       voteCount
@@ -20,7 +20,7 @@
 			class="clear xxs"
 			:title="ownOpinion ? $t('vote.not.allowed') : $t('vote.down')"
 			:color="userVote === -1 ? 'primary' : 'beige'"
-      v-if="!ownOpinion"
+      :disabled="ownOpinion"
 		/>
   </div>
 </template>

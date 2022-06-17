@@ -40,7 +40,7 @@
       />
       <div
         v-if="$state.opinion.font.glyphMap[glyph.id]"
-        class="z-10 absolute bottom-0 right-0 px-1 m-1 rounded-sm bg-beige-200/80"
+        class="z-10 absolute bottom-0 right-0 px-2 m-1 rounded-sm bg-beige-200/80"
         :class="{
           'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
           'text-xs': gridSize < 30,

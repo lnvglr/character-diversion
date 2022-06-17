@@ -2,18 +2,27 @@
 	<div class="flex items-center relative select-none" ref="container">
 		<svg :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`" :viewBox="viewBox.join(' ')"
 			class="pointer-events-none" ref="svgFrame"></svg>
-		<svg ref="svg" :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
-			class="h-full absolute" @pointerleave="$state.opinion.annotationTool.id = null" :viewBox="viewBox.join(' ')">
+		<Transition name="fade">
+		<svg
+			ref="svg"
+			:style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
+			v-show="path || !isTTF"
+			class="h-full absolute"
+			@pointerleave="$state.opinion.annotationTool.id = null"
+			:viewBox="viewBox.join(' ')"
+		>
 			<g>
-				<GlyphsGrid v-if="grid" :width="characterWidth" :strokeWidth="strokeWidth" />
-				<GlyphsFrame v-if="frame" :end="characterWidth" :strokeWidth="strokeWidth" />
-				<GlyphsGlyph :path="path" :class="{ 'fill-info-500': intersection }" :strokeWidth="strokeWidth" />
+				<!-- <GlyphsGrid v-if="true" :width="characterWidth" :strokeWidth="strokeWidth" /> -->
+				<GlyphsFrame v-if="frame && isTTF" :end="characterWidth" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph :path="path" :class="{ 'fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
 				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-primary-500'" :strokeWidth="strokeWidth" />
+				<GlyphsOutline v-if="outline" :decomposed="decomposed" :strokeWidth="strokeWidth" />
 				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"
 					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" />
 			</g>
 		</svg>
-		<div v-if="!path"
+		</Transition>
+		<div v-if="!isTTF"
 			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.opinion.font.glyphMap[glyph.id].literal }}</div>
 	</div>
 </template>
@@ -89,9 +98,12 @@ export default {
 		decomposeWatcher: {
 			handler() {
 				setTimeout(() => {
-					if (this.inView) {
-						this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
-						this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
+					if (!this.inView || !this.isTTF) return
+					this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
+					this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
+					const variableGlyph = (typeof this.decomposedAlt.svgPath === 'function') && this.decomposed.svgPath() !== this.decomposedAlt.svgPath()
+					if (!variableGlyph) {
+						this.decomposedAlt = null
 					}
 				}, 0)
 			},
@@ -99,6 +111,9 @@ export default {
 		},
 	},
 	computed: {
+		isTTF() {
+			return this.$state.opinion.font.tables.glyf
+		},
 		decomposeWatcher() {
 			return [this.tuple, this.inView]
 		},
@@ -145,7 +160,7 @@ export default {
 	},
 	methods: {
 		checkView({ isIntersecting }) {
-			this.inView = isIntersecting
+			if (isIntersecting) this.inView = true
 		},
 		setScaling() {
 			if (!window || !this.$refs.svg) return

@@ -1,7 +1,6 @@
 <template>
 	<div class="flex flex-col h-screen sm:flex-row-reverse">
-		<div class="overflow-auto flex-grow">
-			<slot name="header"></slot>
+		<div class="flex-grow">
 			<slot name="body"></slot>
 		</div>
 		<div class="h-30">

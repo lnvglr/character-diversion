@@ -18,7 +18,7 @@
 		/>
 	</div>
 	<div class="w-full p-20 flex flex-col items-center justify-center gap-5">
-		<span>{{filteredGlyphs.length}} glyphs shown</span>
+		<span>{{$t('glyphs.shown', { n: filteredGlyphs.length })}}</span>
 		<div class="flex items-center justify-center gap-2">
 			<Button @click="limit = limit - 100" class="clear lg" v-if="100 < filteredGlyphs.length" icon="minus">Show fewer</Button>
 			<Button @click="limit = limit + 100" class="lg" v-if="$state.opinion.font.glyphs.length > limit" icon="plus">Show more</Button>
@@ -88,6 +88,7 @@ export default {
 						if (
 							this.removeEmpty(glyph.id) &&
 							// this.$state.opinion.font.glyphMap[glyph.id].literal
+							this.filterByVariability(glyph) &&
 							this.filterByActive(glyph.id) &&
 							this.filterByOpinions(glyph.id) &&
 							this.matchGlyphs(glyph.id)
@@ -106,8 +107,11 @@ export default {
 	methods: {
 		removeEmpty(id: number) {
 			const name = this.$state.opinion.font.glyphMap[id].name
-			// return true
-			return 'space' !== name && '.notdef' !== name
+			return !['.notdef', '.null', 'space', 'nonmarkingreturn'].includes(name)
+		},
+		filterByVariability(glyph: SamsaGlyph) {
+			if (this.intersection) return glyph.tvts.length > 0
+			return true
 		},
 		filterByOpinions(id: number) {
 			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0
@@ -141,9 +145,6 @@ export default {
 				return this.$state.opinion.form.attributes.content = content.substring(0, content.length - glyphReference.length - 1)
 			}
 			this.$state.opinion.form.attributes.content = content.trim() + ' ' + glyphReference
-		},
-		dim(id: number) {
-			// return (this.$state.opinion.active.attributes.glyphs.length > 0 && !this.$state.opinion.active.attributes.glyphs.find((g: number) => g === id)) || (this.$state.opinion.form.attributes.glyphs.length > 0 && !this.$state.opinion.form.attributes.glyphs.find((g: number) => g === id))
 		},
 		hasOpinion(id: number) {
 			return this.$state.discourse.current.attributes.opinions.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))

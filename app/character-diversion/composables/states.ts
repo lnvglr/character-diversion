@@ -69,6 +69,7 @@ export const opinion = reactive<OpinionState>({
   formActive: false,
   active: JSON.parse(JSON.stringify(defaultOpinion)),
   selectedGlyphs: [],
+  invariableGlyphs: [],
   annotationTool: {
     id: null,
     x: 0,

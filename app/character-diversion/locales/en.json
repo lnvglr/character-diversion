@@ -40,5 +40,6 @@
   "vote.up": "Vote up",
   "vote.down": "Vote down",
   "vote.not.allowed": "You are not allowed to vote on your own opinions.",
-  "filter": "Filter"
+  "filter": "Filter",
+  "glyphs.shown": "{n} glyph shown | {n} glyphs shown"
 }

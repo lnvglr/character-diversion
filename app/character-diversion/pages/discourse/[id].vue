@@ -3,15 +3,15 @@
     <div class="grow overflow-auto">
       <div class="flex item-center my-5 mx-2 justify-between">
         <div class="button-group">
-          <Button v-for="(viewObject, name) in views" @click="view = name" :class="{ active: view === name }" :icon="viewObject.icon" :title="viewObject.label" />
+          <Button v-for="(viewObject, name) in views" @click="view = name" :class="{ active: view === name }" :icon="viewObject.icon" :title="viewObject.label" v-show="!viewObject.hide" />
         </div>
         <Button @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion" icon="filter"
         class="ml-auto mr-2 clear" :title="$t('filter')"
           :class="{ active: $state.discourse.filter.opinion }" />
-        <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..."
-          containerClass="text-bold w-auto sm" />
       </div>
-      <div :class="`flex flex-wrap`">
+        <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..."
+          containerClass="text-bold w-auto w-full" class="lg" />
+      <div :class="`flex flex-wrap mt-2`">
         <div class="px-5 py-2 flex-1 max-w-full items-center grid grid-cols-[25px_minmax(300px,_1fr)]"
           v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
 
@@ -30,6 +30,7 @@
         :annotations="views[view].annotations"
         :intersection="views[view].intersection"
         :frame="views[view].frame"
+        :outline="views[view].outline"
         :style="style"
       />
     </div>
@@ -43,7 +44,15 @@ export default {
   data() {
     return {
       view: 'detail',
-      views: {
+     
+    }
+  },
+  mounted() {
+    // this.views.intersect.hide = this.$state.opinion.font?.tvts.length === 0
+  },
+  computed: {
+    views() {
+      return {
         overview: {
           label: 'Overview',
           icon: 'border-all',
@@ -67,7 +76,8 @@ export default {
           edit: true,
           annotations: true,
           intersection: true,
-          frame: true
+          frame: true,
+          hide: !this.$state.opinion.font?.glyphs.some(e => e.tvts.length > 0)
         },
         path: {
           label: 'Path',
@@ -80,11 +90,7 @@ export default {
           outline: true
         }
       }
-    }
-  },
-  mounted() {
-  },
-  computed: {
+    },
     style() {
       const axes = Object.entries(this.$state.opinion.form.attributes.axes).map(axis => {
         return `'${axis[0]}' ${axis[1][0]}`;

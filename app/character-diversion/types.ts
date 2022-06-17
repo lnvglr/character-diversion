@@ -156,6 +156,7 @@ export interface OpinionState {
   active: Opinion
   formActive: Boolean
   selectedGlyphs: number[]
+  invariableGlyphs: number[]
   annotationTool: {
     id: number,
     x: number,
