@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. Ans so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, I refer to my proposal *Cross-Script Character Relationships*.
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, I refer to my proposal *Cross-Script Character Relationships*.
 
 After submitting my proposals, I initially looked for the right medium to showacse my considerations, where my thought was to create an interactive web site, where the potential character relationships were presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of how letter shapes might look like in the future.
 
@@ -14,7 +14,7 @@ My research has shown, that non of the platforms where type designers discuss th
 
 This thesis is a plea to challenge conventions by enabling discourse. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
 
-> ????? »The more things change, the more they stay the same.«
+> »The more things change, the more they stay the same.«
 > — Jean-Baptiste Alphonse Karr
 
 To guide you through my thought process, I will first explain what conventions are (especially in the context of Latin and Hebrew typography) and why it is essential to question them from time to time. Next, discourse—the challenging of conventions—is elaborated on and prerequisites for discourse are established. This will lead me to the core of this paper, the documentation of the design and development of the platform *Character Diversion*—enabling people to discuss characters diverging from their conventional shapes as well as the caracter shapes of the fonts people design in general.
@@ -78,8 +78,6 @@ If discourse is necessary to re-evaluate conventions, how can this discourse be 
 
 [venn diagram]
 
-
-
 > Der Begriff »Innovation« richtet sich [...] auf die Wirkung einer Neuerung auf ein entsprechendes System, eine Struktur, eine *diskursive* Formation oder ein soziokulturelles Feld.
 >
 > —BÜSCHER-ULBRICH, KADENBACH, KINDERMANN (HG.)
@@ -118,8 +116,6 @@ There are a number of conference formats and forums that that provide a platform
 
 1. Platform
 
-2. 
-
    1. Enabling people to have this discourse by having an 
       1. overview
       2. interactivity
@@ -127,6 +123,10 @@ There are a number of conference formats and forums that that provide a platform
    
 
    --
+
+What is the Platform supposed to do?
+
+Typographic discussions take place in conferences, creative studios and online forums and they can be very lively
 
 ### Concept
 
