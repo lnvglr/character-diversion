@@ -7,11 +7,9 @@
     "node": "v16.15.0"
   },
   "scripts": {
-    "start": "node_modules/nuxt/bin/nuxt.js start -c ./nuxt.config.js",
-    "start-local": "nuxt start",
-    "heroku-postbuild": "nuxt build",
-    "build": "node_modules/nuxt/bin/nuxt.js build -c ./nuxt.config.js",
-    "build-local": "nuxt build",
+    "start": "nuxt start",
+    "heroku-postbuild": "npm run build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
@@ -46,6 +44,7 @@
     "@types/tesseract.js": "^2.0.0",
     "nuxt": "3.0.0-rc.1",
     "sass": "^1.52.1",
-    "tailwind-css-variables": "^3.0.1"
+    "tailwind-css-variables": "^3.0.1",
+    "@volar-plugins/prettyhtml": "latest"
   }
 }

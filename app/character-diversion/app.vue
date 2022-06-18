@@ -15,8 +15,7 @@
           </Transition>
         </template>
         <template #body>
-          <!-- <pre>{{$route}}</pre> -->
-          <NuxtPage class="page" />
+          <NuxtPage class="page w-full" />
         </template>
         <template #navigation>
           <NavBar />

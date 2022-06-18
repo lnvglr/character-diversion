@@ -25,8 +25,8 @@ const colors = {
     900: '#233027',
   },
   beige: {
-    50: 'hsl(60,27%,98%)',
-    100: 'hsl(50,22%,96%)',
+    50: 'hsl(55,25%,96%)',
+    100: 'hsl(48,22%,93%)',
     200: 'hsl(43,18%,90%)',
     300: 'hsl(39,17%,83%)',
     400: 'hsl(37,13%,60%)',
@@ -69,7 +69,7 @@ module.exports = {
     ...grid.map(
       (e) => `grid-cols-autofill-${e}`
     ),
-    ...['2xl', '4xl', '8xl', '10xl', '12xl', '13xl', '14xl','15xl', '16xl'].map((e) => `text-${e}`),
+    ...['2xl', '4xl', '8xl', '10xl', '12xl', '13xl', '14xl', '15xl', '16xl'].map((e) => `text-${e}`),
     ...['none', '2', '3', '4', '5', '6'].map((e) => `line-clamp-${e}`),
   ],
   tailwindcss: {
@@ -77,7 +77,7 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      sans: ['Inter', 'Gramatika', 'sans-serif'],
+      sans: ['Inter', 'Gramatika', 'Neue Machina', 'sans-serif'],
       hebrew: ['Assistant'],
     },
     colors,
@@ -92,7 +92,7 @@ module.exports = {
         '16xl': '256px',
       },
       gridTemplateColumns: grid.reduce((acc, curr) => {
-        return { ...acc, [`autofill-${curr}`]: `repeat(auto-fill, minmax(${curr/4}rem, 1fr))` }
+        return { ...acc, [`autofill-${curr}`]: `repeat(auto-fill, minmax(${curr / 4}rem, 1fr))` }
       }, {}),
       height: {
         '128': '32rem',

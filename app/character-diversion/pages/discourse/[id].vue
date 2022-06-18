@@ -1,26 +1,57 @@
 <template>
   <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
     <div class="grow overflow-auto">
-      <div class="flex item-center my-5 mx-2 justify-between">
+      <div class="flex item-center my-5 justify-between">
         <div class="button-group">
-          <Button v-for="(viewObject, name) in views" @click="view = name" :class="{ active: view === name }" :icon="viewObject.icon" :title="viewObject.label" v-show="!viewObject.hide" />
+          <Button
+            v-for="(viewObject, name) in views"
+            @click="view = name"
+            :class="{ active: view === name }"
+            :icon="viewObject.icon"
+            :title="viewObject.label"
+            v-show="!viewObject.hide"
+          />
         </div>
-        <Button @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion" icon="filter"
-        class="ml-auto mr-2 clear" :title="$t('filter')"
-          :class="{ active: $state.discourse.filter.opinion }" />
+        <Button
+          @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion"
+          icon="filter"
+          class="ml-auto mr-2 clear"
+          :title="$t('filter')"
+          :class="{ active: $state.discourse.filter.opinion }"
+        />
       </div>
-        <Input type="text" v-model="$state.discourse.search" placeholder="Filter glyphs ..."
-          containerClass="text-bold w-auto w-full" class="lg" />
+      <Input
+        type="text"
+        v-model="$state.discourse.search"
+        placeholder="Filter glyphs ..."
+        containerClass="text-bold w-auto w-full"
+        class="lg"
+      />
       <div :class="`flex flex-wrap mt-2`">
-        <div class="px-5 py-2 flex-1 max-w-full items-center grid grid-cols-[25px_minmax(300px,_1fr)]"
-          v-if="$state.opinion.font" v-for="axis in $state.opinion.font.axes" :key="axis.tag">
-
-          <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" />
-          <Input v-if="$state.opinion.form.attributes.axes && axis.tag in $state.opinion.form.attributes.axes"
-            type="range" :step="1" :min="axis.min" :max="axis.max"
-            v-model="$state.opinion.form.attributes.axes[axis.tag]" :label="axis.name" color="info"
-            :inlineRange="true" containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]"
-            :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" />
+        <!-- grid-cols-[25px_minmax(300px,_1fr)] -->
+        <div
+          class="py-2 flex-1 max-w-full items-center grid"
+          v-if="$state.opinion.font"
+          v-for="axis in $state.opinion.font.axes"
+          :key="axis.tag"
+        >
+          <!-- <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" /> -->
+          <Input
+            v-if="
+              $state.opinion.form.attributes.axes &&
+              axis.tag in $state.opinion.form.attributes.axes
+            "
+            type="range"
+            :step="1"
+            :min="axis.min"
+            :max="axis.max"
+            v-model="$state.opinion.form.attributes.axes[axis.tag]"
+            :label="axis.name"
+            color="info"
+            :inlineRange="true"
+            containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]"
+          />
+          <!-- :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" -->
         </div>
       </div>
       <GlyphsSelection
@@ -40,65 +71,67 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   data() {
     return {
-      view: 'detail',
-     
-    }
+      view: "detail",
+    };
   },
   mounted() {
     // this.views.intersect.hide = this.$state.opinion.font?.tvts.length === 0
   },
   computed: {
-    views() {
+    views(): { [key: string]: any } {
       return {
         overview: {
-          label: 'Overview',
-          icon: 'border-all',
-          gridSize: '12',
-          fontSize: '2xl',
+          label: "Overview",
+          icon: "border-all",
+          gridSize: "12",
+          fontSize: "2xl",
         },
         detail: {
-          label: 'Detail',
-          icon: 'eye',
-          gridSize: '64',
-          fontSize: '10xl',
+          label: "Detail",
+          icon: "eye",
+          gridSize: "64",
+          fontSize: "10xl",
           edit: true,
           annotations: true,
-          frame: true
+          frame: true,
         },
         intersect: {
-          label: 'Intersection',
-          icon: 'diagram-venn',
-          gridSize: '80',
-          fontSize: '16xl',
+          label: "Intersection",
+          icon: "diagram-venn",
+          gridSize: "80",
+          fontSize: "16xl",
           edit: true,
           annotations: true,
           intersection: true,
           frame: true,
-          hide: !this.$state.opinion.font?.glyphs.some(e => e.tvts.length > 0)
+          hide: !this.$state.opinion.font?.glyphs.some((e) => e.tvts.length > 0),
         },
         path: {
-          label: 'Path',
-          icon: 'bezier-curve',
-          gridSize: '80',
-          fontSize: '16xl',
+          label: "Path",
+          icon: "bezier-curve",
+          gridSize: "80",
+          fontSize: "16xl",
           edit: true,
           annotations: true,
           frame: true,
-          outline: true
-        }
-      }
+          outline: true,
+        },
+      };
     },
     style() {
-      const axes = Object.entries(this.$state.opinion.form.attributes.axes).map(axis => {
-        return `'${axis[0]}' ${axis[1][0]}`;
-      }).join(', ')
-      return `--font-variation-settings: ${axes}`
-    }
+      const axesRaw = this.$state.opinion.form.attributes.axes
+      const axes = Object.entries(axesRaw)
+        .map((axis) => {
+          return `'${axis[0]}' ${axis[1][0]}`;
+        })
+        .join(", ");
+      return `--font-variation-settings: ${axes}`;
+    },
   },
-}
+});
 </script>
 
 <style lang="scss">

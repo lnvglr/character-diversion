@@ -1,7 +1,7 @@
-import { StrapiUser } from '@nuxtjs/strapi/dist/runtime/types'
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
 export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { ComputedRef } from 'vue'
+import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
@@ -100,16 +100,18 @@ export interface Opinion {
 }
 export interface Author {
   id: number
-  createdAt: string
-  email: string
-  name: string
-  username: string
-  role: object
-  avatar: object
+  attributes: {
+    createdAt: string
+    email: string
+    name: string
+    username: string
+    role: object
+    avatar: any
+  }
 }
 
 export interface Vote {
-  author: string
+  author: number
   value: number
   createdAt: string
 }
@@ -138,7 +140,7 @@ export interface DiscourseState {
   all: {
     [id: string]: Discourse
   }
-  current: ComputedRef<Discourse>
+  current: Discourse
   search: string
   filter: {
     [key: string]: boolean
@@ -163,14 +165,23 @@ export interface OpinionState {
     y: number
   },
   font: SamsaFont
-  reset: () => void
+  reset: (key: string) => void
 }
 
-type Strapi = typeof useStrapi4 & typeof useStrapiAuth & typeof useStrapiUser & {
+interface User {
+  id: number,
+  attributes: object
+}
+type Strapi4 = typeof useStrapi4
+type StrapiAuth = typeof useStrapiAuth
+type StrapiUser = typeof useStrapiUser
+type Strapi = Strapi4 & StrapiAuth & StrapiUser & {
   client: typeof useStrapiClient
   api: typeof publicRuntimeConfig
-  user: StrapiUser
+  user: typeof User,
 }
+
+
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -179,5 +190,6 @@ declare module '@vue/runtime-core' {
       opinion: OpinionState
     },
     $strapi: Strapi
+    $f: any
   }
 }

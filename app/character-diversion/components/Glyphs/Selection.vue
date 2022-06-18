@@ -1,8 +1,9 @@
 <template>
 	<div
 		v-if="$state.opinion.font && $state.opinion.form.attributes"
-		class="selection-container grid gap-1 p-1"
+		class="selection-container grid gap-1"
 		:class="`grid-cols-autofill-${gridSize}`"
+		v-bind="$attrs"
 	>
 		<GlyphContanier
 			v-for="glyph in filteredGlyphs"
@@ -29,7 +30,7 @@
 <script lang="ts">
 import { Opinion, SamsaGlyph } from '~/types'
 import GlyphContanier from '~/components/Glyphs/GlyphContainer.vue'
-export default {
+export default defineComponent({
 	components: { GlyphContanier },
 	props: {
 		gridSize: {
@@ -87,7 +88,6 @@ export default {
 					(glyph: SamsaGlyph) => {
 						if (
 							this.removeEmpty(glyph.id) &&
-							// this.$state.opinion.font.glyphMap[glyph.id].literal
 							this.filterByVariability(glyph) &&
 							this.filterByActive(glyph.id) &&
 							this.filterByOpinions(glyph.id) &&
@@ -102,19 +102,20 @@ export default {
 		}
 	},
 	mounted() {
+		console.log(this.$state.discourse.current)
 		// window.addEventListener('pointerup', () => this.active = false);
 	},
 	methods: {
 		removeEmpty(id: number) {
 			const name = this.$state.opinion.font.glyphMap[id].name
-			return !['.notdef', '.null', 'space', 'nonmarkingreturn'].includes(name)
+			return !['.notdef', '.null', 'space', 'nonmarkingreturn', '￿'].includes(name)
 		},
 		filterByVariability(glyph: SamsaGlyph) {
 			if (this.intersection) return glyph.tvts.length > 0
 			return true
 		},
 		filterByOpinions(id: number) {
-			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0
+			if (this.$state.discourse.filter.opinion) return this.hasOpinion(id).length > 0 || this.$state.opinion.form.attributes.glyphs.includes(id)
 			return true
 		},
 		filterByActive(id: number) {
@@ -159,7 +160,7 @@ export default {
 		// if (remove > this.last) this.$f.glyphMethods.toggleGlyph(remove, false)
 		// },
 	},
-}
+})
 </script>
 
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col">
-    <Header class="bg-beige-200" iconClass="text-black">Character Diversion</Header>
-    <main class="p-10 pb-40 bg-beige-200 text-black grow">
+  <div class="flex flex-col overflow-auto h-full w-full">
+    <Header class="border-0" iconClass="text-black">Character Diversion</Header>
+    <main class="p-10 pb-40 text-black grow">
       <div class="max-w-4xl mx-auto">
         <!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
@@ -89,7 +89,7 @@ export default {
       return d.slice(-n);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -111,7 +111,7 @@ export default {
   --f: calc(1 / var(--length));
   --g: calc(200 / var(--length) * 1px);
   --o: calc(var(--i) * var(--f) + var(--f));
-  --tz: calc(var(--g) * -1 * var(--i) + var(--g) * 2);
+  --tz: calc(var(--g) * -1 * var(--i) + var(--g));
   --ty: 0;
   --rx: 10deg;
   --ry: -15deg;

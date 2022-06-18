@@ -20,7 +20,7 @@
               <div
                 class="float-right"
                 v-if="
-                  opinion.attributes.author.data.id === $strapi.user?.id ||
+                  opinion.attributes.author?.data?.id === $strapi.user?.id ||
                   $strapi.user?.id === 11
                 "
               >
@@ -39,7 +39,11 @@
               />
               <TransitionExpand>
                 <div
-                  v-if="active && (glyphs.length > 0 || Object.values(opinion.attributes.axes).length > 0)"
+                  v-if="
+                    active &&
+                    (glyphs.length > 0 ||
+                      Object.values(opinion.attributes.axes).length > 0)
+                  "
                 >
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                     <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
@@ -68,7 +72,7 @@
 
 <script lang="ts">
 import { Opinion } from "~/types";
-export default {
+export default defineComponent({
   props: {
     opinion: {
       type: Object as () => Opinion,
@@ -79,28 +83,28 @@ export default {
   },
   computed: {
     active() {
-      return this.$state.opinion.active.id === this.opinion.id;
+      return this.$state.opinion.active.id === this.opinion?.id;
     },
     inactive() {
       return (
-        this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion.id
+        this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion?.id
       );
     },
     glyphs() {
-      const extra = [];
-      this.opinion.attributes.glyphs.forEach((glyph: number) => {
+      const extra: string[] = [];
+      this.opinion?.attributes.glyphs?.forEach((glyph: number) => {
         if (!this.parseOpinion.parsedGlyphs.includes(glyph))
           extra.push(this.$state.opinion.font.glyphMap[glyph].literal);
       });
       return extra;
     },
     parseOpinion() {
-      const parsedGlyphs = [];
-      const contentRaw = this.opinion.attributes.content?.replaceAll(
+      const parsedGlyphs: number[] = [];
+      const contentRaw = this.opinion?.attributes.content?.replaceAll(
         this.$f.glyphMethods.regexPattern,
         (glyph: string) => {
           if (
-            this.$f.utils.invertObject(this.opinion.attributes.glyphs)[
+            this.$f.utils.invertObject(this.opinion?.attributes.glyphs)[
               this.$f.glyphMethods.glyphToUnicode(glyph.slice(1))
             ]
           ) {
@@ -127,7 +131,7 @@ export default {
   methods: {
     selectOpinion() {
       const opinion = this.opinion;
-      if (opinion === null || this.$state.opinion.active.id === opinion.id) {
+      if (opinion === null || this.$state.opinion.active.id === opinion?.id) {
         this.$state.opinion.reset("active");
         this.$state.opinion.reset("form");
         return;
@@ -140,7 +144,7 @@ export default {
       // this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
     },
     removeOpinion() {
-      this.$strapi.delete("opinions", this.opinion.id).then(({ data }) => {
+      this.$strapi.delete("opinions", this.opinion?.id).then(({ data }) => {
         const opinions = this.$state.discourse.current.attributes.opinions;
         if (opinions?.data) {
           opinions.data = opinions.data.filter((e: Opinion) => e.id !== data.id);
@@ -149,7 +153,7 @@ export default {
       });
     },
   },
-}
+})
 </script>
 
 <style lang="scss">

@@ -10,12 +10,12 @@
       --hover-color: var(--color-${color}-600);
       --handle-color: var(--color-${color}-500);
       --track-fill: var(--color-${color}-400);
-      --inline-template: ${['4ch', '1fr', (Array.isArray(modelValue) && value[1]) && '3ch'].filter(e => e).join(' ')};
+      --inline-template: ${['4ch', '1fr', (Array.isArray(modelValue) && value[1] !== null) && '3ch'].filter(e => e).join(' ')};
     `"
   :data-min="dataMin" :data-max="dataMax">
     <div class="track" :style="style">
       <input type="range" ref="min" :value="value[0]" @input="input($event.target, 0)" v-bind="$attrs" :step="step" />
-      <input v-if="Array.isArray(modelValue) && value[1]" type="range" ref="max" :value="value[1]"
+      <input v-if="Array.isArray(modelValue) && value[1] !== null" type="range" ref="max" :value="value[1]"
         @input="input($event.target, 1)" v-bind="$attrs" :step="step" />
     </div>
   </div>
@@ -61,8 +61,8 @@ export default {
           (100 / (this.$attrs.max - this.$attrs.min)) *
           (val - this.$attrs.min)
         ).toFixed(this.decimalPlaces)};`
-      const max = calc('max', this.value[1] ? this.value[1] : this.value[0])
-      const min = calc('min', this.value[1] ? this.value[0] : this.$attrs.min)
+      const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
+      const min = calc('min', this.value[1] !== null ? this.value[0] : this.$attrs.min)
       return `${min} ${max}`
     },
     decimalPlaces() {

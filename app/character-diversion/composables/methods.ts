@@ -110,7 +110,8 @@ export const glyphMethods = {
     } else {
       return
     }
-    return d.attributes.opinions.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))
+    if (!d.attributes.opinions) return []
+    return d.attributes.opinions?.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))
   },
 }
 

@@ -10,8 +10,8 @@
     <div v-if="maxlength || submitOnEnter || $attrs.onCancel"
       class="absolute bottom-2 left-3 w-full pr-4 flex gap-2 items-center h-3">
       <CharacterCounter v-if="maxlength" :value="modelValue" :maxlength="maxlength" />
-      <small v-if="submitOnEnter" class="text-beige-400">{{ $t('submit.with.enter') }}</small>
-      <small v-if="allowMarkdown" class="text-beige-400">
+      <small v-if="submitOnEnter" class="text-beige-400 leading-none">{{ $t('submit.with.enter') }}</small>
+      <small v-if="allowMarkdown" class="text-beige-400 leading-none">
         <NuxtLink class="hover:underline" target="_blank" to='https://www.markdownguide.org/cheat-sheet/'>{{ $t('markdown.is.allowed') }}</NuxtLink>
       </small>
       <div class="ml-auto"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs"

@@ -123,8 +123,6 @@ In this attempt to build a platform that facilitates typographic discourse, I pu
 
 The former is predominantly led by independent type designers, students and enthusiasts (**source?**). The latter lives mostly in conferences on type.
 
-
-
 So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to
 
 ### User Interface
@@ -138,6 +136,11 @@ User experience and interfaces need to communicate clearly what the app does and
 #### Layout
 
 With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion, or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
+
+|_title_| About      | Glyphs | Discourse |
+|---| ---------- | ------ | --------- |
+|_visible_| Font Title<br />Author<br />Version History |`A`, `B`, `C`    |List View of Opinions|
+|_ability_| Get overview over font project | Inline access to Opinions | Access to Glyph (group Preview) |
 
 #### Discourse
 
@@ -194,8 +197,6 @@ I decided to draw from both options: for this I created a lookup table for glyph
 }
 ```
 
-
-
 Another question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, the precise linking of opinions to glyphs is lost. 
 
 This could be tackled by indeed selecting an opinion and thus filtering the glyphs, and then highlighting specific glyphs by hovering over each reference or paragraph. The usability of this idea needs testing.
@@ -221,6 +222,16 @@ One goal of the platform is to create overview. In order to do that, the possibi
 Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
 
 A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions.
+
+#### Visual Appearance
+
+The overall visual aesthetics are 
+
+- Flat
+- Paper colors to reference the print history
+- 
+
+
 
 ### Features
 
@@ -385,6 +396,14 @@ A component is usually a generic shell which accepts data that will populate thi
 One particularly appealing concept is the atomic design system, introduced. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
+
+#### Deployment
+
+When starting this project, I set up a *GitHub* repository named `lnvglr/character-diversion`. *GitHub* is a platform for hosting source code. *GitHub* uses the version control system *Git* to track changes to the source code. It is mostly used for collaboratively working on projects but it is also used for automated deployment processes.
+
+For this project I used the repo (short for repository) to track my changes and to have the ability to go back in time and see my progress as well as making the project open source.
+
+When *Character Diversion* started taking shape, I used a platform that would allow for me to deploy the code and to make it accessible to the public. *Heroku* offers Node.js hosting, so I deployed both my Straps backend and my Nuxt.js frontend on *Heroku*.
 
 ## Case Studies
 

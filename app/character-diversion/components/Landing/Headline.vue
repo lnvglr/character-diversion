@@ -14,11 +14,13 @@
             >
               <button class="text-inherit uppercase"></button>
               <template #popper>
-                <ListOpinions :opinions="$f.glyphMethods.glyphHasOpinion(3, 57)"
-                  class="w-[360px] min-w-[360px]" />
+                <ListOpinions
+                  :opinions="$f.glyphMethods.glyphHasOpinion(3, 57)"
+                  class="w-[360px] min-w-[360px]"
+                />
               </template>
             </VDropdown>
-            <span class="relative pointer-events-none" :data-count="i">{{letter}}</span>
+            <span class="relative pointer-events-none" :data-count="i">{{ letter }}</span>
           </span>
           <span v-else class="relative z-10 pointer-events-none">{{ part }}</span>
         </template>
@@ -51,7 +53,7 @@ export default {
       });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

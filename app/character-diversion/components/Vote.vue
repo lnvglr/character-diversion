@@ -8,34 +8,37 @@
       icon="angle-up"
       class="clear xxs"
       :color="userVote === 1 ? 'primary' : 'beige'"
-      :title="ownOpinion ? $t('vote.not.allowed') : $t('vote.up')"
+      :title="$t('vote.up')"
       :disabled="ownOpinion"
     />
     <small :title="`Upvotes: ${positives}, Downvotes: ${negatives}`" class="font-bold">{{
       voteCount
     }}</small>
     <Button
-			@click.stop="vote(-1)"
-			icon="angle-down"
-			class="clear xxs"
-			:title="ownOpinion ? $t('vote.not.allowed') : $t('vote.down')"
-			:color="userVote === -1 ? 'primary' : 'beige'"
+      @click.stop="vote(-1)"
+      icon="angle-down"
+      class="clear xxs"
+      :title="$t('vote.down')"
+      :color="userVote === -1 ? 'primary' : 'beige'"
       :disabled="ownOpinion"
-		/>
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import type { Opinion, Vote } from "~/types";
-export default {
+export default defineComponent({
+  name: 'Vote',
   props: {
-    opinion: Object as () => Opinion,
+    opinion: {
+      type: Object as () => Opinion,
+    }
   },
   computed: {
-    userVote(): number {
-      if (!this.$strapi.user) return;
-      return this.opinion.attributes.votes?.find(
+    userVote(): number | undefined {
+      const a = { a: 'a', opi: this.opinion };
+      if (!this.$strapi.user) return
+      return this.opinion?.attributes.votes?.find(
         (e: Vote) => e.author === this.$strapi.user.id
       )?.value;
     },
@@ -49,40 +52,45 @@ export default {
       return this.positives - this.negatives;
     },
     ownOpinion(): boolean {
-      return this.$strapi.user?.id === this.opinion.attributes.author.data.id;
+      return this.$strapi.user?.id === this.opinion?.attributes.author?.data?.id;
     },
   },
   methods: {
     vote(vote: number): void {
-      if (!this.$strapi.user) return this.$router.push("/login");
+      if (!this.$strapi.user) {
+        this.$router.push("/login")
+        return
+      }
       if (this.ownOpinion) return console.warn("cant upvote own opinion");
       if (this.userVote) return this.removeVote();
       this.addVote(vote);
     },
     countVotes(sign: number): number {
       return (
-        this.opinion.attributes.votes?.filter(({ value }) => value === sign)?.length || 0
+        this.opinion?.attributes.votes?.filter(({ value }) => value === sign)?.length || 0
       );
     },
     removeVote(): void {
+      if (!this.opinion) return
       this.opinion.attributes.votes =
         this.opinion.attributes.votes?.filter(
           (e: Vote) => e.author !== this.$strapi.user.id
         ) || [];
     },
     async addVote(value: number): Promise<void> {
+      if (!this.opinion) return
       if (!this.opinion.attributes.votes) this.opinion.attributes.votes = [];
       this.opinion.attributes.votes.push({
         author: this.$strapi.user.id,
         value,
-        createdAt: new Date(),
+        createdAt: (new Date()).toString(),
       });
-      await this.$strapi.update("opinions", this.opinion.id, {
-        votes: this.opinion.attributes.votes,
+      await this.$strapi.update("opinions", this.opinion?.id, {
+        votes: this.opinion?.attributes.votes,
       });
     },
   },
-};
+});
 </script>
 
 <style></style>
