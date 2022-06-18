@@ -154,6 +154,8 @@ Character Diversion is a platform for typographic discourse. Accordingly, typogr
 
 User experience and interfaces need to communicate clearly what the app does and how to use it.
 
+[note] It is common practice in Web and UX/UI Design to design *mobile first*. That is to say, design the structure and layout of a platform for the mobile experience first and then adapt to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed of those users *first*. *Character Diversion* was not designed mobile first: it is in fact intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. This is why *Character Diversion* is—for the moment—desktop first.
+
 #### Layout
 
 With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion, or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
@@ -170,23 +172,9 @@ When I started with the design, opinions were merely comments, connected to glyp
 
 I decided that opinions in fact needed more prominence.
 
-##### Sorting and Filtering (Coming soon)
+##### Sharing an Opinion
 
-By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
-
-One goal of the platform is to create overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
-
-##### How are threads treated? (Coming soon)
-
-Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
-
-A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions.
-
-### Features
-
-#### Linking Opinions to Glyphs
-
-At the core of user experience design lies the questions of what a user want to achieve and how to most intuitively enable them to to it swiftly. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achive that.
+After setting up the discourse project, the first step in actually engaging in discourse, is for people to share their opinions. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achieve that.
 
 There are several approaches to this problem:
 
@@ -228,6 +216,32 @@ I decided to draw from both options: for this I created a lookup table for glyph
 Another question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, the precise linking of opinions to glyphs is lost. 
 
 This could be tackled by indeed selecting an opinion and thus filtering the glyphs, and then highlighting specific glyphs by hovering over each reference or paragraph. The usability of this idea needs testing.
+
+##### Selecting Opinions
+
+A core feature of *Character Diversion* is the ability to browse either the glyphs or the opinions and find the respective opinions on glyph or glyphs an opinion is referring to. The user experience (and almost just as importantly the underlying structural considerations) were not at all trivial.
+
+The initial logic was to have the list of opinions on the right and the grid with all the glyphs on the left. Opinions can be selected to expand their content and show meta data like the set variable font axes and the selected glyphs within the opinion card. Selecting the opinion should, however, also bring the referenced group of glyphs with the corresponding markings highlighted and the referenced spectrum or location on the variable font axis to the attention of the user. This means that if a user wanted to say something about the bottom and top intersections of the /$ at value 800 and up on the `wght` axis and they would mark the location of the dollar sign at `800 wght` while writing their opinion, anyone viewing this opinion should be see a large bold (800) dollar sign, with highlighted markings in the appropriate locations.
+
+This functionality alone, is straightforward conceptually and almost just as straight forward in its implementations: the grid of glyphs is either filtered so that only the glyphs corresponding to the selected opinion remain or a new tab or popup is opened where glyphs corresponding to selected opinions are shown.
+
+When implementing this functionality into 
+
+##### Sorting and Filtering
+
+By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
+
+One goal of the platform is to create overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
+
+##### How are threads treated? (Coming soon)
+
+Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
+
+A question that came up was whether to consider comments below opinions as another kind of data, or to trat comments like opinions that are linked to other opinions.
+
+### Features
+
+
 
 #### Marking Elements in Glyphs
 
