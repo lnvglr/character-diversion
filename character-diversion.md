@@ -123,24 +123,19 @@ In this attempt to build a platform that facilitates typographic discourse, I pu
 
 #### Critiquing letterforms
 
-What sets type design apart from other creative work is the sheer potential amount of individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something to keep in mind.
+What sets type design apart from other creative work is the sheer amount of potential individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something I kept in mind.
 
-There are a number of design unrelated platforms like *Reddit* and *Filestage* that host discussions on design. There are also design dedicated platforms for sharing, critiquing and general feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, are—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs.
+There are a number of design unrelated platforms like *Reddit* and *Filestage* that host discussions on design. There are also design dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, are—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs. And although those platforms fall short of being decidedly type design tools, they give insights into how discourses on designerly topics are lead online.
 
-Yet, those platforms give insights into how discourses on designedly topics are lead online.
+In general, those platforms offer non-verbal feedback to designs (most commonly liking or upvoting), let people respond to previous comments and share media. Those are three features that could find themselves in *Character Diversion*. Up- and downvoting opinions has already been implemented and responding to opinions is in development.
 
-People seem to need the ability to ...
-
-- respond to comments
-- respond with media
-- respond non-verbally
+As for adding media to opinions, as feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: that asking fundamental questions of where we are moving typography as a society.
 
 #### Discussing future letterforms
 
---
+In terms of discourses around the fundamental direction our society wants to take typography, conferences may be the best format in most instances. Not necessarily for all, however: In a recent phone call with Klaus-Peter Staudinger (June, 2022), a longtime member of the *Forum Typografie*, he told me about an experimental project he was working on in the 90s, exploring potential similarities between Kanji, Kana and the Latin script typography. Back then no type foundry would agree to investing time and resources into exploring what is known today as multi script typography. 
 
-So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to
-> (fehlt hier was?)
+For projects like his, or like my own, exploring character relationships between the Hebrew and Latin script, that is projects that investigate not only letter shapes for a specific font but rather, cater to rather general ambitions, a tool for discourse around specific letter shapes could be very beneficial.
 
 ### User Interface
 
@@ -173,7 +168,7 @@ When I started with the design, opinions were merely comments, connected to glyp
 
 I decided that opinions in fact needed more prominence.
 
-##### Sharing an Opinion
+##### Posting an Opinion
 
 After setting up the discourse project, the first step in actually engaging in discourse, is for people to share their opinions. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achieve that.
 
@@ -226,6 +221,12 @@ This functionality alone, is straightforward conceptually and almost just as str
 
 When implementing this functionality into the functionality of filtering glyphs, it becomes very complicated, however. Suddenly, there are three places in the app that have an impact on which glyphs are shown: the new opinion form, the selected opinion and the glyphs filter. And when there are several places impacting filtering, logic needs to be implemented as to how those filters interact. Are glyphs shown matching *all* filters, are glyphs show matching at least one filter or do certain filters have higher priority? Splitting the discourse panel into three views rectified this dilemma to some extend.
 
+##### Voting and Responding to Opinions and Comments
+
+As established before, discourse thrives on differences of opinion. A vital feature for *Character Diversion* is responding to opinions with the option to agree or disagree.
+
+Today, many social media platforms offer the possibility to react to content in many differentiated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be interpreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
+
 ##### Sorting and Filtering
 
 By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
@@ -238,6 +239,8 @@ Threads are sub-conversations that can evolve below a comment. They can be very 
 
 A question that came up was whether to consider comments below opinions as another kind of data, or to treat comments like opinions that are linked to other opinions.
 
+
+
 #### Visual Appearance
 
 The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. The platform does not need to sell anything, persuade anyone. In fact, it succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
@@ -246,19 +249,13 @@ The overall visual aesthetics are kept in a flat design, with a beige palette, a
 
 ![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
-### Features
+### Functional Features
 
 
 
 #### Marking Elements in Glyphs
 
 Another form of visually referencing what a user is critiquing, is marking elements in a glyph and linking it to a particular opinion. A glyph can have multiple marks that are all linked to their corresponding opinion.
-
-#### Voting and Responding to Opinions and Comments
-
-As established before, discourse thrives on differences of opinion. A vital feature for *Character Diversion* is responding to opinions with the option to agree or disagree.
-
-Today, many social media platforms offer the possibility to react to content in many differentiated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when clearly they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be interpreted by the users as agreement, relevance, helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
 
 #### Image detection
 
@@ -268,9 +265,7 @@ A potential future feature of Character Diversion could be the option to upload 
 
 #### Multiple Fonts and Font Instances
 
-As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold.
-
-**With the support for variable fonts, ...**
+As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the meta data of an opinion referenced glyphs and spectra on variable font axes are already denoted, adding the font instance as an extra data point will be straight forward.
 
 
 #### Versioning
@@ -293,8 +288,8 @@ export interface Discourse {
   attributes: {
     title: string
     content: string
-    font: string
     author?: Author
+    font: string
     createdAt?: string
     publishedAt?: string
     updatedAt?: string
@@ -404,7 +399,7 @@ A component is usually a generic shell which accepts data that will populate thi
 
 One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
-![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
+![atomic-design-stages](https://miro.medium.com/max/1400/1*t4UpVgWW-_YLpRZd4wmdSg.jpeg)
 
 #### Deployment
 
@@ -473,13 +468,15 @@ This experience was another bit, which inspired me to work on this project. The 
 
 ## Outlook
 
-The working 
+The working prototype has shown one thing. The interface 
 
 ### Shortcomings
 
-Exploring the design of a software for typographic discourse, I discovered a number of shortcomings.
+In the process of developing *Character Diversion*, I also discovered its many shortcomings.
 
-#### Specificity
+1. specificity to one kind of discourse
+2. Its limitation to font files as typographic reference
+3. 
 
 It lies in the nature of things, that specificity and specialisation enables users to do one thing very well. 
 
