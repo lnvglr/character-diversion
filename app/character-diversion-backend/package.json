@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "description": "Character Diversion Backend",
+  "author": {
+    "name": "Leon Vogler"
+  },
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -10,14 +13,10 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.1.10",
-    "@strapi/plugin-users-permissions": "4.1.10",
+    "@strapi/plugin-i18n": "^4.2.0",
+    "@strapi/plugin-users-permissions": "^4.2.0",
     "@strapi/strapi": "^4.2.0",
-    "better-sqlite3": "7.4.6",
-    "strapi-provider-email-nodemailer": "^3.6.10"
-  },
-  "author": {
-    "name": "Leon Vogler"
+    "better-sqlite3": "7.4.6"
   },
   "strapi": {
     "uuid": "f27c6172-bafb-4f60-9f9b-17bfb8ea447b"

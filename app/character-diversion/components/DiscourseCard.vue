@@ -21,8 +21,8 @@
   </Card>
 </template>
 <script lang="ts">
-import { Discourse } from "~/types";
-export default {
+import { Discourse, Strapi4Response } from "~/types";
+export default defineComponent({
   name: "Discourse Card",
   props: {
     discourse: Object as () => Discourse,
@@ -34,9 +34,9 @@ export default {
     removeDiscourse(id: string) {
       this.$strapi
         .delete("discourses", id)
-        .then(({ data }) => delete discourse.id[data.id]);
+        .then(({ data }: Strapi4Response<Discourse>) => delete discourse.all[data.id]);
     },
   },
-};
+})
 </script>
 <style></style>

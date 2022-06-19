@@ -1,5 +1,5 @@
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
-export { Strapi4Response, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { ComputedRef } from 'vue'
 import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
 
