@@ -225,13 +225,13 @@ A question that came up was whether to consider comments below opinions as anoth
 
 #### Visual Appearance
 
-The overall visual aesthetics are 
+The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. 
 
 - Flat
 - Paper colors to reference the print history
 - 
 
-
+![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
 ### Features
 

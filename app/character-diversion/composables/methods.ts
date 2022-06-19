@@ -9,27 +9,24 @@ const nameToUnicode = (string: string): number => {
     (g: SamsaGlyph) => g.name === string
   )
   if (matchedGlyph) return opinion.font.cmapReverse[matchedGlyph.id]
+  return 0
 }
 
 export const glyphMethods = {
-  getAxisByIndex: (index: number) => {
-    const tag = opinion.font.axes[index]?.tag
-    opinion.form.attributes.axes[tag]
-  },
-  getAxis: (tag: string) => opinion.form.attributes.axes[tag],
   getFontVariations: (index: number) =>
     opinion.form.attributes.axes
       ? Object.entries(opinion.form.attributes.axes).map(
           (e) => `'${e[0]}' ${e[1][index]}`
         )
       : [],
-  getTupleValue: (index: number) =>
-    opinion.form.attributes.axes
+  getTupleValue: (index: number): number[] => {
+    return opinion.form.attributes.axes
       ? Object.values(opinion.form.attributes.axes).map(
           (e, i) => e[index] / opinion.font.axes[i]?.max
-        )
-      : [],
-  toggleGlyph: (id: number, value: boolean = null) => {
+        ) as number[]
+      : []
+  },
+  toggleGlyph: (id: number, value: boolean | null = null) => {
     if (!opinion.formActive) return
     const add = !!value || !opinion.selectedGlyphs.includes(id)
     if (add) {
@@ -69,11 +66,19 @@ export const glyphMethods = {
   nameToUnicode,
 
   setPosition: () => {
+    const closest = (arr: number[], target: number) => arr.reduce(function(prev, curr) {
+      return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
+    });
     opinion.form.attributes.axes = opinion.font?.axes.reduce(
-      (acc: Object, curr: SamsaFontAxes) => ({
-        ...acc,
-        [curr.tag]: [curr.default, curr.max],
-      }),
+      (acc: Object, curr: SamsaFontAxes) => {
+        const min = closest([curr.min, curr.max], curr.default) === curr.default ? curr.min : curr.default
+        const max = closest([curr.min, curr.max], curr.default) === curr.default ? curr.default : curr.max
+        console.log(opinion.font, min, max, closest([curr.min, curr.max], curr.default))
+        return {
+          ...acc,
+          [curr.tag]: [min, max],
+        }
+      },
       {}
     )
   },
@@ -100,7 +105,7 @@ export const glyphMethods = {
 					})
 					.filter(e => e)
   },
-  glyphHasOpinion(id: number, discourseId: number = null): Opinion[] {
+  glyphHasOpinion(id: number, discourseId: number = null): Opinion[] | undefined {
     let d: Discourse
     if (!discourseId && !discourse.current) return
     if (discourseId && discourseId in discourse.all) {

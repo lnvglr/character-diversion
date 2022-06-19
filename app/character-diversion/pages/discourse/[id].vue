@@ -27,7 +27,7 @@
         containerClass="text-bold w-auto w-full"
         class="lg"
       />
-      <div :class="`flex flex-wrap mt-2`">
+      <div :class="`flex flex-wrap mt-2 gap-5`">
         <!-- grid-cols-[25px_minmax(300px,_1fr)] -->
         <div
           class="py-2 flex-1 max-w-full items-center grid"
@@ -39,13 +39,30 @@
           <Input
             v-if="
               $state.opinion.form.attributes.axes &&
-              axis.tag in $state.opinion.form.attributes.axes
+              axis.tag in $state.opinion.form.attributes.axes &&
+              view === 'intersect'
             "
             type="range"
             :step="1"
             :min="axis.min"
             :max="axis.max"
             v-model="$state.opinion.form.attributes.axes[axis.tag]"
+            :label="axis.name"
+            color="info"
+            :inlineRange="true"
+            containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]"
+          />
+          <Input
+            v-if="
+              $state.opinion.form.attributes.axes &&
+              axis.tag in $state.opinion.form.attributes.axes &&
+              view !== 'intersect'
+            "
+            type="range"
+            :step="1"
+            :min="axis.min"
+            :max="axis.max"
+            v-model="$state.opinion.form.attributes.axes[axis.tag][0]"
             :label="axis.name"
             color="info"
             :inlineRange="true"
@@ -76,9 +93,6 @@ export default defineComponent({
     return {
       view: "detail",
     };
-  },
-  mounted() {
-    // this.views.intersect.hide = this.$state.opinion.font?.tvts.length === 0
   },
   computed: {
     views(): { [key: string]: any } {

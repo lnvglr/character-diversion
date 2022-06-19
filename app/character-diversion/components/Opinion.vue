@@ -78,22 +78,19 @@ export default defineComponent({
       type: Object as () => Opinion,
     },
   },
-  data() {
-    return {};
-  },
   computed: {
     active() {
       return this.$state.opinion.active.id === this.opinion?.id;
     },
     inactive() {
       return (
-        this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion?.id
+        !!this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion?.id
       );
     },
     glyphs() {
       const extra: string[] = [];
       this.opinion?.attributes.glyphs?.forEach((glyph: number) => {
-        if (!this.parseOpinion.parsedGlyphs.includes(glyph))
+        if (!this.parseOpinion.parsedGlyphs.includes(glyph) && 'literal' in this.$state.opinion.font.glyphMap[glyph])
           extra.push(this.$state.opinion.font.glyphMap[glyph].literal);
       });
       return extra;

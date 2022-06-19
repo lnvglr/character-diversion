@@ -28,6 +28,10 @@ declare module '@/assets/samsa-core' {
     nameMap: {
       [glyphName: string]: GlyphMap
     }
+    widths: number[]
+    tables: {
+      glyf: any
+    }
     axes: SamsaFontAxes
   }
   interface SamsaGlyph {
@@ -153,17 +157,16 @@ export interface DiscourseState {
   setCurrent: (id: string) => void
   fetch: () => void
 }
+interface annotationTool extends Annotation {
+  id: number
+}
 export interface OpinionState {
   form: Opinion
   active: Opinion
   formActive: Boolean
   selectedGlyphs: number[]
   invariableGlyphs: number[]
-  annotationTool: {
-    id: number,
-    x: number,
-    y: number
-  },
+  annotationTool: annotationTool
   font: SamsaFont
   reset: (key: string) => void
 }

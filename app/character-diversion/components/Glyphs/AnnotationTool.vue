@@ -46,7 +46,7 @@
 </template>
 <script lang="ts">
 import { SamsaGlyph, Opinion, Annotation } from "~/types";
-export default {
+export default defineComponent({
   props: {
     glyph: {
       type: Object as () => SamsaGlyph,
@@ -82,7 +82,7 @@ export default {
     };
   },
   methods: {
-    activateOpinion(id: string) {
+    activateOpinion(id?: string) {
       const opinions = this.$state.discourse.current.attributes.opinions.data;
       const opinion = opinions.find((opinion: Opinion) => opinion.id === id);
       const selected = JSON.parse(JSON.stringify(opinion));
@@ -96,8 +96,9 @@ export default {
       annotations.splice(this.$f.utils.arrayContainsObject(annotations, annotation), 1);
       this.hoverRemove = false;
     },
-    addAnnotation(annotation = null) {
-      const annotations = this.$state.opinion.form.attributes.annotations;
+    addAnnotation(annotation?: Annotation) {
+      if (!this.glyph) return
+      let annotations = this.$state.opinion.form.attributes.annotations;
       if (!annotations) annotations = {};
       if (!(this.glyph.id in annotations)) annotations[this.glyph.id] = [];
 
@@ -119,6 +120,7 @@ export default {
       return this.radius / 1.25;
     },
     currentAnnotations() {
+      if (!this.glyph) return [];
       const currentAnnotations = [];
       const formAnnotation = this.$state.opinion.form.attributes.annotations?.[
         this.glyph.id
@@ -140,13 +142,14 @@ export default {
       return currentAnnotations;
     },
     allAnnotations() {
-      const allAnnotations = [];
+      if (!this.glyph) return [];
+      const allAnnotations = [] as Annotation[];
       const opinions = this.$state.discourse.current.attributes.opinions?.data;
       if (!opinions) return;
       opinions.forEach((opinion: Opinion) => {
         const annotations = opinion.attributes.annotations;
         if (!annotations) return;
-        annotations?.[this.glyph.id]?.forEach((annotation: Annotation) => {
+        annotations?.[this.glyph?.id]?.forEach((annotation: Annotation) => {
           if (this.currentAnnotations.some((a: Annotation) => a.opinionId === opinion.id))
             return;
           const newAnnotation = this.addOpinionId(annotation, opinion);
@@ -163,6 +166,7 @@ export default {
       return this.$state.opinion.annotationTool;
     },
     show() {
+      if (!this.glyph) return false;
       return (
         this.edit &&
         this.glyph.id === this.pointerPosition.id &&
@@ -174,6 +178,7 @@ export default {
   },
   watch: {
     pointer({ x, y }) {
+      if (!this.glyph || !this.scaling || !this.offset || !this.height) return
       this.$state.opinion.annotationTool = {
         id: this.glyph.id,
         x: (x * this.scaling - this.offset.x / 2) | 0,
@@ -181,7 +186,7 @@ export default {
       };
     },
   },
-};
+})
 </script>
 <style scoped>
 svg {

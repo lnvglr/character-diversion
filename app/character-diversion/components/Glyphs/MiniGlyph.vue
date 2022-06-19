@@ -22,14 +22,14 @@
 			</g>
 		</svg>
 		</Transition>
-		<div v-if="!isTTF"
+		<div v-if="!isTTF && glyph"
 			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.opinion.font.glyphMap[glyph.id].literal }}</div>
 	</div>
 </template>
 <script lang="ts">
 import { SamsaGlyph } from "~/types"
 
-export default {
+export default defineComponent({
 	props: {
 		glyph: {
 			type: Object as () => SamsaGlyph
@@ -72,8 +72,8 @@ export default {
 	},
 	data() {
 		return {
-			decomposed: null,
-			decomposedAlt: null,
+			decomposed: {} as SamsaGlyph | undefined,
+			decomposedAlt: {} as SamsaGlyph | undefined,
 			strokeWidth: '10px',
 			transform: 'scale(1,-1)',
 			scaling: 1,
@@ -81,11 +81,10 @@ export default {
 			pointer: {},
 			observer: new IntersectionObserver(e => this.checkView(e[0])),
 			inView: false,
-			pointerListener: null,
 		}
 	},
 	mounted() {
-		this.observer.observe(this.$refs.container);
+		this.observer.observe(this.$refs.container as HTMLElement);
 		this.setScaling()
 	},
 	watch: {
@@ -99,11 +98,11 @@ export default {
 			handler() {
 				setTimeout(() => {
 					if (!this.inView || !this.isTTF) return
-					this.decomposed = this.glyph.decompose(this.$f.glyphMethods.getTupleValue(0))
-					this.decomposedAlt = this.intersection && this.glyph.decompose(this.$f.glyphMethods.getTupleValue(1))
-					const variableGlyph = (typeof this.decomposedAlt.svgPath === 'function') && this.decomposed.svgPath() !== this.decomposedAlt.svgPath()
+					this.decomposed = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0))
+					this.decomposedAlt = this.intersection && this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(1)) || undefined
+					const variableGlyph = (typeof this.decomposedAlt?.svgPath === 'function') && this.decomposed?.svgPath() !== this.decomposedAlt.svgPath()
 					if (!variableGlyph) {
-						this.decomposedAlt = null
+						this.decomposedAlt = undefined
 					}
 				}, 0)
 			},
@@ -112,13 +111,13 @@ export default {
 	},
 	computed: {
 		isTTF() {
-			return this.$state.opinion.font.tables.glyf
+			return !!this.$state.opinion.font.tables.glyf
 		},
 		decomposeWatcher() {
-			return [this.tuple, this.inView]
+			return [this.tuple, this.inView, this.$attrs]
 		},
 		path() {
-			return this.decomposed?.svgPath()
+			return typeof this.decomposed?.svgPath === 'function' ? this.decomposed.svgPath() : undefined
 		},
 		pathAlt() {
 			return this.intersection && typeof this.decomposedAlt?.svgPath === 'function' && this.decomposedAlt.svgPath()
@@ -127,9 +126,11 @@ export default {
 			return this.decomposed?.points
 		},
 		characterWidth(): number {
+			if (!this.glyph) return 0
 			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.opinion.font.widths[this.glyph.id]
 		},
 		width() {
+			if (!this.glyph) return 0
 			this.characterWidth + this.glyph.font.unitsPerEm * 2
 		},
 		scale() {
@@ -141,12 +142,14 @@ export default {
 			return [Math.min(...xValues), Math.max(...xValues)]
 		},
 		offset() {
+			if (!this.glyph) return { x: 0, y: 0 }
 			return {
 				x: this.glyph.font.unitsPerEm * 10,
 				y: this.glyph.font.unitsPerEm / 4
 			}
 		},
 		viewBox() {
+			if (!this.glyph) return [0, 0, 0, 0]
 			return [
 				this.boundaries[0] - this.offset.x / 2,
 				-this.offset.y,
@@ -155,28 +158,33 @@ export default {
 			]
 		},
 		fontSize() {
+			if (!this.glyph) return 0
 			return (this.characterWidth + this.offset.x) / this.glyph.font.unitsPerEm
 		}
 	},
 	methods: {
-		checkView({ isIntersecting }) {
+		checkView({ isIntersecting }: IntersectionObserverEntry) {
 			if (isIntersecting) this.inView = true
 		},
 		setScaling() {
 			if (!window || !this.$refs.svg) return
-			const style = window.getComputedStyle(this.$refs.svg)
+			if (!this.glyph) return 0
+			const refSVG = (this.$refs.svg as HTMLElement)
+			const style = window.getComputedStyle(refSVG)
 			this.$nextTick(() => {
-				this.scaling = (this.glyph.font.unitsPerEm / parseInt(style.fontSize))
-				this.strokeWidth = this.scaling + 'px'
-				if (!this.pointerListener) this.pointerListener = this.$refs.svg.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
+				this.scaling = (this.glyph?.font.unitsPerEm / parseInt(style.fontSize))
+				this.strokeWidth = this.scaling.toString() + 'px';
 
-				if (!this.$refs.svgFrame) return
-				this.height = (this.$refs.svg.getBoundingClientRect().height - this.$refs.svgFrame.getBoundingClientRect().height) / 2
+				refSVG.addEventListener('pointermove', ({ offsetX, offsetY }) => { this.pointer = { x: offsetX, y: offsetY } })
+
+				const refSVGFrame = (this.$refs.svgFrame as HTMLElement)
+				if (!refSVGFrame) return
+				this.height = (refSVG.getBoundingClientRect().height - refSVGFrame.getBoundingClientRect().height) / 2
 			})
 
 		}
 	}
-}
+})
 </script>
 <style scoped>
 .font-user {

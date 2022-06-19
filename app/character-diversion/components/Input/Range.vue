@@ -10,7 +10,7 @@
       --hover-color: var(--color-${color}-600);
       --handle-color: var(--color-${color}-500);
       --track-fill: var(--color-${color}-400);
-      --inline-template: ${['4ch', '1fr', (Array.isArray(modelValue) && value[1] !== null) && '3ch'].filter(e => e).join(' ')};
+      --inline-template: ${['4ch', '1fr', (Array.isArray(modelValue) && value[1] !== null) && '4ch'].filter(e => e).join(' ')};
     `"
   :data-min="dataMin" :data-max="dataMax">
     <div class="track" :style="style">
@@ -21,7 +21,7 @@
   </div>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   props: {
     type: {
       type: String,
@@ -96,7 +96,7 @@ export default {
       this.$emit('update:modelValue', newValues)
     },
   },
-}
+})
 </script>
 <style lang="scss" scoped>
 input {

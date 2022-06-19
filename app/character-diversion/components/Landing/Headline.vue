@@ -1,7 +1,7 @@
 <template>
   <!-- <h1 class="headline font-bold uppercase" v-html="transformedHeadline"></h1> -->
   <h1 class="headline font-bold uppercase">
-    <template v-for="word in transformedHeadline" :key="word" class="">
+    <template v-for="word in transformedHeadline" :key="word">
       <span v-if="word.length === 1" class="nowrap inline-block">{{ word[0] }}</span>
       <span v-else class="inline-block">
         <template v-for="(part, i) in word">
@@ -20,7 +20,7 @@
                 />
               </template>
             </VDropdown>
-            <span class="relative pointer-events-none" :data-count="i">{{ letter }}</span>
+            <span class="relative pointer-events-none" :data-count="increment() % 3">{{ letter }}</span>
           </span>
           <span v-else class="relative z-10 pointer-events-none">{{ part }}</span>
         </template>
@@ -30,8 +30,7 @@
 </template>
 
 <script lang="ts">
-export default {
-  setup() {},
+export default defineComponent({
   props: {
     headline: {
       type: String,
@@ -41,10 +40,11 @@ export default {
       type: String,
       default: "r",
     },
-    comments: {
-      type: Array,
-      default: ["Too boxy", "This is the original shape", "This is just right"],
-    },
+  },
+  data() {
+    return {
+      letterIndex: 0,
+    };
   },
   computed: {
     transformedHeadline() {
@@ -53,7 +53,15 @@ export default {
       });
     },
   },
-};
+  methods: {
+    reset() {
+      this.letterIndex = 0
+    },
+    increment() {
+      return this.letterIndex++
+    },
+  }
+});
 </script>
 
 <style lang="scss">
@@ -71,7 +79,7 @@ export default {
   & > * {
     margin-right: 0.5ex;
   }
-  font-family: "Gramatika", var(--font-sans);
+  font-family: "Neue Machina", "Gramatika", var(--font-sans);
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
@@ -84,7 +92,8 @@ export default {
     --Y: 0.05em;
     --size: var(--font-size);
     position: absolute;
-    transform: translateX(-0.17em);
+    // transform: translateX(-0.17em);
+    transform: translate(-0.15em, -0.37em);
     // top: 0;
     // left: 0;
     button {
