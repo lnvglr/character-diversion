@@ -5,7 +5,7 @@
     :class="hoverable ? `hover:p-[3px] duration-100` : ''"
   >
     <div
-      class="rounded-lg bg-white dark:bg-neutral-900 dark:text-white flex flex-1 w-full h-full overflow-hidden"
+      class="rounded-2xl bg-beige-50 dark:bg-neutral-900 dark:text-white flex flex-1 w-full h-full overflow-hidden"
     >
       <slot></slot>
     </div>

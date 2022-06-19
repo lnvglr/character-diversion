@@ -1,11 +1,14 @@
 <template>
-  <div class="max-w-4xl mx-auto">
-    <div class="flex items-center justify-between gap-5 w-full mb-10 dark:text-white">
-      <h1 class="lg:text-8xl md:text-6xl sm:text-4xl text-2xl font-bold">{{$t('discover.discourses')}}</h1>
+  <div class="-m-10">
+    <Card class="dark:text-white" :hoverable="false">
+    <div class="w-full flex items-center justify-between gap-5 p-10">
+      <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold">{{$t('discover.discourses')}}</h1>
+      <p class="max-w-xl">Explore discourses type and discover a new way to delve into the world of typography, one character at a time.</p>
+      </div>
       <Button v-if="$strapi.user" to="/discourse/new" key="remove" color="primary" class="
-        ml-auto lg
-      " icon="plus">{{$t('new.discourse')}}</Button>
-    </div>
+        ml-auto lg" icon="plus">{{$t('new.discourse')}}</Button>
+        </div>
+    </Card>
     <div class="discourses-container">
       <DiscourseCard v-for="discourseItem in discourses" :key="discourseItem.id" :discourse="discourseItem"
        />
@@ -34,9 +37,9 @@ export default {
 <style lang="scss">
 .discourses-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  // grid-template-columns: 1fr 1fr;
   width: 100%;
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); 
   // gap: var(--p-5);
   & > * {
     width: 100%;

@@ -44,7 +44,7 @@
         :class="{
           'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
           'text-xs': gridSize < 30,
-          'text-sm': gridSize >= 30,
+          'text-sm m-2': gridSize >= 30,
         }"
         v-html="glyphName(glyph, gridSize < 30)"
         @pointerdown="(clickable = false), appendGlyph(glyph)"
@@ -61,6 +61,9 @@
         @pointerdown="clickable = false"
         @pointerup="clickable = true"
         class="m-1 z-10 absolute bottom-0 left-0"
+        :class="{
+          'm-2': gridSize >= 30,
+        }"
       />
     </Card>
   </div>
