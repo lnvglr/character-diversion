@@ -113,24 +113,27 @@ As a plugin, *Character Diversion* could eventually be implemented in a larger t
 
 ## A Platform for Typographic Discourse
 
-The world of typography lives on discussion and debate. Designers speak about fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. There is discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
+The world of typography lives on discussion and debate. Designers speak about fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
 
 _Character Diversion_ can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, _Character Diversion_, creates a better overview over the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
 
 ### Concept
 
-In this attempt to build a platform that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. To achieve this, I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions of where we want to take typography going forward. The former is predominantly led by independent type designers, students and enthusiasts (**source?**). The latter lives mostly in conferences on type.
-
-1. Design Critique
-   1. What exists?
-   2. What is missing?
-2. Societal Discourse
-   1. What exists?
-   2. What is missing?
+In this attempt to build a platform that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. To achieve this, I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions of where we want to take typography as a society going forward.
 
 #### Critiquing letterforms
 
+What sets type design apart from other creative work is the sheer potential amount of individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something to keep in mind.
 
+There are a number of design unrelated platforms like *Reddit* and *Filestage* that host discussions on design. There are also design dedicated platforms for sharing, critiquing and general feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, are—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs.
+
+Yet, those platforms give insights into how discourses on designedly topics are lead online.
+
+People seem to need the ability to ...
+
+- respond to comments
+- respond with media
+- respond non-verbally
 
 #### Discussing future letterforms
 
@@ -154,8 +157,8 @@ The discourse panel is separated into three views: about the font, glyphs, disco
 
 > [note] Initially, the discourse panel was one view, containing discourse description, opinions and glyphs. And while there is a certain appeal to having all the information at your finger tips, the interface was cluttered and most importantly the user experience was not clear. Filtering glyphs while writing an opinion caused conflicting behaviour when selecting an opinion, which would, again filter the referenced glyphs.
 
-|_title_| About      | Glyphs | Discourse |
-|---| ---------- | ------ | --------- |
+|_title_  | About      | Glyphs | Discourse |
+|---------| ---------- | ------ | --------- |
 |_visible_| Font Title, Author,  Version History, Sample Text (with annotations) |`A`, `B`, `C`, `D`, `E`, ...    |List View of Opinions|
 |_ability_| Get overview over font project | Inline access to Opinions | Access to Glyph (group Preview) |
 
