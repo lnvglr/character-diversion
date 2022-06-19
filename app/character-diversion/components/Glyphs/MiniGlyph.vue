@@ -104,13 +104,14 @@ export default defineComponent({
 					if (!variableGlyph) {
 						this.decomposedAlt = undefined
 					}
+					this.setScaling()
 				}, 0)
 			},
 			deep: true,
 		},
 	},
 	computed: {
-		isTTF() {
+		isTTF(): boolean {
 			return !!this.$state.discourse.font.tables.glyf
 		},
 		decomposeWatcher() {

@@ -27,12 +27,12 @@
       </TransitionExpand>
       <div class="flex gap-1 w-full mb-1">
         <Button
-          class="clear w-full"
+          class="clear w-full lg"
           color="alert"
           @click="$state.opinion.reset('form')"
           >{{ $t("cancel") }}</Button
         >
-        <Button :disabled="!canPost" class="w-full" color="success" type="submit">{{
+        <Button :disabled="!canPost" class="w-full lg" color="success" type="submit">{{
           $t("share.opinion")
         }}</Button>
       </div>

@@ -36,7 +36,7 @@ small {
     list-style: disc;
   }
   blockquote {
-    background-color: var(--color-info-100);
+    background-color: var(--color-beige-200);
     border-radius: var(--rounded-md);
     padding: var(--p-2);
   }

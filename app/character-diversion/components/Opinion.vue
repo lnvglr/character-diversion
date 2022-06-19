@@ -56,7 +56,10 @@
             </div>
           </div>
         </div>
-        <Author :post="opinion" class="text-xs" />
+        <div class="flex w-full justify-between items-center">
+          <Author :post="opinion" class="text-xs" />
+          <Button icon="diagram-next" class="clear sm" @click.stop="quote" />
+        </div>
       </div>
     </div>
     <!-- <TransitionExpand>
@@ -126,6 +129,16 @@ export default defineComponent({
     },
   },
   methods: {
+    quote() {
+      this.$state.opinion.formActive = true
+      const content = this.$state.opinion.form.attributes.content
+      const author = this.opinion?.attributes.author?.data.attributes?.name
+      const quote  = `> ${this.opinion?.attributes.content} (by ${author})`
+      if (!content) {
+        return this.$state.opinion.form.attributes.content = quote
+      }
+      return this.$state.opinion.form.attributes.content = content + '\n' + quote
+    },
     selectOpinion() {
       const opinion = this.opinion;
       if (opinion === null || this.$state.opinion.active.id === opinion?.id) {

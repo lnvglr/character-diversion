@@ -24,7 +24,7 @@ I will briefly recount my experiences modifying a number of typefaces according 
 
 ### What are conventions and what are they for?
 
-According to Andrei Marmor (2009, preface, p. x NAME PAGE!), conventions are »rules that regulate human conduct«. He consitues that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
+According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that regulate human conduct«. He consitues that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
 
 > Kulturelle Konventionen wirken sowohl auf subjektiver und intersubjektiver als auch auf struktureller und strukturierender Ebene. Sie sind beteiligt bei Prozessen der Kommunikationsbildung, d.h. der Produktion, Aushandlung und Zuordnung einer Bedeutung zu einem für kulturell gehaltenen Gegenstand, der Textualisierung und Diskursivierung von Kultur, sowie der Regelung der Teilnahme im soziokulturellen Feld.
 >
@@ -34,7 +34,7 @@ In the typographic sense this means that some conventions can be explained with 
 
 The rhythm of ascenders and descenders in Latin script words, gives an often unique silhouette to those words improving their readability (**source**). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant todat.
 
-Writing from left to right had practical reasons, too: the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
+Writing from left to right had practical reasons, too: In its early days, Latin was written from right to left. Eventually the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg" alt="Cippus Perusinus" style="zoom:15%;" />
 
@@ -50,7 +50,7 @@ The Latin and the Hebrew script both have their origins in the Phoenician script
 
 The Jewish tradition perceived both the Hebrew alphabet as well as the language as sacred. This is one of the reasons for why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
 
-As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendant like Hebrew) written from right to left (du hast vorher eigentlich nur erwähnt, dass sie links->rechts irgendwann festgelegt haben, aber daraus geht für mich nicht hervor, dass es vorher andersherum war. Ist vielleicht logisch, könnte man oben aber nochmal spezifischer schreiben oder das As previously mentioned wegnehmen/umformulieren. Weil du ja hier im folgenden auch erklärst wie es war.). As writing replaced chiselling, Latin adopted the baustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
+As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendant like Hebrew) written from right to left. As writing replaced chiselling, Latin adopted the baustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
 
 Initially the character shapes of the Latin alphabet were mono-lined symbols with no stress and no serifs. This changed during the 1st century CE and the reason for this is mostly technical (Tselentis et al., 2012). The origins of serifs and stroke contrast, for example, are considered to lie in the Roman lapidary practice (i.e. the practice of shaping stone). Letters were painted on stone with a flat stiff brush—not a quill or a reed—and then chiseled into the surface (Friggeri, 2001). Hebrew characters developed stress and stroke contrast only more than a millennium later, and convened to a horizontal stress (as opposed to Latin vertical stress). The serif-like in-strokes (referred to as tags) in traditional Hebrew lettering, have technological origins, however different from Latin (Stern, 2003).
 
@@ -65,7 +65,7 @@ The fact that some societies were subjected to the same technological innovation
 
 Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technological circumstance or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink shaped tail of the letter ›j‹. But as our society strives for innovation, progress and adapting to new circumstances, our conventions need to change with us.
 
-As previously established, some conventions are of great value today even if their practical origins are obsolete. But for a democracy to stay alive, the status quo needs to be questioned (**source**) (vielleicht bisschen groß, den Niedergang der Demokratien zu bemühen?)and in this spirit I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
+As previously established, some conventions are of great value today even if their practical origins are obsolete. Som conventions are not, however, and in this spirit I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
 
 This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and he next chapter deals with what is needed to do so.
 
@@ -139,7 +139,8 @@ People seem to need the ability to ...
 
 --
 
-So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to (fehlt hier was?)
+So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to
+> (fehlt hier was?)
 
 ### User Interface
 
@@ -223,7 +224,7 @@ The initial logic was to have the list of opinions on the right and the grid wit
 
 This functionality alone, is straightforward conceptually and almost just as straight forward in its implementations: the grid of glyphs is either filtered so that only the glyphs corresponding to the selected opinion remain or a new tab or popup is opened where glyphs corresponding to selected opinions are shown.
 
-When implementing this functionality into (ja, und dann?)
+When implementing this functionality into the functionality of filtering glyphs, it becomes very complicated, however. Suddenly, there are three places in the app that have an impact on which glyphs are shown: the new opinion form, the selected opinion and the glyphs filter. And when there are several places impacting filtering, logic needs to be implemented as to how those filters interact. Are glyphs shown matching *all* filters, are glyphs show matching at least one filter or do certain filters have higher priority? Splitting the discourse panel into three views rectified this dilemma to some extend.
 
 ##### Sorting and Filtering
 
@@ -231,7 +232,7 @@ By default, opinions are sorted by their voting score. Very recent opinions are 
 
 One goal of the platform is to create overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
 
-##### How are threads treated? (Coming soon)
+##### How are threads treated?
 
 Threads are sub-conversations that can evolve below a comment. They can be very helpful in multi-faceted conversations with many participants. Threads can, however, also reduce the overview over a conversation, and lead away from the topic. 
 
@@ -281,10 +282,6 @@ Due to its complex implementation, this feature may, however, be developed in th
 ### Architecture & Deployment
 
 The app is divided into three main areas represented by links in the main navigation of the platform: Home, Discover and Profile.
-
-
-
-Home, Discover, Profile
 
 #### Information Structure
 
@@ -405,7 +402,7 @@ A component is usually a generic shell which accepts data that will populate thi
 
 
 
-One particularly appealing concept is the atomic design system, introduced (das 'introduced' ist überflüssig oder ich checks nicht). It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
+One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://media.crystallize.com/snowball/21/2/2/1/@1024/atomic-design-stages.webp)
 
@@ -413,7 +410,7 @@ One particularly appealing concept is the atomic design system, introduced (das 
 
 When starting this project, I set up a *GitHub* repository named `lnvglr/character-diversion`. *GitHub* is a platform for hosting source code. *GitHub* uses the version control system *Git* to track changes to the source code. It is mostly used for collaboratively working on projects but it is also used for automated deployment processes.
 
-For this project I used the repo (short for repository) (schreib halt einfach repository :) )to track my changes and to have the ability to go back in time and see my progress as well as making the project open source.
+For this project I used the repository to track my changes and to have the ability to go back in time and see my progress as well as making the project open source.
 
 When *Character Diversion* started taking shape, I used a platform that would allow for me to deploy the code and to make it accessible to the public. *Heroku* offers Node.js hosting, so I deployed both my Straps backend and my Nuxt.js frontend on *Heroku*.
 
@@ -433,7 +430,7 @@ Having two types of character relationships meant I would need two axes in the v
 
 > [1] Psiah is what the tail of the Hebrew letter tav is referred to.
 
-> [2] Variable fonts can contain more axes than anyone would (probably) ever need (wie viele denn?). The axes have 4-character tags that are used to set their CSS values. There are five registered axes, their tag is, by convention, written in lowercase letters, while the tags of custom axes are written in all caps.
+> [2] Variable fonts can contain more axes than anyone would (probably) ever need (up to 64K). The axes have 4-character tags that are used to set their CSS values. There are five registered axes, their tag is, by convention, written in lowercase letters, while the tags of custom axes are written in all caps.
 
 **Registered axes**
 

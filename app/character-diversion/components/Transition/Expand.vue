@@ -39,33 +39,33 @@ export default defineComponent({
   },
   data() {
     return {
-      margin: '' as string,
-      padding: '' as string,
+      margin: null,
+      padding: null,
     };
   },
   methods: {
-    afterEnter(element: HTMLElement): void {
+    afterEnter(element: HTMLElement) {
       // eslint-disable-next-line no-param-reassign
       element.style.height = "auto";
     },
-    beforeEnter(element: HTMLElement): void {
+    beforeEnter(element: HTMLElement) {
       this.margin = getComputedStyle(element).getPropertyValue("margin");
       this.margin = getComputedStyle(element).getPropertyValue("padding");
 
-      element.style.margin = '0';
-      element.style.marginBottom = '0';
+      element.style.margin = 0;
+      element.style.marginBottom = 0;
       element.style.marginLeft = this.margin;
       element.style.marginRight = this.margin;
 
-      element.style.padding = '0';
-      element.style.paddingBottom = '0';
+      element.style.padding = 0;
+      element.style.paddingBottom = 0;
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = this.opacity.toString();
+      element.style.opacity = this.opacity;
       element.style.transform = `scale(${this.scale})`;
     },
-    enter(element: HTMLElement): void {
+    enter(element: HTMLElement) {
       const { width } = getComputedStyle(element);
       /* eslint-disable no-param-reassign */
       element.style.width = width;
@@ -75,10 +75,10 @@ export default defineComponent({
       /* eslint-enable */
       const { height } = getComputedStyle(element);
       /* eslint-disable no-param-reassign */
-      element.style.width = '';
-      element.style.position = '';
-      element.style.visibility = '';
-      element.style.height = '';
+      element.style.width = null;
+      element.style.position = null;
+      element.style.visibility = null;
+      element.style.height = 0;
 
       element.style.marginTop = this.margin;
       element.style.marginBottom = this.margin;
@@ -90,7 +90,7 @@ export default defineComponent({
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = '1';
+      element.style.opacity = 1;
       element.style.transform = "scale(1)";
       /* eslint-enable */
       // Force repaint to make sure the
@@ -102,7 +102,7 @@ export default defineComponent({
         element.style.height = height;
       });
     },
-    leave(element: HTMLElement): void {
+    leave(element: HTMLElement) {
       const { height } = getComputedStyle(element);
       // eslint-disable-next-line no-param-reassign
       element.style.height = height;
@@ -117,7 +117,7 @@ export default defineComponent({
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = this.opacity.toString();
+      element.style.opacity = this.opacity;
       element.style.transform = `scale(${this.scale})`;
       // Force repaint to make sure the
       // animation is triggered correctly.
@@ -125,19 +125,19 @@ export default defineComponent({
       getComputedStyle(element).height;
       requestAnimationFrame(() => {
         // eslint-disable-next-line no-param-reassign
-        element.style.height = '0';
+        element.style.height = 0;
 
-        element.style.marginTop = '0';
-        element.style.marginBottom = '0';
+        element.style.marginTop = 0;
+        element.style.marginBottom = 0;
         element.style.marginLeft = this.margin;
         element.style.marginRight = this.margin;
 
-        element.style.paddingTop = '0';
-        element.style.paddingBottom = '0';
+        element.style.paddingTop = 0;
+        element.style.paddingBottom = 0;
         element.style.paddingLeft = this.padding;
         element.style.paddingRight = this.padding;
 
-        element.style.opacity = this.opacity.toString();
+        element.style.opacity = this.opacity;
         element.style.transform = `scale(${this.scale})`;
       });
     },
