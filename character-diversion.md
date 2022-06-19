@@ -159,21 +159,13 @@ The discourse panel is separated into three views: about the font, glyphs, disco
 |_visible_| Font Title, Author,  Version History, Sample Text (with annotations) |`A`, `B`, `C`, `D`, `E`, ...    |List View of Opinions|
 |_ability_| Get overview over font project | Inline access to Opinions | Access to Glyph (group Preview) |
 
+In the glyphs view, each glyph that is referenced in an opinion, shows a little annotations which, clicking on it opens a popup with the corresponding part of the discourse. The discourse view links to the glyphs by opening a preview of the referenced glyphs (and their state) when clicking on the opinion. Lastly, in the about panel, the characters in the preview text are annotated and linked to the corresponding opinions.
 
-
-#### Discourse
-
-The benefit of recorded and structured discourse is that people can learn from it without engaging in it. The discourse lives, on the other hand, from participation. The user experience in respect to the discourse needs to properly summarise and display the status quo of the discourse as well as show an easy entry point for engagement.
-
-Jeff Atwood is co-founder of Stack Overflow and Discourse. In a blogpost on civilised discourse on the internet he contemplates on some of the issues and design decisions of current forum software.
-
-> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
-
-#### Opinion
-
-While the discourse is the structure that defines the topic and holds the conversation together, the opinions are what bring this structure to life.
+#### Opinion in Discourse
 
 When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganising the ordering through a voting system? Or would this limit the liveliness of the discourse?
+
+> »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
 
 I decided that opinions in fact needed more prominence.
 
