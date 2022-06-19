@@ -236,11 +236,9 @@ A question that came up was whether to consider comments below opinions as anoth
 
 #### Visual Appearance
 
-The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. 
+The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. The platform does not need to sell anything, persuade anyone. In fact, it succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
 
-- Flat
-- Paper colors to reference the print history
-- 
+...
 
 ![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
