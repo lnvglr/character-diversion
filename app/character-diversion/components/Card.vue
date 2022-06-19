@@ -1,22 +1,16 @@
 <template>
-	<div class="bg-black dark:bg-white
-		p-[1px]">
-	<div class="
-		rounded-lg
-		bg-white
-		dark:bg-neutral-900
-		dark:text-white
-		flex
-		flex-1
-		w-full
-		h-full
-		"
-		:class="hoverable ? `hover:m-1 duration-100` : ''"
-		>
-		<slot></slot>
-	</div>
-	</div>
-	<!-- <div class="
+  <component
+    :is="tag || 'div'"
+    class="bg-black dark:bg-white p-[1px]"
+    :class="hoverable ? `hover:p-[3px] duration-100` : ''"
+  >
+    <div
+      class="rounded-lg bg-white dark:bg-neutral-900 dark:text-white flex flex-1 w-full h-full overflow-hidden"
+    >
+      <slot></slot>
+    </div>
+  </component>
+  <!-- <div class="
 		rounded-md
 		border
 		bg-white
@@ -33,13 +27,16 @@
 
 <script lang="ts">
 export default {
-	props: {
-		hoverable: {
-			type: Boolean,
-			default: true,
-		}
-	}
-}
+  props: {
+    tag: {
+      type: String,
+      default: "div",
+    },
+    hoverable: {
+      type: Boolean,
+      default: true,
+    },
+  },
+};
 </script>
-<style>
-</style>
+<style></style>

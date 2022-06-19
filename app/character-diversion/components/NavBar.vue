@@ -2,9 +2,9 @@
   <!-- bg-beige-100
       border-t border-beige-200
       ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
-  <nav class="h-full dark:bg-neutral-700 dark:border-neutral-900 bg-black p-[1px]">
+  <Card tag="nav" class="h-full" :hoverable="false">
     <ul
-      class="flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50 rounded-lg shadow-lg"
+      class="flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50"
     >
       <li
         v-for="(route, index) in routes"
@@ -35,7 +35,7 @@
         :label="false"
       />
     </ul>
-  </nav>
+  </Card>
 </template>
 
 <script>
@@ -84,7 +84,7 @@ export default defineComponent({
         });
     },
   },
-})
+});
 </script>
 
 <style scoped>
