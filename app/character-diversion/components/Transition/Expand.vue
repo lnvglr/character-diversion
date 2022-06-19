@@ -17,7 +17,7 @@
   </transition>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TransitionExpand",
   props: {
     opacity: {
@@ -39,33 +39,33 @@ export default {
   },
   data() {
     return {
-      margin: null,
-      padding: null,
+      margin: '' as string,
+      padding: '' as string,
     };
   },
   methods: {
-    afterEnter(element) {
+    afterEnter(element: HTMLElement): void {
       // eslint-disable-next-line no-param-reassign
       element.style.height = "auto";
     },
-    beforeEnter(element) {
+    beforeEnter(element: HTMLElement): void {
       this.margin = getComputedStyle(element).getPropertyValue("margin");
       this.margin = getComputedStyle(element).getPropertyValue("padding");
 
-      element.style.margin = 0;
-      element.style.marginBottom = 0;
+      element.style.margin = '0';
+      element.style.marginBottom = '0';
       element.style.marginLeft = this.margin;
       element.style.marginRight = this.margin;
 
-      element.style.padding = 0;
-      element.style.paddingBottom = 0;
+      element.style.padding = '0';
+      element.style.paddingBottom = '0';
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = this.opacity;
+      element.style.opacity = this.opacity.toString();
       element.style.transform = `scale(${this.scale})`;
     },
-    enter(element) {
+    enter(element: HTMLElement): void {
       const { width } = getComputedStyle(element);
       /* eslint-disable no-param-reassign */
       element.style.width = width;
@@ -75,10 +75,10 @@ export default {
       /* eslint-enable */
       const { height } = getComputedStyle(element);
       /* eslint-disable no-param-reassign */
-      element.style.width = null;
-      element.style.position = null;
-      element.style.visibility = null;
-      element.style.height = 0;
+      element.style.width = '';
+      element.style.position = '';
+      element.style.visibility = '';
+      element.style.height = '';
 
       element.style.marginTop = this.margin;
       element.style.marginBottom = this.margin;
@@ -90,7 +90,7 @@ export default {
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = 1;
+      element.style.opacity = '1';
       element.style.transform = "scale(1)";
       /* eslint-enable */
       // Force repaint to make sure the
@@ -102,7 +102,7 @@ export default {
         element.style.height = height;
       });
     },
-    leave(element) {
+    leave(element: HTMLElement): void {
       const { height } = getComputedStyle(element);
       // eslint-disable-next-line no-param-reassign
       element.style.height = height;
@@ -117,7 +117,7 @@ export default {
       element.style.paddingLeft = this.padding;
       element.style.paddingRight = this.padding;
 
-      element.style.opacity = this.opacity;
+      element.style.opacity = this.opacity.toString();
       element.style.transform = `scale(${this.scale})`;
       // Force repaint to make sure the
       // animation is triggered correctly.
@@ -125,24 +125,24 @@ export default {
       getComputedStyle(element).height;
       requestAnimationFrame(() => {
         // eslint-disable-next-line no-param-reassign
-        element.style.height = 0;
+        element.style.height = '0';
 
-        element.style.marginTop = 0;
-        element.style.marginBottom = 0;
+        element.style.marginTop = '0';
+        element.style.marginBottom = '0';
         element.style.marginLeft = this.margin;
         element.style.marginRight = this.margin;
 
-        element.style.paddingTop = 0;
-        element.style.paddingBottom = 0;
+        element.style.paddingTop = '0';
+        element.style.paddingBottom = '0';
         element.style.paddingLeft = this.padding;
         element.style.paddingRight = this.padding;
 
-        element.style.opacity = this.opacity;
+        element.style.opacity = this.opacity.toString();
         element.style.transform = `scale(${this.scale})`;
       });
     },
   },
-}
+})
 </script>
 
 <style scoped>

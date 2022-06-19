@@ -88,8 +88,8 @@ export default defineComponent({
     postOpinion() {
       const { content, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
       if (!this.canPost) return;
-      const discourse = JSON.parse(JSON.stringify(this.$state.discourse.current))
-      delete discourse.font
+      const { id, attributes } = this.$state.discourse.current
+      const discourse = JSON.parse(JSON.stringify({ id, attributes }))
       const opinion = {
         content,
         glyphs,

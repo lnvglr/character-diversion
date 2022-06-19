@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col m-2 border rounded-md bg-beige-50 border-beige-200 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
+    class="flex flex-col my-2 border rounded-md bg-beige-50 border-beige-200 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[720px]"
     :class="{ minimized: sidebarMinimized }"
   >
     <!-- <Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" /> -->

@@ -179,12 +179,11 @@ interface User {
 type Strapi4 = typeof useStrapi4
 type StrapiAuth = typeof useStrapiAuth
 type StrapiUser = typeof useStrapiUser
-type Strapi = Strapi4 & StrapiAuth & StrapiUser & {
+type Strapi = {
   client: typeof useStrapiClient
   api: typeof publicRuntimeConfig
-  user: typeof User,
+  user: typeof User
 }
-
 
 
 declare module '@vue/runtime-core' {
