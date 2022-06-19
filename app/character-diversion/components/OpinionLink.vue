@@ -12,7 +12,7 @@
         <ListOpinions
           v-if="linkedOpinions(glyph.id).length > 0"
           :opinions="linkedOpinions(glyph.id)"
-          class="w-[360px] min-w-[360px]"
+          class="w-[360px] min-w-[360px] max-h-[360px] overflow-auto"
         />
       </template>
     </VDropdown>
