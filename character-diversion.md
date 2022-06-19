@@ -113,15 +113,28 @@ As a plugin, *Character Diversion* could eventually be implemented in a larger t
 
 ## A Platform for Typographic Discourse
 
-In the world of typography, there's no shortage of discussion. Designers and their clients discuss fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades.
+The world of typography lives on discussion and debate. Designers speak about fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. There is discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
 
 _Character Diversion_ can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, _Character Diversion_, creates a better overview over the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
 
 ### Concept
 
-In this attempt to build a platform that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. To achieve this, I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions of where we want to take typography going forward.
+In this attempt to build a platform that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. To achieve this, I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions of where we want to take typography going forward. The former is predominantly led by independent type designers, students and enthusiasts (**source?**). The latter lives mostly in conferences on type.
 
-The former is predominantly led by independent type designers, students and enthusiasts (**source?**). The latter lives mostly in conferences on type.
+1. Design Critique
+   1. What exists?
+   2. What is missing?
+2. Societal Discourse
+   1. What exists?
+   2. What is missing?
+
+#### Critiquing letterforms
+
+
+
+#### Discussing future letterforms
+
+--
 
 So I set out to design and develop a platform for people to discuss all typographic topics that can be linked to a specific font file. This linking is meant to
 
@@ -137,10 +150,16 @@ User experience and interfaces need to communicate clearly what the app does and
 
 With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion, or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
 
+The discourse panel is separated into three views: about the font, glyphs, discourse [note]. All three views have elements linking to another one of the views. The about view shows discourse title, author, font info, version history, and other meta data. The glyphs view shows an overview over the glyphs the respective font contains and the discourse view shows the list of opinions.
+
+> [note] Initially, the discourse panel was one view, containing discourse description, opinions and glyphs. And while there is a certain appeal to having all the information at your finger tips, the interface was cluttered and most importantly the user experience was not clear. Filtering glyphs while writing an opinion caused conflicting behaviour when selecting an opinion, which would, again filter the referenced glyphs.
+
 |_title_| About      | Glyphs | Discourse |
 |---| ---------- | ------ | --------- |
-|_visible_| Font Title<br />Author<br />Version History |`A`, `B`, `C`    |List View of Opinions|
+|_visible_| Font Title, Author,  Version History, Sample Text (with annotations) |`A`, `B`, `C`, `D`, `E`, ...    |List View of Opinions|
 |_ability_| Get overview over font project | Inline access to Opinions | Access to Glyph (group Preview) |
+
+
 
 #### Discourse
 
@@ -225,7 +244,11 @@ A question that came up was whether to consider comments below opinions as anoth
 
 #### Visual Appearance
 
-The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. The platform does not need to sell anything, persuade anyone. In fact, it succeeds, when it remains unnoticed – adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
+The overall visual aesthetics are kept in a flat design, with a beige palette, and a bright orange and blue as accent colors. 
+
+- Flat
+- Paper colors to reference the print history
+- 
 
 ![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
