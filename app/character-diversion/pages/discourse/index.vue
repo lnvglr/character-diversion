@@ -37,7 +37,7 @@ export default {
   grid-template-columns: 1fr 1fr;
   width: 100%;
   /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  gap: var(--p-5);
+  // gap: var(--p-5);
   & > * {
     width: 100%;
     max-width: 100%

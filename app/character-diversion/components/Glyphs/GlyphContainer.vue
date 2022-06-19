@@ -2,7 +2,7 @@
   <div ref="container">
     <Card
       :hoverable="$state.opinion.formActive"
-      class="card flex justify-center w-full relative overflow-hidden"
+      class="card flex justify-center w-full relative  border-0"
       :class="{
         'opacity-10': dim(glyph.id),
         'cursor-pointer': $state.opinion.formActive,
@@ -15,7 +15,7 @@
     >
       <GlyphsMiniGlyph
         v-if="inView"
-        :class="`glyph text-${fontSize}`"
+        :class="`glyph overflow-hidden text-${fontSize}`"
         :glyph="glyph"
         :tuple="$state.opinion.form.attributes.axes"
         :annotations="annotations"
@@ -94,6 +94,10 @@ export default {
       default: false,
     },
     intersection: {
+      type: Boolean,
+      default: false,
+    },
+    outline: {
       type: Boolean,
       default: false,
     },

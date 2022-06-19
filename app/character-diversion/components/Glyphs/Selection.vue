@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="$state.opinion.font && $state.opinion.form.attributes"
-		class="selection-container grid gap-1"
+		class="selection-container grid"
 		:class="`grid-cols-autofill-${gridSize}`"
 		v-bind="$attrs"
 	>

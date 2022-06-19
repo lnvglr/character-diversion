@@ -1,7 +1,8 @@
 <template>
   <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
     <div class="grow overflow-auto">
-      <div class="flex item-center my-5 justify-between">
+      <div class="rounded-lg bg-beige-50 m-[1px] mx-0">
+      <div class="flex item-center justify-between p-5">
         <div class="button-group">
           <Button
             v-for="(viewObject, name) in views"
@@ -71,6 +72,7 @@
           <!-- :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" -->
         </div>
       </div>
+      </div>
       <GlyphsSelection
         :gridSize="views[view].gridSize"
         :fontSize="views[view].fontSize"
@@ -82,8 +84,9 @@
         :style="style"
       />
     </div>
-
-    <DiscourseSidebar />
+    <div class="">
+      <DiscourseSidebar />
+    </div>
   </div>
 </template>
 
@@ -100,7 +103,7 @@ export default defineComponent({
         overview: {
           label: "Overview",
           icon: "border-all",
-          gridSize: "12",
+          gridSize: "16",
           fontSize: "2xl",
         },
         detail: {

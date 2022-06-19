@@ -1,6 +1,7 @@
 <template>
+    <!-- class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 outline outline-8 outline-beige-200/90 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]" -->
   <div
-    class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 outline outline-8 outline-beige-200/90 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
+    class="flex flex-col rounded-md bg-beige-50 h-full m-[1px] overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
     :class="{ minimized: sidebarMinimized }"
   >
     <!-- <Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" /> -->

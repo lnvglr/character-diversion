@@ -1,11 +1,11 @@
 <template>
-	<div class="flex items-center relative select-none" ref="container">
-		<svg :style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`" :viewBox="viewBox.join(' ')"
+	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container">
+		<svg :style="style" :viewBox="viewBox.join(' ')"
 			class="pointer-events-none" ref="svgFrame"></svg>
 		<Transition name="fade">
 		<svg
 			ref="svg"
-			:style="`width: ${fontSize}em; min-width: ${fontSize}em; transform: ${transform}`"
+			:style="style"
 			v-show="path || !isTTF"
 			class="h-full absolute"
 			@pointerleave="$state.opinion.annotationTool.id = null"
@@ -75,7 +75,6 @@ export default defineComponent({
 			decomposed: {} as SamsaGlyph | undefined,
 			decomposedAlt: {} as SamsaGlyph | undefined,
 			strokeWidth: '10px',
-			transform: 'scale(1,-1)',
 			scaling: 1,
 			height: 0,
 			pointer: {},
@@ -160,6 +159,16 @@ export default defineComponent({
 		fontSize() {
 			if (!this.glyph) return 0
 			return (this.characterWidth + this.offset.x) / this.glyph.font.unitsPerEm
+		},
+		style() {
+			return {
+				width: `${this.fontSize}em`,
+				minWidth: `${this.fontSize}em`,
+				transform: 'scale(1,-1)',
+				left: '-9999px',
+				right: '-9999px',
+				marginInline: 'auto'
+			}
 		}
 	},
 	methods: {
