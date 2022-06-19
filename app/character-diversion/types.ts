@@ -145,6 +145,7 @@ export interface DiscourseState {
     [id: string]: Discourse
   }
   current: Discourse
+  font: SamsaFont
   search: string
   filter: {
     [key: string]: boolean

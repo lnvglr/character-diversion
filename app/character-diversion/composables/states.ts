@@ -12,15 +12,18 @@ export const discourse = reactive<DiscourseState>({
   search: '',
   filter: {},
   new: {
-    title: null,
-    content: null,
-    files: null
+    title: '',
+    content: '',
+    files: {}
   },
   setCurrent: (id: string) => {
     const current = discourse.all[id as keyof typeof discourse.all]
     if (!current) return discourse.current = null
     useSamsaFont(current.attributes.font?.data?.attributes.url)
-      .then((font: SamsaFont) => opinion.font = font)
+      .then((font: SamsaFont) => {
+        discourse.font = font
+        current.font = font
+      })
       .catch(e => console.error(e))
       .finally(() => discourse.current = current)
   },
@@ -84,7 +87,7 @@ export const opinion = reactive<OpinionState>({
   }
 })
 
-export const useSamsaFont = (fontName: string) => {
+export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
   const app = useNuxtApp()
   return new Promise(
     (resolve, reject) => {

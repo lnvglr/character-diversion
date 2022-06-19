@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Discourse } from "~/types";
 
-export default {
+export default defineComponent({
   setup() {
     definePageMeta({
       name: "Discourse",
@@ -18,7 +18,7 @@ export default {
       },
     });
   },
-  async mounted() {
+  mounted() {
     this.$state.discourse.fetch();
   },
   watch: {
@@ -46,7 +46,7 @@ export default {
       deep: true,
     },
   },
-}
+})
 </script>
 
 <style>

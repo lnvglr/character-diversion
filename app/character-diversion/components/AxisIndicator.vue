@@ -14,7 +14,7 @@ export default {
 	},
 	computed: {
 		fontAxes() {
-			return this.$state.opinion.font.axes
+			return this.$state.discourse.font.axes
 		},
 		axesArray() {
 			return Object.entries(this.axes).map(e => ({  valueMin: e[1][0], valueMax: e[1][1], ...this.fontAxes.find((f: SamsaFontAxes) => f.tag === e[0]) }))

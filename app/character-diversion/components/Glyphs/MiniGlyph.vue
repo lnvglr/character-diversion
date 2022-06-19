@@ -23,7 +23,7 @@
 		</svg>
 		</Transition>
 		<div v-if="!isTTF && glyph"
-			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.opinion.font.glyphMap[glyph.id].literal }}</div>
+			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font.glyphMap[glyph.id].literal }}</div>
 	</div>
 </template>
 <script lang="ts">
@@ -111,7 +111,7 @@ export default defineComponent({
 	},
 	computed: {
 		isTTF() {
-			return !!this.$state.opinion.font.tables.glyf
+			return !!this.$state.discourse.font.tables.glyf
 		},
 		decomposeWatcher() {
 			return [this.tuple, this.inView, this.$attrs]
@@ -127,7 +127,7 @@ export default defineComponent({
 		},
 		characterWidth(): number {
 			if (!this.glyph) return 0
-			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.opinion.font.widths[this.glyph.id]
+			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.discourse.font.widths[this.glyph.id]
 		},
 		width() {
 			if (!this.glyph) return 0

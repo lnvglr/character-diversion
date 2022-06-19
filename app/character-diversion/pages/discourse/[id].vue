@@ -31,8 +31,8 @@
         <!-- grid-cols-[25px_minmax(300px,_1fr)] -->
         <div
           class="py-2 flex-1 max-w-full items-center grid"
-          v-if="$state.opinion.font"
-          v-for="axis in $state.opinion.font.axes"
+          v-if="$state.discourse.font"
+          v-for="axis in $state.discourse.font.axes"
           :key="axis.tag"
         >
           <!-- <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" /> -->
@@ -43,7 +43,7 @@
               view === 'intersect'
             "
             type="range"
-            :step="1"
+            :step="0.01"
             :min="axis.min"
             :max="axis.max"
             v-model="$state.opinion.form.attributes.axes[axis.tag]"
@@ -59,7 +59,7 @@
               view !== 'intersect'
             "
             type="range"
-            :step="1"
+            :step="0.01"
             :min="axis.min"
             :max="axis.max"
             v-model="$state.opinion.form.attributes.axes[axis.tag][0]"
@@ -121,7 +121,7 @@ export default defineComponent({
           annotations: true,
           intersection: true,
           frame: true,
-          hide: !this.$state.opinion.font?.glyphs.some((e) => e.tvts.length > 0),
+          hide: !this.$state.discourse.font?.glyphs.some((e) => e.tvts.length > 0),
         },
         path: {
           label: "Path",

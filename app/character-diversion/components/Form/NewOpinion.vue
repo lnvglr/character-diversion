@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   computed: {
     currentDiscourse() {
       return this.$state.discourse.current;
@@ -88,12 +88,14 @@ export default {
     postOpinion() {
       const { content, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
       if (!this.canPost) return;
+      const discourse = JSON.parse(JSON.stringify(this.$state.discourse.current))
+      delete discourse.font
       const opinion = {
         content,
         glyphs,
         axes,
         annotations,
-        discourse: this.$state.discourse.current,
+        discourse,
         author: this.$strapi.user,
       };
       this.$strapi
@@ -125,7 +127,7 @@ export default {
         });
     },
   },
-}
+})
 </script>
 
 <style></style>

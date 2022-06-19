@@ -18,7 +18,7 @@
       <i18n-t keypath="files.dropNotice" tag="span" for="browse" scope="global">
         <label for="dropzoneFile">{{$t('files.browse')}}</label>
       </i18n-t>
-      <small>{{$t('files.supported', { formats: accept.join(', ').toUpperCase(), size: "2 MB" })}}</small>
+      <small>{{$t('files.supported', { formats: accept.join(', ').toUpperCase(), size: formatBytes(maxFileSize) })}}</small>
       <input @change="({target}) => checkFiles(target)" ref="files" type="file" id="dropzoneFile" class="dropzoneFile" multiple />
     </div>
   </div>
@@ -33,7 +33,7 @@
       @remove="removeFile"
     />
   </transition-group>
-  <!-- <callout
+  <div
     type="warning"
     margin="5px"
     :active="callout.length > 0"
@@ -41,14 +41,14 @@
     @close="callout = []"
     >
       {{ callout.join('. ') }}
-    </callout> -->
+    </div>
 </template>
 
-<script>
+<script lang="ts">
 import FileCard from '~/components/UI/FileCard.vue'
 // import Callout from '~/components/UI/Callout.vue'
 
-export default {
+export default defineComponent({
   name: 'DropZone',
   components: {
     FileCard,
@@ -60,12 +60,16 @@ export default {
       type: Array,
       default: () => ['ttf', 'otf'],
     },
+    maxSize: {
+      type: Number,
+    }
   },
   data() {
     return {
       active: false,
       files: [],
       maxFiles: 3,
+      maxFileSize: this.maxSize || 2 * 1024 * 1024,
       draggedFiles: 0,
       callout: [],
     }
@@ -89,12 +93,12 @@ export default {
     },
     addFile(file, preview = null) {
       const uniqueName = this.files.every(e => e.file.name !== file.name)
-      const withinSize = file.size <= 2000000
+      const withinSize = file.size <= this.maxFileSize
       const allowedType = this.accept.some(e => {
         return file.type.replace(/jpeg|jpe/, 'jpg').includes(e.replace(/jpeg|jpe/, 'jpg'))
       })
       if (!uniqueName) this.callout.push(this.$t('files.duplicate') + ` (${file.name})`)
-      if (!withinSize) this.callout.push(this.$t('files.supportedSize', { size: '2 MB' }) + ` (${file.name})`)
+      if (!withinSize) this.callout.push(this.$t('files.supportedSize', { size: this.formatBytes(this.maxFileSize) }) + ` (${file.name})`)
       const format = this.$t('files.supportedFormats', { formats: this.accept.join(', ').toUpperCase() });
       if (!allowedType && !this.callout.includes(format)) this.callout.push(format)
       if (this.moreSpace && uniqueName && withinSize && allowedType) {
@@ -112,6 +116,18 @@ export default {
         reader.readAsDataURL(file)
       })
     },
+    formatBytes(bytes: number, decimals: number = 2): string {
+      if (bytes === 0) return '0 Bytes';
+
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
   },
   watch: {
     files: {
@@ -128,7 +144,7 @@ export default {
       deep: true,
     },
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

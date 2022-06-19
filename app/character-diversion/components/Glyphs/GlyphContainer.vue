@@ -39,7 +39,7 @@
         @click.prevent
       />
       <div
-        v-if="$state.opinion.font.glyphMap[glyph.id]"
+        v-if="$state.discourse.font.glyphMap[glyph.id]"
         class="z-10 absolute bottom-0 right-0 px-2 m-1 rounded-sm bg-beige-200/80"
         :class="{
           'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
@@ -128,7 +128,7 @@ export default {
       this.inView = isIntersecting;
     },
     glyphName(glyph: SamsaGlyph, literal = false) {
-      const g = this.$state.opinion.font.glyphMap[glyph.id];
+      const g = this.$state.discourse.font.glyphMap[glyph.id];
       return literal || g.postScript === "" ? g.literal : g.postScript;
     },
     appendGlyph(glyph: SamsaGlyph) {

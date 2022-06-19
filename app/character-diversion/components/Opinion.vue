@@ -90,8 +90,8 @@ export default defineComponent({
     glyphs() {
       const extra: string[] = [];
       this.opinion?.attributes.glyphs?.forEach((glyph: number) => {
-        if (!this.parseOpinion.parsedGlyphs.includes(glyph) && 'literal' in this.$state.opinion.font.glyphMap[glyph])
-          extra.push(this.$state.opinion.font.glyphMap[glyph].literal);
+        if (!this.parseOpinion.parsedGlyphs.includes(glyph) && 'literal' in this.$state.discourse.font.glyphMap[glyph])
+          extra.push(this.$state.discourse.font.glyphMap[glyph].literal);
       });
       return extra;
     },

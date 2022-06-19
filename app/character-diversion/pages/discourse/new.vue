@@ -23,6 +23,7 @@
         v-model="formData.font"
         :accept="['ttf', 'otf']"
         :maxFiles="1"
+        :maxSize="3 * 1024 * 1024"
       />
       <Button type="submit" :disabled="!formData.font?.[0]" class="lg">{{ $t("start.new.discourse") }}</Button>
     </form>
@@ -30,7 +31,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   data() {
     return {
       formData: {
@@ -82,7 +83,7 @@ export default {
         });
     },
   },
-}
+})
 </script>
 
 <style scoped>

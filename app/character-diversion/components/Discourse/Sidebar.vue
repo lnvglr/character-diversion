@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col m-5 border rounded-md bg-beige-50 border-beige-300 outline outline-8 outline-beige-200/90 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
+    class="flex flex-col m-2 border rounded-md bg-beige-50 border-beige-200 overflow-hidden w-[240px] min-w-[240px] md:w-[360px] md:min-w-[360px] lg:w-[480px] lg:min-w-[480px]"
     :class="{ minimized: sidebarMinimized }"
   >
     <!-- <Image :src="$state.discourse.current.attributes.featuredImage.data?.attributes" /> -->
@@ -11,7 +11,7 @@
       <h1 class="text-2xl font-bold flex w-full">
         {{ $state.discourse.current.attributes.title }}
       </h1>
-      <p class="text-sm">{{ $state.opinion.font?.names[5].split(";")[0] }}</p>
+      <p class="text-sm">{{ version }}</p>
       <Author :post="$state.discourse.current" class="text-sm mt-2" />
       <p
         class="text-md max-w-lg markdown mt-2"
@@ -50,8 +50,13 @@ export default defineComponent({
       return this.currentDiscourse?.attributes.opinions?.data;
     },
     axes(): string[] {
-      return this.$state.opinion.font?.axes;
+      return this.$state.discourse.font?.axes;
     },
+    version() {
+      const v = this.$state.discourse.font?.names[5].split(";")[0]
+      const convert = (e: number) => (e % 1 == 0) ? e + ".0" : e;
+      return v.split(' ').map((e: string, i: number) => i === 1 ? convert(parseFloat(e)) : e ).join(' ')
+    }
   },
   watch: {
     axes: {

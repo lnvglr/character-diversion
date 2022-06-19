@@ -5,10 +5,10 @@ import md from '@/composables/markdown'
 
 const nameToUnicode = (string: string): number => {
   if (string.length === 1) return string.charCodeAt(0)
-  const matchedGlyph = opinion.font.glyphs.find(
+  const matchedGlyph = discourse.font.glyphs.find(
     (g: SamsaGlyph) => g.name === string
   )
-  if (matchedGlyph) return opinion.font.cmapReverse[matchedGlyph.id]
+  if (matchedGlyph) return discourse.font.cmapReverse[matchedGlyph.id]
   return 0
 }
 
@@ -22,7 +22,7 @@ export const glyphMethods = {
   getTupleValue: (index: number): number[] => {
     return opinion.form.attributes.axes
       ? Object.values(opinion.form.attributes.axes).map(
-          (e, i) => e[index] / opinion.font.axes[i]?.max
+          (e, i) => e[index] / discourse.font.axes[i]?.max
         ) as number[]
       : []
   },
@@ -39,16 +39,16 @@ export const glyphMethods = {
   },
   getGlyphsById: (
     glyphs: number | number[],
-    font: SamsaFont = null
+    font?: SamsaFont
   ): string => {
-    if (!font) font = opinion.font
+    if (!font) font = discourse.font
     const map = font?.cmapReverse
     if (!glyphs || glyphs === 1 || !map) return ''
     if (typeof glyphs === 'number') glyphs = [glyphs]
     return glyphs
       .map((id): string => {
         if (!(id in map)) {
-          const SamsaGlyph = font.glyphs[id]
+          const SamsaGlyph = font?.glyphs[id]
           const lig = SamsaGlyph?.openType?.lig
           if (lig) return lig
           id = SamsaGlyph?.openType.base
@@ -59,9 +59,9 @@ export const glyphMethods = {
   },
   glyphToUnicode: (string: string | string[]): number | number[] => {
     if (typeof string === 'string') {
-      return opinion.font?.cmap[nameToUnicode(string)]
+      return discourse.font?.cmap[nameToUnicode(string)]
     }
-    return string.map((e) => opinion.font?.cmap[nameToUnicode(e)])
+    return string.map((e) => discourse.font?.cmap[nameToUnicode(e)])
   },
   nameToUnicode,
 
@@ -69,11 +69,11 @@ export const glyphMethods = {
     const closest = (arr: number[], target: number) => arr.reduce(function(prev, curr) {
       return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
     });
-    opinion.form.attributes.axes = opinion.font?.axes.reduce(
+    opinion.form.attributes.axes = discourse.font?.axes.reduce(
       (acc: Object, curr: SamsaFontAxes) => {
         const min = closest([curr.min, curr.max], curr.default) === curr.default ? curr.min : curr.default
         const max = closest([curr.min, curr.max], curr.default) === curr.default ? curr.default : curr.max
-        console.log(opinion.font, min, max, closest([curr.min, curr.max], curr.default))
+        console.log(discourse.font, min, max, closest([curr.min, curr.max], curr.default))
         return {
           ...acc,
           [curr.tag]: [min, max],
@@ -98,9 +98,9 @@ export const glyphMethods = {
 			return match
 					.map(e => {
 						return (
-							opinion.font.literalMap[e] ||
-							opinion.font.postScriptMap[e] ||
-							opinion.font.nameMap[e]
+							discourse.font.literalMap[e] ||
+							discourse.font.postScriptMap[e] ||
+							discourse.font.nameMap[e]
 						)?.glyph.id
 					})
 					.filter(e => e)
@@ -121,16 +121,16 @@ export const glyphMethods = {
 }
 
 export const utils = {
-  invertObject: (object: Object) => {
+  invertObject: (object: object) => {
     if (!object) return
     return Object.keys(object).reduce((ret, key) => {
       ret[object[key]] = key
       return ret
     }, {})
   },
-  arrayContainsObject: (array: object[], object: object) => {
-    const objectInArray = array.find((item) =>
-      Object.keys(item).every((key) => item[key] === object[key])
+  arrayContainsObject: (array: object[], object: {[key: string]: any}) => {
+    const objectInArray = array.find((item: {[key: string]: any}) =>
+      Object.keys(item).every((key: string) => item[key] === object[key])
     )
     return objectInArray && array.indexOf(objectInArray)
   },
