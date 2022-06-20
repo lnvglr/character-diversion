@@ -8,7 +8,7 @@ In my proposals, I studied potential relationships between Hebrew and Latin char
 
 After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted toward building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use this platform and make it their own, discuss their own type projects and ideas of what letter shapes might look like in the future.
 
-After some research of which platform for typographic thought exchange already exist I found that those platform where type designers discuss their work are not designed specifically for typographic discourse. They are either forums that are designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz). With those shortcomings in current platforms typographic discourse, I started working on the concept for a platfrom tackling those deficiencies.
+After some research of which platform for typographic thought exchange already exist I found that those platform where type designers discuss their work are not designed specifically for typographic discourse. They are either forums that are designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz). With those shortcomings in current platforms typographic discourse, I started working on the concept for a platfrom tackling those deficiencies. I will elaborate on those insufficiencies in the chapter *Enabling Discourse*.
 
 By opening up new ways of typographic discourse, this thesis aims to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently criticized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
 
@@ -48,16 +48,26 @@ Finally, there are conventions of ornamentation, like the drop-shaped tail of a 
 
 The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are alive and well. On their way to the 21st century, they took very different paths, however. The two scripts developed distinct structural and typographic conventions. This differentiation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
 
+#### Use of Language
+
 The Jewish tradition perceived both the Hebrew alphabet as well as the language itself as sacred. This is one of the reasons why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
+
+#### Writing Direction
 
 As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendants like Hebrew) written from right to left. As writing replaced chiselling, Latin adopted the boustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE, almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
 
+#### Writing Tools
+
 Initially, the character shapes of the Latin alphabet were mono-lined symbols with no stress and no serifs. This changed during the 1st century CE and the reason for this is mostly technical (Tselentis et al., 2012). The origins of serifs and stroke contrast, for example, are considered to lie in the Roman lapidary practice (i.e. the practice of shaping stone). Letters were painted on stone with a flat stiff brush—not a quill or a reed—and then chiselled into the surface (Friggeri, 2001). Hebrew characters developed stress and stroke contrast only more than a millennium later and convened to horizontal stress (as opposed to Latin vertical stress). The serif-like in-strokes (referred to as tags) in traditional Hebrew lettering, have technological origins, however, different from Latin (Stern, 2003).
+
+#### Stress and Contrast
 
 Many of those conventions were created and altered due to social and technological influences. Among other reasons, the Jewish people were scattered throughout Europe, lived in the Diaspora, and were subject to constant persecution, so they were unable to adapt scribal letterforms to the context of typesetting. This way, the refinements that were made to the Latin script following the invention of the printing press were not applied to Hebrew (Wittner et al., 2018).
 
 > »Everything must change for everything to remain the same.«
 > — Giuseppe Tomasi di Lampedusa, The Leopard, 1960
+
+#### Technological Innovation
 
 The fact that some societies were subjected to the same technological innovations, yet developed different conventions, could be caused by how some minorities adapt while others defend their heritage. Some immigrants hold on to their native culture to retain their identity and do so even more strongly than the people living in their homeland (Kumar & Steenkamp, 2013). A mechanism of self-preservation for the Jewish living in the diaspora surely applied. [note] This may be yet another reason why typographic conventions diverged even though societies lived side by side.
 
@@ -66,6 +76,7 @@ The fact that some societies were subjected to the same technological innovation
 ### Questioning Typographic Convention
 
 Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technological circumstances or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink-shaped tail of the letter ›j‹. But as our society strives for innovation, progress, and adapting to new circumstances, our conventions need to change with us.
+> But as our society strives for innovation, progress, and adapting to new circumstances, our conventions need to change with us.
 
 As previously established, some conventions are of great value today even if their practical origins are obsolete. Some conventions are not, however, and in this spirit, I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate practices. 
 
@@ -89,11 +100,7 @@ Without controversy, without the potential for disagreement, there is no discour
 
 ### People with Opinions
 
-For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible. The more people involved in a conversation, the more likely it is that they will bring with them a variety of perspectives and ideas.
-
-To make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalized because they couldn't participate for lack of access or because they didn't even know there was a platform for this kind of typographic discourse in the first place.
-
-> these two paragraphs need working on...
+For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible. The more people involved in a conversation, the more likely it is that they will bring with them a variety of perspectives and ideas. In other words, the opinions in a discourse are more than the sum of their parts, because they inspire and teach one another and progress the conversation. To make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalized because they couldn't participate for lack of access or because they didn't even know there was a platform for this kind of typographic discourse in the first place.
 
 ### Appropriate Platforms
 
@@ -104,14 +111,14 @@ To make sure that discourse is inclusive and representative, you have to make su
 
 In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is usually language-based communication. In many fields in which discourse is carried out, such as sociology, political science, and anthropology, using language as the basis for communication is most appropriate. 
 
-There are a number of platforms for typographic discourse, analog conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text-based—in fact, they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language. I want to argue that for typography—as for many design disciplines—, language may not be the only appropriate base for discussion. Not be be mistaken, language is indispelsible for discussion, but maybe it does not need to be the basis, the ›red thread‹ of the discourse.
+There are a number of platforms for typographic discourse, analog conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text-based—in fact, they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language. I want to argue that for typography—as for many design disciplines—, language may not be the only appropriate base for discussion. Not to be misunderstood: language is indispensable to discourse, but perhaps it need not be the foundation, the »thread« of discourse, but rather the glue that holds the building blocks, the glyphs, together.
 
 There are several design unrelated platforms like *Reddit* and *Filestage* which host discussions on design. There are also design-dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. *TypeDrawers* and its German equivalent *typografie.info* (since both share many similarities, going forward I will refer to *TypeDrawers* only) are among the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. Some of those platforms are language based (like *Reddit* and *TypeDrawers*) others are image based (like *Dribbble* and *Behance*). None of them are specifically built for discussions around type and make up for the requirements type design critique. What sets type design apart from other creative work is the sheer amount of potential individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. That is why simply uploading screenshots or PDFs of specimen does not do justice to the versatility of type.
 
 ![typedrawers](./documentation/typedrawers.png)
 
 
-Of the mentioned platforms, only one is dedicated to typography: *TypeDrawers*. The fact that its design seems to almost be oblivious to the contents of the forum may be one of its greatest strengths and weaknesses at the same time. It does not force its users into the confines of too specific design, enabling them to use the platform according to their needs. But it also lacks the tools to intuitively and interactively explore the discussions. Hence *TypeDrawers* is—though dedicated to typographic discourse—not an adequate platform for typographic discourse.
+Of the mentioned platforms, only one is dedicated to typography: *TypeDrawers*. The fact that its design seems to almost be oblivious to the contents of the forum may be one of its greatest strengths and weaknesses at the same time. It does not force its users into the confines of too specific design, enabling them to use the platform according to their needs. But it also lacks the tools to intuitively and interactively explore the discussions. Hence *TypeDrawers* is—though dedicated to typographic discourse—not an adequate platform for typographic discourse, because the conversation is a linear thread, spanning pages at times and the only visual reference are static image files that usually sit on the first page.
 
 In terms of discourses around the fundamental direction our society wants to take typography, conferences may be the best format in most instances. However, not always: In a recent phone call with Klaus-Peter Staudinger (June 2022), a longtime member of the *Forum Typografie*, he told me about an experimental project he was working on in the 90s, exploring potential similarities between Kanji, Kana and the Latin script typography. Back then no type foundry would agree to invest time and resources into exploring what is known today as multi-script typography. For projects like his, or like my own, exploring character relationships between the Hebrew and Latin script, that is projects that investigate not only letter shapes for a specific font but rather, cater to rather general ambitions, a tool for discourse around specific letter shapes could be very beneficial.
 
@@ -119,9 +126,22 @@ To enable typographic discourse in ways that do not already exists (and fall sho
 
 ## A Platform for Typographic Discourse
 
-The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
+The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not provide the appropriate environment and tools.
 
 *Character Diversion* can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, *Character Diversion*, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
+
+
+
+
+
+---
+
+=== aya read until here ===
+
+---
+
+
+
 
 ### Concept
 
