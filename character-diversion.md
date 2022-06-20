@@ -8,6 +8,8 @@ In my proposals, I studied potential relationships between Hebrew and Latin char
 
 After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of how letter shapes might look like in the future.
 
+`comment`
+
 My research has shown that the platforms where type designers discuss their work, are not designed specifically for typographic discourse. They are either forums designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz).
 
 By opening up new ways of typographic discourse, this thesis pleas to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
