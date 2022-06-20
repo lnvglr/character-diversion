@@ -6,11 +6,11 @@
 
 In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts those connections exist: ›n‹, ›m‹ and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, refer to my proposal *Cross-Script Character Relationships*.
 
-After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of how letter shapes might look like in the future.
+After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted towards building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of what letter shapes might look like in the future.
 
 My research has shown that the platforms where type designers discuss their work, are not designed specifically for typographic discourse. They are either forums designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz).
 
-By opening up new ways of typographic discourse, this thesis pleas to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently critisized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
+By opening up new ways of typographic discourse, this thesis aims to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently criticized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
 
 > »The more things change, the more they stay the same.«
 >
@@ -24,7 +24,7 @@ I will briefly recount my experiences modifying a number of typefaces according 
 
 ### What are conventions and what are they for?
 
-According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that regulate human conduct«. He consitues that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
+According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that regulate human conduct«. He constitutes that for conventions to develop one of the following three conditions must be met. (1) Conventions are social rules and are followed as a social fact. (2) There are practical reasons for people to follow certain rules. (3) The reason for obeying a conventional norm depends in part on others following it (Marmor, 2009).
 
 > Kulturelle Konventionen wirken sowohl auf subjektiver und intersubjektiver als auch auf struktureller und strukturierender Ebene. Sie sind beteiligt bei Prozessen der Kommunikationsbildung, d.h. der Produktion, Aushandlung und Zuordnung einer Bedeutung zu einem für kulturell gehaltenen Gegenstand, der Textualisierung und Diskursivierung von Kultur, sowie der Regelung der Teilnahme im soziokulturellen Feld.
 >
@@ -32,7 +32,7 @@ According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that 
 
 In the typographic sense this means that some conventions can be explained with practical reasons while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain (**example?**).
 
-The rhythm of ascenders and descenders in Latin script words, gives an often unique silhouette to those words improving their readability (**source**). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant todat.
+The rhythm of ascenders and descenders in Latin script words, gives an often unique silhouette to those words improving their readability (**source**). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant today.
 
 Writing from left to right had practical reasons, too: In its early days, Latin was written from right to left. Eventually the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
 
@@ -44,13 +44,13 @@ Finally, there are conventions of ornamentation, like the drop shaped tail of a 
 
 ### Conventions in Hebrew and Latin Typography
 
-*The coventions of the Latin and the Hebrew script specifically were a major element in the research for my proposal »Cross-Script Character Relationships« and so the following paragraphs will reference a lot of this research.*
+*The conventions of the Latin and the Hebrew script specifically were a major element in the research for my proposal »Cross-Script Character Relationships« and so the following paragraphs will reference a lot of this research.*
 
-The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are alive and well. On their way to the 21st century they took very different paths, however. The two scripts developed distinct structural and typographic conventions. This differenciation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
+The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are alive and well. On their way to the 21st century they took very different paths, however. The two scripts developed distinct structural and typographic conventions. This differentiation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
 
 The Jewish tradition perceived both the Hebrew alphabet as well as the language as sacred. This is one of the reasons for why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
 
-As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendant like Hebrew) written from right to left. As writing replaced chiselling, Latin adopted the baustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
+As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendant like Hebrew) written from right to left. As writing replaced chiseling, Latin adopted the boustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
 
 Initially the character shapes of the Latin alphabet were mono-lined symbols with no stress and no serifs. This changed during the 1st century CE and the reason for this is mostly technical (Tselentis et al., 2012). The origins of serifs and stroke contrast, for example, are considered to lie in the Roman lapidary practice (i.e. the practice of shaping stone). Letters were painted on stone with a flat stiff brush—not a quill or a reed—and then chiseled into the surface (Friggeri, 2001). Hebrew characters developed stress and stroke contrast only more than a millennium later, and convened to a horizontal stress (as opposed to Latin vertical stress). The serif-like in-strokes (referred to as tags) in traditional Hebrew lettering, have technological origins, however different from Latin (Stern, 2003).
 
@@ -63,11 +63,11 @@ The fact that some societies were subjected to the same technological innovation
 
 ### Questioning Typographic Convention
 
-Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technological circumstance or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink shaped tail of the letter ›j‹. But as our society strives for innovation, progress and adapting to new circumstances, our conventions need to change with us.
+Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technological circumstances or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink shaped tail of the letter ›j‹. But as our society strives for innovation, progress and adapting to new circumstances, our conventions need to change with us.
 
-As previously established, some conventions are of great value today even if their practical origins are obsolete. Som conventions are not, however, and in this spirit I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
+As previously established, some conventions are of great value today even if their practical origins are obsolete. Some conventions are not, however, and in this spirit I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
 
-This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and he next chapter deals with what is needed to do so.
+This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and the next chapter deals with what is needed to do so.
 
 ## Enabling Discourse
 
@@ -85,13 +85,13 @@ If discourse is necessary to re-evaluate conventions, how can this discourse be 
 
 In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics are material for controversial discourse. Both orbit around multi script typography, about the possible implications of typographic differences between scripts and how we can alter typographic conventions to bring script closer together.
 
-Without controversy, without the potential to disagreement there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the consequence?**). 
+Without controversy, without the potential for disagreement there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the consequence?**). 
 
 ### People with Opinions
 
 For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible. The more people involved in a conversation, the more likely it is that you'll get a variety of perspectives and ideas. And that's what makes discourse so valuable—it helps us understand one another better by giving us new ways to approach topics we thought we knew all about.
 
-In order to make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalised because they couldn't participate for lack of access or because they didn't even know there was platform for this kind of typographic discourse in the first place.
+In order to make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalized because they couldn't participate for lack of access or because they didn't even know there was a platform for this kind of typographic discourse in the first place.
 
 ### Adequate Platforms
 
@@ -105,11 +105,11 @@ One of the great struggles of user interface design (frankly, of all design), is
 
 ![typedrawers](./documentation/typedrawers.png)
 
-An adequate platform knows its users and knows the topics they discuss and finds a good balance between focussing the tools to what the user predictably seek out to do and leaving room for their particular use of the platform. In this sense, *Character Diversion* will be two things: a standalone platform that is simply very specific and a proof of concept for a potential plugin to already existing platforms missing this kind of discourse functionality. 
+An adequate platform knows its users and knows the topics they discuss and finds a good balance between focussing the tools to what the users predictably seek out to do and leaving room for their particular use of the platform. In this sense, *Character Diversion* will be two things: a standalone platform that is simply very specific and a proof of concept for a potential plugin to already existing platforms missing this kind of discourse functionality. 
 
 As a standalone platform it has been designed specifically for critiquing letterforms and discussing their place in the future development of typography. 
 
-As a plugin, *Character Diversion* could eventually be implemented in a larger typographic forum with a preexisting community, giving it the possibility to upgrade lively type communities with a tool for very specific type discussions.
+As a plugin, *Character Diversion* could eventually be implemented in a larger typographic forum with a pre existing community, giving it the possibility to upgrade lively type communities with a tool for very specific type discussions.
 
 ## A Platform for Typographic Discourse
 
@@ -123,13 +123,13 @@ In this attempt to build a platform that facilitates typographic discourse, I pu
 
 #### Critiquing letterforms
 
-What sets type design apart from other creative work is the sheer amount of potential individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something I kept in mind.
+What sets type design apart from other creative work is the sheer amount of potential individual artifacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something I kept in mind.
 
-There are a number of design unrelated platforms like *Reddit* and *Filestage* that host discussions on design. There are also design dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, are—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs. And although those platforms fall short of being decidedly type design tools, they give insights into how discourses on designerly topics are lead online.
+There are a number of design unrelated platforms like *Reddit* and *Filestage* that host discussions on design. There are also design dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, are—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs. And although those platforms fall short of being decidedly type design tools, they give insights into how discourses on designerly topics are led online.
 
 In general, those platforms offer non-verbal feedback to designs (most commonly liking or upvoting), let people respond to previous comments and share media. Those are three features that could find themselves in *Character Diversion*. Up- and downvoting opinions has already been implemented and responding to opinions is in development.
 
-As for adding media to opinions, as feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: that asking fundamental questions of where we are moving typography as a society.
+As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: that asking fundamental questions of where we are moving typography as a society.
 
 #### Discussing future letterforms
 
@@ -143,15 +143,15 @@ Character Diversion is a platform for typographic discourse. Accordingly, typogr
 
 User experience and interfaces need to communicate clearly what the app does and how to use it.
 
-> [note] It is common practice in Web and UX/UI Design to design *mobile first*. That is to say, design the structure and layout of a platform for the mobile experience first and then adapt to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed of those users *first*. *Character Diversion* was not designed mobile first: it is in fact intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. This is why *Character Diversion* is—for the moment—desktop first.
+> [note] It is common practice in Web and UX/UI Design to design *mobile first*. That is to say, design the structure and layout of a platform for the mobile experience first and then adapt to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed of those users *first*. *Character Diversion* was not designed mobile-first: it is in fact intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. This is why *Character Diversion* is—for the moment—desktop first.
 
 #### Layout
 
 With all this talk about moving away from language based discourse towards a typography based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion, or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
 
-The discourse panel is separated into three views: about the font, glyphs, discourse [note]. All three views have elements linking to another one of the views. The about view shows discourse title, author, font info, version history, and other meta data. The glyphs view shows an overview over the glyphs the respective font contains and the discourse view shows the list of opinions.
+The discourse panel is separated into three views: About, Glyphs, Discourse [note]. All three views have elements linking to another one of the views. The *About view* shows discourse title, author, font info, version history, and other metadata. The *Glyphs view* shows an overview over the glyphs the respective font contains and the *Discourse view* shows the list of opinions.
 
-> [note] Initially, the discourse panel was one view, containing discourse description, opinions and glyphs. And while there is a certain appeal to having all the information at your finger tips, the interface was cluttered and most importantly the user experience was not clear. Filtering glyphs while writing an opinion caused conflicting behaviour when selecting an opinion, which would, again filter the referenced glyphs.
+> [note] Initially, the discourse panel was one view, containing discourse description, opinions and glyphs. And while there is a certain appeal to having all the information at your fingertips, the interface was cluttered and most importantly the user experience was not clear. Filtering glyphs while writing an opinion caused conflicting behavior when selecting an opinion, which would, again, filter the referenced glyphs.
 
 |_title_  | About      | Glyphs | Discourse |
 |---------| ---------- | ------ | --------- |
@@ -162,7 +162,7 @@ In the glyphs view, each glyph that is referenced in an opinion, shows a little 
 
 #### Opinion in Discourse
 
-When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganising the ordering through a voting system? Or would this limit the liveliness of the discourse?
+When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganizing the ordering through a voting system? Or would this limit the liveliness of the discourse?
 
 > »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal to noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
 
@@ -170,7 +170,7 @@ I decided that opinions in fact needed more prominence.
 
 ##### Posting an Opinion
 
-After setting up the discourse project, the first step in actually engaging in discourse, is for people to share their opinions. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achieve that.
+After setting up the discourse project, the first step in actually engaging in discourse is for people to share their opinions. So the implementation of opinions on type design begs the question of what users want to actually do (on top of simply sharing their opinion in written form) and how they would most intuitively try to achieve that.
 
 There are several approaches to this problem:
 
@@ -217,9 +217,9 @@ A core feature of *Character Diversion* is the ability to browse either the glyp
 
 The initial logic was to have the list of opinions on the right and the grid with all the glyphs on the left. Opinions can be selected to expand their content and show meta data like the set variable font axes and the selected glyphs within the opinion card. Selecting the opinion should, however, also bring the referenced group of glyphs with the corresponding markings highlighted and the referenced spectrum or location on the variable font axis to the attention of the user. This means that if a user wanted to say something about the bottom and top intersections of the /$ at value 800 and up on the `wght` axis and they would mark the location of the dollar sign at `800 wght` while writing their opinion, anyone viewing this opinion should be see a large bold (800) dollar sign, with highlighted markings in the appropriate locations.
 
-This functionality alone, is straightforward conceptually and almost just as straight forward in its implementations: the grid of glyphs is either filtered so that only the glyphs corresponding to the selected opinion remain or a new tab or popup is opened where glyphs corresponding to selected opinions are shown.
+This functionality alone, is straightforward conceptually and almost just as straightforward in its implementations: the grid of glyphs is either filtered so that only the glyphs corresponding to the selected opinion remain or a new tab or popup is opened where glyphs corresponding to selected opinions are shown.
 
-When implementing this functionality into the functionality of filtering glyphs, it becomes very complicated, however. Suddenly, there are three places in the app that have an impact on which glyphs are shown: the new opinion form, the selected opinion and the glyphs filter. And when there are several places impacting filtering, logic needs to be implemented as to how those filters interact. Are glyphs shown matching *all* filters, are glyphs show matching at least one filter or do certain filters have higher priority? Splitting the discourse panel into three views rectified this dilemma to some extend.
+When implementing this functionality into the functionality of filtering glyphs, it becomes very complicated, however. Suddenly, there are three places in the app that have an impact on which glyphs are shown: the new opinion form, the selected opinion and the glyphs filter. And when there are several places impacting filtering, logic needs to be implemented as to how those filters interact. Are glyphs shown matching *all* filters, are glyphs shown matching at least one filter or do certain filters have higher priority? Splitting the discourse panel into three views rectified this dilemma to some extent.
 
 ##### Voting and Responding to Opinions and Comments
 
@@ -231,7 +231,7 @@ Today, many social media platforms offer the possibility to react to content in 
 
 By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
 
-One goal of the platform is to create overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
+One goal of the platform is to create an overview. In order to do that, the possibility of a large amount of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
 
 ##### How are threads treated?
 
@@ -259,13 +259,13 @@ Another form of visually referencing what a user is critiquing, is marking eleme
 
 #### Image detection
 
-The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have not font files or the licensing disallows the upload of font files. Currently, those discourse are held by uploading imagery and even drawings of letterforms.
+The current design of the platform requires users to upload font files in order to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
 
-A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to wide range of use cases.
+A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to a wide range of use cases.
 
 #### Multiple Fonts and Font Instances
 
-As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the meta data of an opinion referenced glyphs and spectra on variable font axes are already denoted, adding the font instance as an extra data point will be straight forward.
+As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, adding the font instance as an extra data point will be straight forward.
 
 
 #### Versioning
@@ -280,11 +280,11 @@ Due to its complex implementation, this feature may, however, be developed in th
 
 Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android etc. which you would download onto your device, while a web based app is basically a website that behaves almost like native app.
 
-This means that *Character Diversion* is build with HTML, CSS, and JavaScript. More specifically, I used the open source JavaScript framework Vue.js (writing TypeScript and implemented with Nuxt.js) to build the front end application and the headless open source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction and the ability to install *Character Diversion* as a PWA (progressive web app).
+This means that *Character Diversion* is built with HTML, CSS, and JavaScript. More specifically, I used the open source JavaScript framework Vue.js (writing TypeScript and implemented with Nuxt.js) to build the front end application and the headless open source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction and the ability to install *Character Diversion* as a PWA (progressive web app).
 
 ##### JavaScript / TypeScript
 
-*Character Diversion* is written in TypeScript, a strongly typed programming language that compiles to JavaScript. There is a lot that can be said about TypeScript—relevant to this paper is that it enables developers to define data structures called `interface` and with this the code editor (IDE) can give the developers access to those structures in the development process. This makes development faster and helps prevent (type related) bugs before they occur in a production site or app. Writing the code in TypeScript also helped me understand how discourse, opinions and smaller data object need to be structured and referenced. I will illustrate the structure of discourses and opinions in the same way they are defined in the code base [note].
+*Character Diversion* is written in TypeScript, a strongly typed programming language that compiles to JavaScript. There is a lot that can be said about TypeScript—relevant to this paper is that it enables developers to define data structures called `interface` and with this the code editor (IDE) can give the developers access to those structures in the development process. This makes development faster and helps prevent (type related) bugs before they occur in a production site or app. Writing the code in TypeScript also helped me understand how discourse, opinions and smaller data objects need to be structured and referenced. I will illustrate the structure of discourses and opinions in the same way they are defined in the code base [note].
 
 > [note] Some basic knowledge of JavaScript and programming paradigms may be necessary to understand this.
 
@@ -373,9 +373,9 @@ export interface Annotation {
 
 ##### Component Based Approach
 
-For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript), this is a paradigm in software engineering called separation of concern (Hürsch & Lopes, 1995). HTML files contain content and structure of the site, CSS files deal with presentation, that is, the styling and JavaScript files are responsible for behaviour.
+For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript), this is a paradigm in software engineering called separation of concern (Hürsch & Lopes, 1995). HTML files contain content and structure of the site, CSS files deal with presentation, that is, the styling and JavaScript files are responsible for behavior.
 
-In recent years there has been a paradigm shift, however, towards a component based approach. Concerns are are not separated by files, but by component. A component is a small unit of all the markup, styles and behaviour that relates to this specific component.
+In recent years there has been a paradigm shift, however, towards a component based approach. Concerns are not separated by files, but by components. A component is a small unit of all the markup, styles and behavior that relates to this specific component.
 
 Like many JavaScript frameworks, Vue.js uses a component based approach to front end development. 
 
@@ -405,7 +405,7 @@ A component is usually a generic shell which accepts data (called props) that wi
 
 One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form cells which make up organisms and species. This natural science analogy to the structuring of components goes back to Brad Frost, a web designer and speaker. 
 
-Hannah Heinson (2022) adapted Frost's original structure of Atoms, Molecules, Organisms, Template and Pages, to a more coherent hierarchy.
+Hannah Heinson (2022) adapted Frost's original structure of Atoms, Molecules, Organisms, Templates and Pages, to a more coherent hierarchy.
 
 | UI Unit    | Scientific Category | Example                                                      |
 | ---------- | -------------------------------- | ------------------------------------------------------------ |
@@ -427,7 +427,7 @@ When starting this project, I set up a *GitHub* repository named `lnvglr/charact
 
 For this project I used the repository to track my changes and to have the ability to go back in time and see my progress as well as making the project open source.
 
-When *Character Diversion* started taking shape, I used a platform that would allow for me to deploy the code and to make it accessible to the public. *Heroku* offers Node.js hosting, so I deployed both my Straps backend and my Nuxt.js frontend on *Heroku*.
+When *Character Diversion* started taking shape, I used a platform that would allow me to deploy the code and to make it accessible to the public. *Heroku* offers Node.js hosting, so I deployed both my Straps backend and my Nuxt.js frontend on *Heroku*.
 
 ## Case Studies
 
@@ -445,7 +445,7 @@ Having two types of character relationships meant I would need two axes in the v
 
 > [1] Psiah is what the tail of the Hebrew letter tav is referred to.
 
-> [2] Variable fonts can contain more axes than anyone would (probably) ever need (up to 64K). The axes have 4-character tags that are used to set their CSS values. There are five registered axes, their tag is, by convention, written in lowercase letters, while the tags of custom axes are written in all caps.
+> [2] Variable fonts can contain more axes than anyone would (probably) ever need (up to 64K). The axes have 4-character tags that are used to set their CSS values. There are five registered axes; their tag is, by convention, written in lowercase letters, while the tags of custom axes are written in all caps.
 
 **Registered axes**
 
@@ -457,7 +457,7 @@ Having two types of character relationships meant I would need two axes in the v
 | Optical Size | `opsz` |
 | Italics      | `ital` |
 
-I made a copy of the bold weight font file of Fedra and opened it in the font editing software *Glyphs*. Since the two axes Psiah and Shoulder do not apply to all characters, I did not set up regular master layers. Instead I used Virtual Masters which are masters that can be applied to selected glyphs. This meant that depending on whether a certain character was affected by both axes, one axis or no axis had an impact on how many masters this particular character would have. While the Latin letter ›j‹ was only affected by the Psiah axis resulting in two master for two extremes, the Hebrew letter tav (›ת‹) was affected by both axes, resulting in four masters for all possible combination of extremes.
+I made a copy of the bold weight font file of Fedra and opened it in the font editing software *Glyphs*. Since the two axes Psiah and Shoulder do not apply to all characters, I did not set up regular master layers. Instead I used Virtual Masters which are masters that can be applied to selected glyphs. This meant that depending on whether a certain character was affected by both axes, one axis or no axis had an impact on how many masters this particular character would have. While the Latin letter ›j‹ was only affected by the Psiah axis resulting in two masters for two extremes, the Hebrew letter tav (›ת‹) was affected by both axes, resulting in four masters for all possible combinations of extremes.
 
 <img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/resources/Screenshot 2022-06-14 at 20.20.33.png" alt="Screenshot 2022-06-14 at 20.20.33" style="zoom:10%;" />
 
@@ -465,7 +465,7 @@ I made a copy of the bold weight font file of Fedra and opened it in the font ed
 
 
 
-As can be seen in figure (**x** and **y**), the linked character fragments do not share the same exact component. In fact, the proportions of the fragment are quite different—and for good reason. With the modification of *Fedra*, I did not change the entire set of glyphs and so I needed to stick to the stress angle of each script. It is for the Hebrew letters a horizontal stress and for the Latin letters a vertical stress. This meant that the Psiah of the Hebrew Tav (›ת‹) is narrower and has a thicker ›foot‹ than the corresponding Latin letter ›t‹.
+As can be seen in figure (**x** and **y**), the linked character fragments do not share the same exact component. In fact, the proportions of the fragment are quite different—and for good reason. With the modification of *Fedra*, I did not change the entire set of glyphs and so I needed to stick to the stress angle of each script. It is for the Hebrew letters a horizontal stress and for the Latin letters a vertical stress. This means that the Psiah of the Hebrew Tav (›ת‹) is narrower and has a thicker ›foot‹ than the corresponding Latin letter ›t‹.
 
 At the core of the modifications lies the idea that those newly established character relationships could potentially become conventional, meaning a certain level of predictability is involved. Multi script typefaces with character sets of both Hebrew and Latin script would predictably treat inter-script character groups similarly. The Latin ›j‹ and the Hebrew Tav (›ת‹) would consistently behave similarly. The Tav could look more like the original Jay or the Jay could tend more towards the original Tav—either way, both would look as though there is some inherent connection.
 
@@ -490,11 +490,14 @@ This experience was another bit, which inspired me to work on this project. The 
 
 ### Shortcomings
 
-In the process of developing *Character Diversion*, I also discovered several shortcomings.
+In the process of developing *Character Diversion* I also discovered several shortcomings.
 
 1. Its limitation to font files as typographic reference
 2. specificity to one kind of discourse
 
-It lies in the nature of things, that specificity and specialisation enables users to do one thing very well. 
+It lies in the nature of things, that specificity and specialization enables users to do one thing very well. 
 
 ### Conclusion
+
+
+
