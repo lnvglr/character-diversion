@@ -276,11 +276,25 @@ Due to its complex implementation, this feature may, however, be developed in th
 
 ### Architecture & Deployment
 
-The app is divided into three main areas represented by links in the main navigation of the platform: Home, Discover and Profile.
+#### Structuring Opinions
 
-#### Information Structure
+??? A major question to overcome was the structure of opinions and how to design the interface.
 
-*Character Diversion* is written in TypeScript, a strongly typed programming language that builds on JavaScript. It is a language that helps developers build their projects and spot bugs before their occur in a production site or app. There is a lot that can be said about TypeScript—relevant to this paper is that it enables the developer to define data object structures and peek at those structures in the development process. It also helped me understand how discourse and opinions need to be structured and references. I will illustrate the structure of discourses and opinions in the same way their are defined in the project.
+> Maybe remove this
+
+#### Underlying Technology
+
+Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android etc. which you would download onto your device, while a web based app is basically a website that behaves almost like native app.
+
+This means that *Character Diversion* is build with HTML, CSS, and JavaScript. More specifically, I used the open source JavaScript framework Vue.js (writing TypeScript and implemented with Nuxt.js) to build the front end application and the headless open source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction and the ability to install *Character Diversion* as a PWA (progressive web app).
+
+##### JavaScript / TypeScript
+
+*Character Diversion* is written in TypeScript, a strongly typed programming language that compiles to JavaScript. There is a lot that can be said about TypeScript—relevant to this paper is that it enables developers to define data structures called `interface` and with this the code editor (IDE) can give the developers access to those structures in the development process. This makes development faster and helps prevent (type related) bugs before they occur in a production site or app. Writing the code in TypeScript also helped me understand how discourse, opinions and smaller data object need to be structured and referenced. I will illustrate the structure of discourses and opinions in the same way they are defined in the code base [note].
+
+> [note] Some basic knowledge of JavaScript and programming paradigms may be necessary to understand this.
+
+>@Aya: do you think I need to explain what `export` means and the curly braces (`{}`) and so on?
 
 ```typescript
 export interface Discourse {
@@ -298,7 +312,11 @@ export interface Discourse {
 }
 ```
 
-While lowercase types like `number` or `string` are primitives, types with an uppercase starting character like `Discourse` or `Opinion` are interfaces referencing an object type. Empty brackets after a type (`[]`), signify an array of the type. In the `Discourse` interface, `opinions` is typed with `Opinion[]` referencing the `Opinion` interface. A question mark after the key (`?`) makes this key optional to an interface (TypeScript Documentation, 2022). 
+This structure exports the Discourse interface. The curly braces (`{}`) signify an object in TypeScript, so the code lines between the curly braces are members of this object. The word before a colon is a key and the word after a colon is the type of this key. While lowercase types like `number` or `string` are primitives, types with an uppercase starting character like `Discourse` or `Opinion` are interfaces referencing an object type. Object types can be nested: the Discourse interface is an object, and `attributes` is an object in the Discourse object. Empty brackets after a type (`[]`), signify an array of the type, arrays like lists of data [note]. In the `Discourse` interface, `opinions` is typed with `Opinion[]` referencing an array of the `Opinion` interface. A question mark after the key (`?`) makes this key optional to an interface (TypeScript Documentation, 2022).
+
+> [note] In fact, in JavaScript, arrays are objects, with the keys of that object being enumerated integers starting at 0.
+
+Sometimes, the keys in objects are dynamic, like the keys in `annotations`. This means that `annotations` is an object with a variable amount of keys representing glyph ids, referencing a certain object of type `Annotation`.
 
 ```typescript
 export interface Opinion {
@@ -355,23 +373,19 @@ export interface Annotation {
 
 
 
-#### Structuring Opinions
+```js
 
-A major question to overcome was the structure of opinions and how to design the interface.
-
-#### Underlying Technology
-
-Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android etc. which you would download onto your device, while a web based app is basically a website that behaves almost like native app. Building a web app requires you to build only one (1) app, whereas when designing natively you may end up developing several apps for each platform (i.e. iOS, Android etc.). (doppelt)
-
-This means that *Character Diversion* is build with HTML, CSS, and JavaScript. More specifically, I used the open source JavaScript framework Vue.js (writing TypeScript and implemented with Nuxt.js) to build the front end application and the headless open source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction and the ability to install *Character Diversion* as a PWA (progressive web app).
+```
 
 ##### Component Based Approach
 
-For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript) (**source**). All styles would be written in a large CSS file and the same would be done with JavaScript. 
+For the longest time, it was common practice in web development to separate markup (HTML), styling (CSS) and functionality (JavaScript), this is a paradigm in software engineering called separation of concern (Hürsch & Lopes, 1995). HTML files contain content and structure of the site, CSS files deal with presentation, that is, the styling and JavaScript files are responsible for behaviour.
 
-In recent years there has been a paradigm shift, however, towards a component based approach. In this approach, a website or an app would be divided into smaller elements and then the markup, styles and functionality for each element would be stored in a separate file. Like many JavaScript frameworks, Vue.js uses a component based approach to front end development. 
+In recent years there has been a paradigm shift, however, towards a component based approach. Concerns are are not separated by files, but by component. A component is a small unit of all the markup, styles and behaviour that relates to this specific component.
 
-A component is usually a generic shell which accepts data that will populate this shell.
+Like many JavaScript frameworks, Vue.js uses a component based approach to front end development. 
+
+A component is usually a generic shell which accepts data (called props) that will populate this shell. A button component may accept the props label and color. When using this custom button component, only those props are passed to the component and the styling is applied from within the component.
 
 ```vue
 // CustomButton.vue
@@ -395,9 +409,19 @@ A component is usually a generic shell which accepts data that will populate thi
 </template>
 ```
 
+One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form cells which make up organisms and species. This natural science analogy to the structuring of components goes back to Brad Frost, a web designer and speaker. 
 
+Hannah Heinson (2022) adapted Frost's original structure of Atoms, Molecules, Organisms, Template and Pages, to a more coherent hierarchy.
 
-One particularly appealing concept is the atomic design system. It is constructed from atoms, which form molecules, which in turn form organisms which live in templates and pages. In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
+| UI Unit    | Scientific Category | Example                                                      |
+| ---------- | -------------------------------- | ------------------------------------------------------------ |
+| Token      | Atoms                            | Borders, Breakpoints, Colors, Grids, Motion, Opacity, Shadows, Spacing, Text |
+| Components | Molecules | Inputs (radio, text field, checkbox), Form labels, Error text Dividers, Lists, Icons, Badges, Tooltips |
+| Patterns   | Cells | Form fields, Alerts, Product tiles, Menus, Time/date pickers, User comments, Breadcrumbs |
+| Blocks     | Organisms | Forms, Carousels, Banners, Header, Footer, Upload modal |
+| Templates  | Species | Landing pages, Product listing page, Product detail page, Article page, Event page |
+
+In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://miro.medium.com/max/1400/1*t4UpVgWW-_YLpRZd4wmdSg.jpeg)
 
@@ -468,15 +492,12 @@ This experience was another bit, which inspired me to work on this project. The 
 
 ## Outlook
 
-The working prototype has shown one thing. The interface 
-
 ### Shortcomings
 
-In the process of developing *Character Diversion*, I also discovered its many shortcomings.
+In the process of developing *Character Diversion*, I also discovered several shortcomings.
 
-1. specificity to one kind of discourse
-2. Its limitation to font files as typographic reference
-3. 
+1. Its limitation to font files as typographic reference
+2. specificity to one kind of discourse
 
 It lies in the nature of things, that specificity and specialisation enables users to do one thing very well. 
 
