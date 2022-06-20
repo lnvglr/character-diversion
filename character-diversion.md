@@ -146,6 +146,10 @@ The world of typography lives on discussion and debate. Designers speak about ty
 ### Concept
 
 1. Create a very specific platform 
+1. Scenarios
+1. how its helping situations
+1. whats the potential
+1. elaborate on the parts there are
 
 
 
@@ -157,7 +161,9 @@ As for adding media to opinions, a feature that is not yet implemented, I am con
 
 Since ample platforms exist that facilitate general discourse, my goal is to enable discourse specifically around lettershapes. An adequate platform would hence put characters at the center of its design.
 
+### User Flow
 
+![flow](/Users/Leon/Sites/character-diversion-mono/documentation/flow.png)
 
 ### User Interface
 
@@ -269,35 +275,13 @@ Threads are sub-conversations that can evolve below a comment. They can be very 
 
 A question that came up was whether to consider comments below opinions as another kind of data or to treat comments like opinions that are linked to other opinions.
 
-
-
 #### Glyphs
 
 One component of the UI that is tighly linked with opinions, are the glyphs. 
 
-
-### Functional Features
-
-#### Marking Elements in Glyphs
+##### Marking Elements in Glyphs
 
 Another form of visually referencing what a user is critiquing is marking elements in a glyph and linking them to a particular opinion. A glyph can have multiple marks that are all linked to their corresponding opinion.
-
-#### Image detection
-
-The current design of the platform requires users to upload font files to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
-
-A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to a wide range of use cases.
-
-#### Multiple Fonts and Font Instances
-
-As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, so adding the font instance as an extra data point will be straightforward.
-
-
-#### Versioning
-
-When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
-
-Due to its complex implementation, this feature may, however, be developed in the future.
 
 ### Architecture & Deployment
 
@@ -525,6 +509,25 @@ In the process of developing *Character Diversion* I also discovered several sho
 It lies in the nature of things, that specificity and specialization enable users to do one thing very well. 
 
 One of the great struggles of user interface design (frankly, of all design), is finding a good balance  in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
+
+#### Future Features
+
+##### Image detection
+
+The current design of the platform requires users to upload font files to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
+
+A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to a wide range of use cases.
+
+##### Multiple Fonts and Font Instances
+
+As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, so adding the font instance as an extra data point will be straightforward.
+
+
+##### Versioning
+
+When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
+
+Due to its complex implementation, this feature may, however, be developed in the future.
 
 ### Conclusion
 
