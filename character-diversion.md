@@ -4,13 +4,13 @@
 
 ## Introduction
 
-In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts, those connections exist: ›n‹, ›m‹, and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, refer to my proposal *Cross-Script Character Relationships*.
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts, those kind of connections exist: ›n‹, ›m‹, and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, refer to my proposal *Cross-Script Character Relationships*.
 
-After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted toward building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use the platform and make it their own, discuss their own type projects and ideas of what letter shapes might look like in the future.
+After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted toward building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use this platform and make it their own, discuss their own type projects and ideas of what letter shapes might look like in the future.
 
-My research has shown that the platforms where type designers discuss their work are not designed specifically for typographic discourse. They are either forums that are designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz).
+After some research of which platform for typographic thought exchange already exist I found that those platform where type designers discuss their work are not designed specifically for typographic discourse. They are either forums that are designed for general discourse with typography being the core topic (e.g. typedrawers.com) or platforms designed for typography but not for discourse (e.g. futurefonts.xyz). With those shortcomings in current platforms typographic discourse, I started working on the concept for a platfrom tackling those deficiencies.
 
-By opening up new ways of typographic discourse, this thesis aims to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. Discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently criticized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
+By opening up new ways of typographic discourse, this thesis aims to challenge typographic conventions. It is not intended to suggest that the conventions we adhere to must all be thrown overboard. In fact, discourse may also reinforce conventions: There is a good chance that my proposal to establish new conventional character relationships between Hebrew and Latin will be vehemently criticized and rejected. And if, as Foucault puts it, the »will to truth« (1971, p.10) succeeds through the platform I am creating, all is won.
 
 > »The more things change, the more they stay the same.«
 >
@@ -33,15 +33,15 @@ According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that 
 
 In the typographic sense this means that some conventions can be explained with practical reasons while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain (**example?**).
 
-The rhythm of ascenders and descenders in Latin script words gives an often unique silhouette to those words improving their readability (**source**). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant today.
+The rhythm of ascenders and descenders in Latin script words gives an often unique silhouette to those words improving their readability (Mandel, 1993). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant today.
 
-Writing from left to right had practical reasons, too: In its early days, Latin was written from right to left. Eventually, the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right-handed and using ink for writing, the right hand moving left would smear the ink (**source**). Today, where most text is written on a keyboard (**source**), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
+Researchers are not sure as to why certain scripts have settled into the writing direction they did. There are theories, however: as for the Latin script, writing from left to right may have had practical reasons: In its early days, Latin was written from right to left. Eventually, the theory goes, the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right-handed and using ink for writing, the right hand moving left would smear the ink. It must be noted, however, that there is no real evidence to support this theory. Today, where most text is written on a keyboard (Chemin, 2014), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg" alt="Cippus Perusinus" style="zoom:15%;" />
 
 [caption: Cippus Perusinus]
 
-Finally, there are conventions of ornamentation, like the drop-shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason, and breaking them would not cause chaos to the western world—they are because they have grown to be and just as they have come, they have the ability to go if a critical mass chooses to. 
+Finally, there are conventions of ornamentation, like the drop-shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason, and breaking them would not cause chaos to the western world—they are because they have grown to be and just as they have come, they have the ability to go if a critical mass wants them to. 
 
 ### Conventions in Hebrew and Latin Typography
 
@@ -497,6 +497,5 @@ In the process of developing *Character Diversion* I also discovered several sho
 It lies in the nature of things, that specificity and specialization enable users to do one thing very well. 
 
 ### Conclusion
-
 
 
