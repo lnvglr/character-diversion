@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts, those kind of connections exist: ›n‹, ›m‹, and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, refer to my proposal *Cross-Script Character Relationships*.
+In my proposals, I studied potential relationships between Hebrew and Latin characters. More specifically, I looked at character connections between the Hebrew and Latin script. Within the boundaries of both scripts, those kinds of connections exist: ›n‹, ›m‹, and ›h‹ are structurally linked in the Latin script. And so I sought to find out whether characters or character fragments of both Hebrew and Latin are linked or can be linked. I discovered that while certain character groups bear the potential for new relationships, the modification of century-old letterforms and typographic conventions could be quite controversial. To read all about this process, refer to my proposal *Cross-Script Character Relationships*.
 
 After submitting my proposals, I initially looked for the right medium to showcase my considerations. My thought was to create an interactive webpage where the potential character relationships could be presented. My focus soon shifted toward building a proper platform where I could showcase my considerations, but also enable others to respond to those considerations. This way, I thought, others might use this platform and make it their own, discuss their own type projects and ideas of what letter shapes might look like in the future.
 
@@ -37,9 +37,8 @@ The rhythm of ascenders and descenders in Latin script words gives an often uniq
 
 Researchers are not sure as to why certain scripts have settled into the writing direction they did. There are theories, however: as for the Latin script, writing from left to right may have had practical reasons: In its early days, Latin was written from right to left. Eventually, the theory goes, the Romans adopted left-to-right writing direction among other reasons because with a majority of the population being right-handed and using ink for writing, the right hand moving left would smear the ink. It must be noted, however, that there is no real evidence to support this theory. Today, where most text is written on a keyboard (Chemin, 2014), this may not be an issue anymore, but because a critical mass has adopted writing the Latin script from left to right (i.e. 100%), changing this convention would be practically impossible.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg" alt="Cippus Perusinus" style="zoom:15%;" />
+![Cippus Perusinus](https://upload.wikimedia.org/wikipedia/commons/4/4f/Cippo_perugino_con_iscrizione_in_lingua_etrusca.jpg)
 
-[caption: Cippus Perusinus]
 
 Finally, there are conventions of ornamentation, like the drop-shaped tail of a Latin small letter ›y‹ or ›j‹. And while we got used to seeing those ornaments in serif typefaces, they are conventions that serve no practical reason, and breaking them would not cause chaos to the western world—they are because they have grown to be and just as they have come, they have the ability to go if a critical mass wants them to. 
 
@@ -78,8 +77,6 @@ If discourse is necessary to re-evaluate conventions, how can this discourse be 
 
 ![discourse-diagram](/Users/Leon/Sites/character-diversion-mono/documentation/discourse-diagram.png)
 
-[venn diagram]
-
 > »Der Begriff ›Innovation‹ richtet sich [...] auf die Wirkung einer Neuerung auf ein entsprechendes System, eine Struktur, eine *diskursive* Formation oder ein soziokulturelles Feld.«
 >
 > — Büscher-Ulbrich, Kadelbach, Kindermann (HG.)
@@ -92,57 +89,55 @@ Without controversy, without the potential for disagreement, there is no discour
 
 ### People with Opinions
 
-For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible. The more people involved in a conversation, the more likely it is that you'll get a variety of perspectives and ideas. And that's what makes discourse so valuable—it helps us understand one another better by giving us new ways to approach topics we thought we knew all about.
+For discourse to live, it needs participants who bring with them diverse opinions. This is why a platform for typographic discourse needs to be accessible. The more people involved in a conversation, the more likely it is that they will bring with them a variety of perspectives and ideas.
 
 To make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalized because they couldn't participate for lack of access or because they didn't even know there was a platform for this kind of typographic discourse in the first place.
 
-### Adequate Platforms
+> these two paragraphs need working on...
+
+### Appropriate Platforms
 
 > »[Platforms are] things which raise us up higher than we could stand on our own.«
 >
 > — Umair Haque, 2016
 
-In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is language-based communication. In many fields in which discourse is carried out, such as sociology, political science, and anthropology, using language as the basis for communication seems quite adequate. And although typography is tightly linked with language, I have come to question whether discourse around typography should be *based* on language.
 
-There are a number of platforms for typographic discourse, analog conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text-based—in fact, they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language.
+In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is usually language-based communication. In many fields in which discourse is carried out, such as sociology, political science, and anthropology, using language as the basis for communication is most appropriate. 
 
-One of the great struggles of user interface design (frankly, of all design), is finding the balance between on the one hand predicting the user's needs, making smart decisions for them, and consequently decluttering the interface, and on the other hand, giving them the feeling of agency and enabling them to accomplish their specific goals.
+There are a number of platforms for typographic discourse, analog conferences as well as digital forums, that have language as the basis of their discussions. That is not to say, that those formats are purely text-based—in fact, they are usually supplemented with imagery and specimen PDFs, but the exchange is based on language. I want to argue that for typography—as for many design disciplines—, language may not be the only appropriate base for discussion. Not be be mistaken, language is indispelsible for discussion, but maybe it does not need to be the basis, the ›red thread‹ of the discourse.
 
-*TypeDrawers* is one of the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. The fact that the design of the platform *TypeDrawers* seems to almost be oblivious to its content may be one of its greatest strengths and its weaknesses. While it does not force its users into the confines of too specific design, enabling them to use the platform according to their needs, the platform also lacks the tools to intuitively and interactively explore the discussions.
+There are several design unrelated platforms like *Reddit* and *Filestage* which host discussions on design. There are also design-dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. *TypeDrawers* and its German equivalent *typografie.info* (since both share many similarities, going forward I will refer to *TypeDrawers* only) are among the most popular typography forums, spanning topics on Font Technology, History of Typography, and Type Design Critique. Some of those platforms are language based (like *Reddit* and *TypeDrawers*) others are image based (like *Dribbble* and *Behance*). None of them are specifically built for discussions around type and make up for the requirements type design critique. What sets type design apart from other creative work is the sheer amount of potential individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. That is why simply uploading screenshots or PDFs of specimen does not do justice to the versatility of type.
 
 ![typedrawers](./documentation/typedrawers.png)
 
-An adequate platform knows its users and it is aware of the topics they discuss and finds a good balance between focussing the tools on what the users predictably seek out to do and leaving room for their particular use of the platform. In this sense, *Character Diversion* will be two things: a standalone platform that is simply very specific and a proof of concept for a potential plugin to already existing platforms missing this kind of discourse functionality. 
 
-As a standalone platform, it has been designed specifically for critiquing letterforms and discussing their place in the future development of typography. 
+Of the mentioned platforms, only one is dedicated to typography: *TypeDrawers*. The fact that its design seems to almost be oblivious to the contents of the forum may be one of its greatest strengths and weaknesses at the same time. It does not force its users into the confines of too specific design, enabling them to use the platform according to their needs. But it also lacks the tools to intuitively and interactively explore the discussions. Hence *TypeDrawers* is—though dedicated to typographic discourse—not an adequate platform for typographic discourse.
 
-As a plugin, *Character Diversion* could eventually be implemented in a larger typographic forum with a pre-existing community, giving it the possibility to upgrade lively type communities with a tool for very specific type discussions.
+In terms of discourses around the fundamental direction our society wants to take typography, conferences may be the best format in most instances. However, not always: In a recent phone call with Klaus-Peter Staudinger (June 2022), a longtime member of the *Forum Typografie*, he told me about an experimental project he was working on in the 90s, exploring potential similarities between Kanji, Kana and the Latin script typography. Back then no type foundry would agree to invest time and resources into exploring what is known today as multi-script typography. For projects like his, or like my own, exploring character relationships between the Hebrew and Latin script, that is projects that investigate not only letter shapes for a specific font but rather, cater to rather general ambitions, a tool for discourse around specific letter shapes could be very beneficial.
+
+To enable typographic discourse in ways that do not already exists (and fall short of some of its needs), the platform must facilitate discourse that is not only language based. 
 
 ## A Platform for Typographic Discourse
 
 The world of typography lives on discussion and debate. Designers speak about fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
 
-_Character Diversion_ can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, _Character Diversion_, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
+*Character Diversion* can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, *Character Diversion*, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
 
 ### Concept
 
-In this attempt to build a platform that facilitates typographic discourse, I put my attention to what this discourse needs and what existing platforms are missing. To achieve this, I distinguish between two kinds of discourse: (1) type design critique and (2) fundamental questions about where we want to take typography as a society going forward.
+Since ample platforms exist that facilitate general discourse, my goal is to enable discourse specifically around lettershapes. An adequate platform would hence put characters at the center of its design.
 
-#### Critiquing letterforms
+One of the great struggles of user interface design (frankly, of all design), is finding a good balance  in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
 
-What sets type design apart from other creative work is the sheer amount of potential individual artefacts, a variety that is augmented with the seemingly endless shapes variable fonts interpolate. So when I researched platforms that focus on discussions and feedback to type, this unique property was something I kept in mind.
+--
 
-There are several design unrelated platforms like *Reddit* and *Filestage* which host discussions on design. There are also design-dedicated platforms for sharing ideas and responding with feedback like *Dribbble* and *Behance*. None of them are specifically built for discussions around type. The aforementioned forum for typeface design, lettering, and typography *TypeDrawers* or its German equivalent *typografie.info*, is—though dedicated to typographic discourse—lacking dedicated tools for critiquing glyphs. And although those platforms fall short of being decidedly typeface design tools, they give insights into how discourses on designerly topics are led online.
+**learning from the competition**
+
+And although those platforms fall short of being decidedly typeface design tools, they give insights into how discourses on designerly topics are led online.
 
 In general, those platforms offer non-verbal feedback to designs (most commonly liking or upvoting), let people respond to previous comments, and share media. Those are three features that could find themselves in *Character Diversion*. Up- and downvoting opinions has already been implemented and responding to opinions is in development.
 
 As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: asking fundamental questions about where we are moving typography as a society.
-
-#### Discussing future letterforms
-
-In terms of discourses around the fundamental direction our society wants to take typography, conferences may be the best format in most instances. Not necessarily for all, however: In a recent phone call with Klaus-Peter Staudinger (June 2022), a longtime member of the *Forum Typografie*, he told me about an experimental project he was working on in the 90s, exploring potential similarities between Kanji, Kana and the Latin script typography. Back then no type foundry would agree to invest time and resources into exploring what is known today as multi-script typography. 
-
-For projects like his, or like my own, exploring character relationships between the Hebrew and Latin script, that is projects that investigate not only letter shapes for a specific font but rather, cater to rather general ambitions, a tool for discourse around specific letter shapes could be very beneficial.
 
 ### User Interface
 
@@ -493,6 +488,8 @@ This experience was another bit, which inspired me to work on this project. The 
 
 ## Outlook
 
+*Character Diversion* has the potential to be two things: a standalone app with a very specific use case on the one hand and a proof of concept for a specific functionality on the other. A proof of concept that could be plugged in to already existing platforms which are missing this kind of discourse functionality.
+
 ### Shortcomings
 
 In the process of developing *Character Diversion* I also discovered several shortcomings.
@@ -503,5 +500,4 @@ In the process of developing *Character Diversion* I also discovered several sho
 It lies in the nature of things, that specificity and specialization enable users to do one thing very well. 
 
 ### Conclusion
-
 
