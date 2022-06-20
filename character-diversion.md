@@ -276,12 +276,6 @@ Due to its complex implementation, this feature may, however, be developed in th
 
 ### Architecture & Deployment
 
-#### Structuring Opinions
-
-??? A major question to overcome was the structure of opinions and how to design the interface.
-
-> Maybe remove this
-
 #### Underlying Technology
 
 Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android etc. which you would download onto your device, while a web based app is basically a website that behaves almost like native app.
@@ -424,6 +418,8 @@ Hannah Heinson (2022) adapted Frost's original structure of Atoms, Molecules, Or
 In a UI context a button and a text input field can be understood as atoms and when put together to a search field they become a molecule. This molecule of a search field can be embedded into the organism of a header, side-by-side with a logo atom and a main-menu molecule. This organism of a header can live in a template or a page.
 
 ![atomic-design-stages](https://miro.medium.com/max/1400/1*t4UpVgWW-_YLpRZd4wmdSg.jpeg)
+
+
 
 #### Deployment
 
