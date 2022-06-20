@@ -45,11 +45,11 @@ Finally, there are conventions of ornamentation, like the drop-shaped tail of a 
 
 ### Conventions in Hebrew and Latin Typography
 
-*The conventions of the Latin and the Hebrew script specifically were a major element in the research for my proposal »Cross-Script Character Relationships«so the following paragraphs will reference a lot of this research.*
+*The conventions of the Latin and the Hebrew script specifically were a major element in the research for my proposal »Cross-Script Character Relationships« so the following paragraphs will reference findings from this research.*
 
 The Latin and the Hebrew script both have their origins in the Phoenician script and while the Phoenician script is not used anymore, both Latin and Hebrew are alive and well. On their way to the 21st century, they took very different paths, however. The two scripts developed distinct structural and typographic conventions. This differentiation began before typography itself was born as a consequence of the invention of the printing press in 1450 (Gunaratne, 2001).
 
-The Jewish tradition perceived both the Hebrew alphabet as well as the language as sacred. This is one of the reasons why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
+The Jewish tradition perceived both the Hebrew alphabet as well as the language itself as sacred. This is one of the reasons why in the second century BCE Hebrew started being used mostly as a liturgical and literary language (Britannica, 2021), while Latin spread with the expansion of the Roman Empire (**source**). 
 
 As previously mentioned, Latin used to be (like Greek and Etruscan and other Phoenecian descendants like Hebrew) written from right to left. As writing replaced chiselling, Latin adopted the boustrophedon style which meant it could be written both from left to right and from right to left. After the first century BCE, almost all Latin inscriptions were written from left to right (Shores, 1965). Hebrew did not undergo this change in convention and remains written right to left, to this day.
 
@@ -60,21 +60,23 @@ Many of those conventions were created and altered due to social and technologic
 > »Everything must change for everything to remain the same.«
 > — Giuseppe Tomasi di Lampedusa, The Leopard, 1960
 
-The fact that some societies were subjected to the same technological innovations, yet developed different conventions, could be caused by how some minorities adapt while others defend their heritage. Some immigrants hold on to their native culture to retain their identity and do so even more strongly than the people living in their homeland (Kumar & Steenkamp, 2013). A mechanism of self-preservation for the Jewish living in the diaspora surely applied. This may be yet another reason why typographic conventions diverged even though societies lived side by side.
+The fact that some societies were subjected to the same technological innovations, yet developed different conventions, could be caused by how some minorities adapt while others defend their heritage. Some immigrants hold on to their native culture to retain their identity and do so even more strongly than the people living in their homeland (Kumar & Steenkamp, 2013). A mechanism of self-preservation for the Jewish living in the diaspora surely applied. [note] This may be yet another reason why typographic conventions diverged even though societies lived side by side.
+
+> [note] There are a great many things setting people living in the diaspora apart from people who migrated to a new environment. Both are usually minorities, however, which is why I wanted to make this reference.
 
 ### Questioning Typographic Convention
 
 Conventions emerge in a dialectic process but are not always established because they are truly best practices. Sometimes they were established in times of quite different technological circumstances or for social reasons that may not apply today. Yet, some conventions are carried from generation to generation—consider the ink-shaped tail of the letter ›j‹. But as our society strives for innovation, progress, and adapting to new circumstances, our conventions need to change with us.
 
-As previously established, some conventions are of great value today even if their practical origins are obsolete. Some conventions are not, however, and in this spirit, I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate conventions. 
+As previously established, some conventions are of great value today even if their practical origins are obsolete. Some conventions are not, however, and in this spirit, I ask for typographic conventions to be questioned. Not with the intention of abolishing or changing them but to inspect them, see if they are still useful and if they could be replaced by more adequate practices. 
 
 This process of challenging conventions can happen quite naturally, as it has for millennia. It can also be initiated intentionally and the next chapter deals with what is needed to do so.
 
 ## Enabling Discourse
 
-If discourse is necessary to re-evaluate conventions, how can this discourse be enabled and encouraged? For discourse to emerge, three elements cannot be absent: (1) an issue, (2) opinions on the issue, and (3) a platform (on which people with opinions can discuss issues).
+If discourse is necessary to re-evaluate conventions, how can this discourse be enabled and encouraged? For discourse to emerge, three elements cannot be absent: (1) a topic, (2) opinions on the issue, and (3) a platform (on which people with opinions can discuss issues).
 
-<img src="/Users/Leon/Library/Mobile Documents/com~apple~CloudDocs/KISD/Thesis/Untitled_Artwork.png" alt="Untitled_Artwork" style="zoom:10%;" />
+![discourse-diagram](/Users/Leon/Sites/character-diversion-mono/documentation/discourse-diagram.png)
 
 [venn diagram]
 
@@ -82,11 +84,11 @@ If discourse is necessary to re-evaluate conventions, how can this discourse be 
 >
 > — Büscher-Ulbrich, Kadelbach, Kindermann (HG.)
 
-### Issues
+### Topic
 
 In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics are material for controversial discourse. Both orbit around multi-script typography, about the possible implications of typographic differences between scripts and how we can alter typographic conventions to bring scripts closer together.
 
-Without controversy, without the potential for disagreement, there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the consequence?**). 
+Without controversy, without the potential for disagreement, there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the consequence?**).
 
 ### People with Opinions
 
@@ -95,6 +97,10 @@ For discourse to live, it needs participants who bring with them diverse opinion
 To make sure that discourse is inclusive and representative, you have to make sure everyone has access to it. For discourse to be alive, no one should feel excluded or marginalized because they couldn't participate for lack of access or because they didn't even know there was a platform for this kind of typographic discourse in the first place.
 
 ### Adequate Platforms
+
+> »[Platforms are] things which raise us up higher than we could stand on our own.«
+>
+> — Umair Haque, 2016
 
 In the original meaning of the word, discourse is described as an oral or written communication that goes beyond a single sentence. This also means that discourse is language-based communication. In many fields in which discourse is carried out, such as sociology, political science, and anthropology, using language as the basis for communication seems quite adequate. And although typography is tightly linked with language, I have come to question whether discourse around typography should be *based* on language.
 
