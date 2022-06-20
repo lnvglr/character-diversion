@@ -53,6 +53,7 @@
 </template>
 
 <script lang="ts">
+import { SamsaFontAxis } from '~/types'
 export default defineComponent({
   computed: {
     currentDiscourse() {
@@ -86,10 +87,21 @@ export default defineComponent({
       this.$state.opinion.formActive = true;
     },
     postOpinion() {
-      const { content, glyphs, axes, annotations } = this.$state.opinion.form.attributes;
+      const { content, glyphs, axes: axesRaw, annotations } = this.$state.opinion.form.attributes;
       if (!this.canPost) return;
       const { id, attributes } = this.$state.discourse.current
       const discourse = JSON.parse(JSON.stringify({ id, attributes }))
+      const axes = {} as { [key: string]: number[] };
+      Object.entries(axesRaw || {})
+        .forEach(e => {
+          const axis: SamsaFontAxis = this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0])
+          // this adds all axes:
+          axes[e[0]] = e[1]
+          // this adds only non default axes:
+          // if (axis.default !== e[1][0]) {
+          //   axes[e[0]] = e[1]
+          // }
+        })
       const opinion = {
         content,
         glyphs,

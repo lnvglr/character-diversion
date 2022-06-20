@@ -108,11 +108,6 @@ export default defineComponent({
       return glyphs.slice(0, this.limit);
     },
   },
-  mounted() {
-    console.log(this.$state.discourse.current);
-    console.log(this.$state.discourse.font);
-    // window.addEventListener('pointerup', () => this.active = false);
-  },
   methods: {
     removeEmpty(id: number) {
       const name = this.$state.discourse.font.glyphMap[id].name;

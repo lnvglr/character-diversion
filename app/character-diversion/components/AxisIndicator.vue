@@ -1,33 +1,33 @@
 <template>
 	<div v-for="axis in filteredAxes" :key="axis.tag" class="flex gap-2 items-center text-xs">
 		<span>{{axis.tag}}</span>
-		<div class="bar" :style="`--value: ${100 / axis.max * axis.valueMin}`" />
+		<div class="bar" :style="`--value: ${axis.valueMin ? 100 / axis.max * axis.valueMin : 0}`" />
 		<span>{{axis.valueMin}}</span>
 	</div>
 </template>
 <script lang="ts">
-import { SamsaFontAxes } from "~/types"
-export default {
+import { SamsaFontAxis } from "~/types"
+export default defineComponent({
 	name: 'Axis Indicator',
 	props: {
 		axes: Object,
 	},
 	computed: {
-		fontAxes() {
+		fontAxes(): SamsaFontAxis[] {
 			return this.$state.discourse.font.axes
 		},
-		axesArray() {
-			return Object.entries(this.axes).map(e => ({  valueMin: e[1][0], valueMax: e[1][1], ...this.fontAxes.find((f: SamsaFontAxes) => f.tag === e[0]) }))
+		axesArray(): SamsaFontAxis[] {
+			return Object.entries(this.axes || {}).map(e => ({  valueMin: e[1][0], valueMax: e[1][1], ...this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0]) }))
 		},
-		filteredAxes() {
-			return this.axesArray.filter((e: SamsaFontAxes) => e.valueMin !== e.default || e.valueMax !== e.default)
+		filteredAxes(): SamsaFontAxis[] {
+			return this.axesArray?.filter((e: SamsaFontAxis) => e.valueMin !== e.default || e.valueMax !== e.default)
 		},
 	},
 	data() {
 		return {
 		}
 	},
-}
+})
 </script>
 <style scoped>
 .bar {

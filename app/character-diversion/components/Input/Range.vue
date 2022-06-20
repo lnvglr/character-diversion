@@ -61,8 +61,10 @@ export default defineComponent({
           (100 / (this.$attrs.max - this.$attrs.min)) *
           (val - this.$attrs.min)
         ).toFixed(this.decimalPlaces)};`
-      const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
-      const min = calc('min', this.value[1] !== null ? this.value[0] : this.$attrs.min)
+      const min = calc('min', this.value[0])
+      const max = calc('max', this.value[1])
+      // const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
+      // const min = calc('min', this.value[1] !== null ? this.value[0] : this.$attrs.min)
       return `${min} ${max}`
     },
     decimalPlaces() {

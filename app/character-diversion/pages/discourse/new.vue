@@ -57,12 +57,7 @@ export default defineComponent({
       formData.append("data", JSON.stringify(dataCompiled));
       formData.append("files.font", this.formData.font[0], this.formData.font[0].name);
 
-      // this.$strapi.client('discourses', {
-      //   method: 'POST',
-      //   body: formData
-      // })
-      this.$strapi
-        .client("discourses", formData)
+      this.$strapi.client("discourses", formData)
         .then(({ data }) => {
           return this.$strapi.findOne("discourses", data.id, {
             populate: [

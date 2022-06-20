@@ -8,13 +8,13 @@
     class="dropzone"
     v-bind="$attrs"
   >
-    <div v-if="!moreSpace" style="pointer-events: none">
+    <div v-if="!moreSpace && dropzone" style="pointer-events: none">
       <span>{{$t('files.uploadMax', { n: maxFiles })}}</span>
     </div>
-    <div v-else-if="active" style="pointer-events: none">
+    <div v-else-if="active && dropzone" style="pointer-events: none">
       <span>{{$t('files.drop', draggedFiles)}}</span>
     </div>
-    <div v-else>
+    <div v-else-if="dropzone">
       <i18n-t keypath="files.dropNotice" tag="span" for="browse" scope="global">
         <label for="dropzoneFile">{{$t('files.browse')}}</label>
       </i18n-t>
@@ -22,7 +22,7 @@
       <input @change="({target}) => checkFiles(target)" ref="files" type="file" id="dropzoneFile" class="dropzoneFile" multiple />
     </div>
   </div>
-  <transition-group name="fade" tag="ul">
+  <transition-group name="fade" tag="ul" v-if="filelist && dropzone">
     <FileCard
       v-for="(item, i) in files"
       :key="item"
@@ -62,7 +62,15 @@ export default defineComponent({
     },
     maxSize: {
       type: Number,
-    }
+    },
+    dropzone: {
+      type: Boolean,
+      default: true,
+    },
+    filelist: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -148,13 +156,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.dropzone {
+
+:global(:where(.dropzone)) {
   border-style: dashed;
   transition: var(--transition-duration-default);
   border-radius: var(--rounded-md);
   color: currentColor;
   padding: var(--padding-s);
   background: var(--color-white);
+
+}
+.dropzone {
   div {
     min-height: 150px;
     display: flex;

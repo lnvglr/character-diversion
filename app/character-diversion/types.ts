@@ -1,7 +1,8 @@
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
 export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
-import { ComputedRef } from 'vue'
 import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
+import { useStrapiAuth } from '@nuxtjs/strapi/dist/runtime/composables/useStrapiAuth'
+import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
@@ -32,19 +33,24 @@ declare module '@/assets/samsa-core' {
     tables: {
       glyf: any
     }
-    axes: SamsaFontAxes
+    axes: SamsaFontAxis[]
+    config: {
+      unicodeTable: {
+        [unicodeHex: string]: string
+      }
+    }
   }
   interface SamsaGlyph {
     value: string
     openType: {
-      is?: string
-      lig?: string
-      base?: string
+      is: string
+      lig: string
+      base: string
       [stylisticSet: string]: string
     }
   }
 }
-export interface SamsaFontAxes {
+export interface SamsaFontAxis {
   axisNameID: number
   default: number
   flags: number
@@ -81,16 +87,15 @@ export interface Discourse {
   }
 }
 export interface Opinion {
-  id: string
+  id: string | null
   attributes: {
-    content: string
+    content: string | null
     author?: Author
     createdAt?: string
     publishedAt?: string
     updatedAt?: string
-    comments?: Comment[]
-    responseTo?: number
-    responses?: number[]
+    responseTo?: Opinion
+    responses?: Opinion[]
     glyphs?: number[]
     votes?: Vote[]
     annotations?: {
@@ -99,7 +104,6 @@ export interface Opinion {
     axes?: {
       [tag: string]: number[]
     }
-    activeAxes?: string[]
   }
 }
 export interface Author {
@@ -159,7 +163,7 @@ export interface DiscourseState {
   fetch: () => void
 }
 interface annotationTool extends Annotation {
-  id: number
+  id: number | null
 }
 export interface OpinionState {
   form: Opinion
@@ -168,7 +172,6 @@ export interface OpinionState {
   selectedGlyphs: number[]
   invariableGlyphs: number[]
   annotationTool: annotationTool
-  font: SamsaFont
   reset: (key: string) => void
 }
 
@@ -180,7 +183,10 @@ type Strapi4 = typeof useStrapi4
 type StrapiAuth = typeof useStrapiAuth
 type StrapiUser = typeof useStrapiUser
 type Strapi = {
-  client: typeof useStrapiClient
+  client: typeof strapiHelpers.client
+  uploadFile: typeof strapiHelpers.uploadFile
+  removeFile: typeof strapiHelpers.removeFile
+  register: typeof useStrapiAuth.register
   api: typeof publicRuntimeConfig
   user: typeof User
 }

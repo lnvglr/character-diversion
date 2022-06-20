@@ -2,7 +2,7 @@
   <div class="input-container" :class="containerClass">
     <label class="placeholder" v-if="label && type === 'range'">{{ label }}</label>
     <component :is="is" :type="type" v-model="modelValue" @update:modelValue="updateValue" v-bind="$attrs"
-      :empty="empty || null" class="rounded-md border-beige-200 w-full focus:outline-info-500"
+      :empty="empty || null" class="border-beige-200 w-full focus:outline-info-500"
       :class="{ border, hasLabel: label }" :placeholder="!label ? placeholder : null" :maxlength="maxlength"
       @keydown.enter.exact="enter"
       @keydown.esc.exact="cancel"
@@ -144,6 +144,7 @@ input {
 
 :global(:where(input, textarea)) {
   display: block;
+  border-radius: var(--rounded-md);
 }
 
 :global(form :is(.input-container)) {

@@ -62,7 +62,6 @@ const defaultOpinion = {
   attributes: {
     content: null,
     axes: {},
-    activeAxes: [],
     glyphs: [],
     annotations: {},
   }
@@ -78,7 +77,6 @@ export const opinion = reactive<OpinionState>({
     x: 0,
     y: 0
   },
-  font: null,
   reset: (area: string = 'form'): void => {
     // opinion[area].id = defaultOpinion.id
     opinion[area] = JSON.parse(JSON.stringify(defaultOpinion))
