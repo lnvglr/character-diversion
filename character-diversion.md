@@ -119,33 +119,43 @@ To enable typographic discourse in ways that do not already exists (and fall sho
 
 ## A Platform for Typographic Discourse
 
-The world of typography lives on discussion and debate. Designers speak about fonts in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
+The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not always provide the appropriate environment and tools.
 
 *Character Diversion* can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, *Character Diversion*, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
 
 ### Concept
 
-Since ample platforms exist that facilitate general discourse, my goal is to enable discourse specifically around lettershapes. An adequate platform would hence put characters at the center of its design.
+1. Create a very specific platform 
 
-One of the great struggles of user interface design (frankly, of all design), is finding a good balance  in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
 
---
 
-**learning from the competition**
-
-And although those platforms fall short of being decidedly typeface design tools, they give insights into how discourses on designerly topics are led online.
+Some of the platforms mentioned in the last chapter fall short of being decidedly typeface design tools, but they give insights into how discourses on designerly topics are led online.
 
 In general, those platforms offer non-verbal feedback to designs (most commonly liking or upvoting), let people respond to previous comments, and share media. Those are three features that could find themselves in *Character Diversion*. Up- and downvoting opinions has already been implemented and responding to opinions is in development.
 
 As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: asking fundamental questions about where we are moving typography as a society.
 
+Since ample platforms exist that facilitate general discourse, my goal is to enable discourse specifically around lettershapes. An adequate platform would hence put characters at the center of its design.
+
+
+
 ### User Interface
 
-Character Diversion is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. 
+*Character Diversion* is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. 
 
 User experience and interfaces need to communicate clearly what the app does and how to use it.
 
 > [note] It is common practice in Web and UX/UI Design to design *mobile-first*. That is to say, design the structure and layout of a platform for the mobile experience first and then adapt to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed for those users *first*. *Character Diversion* was not designed mobile-first: it is intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. This is why *Character Diversion* is—for the moment—desktop first.
+
+
+
+#### Visual Appearance
+
+The overall visual aesthetics are kept in a flat design, with a beige palette, and bright orange and blue as accent colors. The platform does not need to sell anything or persuade anyone. It succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
+
+...
+
+![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
 #### Layout
 
@@ -241,17 +251,12 @@ A question that came up was whether to consider comments below opinions as anoth
 
 
 
-#### Visual Appearance
+#### Glyphs
 
-The overall visual aesthetics are kept in a flat design, with a beige palette, and bright orange and blue as accent colors. The platform does not need to sell anything or persuade anyone. It succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
+One component of the UI that is tighly linked with opinions, are the glyphs. 
 
-...
-
-![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
 ### Functional Features
-
-
 
 #### Marking Elements in Glyphs
 
@@ -498,6 +503,8 @@ In the process of developing *Character Diversion* I also discovered several sho
 2. specificity to one kind of discourse
 
 It lies in the nature of things, that specificity and specialization enable users to do one thing very well. 
+
+One of the great struggles of user interface design (frankly, of all design), is finding a good balance  in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
 
 ### Conclusion
 
