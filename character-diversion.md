@@ -473,16 +473,15 @@ This was yet another experience which inspired me to work on this project. The n
 
 *Character Diversion* has the potential to be two things: a standalone app with a very specific use case on the one hand and a proof of concept for a specific functionality on the other. A proof of concept that could be plugged in to already existing platforms which are missing this kind of discourse functionality.
 
+At the end of this process I can present a working prototype. In many ways it is more than a working prototype. The platform is deployed to a webserver, connected to a database, basic authentication is enabled and the core functionality works. Technically, people can start publishing their type design projects and share their opinions on the projects of others. There is one major shortcoming I want to address as well as features that did not make it into the alpha version.
+
 ### Shortcomings
 
-In the process of developing *Character Diversion* I also discovered several shortcomings.
+It lies in the nature of things, that specificity and specialization enable users to do one thing very well, while disregarding a plethora of other things. With the focus on a discourse around character shapes that I put on *Character Diversion*, I build a platform that does glyph-based discourse well, but disregards so many other vital facettes in typographic discourse.
 
-1. Its limitation to font files as typographic reference
-2. specificity to one kind of discourse
+One of the great struggles of user interface design (frankly, of all design), is finding a good balance in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
 
-It lies in the nature of things, that specificity and specialization enable users to do one thing very well. 
-
-One of the great struggles of user interface design (frankly, of all design), is finding a good balance  in giving the user just the right amount of choice—not to overwhelm, and not to limit. A good platform must predict the needs of its users, make smart decisions for them, and consequently decluttering the interface. A good platform must also give its users a feeling of agency and enable them to accomplish their specific goals instead of limiting them.
+In an attempt to build a specific tool *Character Diversion* may be all to specific and fall short of giving the users the agency to dicourse as they wish.
 
 #### Future Features
 
@@ -490,26 +489,35 @@ One of the great struggles of user interface design (frankly, of all design), is
 
 The current design of the platform requires users to upload font files to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
 
-A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of *Character Diversion* would be extended to a wide range of use cases.
+A potential future feature of *Character Diversion* could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This is, though very complex, technically possible. Machine learning models are advanced enough to regognize characters with ease and there are open source libraries that leverage these possibilities passing the power of AI to JavaScript frameworks. With optical character recognition (OCR) a core functionality of *Character Diversion* would be extended to a wide range of use cases.
 
 ##### Multiple Fonts and Font Instances
 
-As of writing this, *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, so adding the font instance as an extra data point will be straightforward.
+*Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, so adding the font instance as an extra data point will be straightforward.
 
 
 ##### Versioning
 
-When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
+When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be checked if with the most recent update it has become obsolete?
 
-##### Distinct References in Single Comment
-A question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost.
+In addition to the management of obsolete opinions, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
 
-This could be tackled by linking all glyphs to the opinion. When selecting the opinion, only the referenced glyphs will be shown. In the opinion card, the different glyph references become interactive and hovering over each of them will single out the enlarged glyph.
+##### Distinct References in Single Opinion
+A question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in an opinion but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost.
 
+This could be tackled by linking all glyphs to the opinion, but establishing individual links to the glyphs as well. When selecting the opinion, only the referenced glyphs will be shown. In the opinion card, the different glyph references become interactive and hovering over each of them will single out the enlarged glyph.
 
 ##### Diverging Characters
 
-As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: asking fundamental questions about where we are moving typography as a society.
+Finally, the name of the plarform is *Character Diversion*. I chose this name to pay tribute to the diversity of letterforms out there and to characters diverting from typographic conventions.
+
+There was, however, a second thought to the name, involving a feature directed at collaborative, constructive discourse by enabling users to propose changes to characters.
+
+A very common feature in collaborative open source projects in the realm of software development is a pull request (PR). It is, in short, the contribution of code to a larger code base. Developers fork a project, make their changes and make a pull request. Their changes are then reviewed by the community and potentially merged into the project.
+
+In the same spirit, I imagine enabling users to contribute to a type design discourse by actually proposing a diverting letter shape, posting it and then giving users the ability to view the different options.
 
 ### Conclusion
+
+I have started this project with the goal of promoting the questioning of typographic conventions. In the process I have not only created a platform to do just that—I have created a platform that challenges the convention of how typographic discourse is held. With a move away from language based discourse to glyph-based discourse *Character Diversion* became a proposal that will, hopefully be vividly and controvertially discussed. Maybe it will be found worthy of its aspirations, maybe the prevailing opinion will be that it failed in what it set out to. Hopefully it will inspire how we think about discourse in the realm of design.
 
