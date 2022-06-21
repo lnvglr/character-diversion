@@ -1,21 +1,22 @@
 <template>
-  <div class="flex flex-col h-screen overflow-hidden" v-if="$state.discourse.current">
+  <div class="-m-10 flex h-screen" v-if="$state.discourse.current">
+
     <div class="mr-2 mt-2">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </div>
-    <div class="flex grow overflow-auto flex-row-reverse gap-2 mr-2">
-      <div class="grow overflow-auto">
-      <FilterGroup :items="glyphsViews" @active="(e: string) => glyphsView = e" />
-        
-        <div :class="`flex flex-wrap mt-2 gap-5`">
-          <!-- grid-cols-[25px_minmax(300px,_1fr)] -->
-          <div
-            class="py-2 flex-1 max-w-full items-center grid"
-            v-for="axis in $state.discourse.font.axes"
-            v-if="$state.discourse.font && $state.opinion.form.attributes.axes"
-            :key="axis.tag"
-          >
-            <!-- <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" /> -->
+    <div class="grow overflow-auto">
+      <Card class="" :hoverable="false">
+        <div class="flex flex-col gap-5 w-full p-5">
+          <FilterGroup :items="glyphsViews" @active="(e: string) => glyphsView = e" />
+          <div :class="`flex flex-wrap mt-2 gap-5`">
+            <!-- grid-cols-[25px_minmax(300px,_1fr)] -->
+            <div
+              class="py-2 flex-1 max-w-full items-center grid"
+              v-if="$state.opinion.font"
+              v-for="axis in $state.opinion.font.axes"
+              :key="axis.tag"
+            >
+              <!-- <Input type="checkbox" class="" v-model="$state.opinion.form.attributes.activeAxes" :value="axis.tag" /> -->
             <Input
               v-if="axis.tag in $state.opinion.form.attributes.axes && glyphsView === 'intersect'"
               type="range"
@@ -42,21 +43,23 @@
               :inlineRange="true"
               containerClass="grid grid-cols-[80px_minmax(200px,_1fr)]"
             />
-            <!-- :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" -->
+              <!-- :disabled="!$state.opinion.form.attributes.activeAxes.includes(axis.tag)" -->
+            </div>
           </div>
         </div>
-        <GlyphsSelection
-          :gridSize="glyphsViews[glyphsView].gridSize"
-          :fontSize="glyphsViews[glyphsView].fontSize"
-          :edit="glyphsViews[glyphsView].edit && $state.opinion.formActive"
-          :annotations="glyphsViews[glyphsView].annotations"
-          :intersection="glyphsViews[glyphsView].intersection"
-          :frame="glyphsViews[glyphsView].frame"
-          :outline="glyphsViews[glyphsView].outline"
-          :style="style"
-        />
-      </div>
-
+      </Card>
+      <GlyphsSelection
+        :gridSize="views[view].gridSize"
+        :fontSize="views[view].fontSize"
+        :edit="views[view].edit && $state.opinion.formActive"
+        :annotations="views[view].annotations"
+        :intersection="views[view].intersection"
+        :frame="views[view].frame"
+        :outline="views[view].outline"
+        :style="style"
+      />
+    </div>
+    <div class="">
       <DiscourseSidebar />
     </div>
   </div>
@@ -96,7 +99,7 @@ export default defineComponent({
         overview: {
           label: "Overview",
           icon: "border-all",
-          gridSize: "12",
+          gridSize: "16",
           fontSize: "2xl",
         },
         detail: {

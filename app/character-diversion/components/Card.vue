@@ -1,5 +1,16 @@
 <template>
-	<div class="
+  <component
+    :is="tag || 'div'"
+    class="bg-beige-400 dark:bg-white p-[1px]"
+    :class="hoverable ? `hover:p-[3px] duration-100` : ''"
+  >
+    <div
+      class="rounded-lg bg-beige-50 dark:bg-neutral-900 dark:text-white flex flex-1 w-full h-full overflow-hidden"
+    >
+      <slot></slot>
+    </div>
+  </component>
+  <!-- <div class="
 		rounded-md
 		border
 		bg-white
@@ -11,18 +22,21 @@
 		:class="hoverable ? `hover:bg-beige-50 hover:border-beige-300 dark:hover:bg-neutral-800 dark:hover:border-neutral-600` : ''"
 		>
 		<slot></slot>
-	</div>
+	</div> -->
 </template>
 
 <script lang="ts">
 export default {
-	props: {
-		hoverable: {
-			type: Boolean,
-			default: true,
-		}
-	}
-}
+  props: {
+    tag: {
+      type: String,
+      default: "div",
+    },
+    hoverable: {
+      type: Boolean,
+      default: true,
+    },
+  },
+};
 </script>
-<style>
-</style>
+<style></style>

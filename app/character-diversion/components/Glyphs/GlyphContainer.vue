@@ -2,7 +2,7 @@
   <div ref="container">
     <Card
       :hoverable="$state.opinion.formActive"
-      class="card flex justify-center w-full relative overflow-hidden"
+      class="card flex justify-center w-full relative  border-0"
       :class="{
         'opacity-10': dim(glyph.id),
         'cursor-pointer': $state.opinion.formActive,
@@ -15,7 +15,7 @@
     >
       <GlyphsMiniGlyph
         v-if="inView"
-        :class="`glyph text-${fontSize}`"
+        :class="`glyph overflow-hidden text-${fontSize}`"
         :glyph="glyph"
         :tuple="$state.opinion.form.attributes.axes"
         :annotations="annotations"
@@ -44,7 +44,7 @@
         :class="{
           'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
           'text-xs': gridSize < 30,
-          'text-sm': gridSize >= 30,
+          'text-sm m-2': gridSize >= 30,
         }"
         v-html="glyphName(glyph, gridSize < 30)"
         @pointerdown="(clickable = false), appendGlyph(glyph)"
@@ -61,6 +61,9 @@
         @pointerdown="clickable = false"
         @pointerup="clickable = true"
         class="m-1 z-10 absolute bottom-0 left-0"
+        :class="{
+          'm-2': gridSize >= 30,
+        }"
       />
     </Card>
   </div>
@@ -94,6 +97,10 @@ export default {
       default: false,
     },
     intersection: {
+      type: Boolean,
+      default: false,
+    },
+    outline: {
       type: Boolean,
       default: false,
     },

@@ -1,7 +1,10 @@
 <template>
-  <nav class="h-full dark:bg-neutral-700 dark:border-neutral-900 p-2">
+  <!-- bg-beige-100
+      border-t border-beige-200
+      ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
+  <Card tag="nav" class="h-full" :hoverable="false">
     <ul
-      class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50 rounded-lg border border-beige-200"
+      class="flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50"
     >
       <li
         v-for="(route, index) in routes"
@@ -32,7 +35,7 @@
         :label="false"
       />
     </ul>
-  </nav>
+  </Card>
 </template>
 
 <script>
@@ -81,7 +84,7 @@ export default defineComponent({
         }).filter(e => e);
     },
   },
-})
+});
 </script>
 
 <style scoped>
