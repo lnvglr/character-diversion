@@ -128,64 +128,37 @@ To enable typographic discourse in ways that do not already exists (and fall sho
 
 The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there *is* discourse in the world of typography but the platforms do not provide the appropriate environment and tools.
 
-*Character Diversion* can help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, *Character Diversion*, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
+*Character Diversion* is designed to help get a better picture of how people think about certain design decisions, show where people agree and disagree, and link those opinions with the character shapes they refer to. This way, *Character Diversion*, creates a better overview of the conversation and with visual referencing enables a more intuitive approach to typographic discourse.
 
+*Character Diversion* breaks with conventional design of forums by breaking away from language-based discourse towards a glyph-based discourse. It also breaks with the style of contemporary forums on type, applying the paradigms of web app development. This means *Character Diversion* works asynchronously (i.e. not page reloads when users navigate the platform or submit data), shifting the user experience towards the bliss of using native apps. This paradigm shift in the world of typographic discourse software is undelined with the contemporary muted aesthetics, paired with a beige nostalgia.
 
-
-
-
----
-
-=== aya read until here ===
-
----
-
-
-
-
-### Concept
-
-1. Create a very specific platform 
-1. Scenarios
-1. how its helping situations
-1. whats the potential
-1. elaborate on the parts there are
-
-
-
-Some of the platforms mentioned in the last chapter fall short of being decidedly typeface design tools, but they give insights into how discourses on designerly topics are led online.
-
-In general, those platforms offer non-verbal feedback to designs (most commonly liking or upvoting), let people respond to previous comments, and share media. Those are three features that could find themselves in *Character Diversion*. Up- and downvoting opinions has already been implemented and responding to opinions is in development.
-
-As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: asking fundamental questions about where we are moving typography as a society.
-
-Since ample platforms exist that facilitate general discourse, my goal is to enable discourse specifically around lettershapes. An adequate platform would hence put characters at the center of its design.
+As the platform will be specifically for discourse on character shapes, those characters will be at the center of the discussion. As previously established, language needs to function as the glue of the discourse, and so the glyphs are paired and linked to opinions.
 
 ### User Flow
 
-![flow](/Users/Leon/Sites/character-diversion-mono/documentation/flow.png)
+HTML (HyperText Markup Language) is the most basic building block of the Web. The ›H‹ stands for ›hyper‹ stands for links pointing away from the current location in the page or the Web. In this spirit, *Character Diversion* links to each of its areas to another one. Yet, there is a premeditated user flow.
+
+New visitors arrive on the landing page, where the platform is introduced. From there, users are given the option to login (or sign up if they are not registered, yet) or to discover discourses. In the discourse discovery page visitors can view a discourse and get to the glyphs view within the page. They can inspect the glyphs, or move over to the about view, reading about the discourse and typeface in question. Or visitors view the opinions. Most paths lead to the visitors viewing the discourse and engaging by sharing opinions or voting the ones they like up and the ones they dislike down.
+
+![flow](/Users/Leon/Sites/character-diversion-mono/documentation/cd.svg)
 
 ### User Interface
 
-*Character Diversion* is a platform for typographic discourse. Accordingly, typography and discourse should lie at the heart of the application. 
+Good user interface design guides the user to where they want to get (or where villainous companies want them to go).
 
-User experience and interfaces need to communicate clearly what the app does and how to use it.
-
-> [note] It is common practice in Web and UX/UI Design to design *mobile-first*. That is to say, design the structure and layout of a platform for the mobile experience first and then adapt to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed for those users *first*. *Character Diversion* was not designed mobile-first: it is intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. This is why *Character Diversion* is—for the moment—desktop first.
+*Character Diversion* is a platform for typographic discourse. Accordingly, typography and discourse lies at the heart of the application. 
 
 
 
-#### Visual Appearance
-
-The overall visual aesthetics are kept in a flat design, with a beige palette, and bright orange and blue as accent colors. The platform does not need to sell anything or persuade anyone. It succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
-
-...
+The overall visual aesthetics are kept in a flat design, with a beige palette, and bright orange and blue as accent colors. Two complementary colors were chosen so that when two character shapes in distinct axis extremes are overlayed with a multiplying filter, they would produce a dark intersecting area. The platform does not need to sell anything or persuade anyone. It succeeds, when it remains unnoticed—adapted freely from Lucius Burckhardt's *Design is invisible* (2017). And yet, the visual appearance is not arbitrary: with the muted beige, I reference paper as the home of typography.
 
 ![Screenshot 2022-06-19 at 01.49.50](/Users/Leon/Desktop/Screenshot 2022-06-19 at 01.49.50.png)
 
 #### Layout
 
 With all this talk about moving away from language-based discourse towards a typography-based discourse, the letter shapes needed to be at the literal center of the platform. The glyphs serve either as an entry point into the discussion or as an illustration and reference. This way, opinions and the design they are referring to are interlinked in two ways and both can be accessed through one another. However, more on that later.
+
+> [note] *Character Diversion* designed desktop-first: it is intended to be a tool for professionals, working on their desktop computers and accessing this site through this desktop. I made this conscious decision even though it is common practice in Web and UX/UI Design to design *mobile-first*. That is to say, the structure and layout of a platform are designed for the mobile experience first and then adapted to larger screens. The reasoning behind this is, that the majority of users will access the app on a mobile device and thus the platform should be designed for those users *first*. *Character Diversion* is a different situation, however.
 
 The discourse panel is separated into three views: About, Glyphs, and Discourse [note]. All three views have elements linking to another one of the views. The *About view* shows discourse title, author, font info, version history, and other metadata. The *Glyphs view* shows an overview of the glyphs the respective font contains and the *Discourse view* shows the list of opinions.
 
@@ -200,7 +173,9 @@ In the glyphs view, each glyph that is referenced in an opinion shows a little a
 
 #### Opinion in Discourse
 
-When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting the richness of the editor and reorganizing the ordering through a voting system? Or would this limit the liveliness of the discourse?
+When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting character count and the richness of the editor, reorganizing the ordering through a voting system? Or would this limit the liveliness of the discourse?
+
+Both approaches have arguments for them. What made me go for a design that urges opinions to be concise is the decision to move away from language-based discourse. When inspecting the opinions on a glyph, people should not have to read an essay on pros and cons, they should be able to see the points being made about certain design decisions. For this reason, opinions have a limited character count, a minimal editor (enriched by markdown, which I will elaborate on later) and the ability to simply vote opinions up or down.
 
 > »At Stack Exchange, one of the tricky things we learned about Q&A is that if your goal is to have an excellent signal-to-noise ratio, **you *must* suppress discussion.** Stack Exchange only supports the absolute minimum amount of discussion necessary to produce great questions and great answers. That's why answers get constantly re-ordered by votes, that's why comments have limited formatting and length and only a few display, and so forth.« (Atwood, 2013)
 
@@ -212,8 +187,9 @@ There are several approaches to this problem:
 
 1. Users type their opinion and before posting it are presented with a (filterable) list of glyphs as well as, if applicable, range inputs for setting the spectra of the variable font axes.
 2. Current convention of denoting letter reference with a forward slash (/) is made use of and referenced letters are recognized from the text of the opinion and automatically linked.
+3. Users mark elements in glyphs and with the placement of the marker a text field opens prompting users to annotate the markers, enabling them to share their opinion.
 
-I decided to draw from both options: for this, I created a lookup table for glyphs through which I can access all glyphs by entering either the literal glyph (/א), the postscript name of the glyph (/alef), or a name with a stylistic set extension (/alef.ss01). It also works on complex alternatives like /braceleft.case.ss01.
+I decided to draw from all three options. First, users can post an opinion from the glyphs view (enabling option 3) or from the discourse view. For referencing glyphs from the discourse view, I created a lookup table for glyphs through which I can access all glyphs by entering either the literal glyph (/א), the postscript name of the glyph (/alef), or a name with a stylistic set extension (/alef.ss01). It also works on complex alternatives like /braceleft.case.ss01.
 
 ```js
 {
@@ -243,9 +219,14 @@ I decided to draw from both options: for this, I created a lookup table for glyp
 }
 ```
 
-Another question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost. 
+The editor for composing opinions is very minimalistic. So much so, that there is no formatting toolbar. Formatting can be achieved by using markdown. Markdown is a markup language to for simple text formatting. It works by using a set of special characters like asterisks (*), number signs (#), tiks (`), greater than (>), dashes (-) and special syntax for links (\[title](http://www.example.com)\), images (\![alt text](image.jpg)\) and tables.
 
-This could be tackled by indeed selecting an opinion and thus filtering the glyphs, and then highlighting specific glyphs by hovering over each reference or paragraph. The usability of this idea needs testing.
+> [note] The markdown syntax for a table:
+>
+> \| Syntax    | Description |
+> \| --------- | ----------- |
+> \| Header    | Title       |
+> \| Paragraph | Text        |
 
 ##### Selecting Opinions
 
@@ -261,13 +242,13 @@ When implementing this functionality into the functionality of filtering glyphs,
 
 As established before, discourse thrives on differences of opinion. A vital feature of *Character Diversion* is responding to opinions with the option to agree or disagree.
 
-Today, many social media platforms offer the possibility to react to content in many differentiated ways. The like buttons seemed to cause issues when people were posting about tragedies and followers were unsure if to like or not to like, when they were not happy about the tragedy but wanted to show support. This seems to be no issue here, however, and so I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be interpreted by the users as agreement, relevance, or helpfulness and used for spotting important popular opinions and sorting opinions by popularity.
+Today, many social media platforms offer the possibility to react to content in many differentiated ways. For the sake of simplicity, I decided to implement a very simple voting mechanism—you can vote up or down. The vote can then be interpreted by the users as agreement, relevance, or helpfulness and used for spotting important popular opinions and sorting opinions by voting score.
 
 ##### Sorting and Filtering
 
-By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
-
 One goal of the platform is to create an overview. To do that, the possibility of a large number of opinions and comments needs to be taken into account. Opinions need to be filterable and sortable by date, votes, and tags.
+
+By default, opinions are sorted by their voting score. Very recent opinions are pushed to the top as well, not to be displaced by very popular opinions right from the start. This way, new potentially popular opinions have the chance to be seen not only after scrolling all the way to the bottom.
 
 ##### How are threads treated?
 
@@ -296,8 +277,6 @@ This means that *Character Diversion* is built with HTML, CSS, and JavaScript. M
 *Character Diversion* is written in TypeScript, a strongly typed programming language that compiles to JavaScript. There is a lot that can be said about TypeScript—relevant to this paper is that it enables developers to define data structures called `interface` and with this, the code editor (IDE) can give the developers access to those structures in the development process. This makes development faster and helps prevent (type-related) bugs before they occur in a production site or app. Writing the code in TypeScript also helped me understand how discourse, opinions, and smaller data objects need to be structured and referenced. I will illustrate the structure of discourses and opinions in the same way they are defined in the code base [note].
 
 > [note] Some basic knowledge of JavaScript and programming paradigms may be necessary to understand this.
-
->@Aya: do you think I need to explain what `export` means and the curly braces (`{}`) and so on?
 
 ```typescript
 export interface Discourse {
@@ -528,6 +507,16 @@ As of writing this, *Character Diversion* does not support multiple font files o
 When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
 
 Due to its complex implementation, this feature may, however, be developed in the future.
+
+##### Distinct References in Single Comment
+A question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost.
+
+This could be tackled by linking all glyphs to the opinion. When selecting the opinion, only the referenced glyphs will be shown. In the opinion card, the different glyph references become interactive and hovering over each of them will single out the enlarged glyph.
+
+
+##### Diverging Characters
+
+As for adding media to opinions, a feature that is not yet implemented, I am considering ways of uploading vector files or images to replace certain letters enabling the user to propose a diversion of the original character shape. This brings me to the second kind of typographic discourse: asking fundamental questions about where we are moving typography as a society.
 
 ### Conclusion
 
