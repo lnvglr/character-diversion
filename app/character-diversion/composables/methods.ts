@@ -75,7 +75,6 @@ export const glyphMethods = {
       (acc: Object, curr: SamsaFontAxis) => {
         const min = closest([curr.min, curr.max], curr.default) === curr.default ? curr.min : curr.default
         const max = closest([curr.min, curr.max], curr.default) === curr.default ? curr.default : curr.max
-        console.log(min, max, curr.default, closest([curr.min, curr.max], curr.default))
         return {
           ...acc,
           [curr.tag]: [min, max],
@@ -83,7 +82,6 @@ export const glyphMethods = {
       },
       {}
     )
-    console.log(opinion.form.attributes.axes)
   },
   // positive look behind                  (?<=\/) <=== not working in safari
   // match 1 or more none white characters [\S]+?

@@ -17,9 +17,6 @@
 import { Discourse } from '~/types'
 
 export default defineComponent({
-  mounted() {
-    console.log(this.$strapi.user)
-  },
   computed: {
     discourses() {
       return Object
