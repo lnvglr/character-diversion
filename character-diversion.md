@@ -483,31 +483,31 @@ One of the great struggles of user interface design (frankly, of all design), is
 
 In an attempt to build a specific tool *Character Diversion* may be all too specific and fall short of giving the users the agency to discourse as they wish.
 
-#### Future Features
+### Future Features
 
-##### Image detection
+#### Image detection
 
 The current design of the platform requires users to upload font files to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
 
 A potential future feature of *Character Diversion* could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This is, though very complex, technically possible. Machine learning models are advanced enough to recognize characters with ease and there are open source libraries that leverage these possibilities passing the power of AI to JavaScript frameworks. With optical character recognition (OCR) a core functionality of *Character Diversion* would be extended to a wide range of use cases.
 
-##### Multiple Fonts and Font Instances
+#### Multiple Fonts and Font Instances
 
 *Character Diversion* does not support multiple font files or multiple font instances like Light, Regular and Bold. With the support for variable fonts, the possibility exists to link opinions with certain stylistic variations. And future support for multiple fonts should follow a similar design pattern: in the metadata of an opinion referenced glyphs and spectra on variable font axes are already denoted, so adding the font instance as an extra data point will be straightforward.
 
 
-##### Versioning
+#### Versioning
 
 When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be checked if with the most recent update it has become obsolete?
 
 In addition to the management of obsolete opinions, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
 
-##### Distinct References in Single Opinion
+#### Distinct References in Single Opinion
 A question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in an opinion but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost.
 
 This could be tackled by linking all glyphs to the opinion but establishing individual links to the glyphs as well. When selecting the opinion, only the referenced glyphs will be shown. In the opinion card, the different glyph references become interactive, and hovering over each of them will single out the enlarged glyph.
 
-##### Diverging Characters
+#### Diverging Characters
 
 Finally, the name of the platform is *Character Diversion*. I chose this name to pay tribute to the diversity of letterforms out there and to characters diverting from typographic conventions.
 
