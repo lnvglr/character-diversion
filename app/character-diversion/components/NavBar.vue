@@ -1,7 +1,4 @@
 <template>
-  <!-- bg-beige-100
-      border-t border-beige-200
-      ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
   <nav class="h-full dark:bg-neutral-700 dark:border-neutral-900 p-2">
     <ul
       class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50 rounded-lg border border-beige-200"
@@ -17,7 +14,7 @@
           class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-slate-600"
         >
           <Icon :name="route.icon" class="fa-lg" />
-          <span class="text-xs mt-2">{{ route.name }}</span>
+          <span class="text-xs mt-2" v-html="route.name" />
         </NuxtLink>
       </li>
       <Button
