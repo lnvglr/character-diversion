@@ -74,14 +74,14 @@ export default defineComponent({
         .sort((a, b) => a.meta.order - b.meta.order)
         .map(({ name, meta, path, memory }) => {
           path = memory || path;
-          if (path === "/profile" && !this.$strapi.user) path = "/login";
+          if (path === "/profile" && !this.$strapi.user) return {}
           return {
             name: meta?.name || name[0].toUpperCase() + name.slice(1),
             path,
             icon: meta?.icon || name,
             active: this.$route.name === name,
           };
-        });
+        }).filter(e => e);
     },
   },
 })

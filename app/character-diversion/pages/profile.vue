@@ -14,12 +14,10 @@
         <div class="flex gap-5 items-center">
           <Image
             :src="$strapi.user.avatar"
-            v-if="$strapi.user.avatar"
+            :placeholder="$strapi.user.name[0]"
             size="small"
             class="w-20 h-20 border border-beige-200 rounded-full"
           />
-          <div v-else class="w-20 h-20 border border-beige-300 bg-beige-200 rounded-full flex items-center justify-center text-2xl text-beige-400 font-bold">{{$strapi.user.name[0]}}
-          </div>
           <div class="flex flex-col">
             <span class="font-bold">{{ $strapi.user.name }}</span>
             <span class="text-neutral-500">{{ $strapi.user.email }}</span>

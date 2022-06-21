@@ -45,7 +45,7 @@ export const discourse = reactive<DiscourseState>({
           ],
           sort: ['publishedAt:desc'],
         })
-          .then(({data}) => {
+          .then(({ data }) => {
             discourse.all = data.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
             discourse.setCurrent(useRoute().params.id)
             resolve(discourse.all)
@@ -90,25 +90,28 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
   return new Promise(
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
-      new SamsaFont({
-        url: app.$strapi.api.url + fontName,
-        // url: '../assets/fonts/' + fontName,
-        callback: (e: SamsaFont) => {
-          if (e.errors.length > 0) {
-            reject(e)
-          } else {
-            e.cmapReverse = utils.invertObject(e.cmap)
-            e.config.unicodeTable = unicodeTable
-            const map = mapGlyphs(e)
-            e.glyphMap = map.glyphMap
-            e.literalMap = map.literalMap
-            e.postScriptMap = map.postScriptMap
-            e.nameMap = map.nameMap
-            e.glyphs = openTypeGlyphs(e)
-            resolve(e)
-          }
-        },
-      })
+      try {
+        new SamsaFont({
+          url: app.$strapi.api.url + fontName,
+          callback: (e: SamsaFont) => {
+            if (e.errors.length > 0) {
+              reject(e)
+            } else {
+              e.cmapReverse = utils.invertObject(e.cmap)
+              e.config.unicodeTable = unicodeTable
+              const map = mapGlyphs(e)
+              e.glyphMap = map.glyphMap
+              e.literalMap = map.literalMap
+              e.postScriptMap = map.postScriptMap
+              e.nameMap = map.nameMap
+              e.glyphs = openTypeGlyphs(e)
+              resolve(e)
+            }
+          },
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   )
 }
@@ -147,7 +150,7 @@ const mapGlyphs = (font: SamsaFontType) => {
 // @todo use samsafont feature lookup table
 const openTypeGlyphs = (font: SamsaFontType) => {
   return font.glyphs.map((glyph: SamsaGlyph) => {
-    if (! glyph.name) {
+    if (!glyph.name) {
       const character = font.glyphMap[glyph.id].literal
       glyph.name = (!['\x00'].includes(character) && glyph.name) && character
       glyph.value = character
@@ -163,7 +166,7 @@ const openTypeGlyphs = (font: SamsaFontType) => {
       glyph.openType.is = 'lig'
       glyph.openType['lig'] = glyph.name
     }
-    if (! (glyph.id in font.cmapReverse) && base && alternate?.[1]) {
+    if (!(glyph.id in font.cmapReverse) && base && alternate?.[1]) {
       glyph.openType.is = alternate[1]
       // base.openType[String(alternate[1])] = glyph.id
     }

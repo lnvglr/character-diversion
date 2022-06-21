@@ -25,7 +25,9 @@
         :maxFiles="1"
         :maxSize="3 * 1024 * 1024"
       />
-      <Button type="submit" :disabled="!formData.font?.[0]" class="lg">{{ $t("start.new.discourse") }}</Button>
+      <Button type="submit" :disabled="!formData.font?.[0]" class="lg">{{
+        $t("start.new.discourse")
+      }}</Button>
     </form>
   </NuxtLayout>
 </template>
@@ -46,7 +48,7 @@ export default defineComponent({
   },
   methods: {
     postDiscourse(e: Event) {
-      if (!this.formData.font[0]) return
+      if (!this.formData.font[0]) return;
       const formData = new FormData();
       const dataCompiled = {
         ...this.formData,
@@ -57,7 +59,8 @@ export default defineComponent({
       formData.append("data", JSON.stringify(dataCompiled));
       formData.append("files.font", this.formData.font[0], this.formData.font[0].name);
 
-      this.$strapi.client("discourses", formData)
+      this.$strapi
+        .client("discourses", formData)
         .then(({ data }) => {
           return this.$strapi.findOne("discourses", data.id, {
             populate: [
@@ -78,7 +81,7 @@ export default defineComponent({
         });
     },
   },
-})
+});
 </script>
 
 <style scoped>

@@ -1,5 +1,6 @@
 <template>
-	<img v-if="src" :src="source" :style="`--aspect-ratio: ${aspectRatio}`" />
+	<img v-if="src && source" :src="source" :style="`--aspect-ratio: ${aspectRatio}`" />
+	<div v-else class="flex items-center justify-center text-2xl text-beige-400 font-bold">{{placeholder}}</div>
 </template>
 <script lang="ts">
 export default defineComponent({
@@ -15,13 +16,18 @@ export default defineComponent({
 			type: String,
 			default: '1/1'
 		},
+		placeholder: {
+			type: String,
+			default: ''
+		}
 	},
 	computed: {
 		source() {
-			if (!this.src) return
-			const format = this.size in this.src.formats ? this.size : 'thumbnail';
-			if (!(format in this.src.formats)) return
-			return this.$strapi.api.url + this.src.formats[format].url
+			const base = this.$strapi.api.url
+			const format = this.src?.formats?.[this.size] ? this.size : 'thumbnail';
+
+			if (this.src?.formats?.[format]) return base + this.src.formats[format].url
+			if (this.src?.url) return base + this.src.url
 		},
 	},
 })

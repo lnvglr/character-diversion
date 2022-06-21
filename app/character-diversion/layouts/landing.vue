@@ -7,7 +7,7 @@
 				<Input v-model="letter" class="text-black" /> -->
         <LandingHeadline :headline="headine" :letter="letter" class="mt-12 mb-12" />
         <div
-          class="max-w-xl mx-auto mb-48 flex gap-5 flex-col sm:flex-row items-start sm:items-center"
+          class="max-w-2xl mx-auto mb-48 flex gap-24 flex-col sm:flex-row items-start sm:items-center"
         >
           <div>
             Designers and foundries explore, discuss, and work on their typefaces on
@@ -18,7 +18,8 @@
             <Button
               to="/discourse"
               icon="arrow-right"
-              style="--background-color: var(--color-yellow-500)"
+              style="--background-color: var(--color-primary-500)"
+              class="lg"
               >Discover</Button
             >
           </div>

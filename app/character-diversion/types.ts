@@ -1,7 +1,9 @@
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
+import { Ref } from 'vue'
 export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
 import { useStrapiAuth } from '@nuxtjs/strapi/dist/runtime/composables/useStrapiAuth'
+import { StrapiAuthenticationData, StrapiAuthenticationResponse, StrapiAuthProvider, StrapiEmailConfirmationData, StrapiForgotPasswordData, StrapiRegistrationData, StrapiResetPasswordData, StrapiUser } from '@nuxtjs/strapi/dist/runtime/types'
 import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
@@ -179,16 +181,45 @@ interface User {
   id: number,
   attributes: object
 }
-type Strapi4 = typeof useStrapi4
-type StrapiAuth = typeof useStrapiAuth
-type StrapiUser = typeof useStrapiUser
-type Strapi = {
-  client: typeof strapiHelpers.client
-  uploadFile: typeof strapiHelpers.uploadFile
-  removeFile: typeof strapiHelpers.removeFile
-  register: typeof useStrapiAuth.register
+type StrapiExtended = {
   api: typeof publicRuntimeConfig
-  user: typeof User
+}
+// type Strapi = typeof useStrapi4 & typeof useStrapiAuth & typeof useStrapiUser & typeof strapiHelpers & StrapiExtended
+export interface User {
+  blocked: boolean;
+  confirmed: boolean;
+  createdAt: string
+  email: string
+  id: number
+  name: string
+  provider: string
+  updatedAt: string
+  username: string
+  role: string
+  avatar: any
+}
+interface Strapi {
+  login(params?:object) : Promise<any>;
+  find(collection:string, params?:object) : Promise<any>;
+  findOne(collection:string, id:number) : Promise<any>;
+  create(collection:string, data:object) : Promise<any>;
+  count(collection:string, params?:object) : Promise<any>;
+  update(collection:string, id:number, data:object) : Promise<any>;
+  delete(collection:string, id:number) : Promise<any>;
+  setToken: (value: string | null) => void;
+  setUser: (value: StrapiUser) => void;
+  fetchUser: () => Promise<Ref<StrapiUser>>;
+  login: (data: StrapiAuthenticationData) => Promise<StrapiAuthenticationResponse>;
+  logout: () => void;
+  register: (data: StrapiRegistrationData) => Promise<StrapiAuthenticationResponse>;
+  forgotPassword: (data: StrapiForgotPasswordData) => Promise<void>;
+  resetPassword: (data: StrapiResetPasswordData) => Promise<StrapiAuthenticationResponse>;
+  sendEmailConfirmation: (data: StrapiEmailConfirmationData) => Promise<void>;
+  getProviderAuthenticationUrl: (provider: StrapiAuthProvider) => string;
+  authenticateProvider: (provider: StrapiAuthProvider, access_token: string) => Promise<StrapiAuthenticationResponse>;
+  user: typeof User;
+  uploadFile: typeof strapiHelpers.uploadFile;
+  removeFile: typeof strapiHelpers.removeFile;
 }
 
 

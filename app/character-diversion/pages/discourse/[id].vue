@@ -5,7 +5,7 @@
     </div>
     <div class="flex grow overflow-auto flex-row-reverse gap-2 mr-2">
       <div class="grow overflow-auto">
-      <FilterGroup :items="glyphsViews" @active="(e: string) => activeView = e" />
+      <FilterGroup :items="glyphsViews" @active="(e: string) => glyphsView = e" />
         
         <div :class="`flex flex-wrap mt-2 gap-5`">
           <!-- grid-cols-[25px_minmax(300px,_1fr)] -->

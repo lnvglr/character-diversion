@@ -6,11 +6,16 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
+    // '@nuxtjs/pwa'
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
   },
-  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/pwa', '@intlify/nuxt3', 'floating-vue/nuxt'],
+  buildModules: [
+    '@nuxtjs/tailwindcss',
+    '@intlify/nuxt3',
+    'floating-vue/nuxt'
+  ],
   router: {
     // https://router.vuejs.org/api/#routeroptions
     options: {},
@@ -23,11 +28,12 @@ export default defineNuxtConfig({
       '@fortawesome/free-solid-svg-icons',
     ],
   },
-  pwa: {
-    manifest: {
-      name: 'Character Diversion',
-    },
-  },
+  // pwa: {
+  //   manifest: {
+  //     name: 'Character Diversion',
+  //     publicPath: './pwa/manifest.json',
+  //   },
+  // },
   intlify: i18n,
   vite: {
     define: {

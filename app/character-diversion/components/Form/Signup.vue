@@ -9,6 +9,14 @@
       class="lg"
     />
     <Input
+      type="text"
+      name="username"
+      placeholder="Username"
+      v-model="formData.username"
+      autocomplete="username"
+      class="lg"
+    />
+    <Input
       type="email"
       name="email"
       placeholder="Email"
@@ -36,34 +44,31 @@
 </template>
 
 <script lang="ts">
+type FormData = { name: string; username: string, email: string; password: string; }
 export default defineComponent({
   data() {
     return {
-      formData: {} as { name: string; email: string; password: string; username: string },
+      formData: {} as FormData,
       avatar: [] as File[],
       error: false,
       errorMsg: `An error occurred, please try again`,
     };
   },
-  computed: {
-    name() {
-      return this.formData.name;
-    },
-  },
-  watch: {
-    name(value: string) {
-      this.formData.username = this.slugify(value);
-    },
-  },
   methods: {
     async signUp(e: Event) {
       try {
+        this.formData.username = this.formData.username || this.slugify(this.formData.name);
         this.$strapi.register(this.formData).then(({ user }) => {
           this.$strapi
             .uploadFile(this.avatar[0], "user", user?.id || this.$strapi.user?.id, "avatar")
             .then(({ avatar }: any) => {
               this.$strapi.user.avatar = avatar
-              this.formData = {};
+              this.formData = {
+                name: "",
+                username: "",
+                email: "",
+                password: "",
+              };
             });
             this.$router.push("/profile");
         });
