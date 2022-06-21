@@ -1,6 +1,6 @@
 <template>
-  <!-- <h1 class="headline font-bold uppercase" v-html="transformedHeadline"></h1> -->
-  <h1 class="headline font-bold uppercase">
+  <h1 class="headline font-bold uppercase" v-html="headline"></h1>
+  <!-- <h1 class="headline font-bold uppercase">
     <template v-for="word in transformedHeadline" :key="word">
       <span v-if="word.length === 1" class="nowrap inline-block">{{ word[0] }}</span>
       <span v-else class="inline-block">
@@ -26,7 +26,7 @@
         </template>
       </span>
     </template>
-  </h1>
+  </h1> -->
 </template>
 
 <script lang="ts">
