@@ -31,7 +31,7 @@ According to Andrei Marmor (2009, p. X (preface)), conventions are »rules that 
 >
 > — Büscher-Ulbrich, Kadelbach, Kindermann (HG.)
 
-In the typographic sense this means that some conventions can be explained with practical reasons while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain (**example?**).
+In the typographic sense this means that some conventions can be explained with practical reasons while others only make sense for the mere reason that a critical mass is following those conventions and breaking them would cause more loss than gain.
 
 The rhythm of ascenders and descenders in Latin script words gives an often unique silhouette to those words improving their readability (Mandel, 1993). Ascenders and descenders are letter shape conventions that have evolved over centuries and bring with them a very practical benefit that is still relevant today.
 
@@ -96,7 +96,7 @@ If discourse is necessary to re-evaluate conventions, how can this discourse be 
 
 In my proposals to this thesis, I explored the sociological impact of typographic hierarchies between the Hebrew and Arabic script in Israeli public space on the one hand and—as mentioned in the introduction—new potential character relationships between the Hebrew and Latin script on the other. Both topics are material for controversial discourse. Both orbit around multi-script typography, about the possible implications of typographic differences between scripts and how we can alter typographic conventions to bring scripts closer together.
 
-Without controversy, without the potential for disagreement, there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches (**what is the consequence?**).
+Without controversy, without the potential for disagreement, there is no discourse. Everything else is non-discursive communication. This means that a platform for typographic discourse needs to be open to controversial proposals and encourage unconventional approaches. By stressing the imporance of challenging conventions, the *Character Diversion* may encourage just that.
 
 ### People with Opinions
 
@@ -171,7 +171,13 @@ The discourse panel is separated into three views: About, Glyphs, and Discourse 
 
 In the glyphs view, each glyph that is referenced in an opinion shows a little annotation which, clicking on it opens a popup with the corresponding part of the discourse. The discourse view links to the glyphs by opening a preview of the referenced glyphs (and their state) when clicking on the opinion. Lastly, in the about panel, the characters in the preview text are annotated and linked to the corresponding opinions.
 
-#### Opinion in Discourse
+#### Glyphs
+
+One key component of the UI are the glyphs. They are the key to non-language-based discourse because effectively, *Character Diversion* enables glyph-based discourse. By browsing the glyphs it is possible to see the heart of the discourse, what all participants are referring to.
+
+When browsing glyphs, orange badges indicate glyphs that users referenced in their opinions. This link is an essential feature bringing opinions and the glyphs they are referring to together.
+
+#### Opinions in Discourse
 
 When I started with the design, opinions were merely comments, connected to glyphs and axes spectra. In the spirit of Jeff Atwood's comment about Stack Exchange (2013), I had to consider how this element needed to be designed. Should opinions be forced to be concise and efficient by limiting character count and the richness of the editor, reorganizing the ordering through a voting system? Or would this limit the liveliness of the discourse?
 
@@ -256,19 +262,11 @@ Threads are sub-conversations that can evolve below a comment. They can be very 
 
 A question that came up was whether to consider comments below opinions as another kind of data or to treat comments like opinions that are linked to other opinions.
 
-#### Glyphs
-
-One component of the UI that is tighly linked with opinions, are the glyphs. 
-
-##### Marking Elements in Glyphs
-
-Another form of visually referencing what a user is critiquing is marking elements in a glyph and linking them to a particular opinion. A glyph can have multiple marks that are all linked to their corresponding opinion.
-
 ### Architecture & Deployment
 
 #### Underlying Technology
 
-Because of the scale of the project as well as my own skill set, I decided to build a web app instead of a native app. A native app needs to be specifically designed for macOS, Windows, iOS or Android, etc. which you would download onto your device, while a web-based app is a website that behaves almost like a native app.
+With browser performance getting closer to the performance of native apps every year, and development cost disproportionally lower web apps are on the rise. A native app needs to be specifically designed for macOS, Windows, iOS or Android, etc. which you would download onto your device, while a web-based app is a website that behaves almost like a native app. And not only that: web apps are also more accessible because they do not require users to download and install software, but it works out of the box. This is why *Character Diversion* is built as a web app.
 
 This means that *Character Diversion* is built with HTML, CSS, and JavaScript. More specifically, I used the open-source JavaScript framework Vue.js (embedded in Nuxt.js) to build the front-end application and the headless open-source CMS (content management system) Strapi for the Node.js backend. This is to say that a lot of modern web technologies were used to make the user experience (as well as the developer experience) as smooth as possible, allow for asynchronous interaction, and the ability to install *Character Diversion* as a PWA (progressive web app).
 
@@ -391,7 +389,7 @@ A component is usually a generic shell that accepts data (called props) that wil
 </template>
 ```
 
-One particularly appealing concept is the atomic design system. It is made up of atoms, which form molecules, which in turn form cells, which make up organisms and species. This natural science analogy to the structuring of components goes back to Brad Frost, a web designer, and speaker. 
+I based the structure and architecture of the components on what is referred to as the atomic design system. It is made up of atoms, which form molecules, which in turn form cells, which make up organisms and species. This natural science analogy to the structuring of components goes back to Brad Frost, a web designer, and speaker. 
 
 Hannah Heinson (2022) adapted Frost's original structure of Atoms, Molecules, Organisms, Templates, and Pages, to a more coherent hierarchy.
 
@@ -461,18 +459,15 @@ To demonstrate this, I implemented a Hebraised and a Latinised version in the tw
 
 > [note] The idea to design fonts with many variable font axes and use those axes not for changing generic parameters but for fluidly changing ornaments and treatment of serifs is quite intriguing.
 
-#### Publication on *Character Diversion*
-
-
-
+Finally, I uploaded the font to *Character Diversion*, composed opinions on the parts of charters I modified and opened the discourse to the public.
 
 ### The New Hebrew Typography
 
 In my research on the latinisation of Hebrew typography, I came across *The New Hebrew Typography* by Hugh J. Schonfield. It is an attempt at reimagining the Hebrew typography way beyond the bounds of typography. Not so much did he develop a typeface or range of typefaces, he developed new conventions for the Hebrew script, heavily inspired by the Latin script. He implemented a bi-cameral system, giving Hebrew lower case characters, he removed the five final forms (›ך‹, ›ם‹, ›ן‹, ›ף‹, ›ץ‹), added vertical stress and real serifs (different from the already existing tags).
 
-Most of what I could find about *The New Hebrew Typography* were rants about how terrible the ideas were, how illegible the letter forms, and—quite frankly—how low the quality of execution was. What I could not find, was a constructive inspection of each letter, each consideration, and discourse about the considerations driven by the Hebrew type design community.
+Most of what I could find about *The New Hebrew Typography* were rants about how terrible the ideas were, how illegible the letter forms, and—quite frankly—how low the quality of execution was. Surely, the proposal may have also been rejected because of personal preference or for religious and cultural convitions considering the latinization and act of colonization. What I could not find, was a constructive inspection of each letter, each consideration, and discourse about the considerations driven by the Hebrew type design community.
 
-This experience was another bit, which inspired me to work on this project. The notion that some ideas, however wild and unpopular they may seem at first, at least deserve a platform to be discussed. For this reason, I uploaded to *Character Diversion* a font designed after the principle of *The New Hebrew Typography*.
+This was yet another experience which inspired me to work on this project. The notion that some ideas, however wild and unpopular they may seem at first, at least deserve a platform to be discussed. For this reason, I uploaded to *Character Diversion* a font designed after the principle of *The New Hebrew Typography*.
 
 ## Outlook
 
@@ -495,7 +490,7 @@ One of the great struggles of user interface design (frankly, of all design), is
 
 The current design of the platform requires users to upload font files to refer to certain characters. The reality in typographic discourse is, however, that some questions orbit around typefaces that have no font files or the licensing disallows the upload of font files. Currently, those discourses are held by uploading imagery and even drawings of letterforms.
 
-A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of Character Diversion would be extended to a wide range of use cases.
+A potential future feature of Character Diversion could be the option to upload an image instead of a font and have the app automatically detect the letters, assign them to their Unicode symbol and allow users to associate opinions with those letters. This way a core functionality of *Character Diversion* would be extended to a wide range of use cases.
 
 ##### Multiple Fonts and Font Instances
 
@@ -505,8 +500,6 @@ As of writing this, *Character Diversion* does not support multiple font files o
 ##### Versioning
 
 When implementing the platform into the design process of a typeface, versioning is indispensable. It is very common for a process involving design critiquing to involve versioning. A designer may upload a project font, commentators propose changes and the designer implements those changes. If there are 50 comments and the designer solves 20 of them in one round and tweaks another 15 in another go, how can those changes be kept track of? Do the opinions that were tackled become obsolete? And what is the workflow for marking those that become obsolete? Is it technically feasible to integrate an automatic change detection like the versioning control system Git or would each opinion need to be marked as obsolete? In addition to the management of obsolete comments, some sort of timeline would need to be added to look back at prior versions to comprehend the development.
-
-Due to its complex implementation, this feature may, however, be developed in the future.
 
 ##### Distinct References in Single Comment
 A question that emerged was how to deal with the situation that a user wants to voice their opinion on several glyphs referencing them in a comment but saying distinct things about each of the glyphs. By default, all referenced glyphs are linked to the whole comment. Considering it is a lengthy comment referencing ten or more glyphs, the quality of the tool, and the precise linking of opinions to glyphs is lost.
