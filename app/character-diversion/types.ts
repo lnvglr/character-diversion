@@ -224,6 +224,8 @@ interface Strapi {
 
 
 declare module '@vue/runtime-core' {
+  interface StrapiUser extends User {
+  }
   interface ComponentCustomProperties {
     $state: {
       discourse: DiscourseState

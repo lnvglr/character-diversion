@@ -45,8 +45,13 @@ export default {
     if (!app.$strapi) app.provide("strapi", reactive(strapi));
     if (!app.$state) app.provide("state", reactive({ discourse, opinion }));
     if (!app.$f) app.provide("f", { glyphMethods, utils });
-    const userId = strapi.user?.id || strapi.user?.value?.id;
-    if (userId && typeof userId === 'number') strapi.findOne("users", strapi.user.id, { populate: ["avatar"] }).then(({avatar}) => app.$strapi.user.avatar = avatar).catch((err) => console.error(err))
+    if (app.$strapi.user?.id)
+      strapi
+        .findOne("users", app.$strapi.user.id, { populate: ["avatar"] })
+        .then(({ avatar }) => {
+          app.$strapi.user.avatar = avatar;
+        })
+        .catch((err) => console.error(err));
 
     definePageMeta({
       pageTransition: {
