@@ -1,5 +1,8 @@
 <template>
 	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container">
+
+		<div v-if="!isTTF && glyph"
+			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font.glyphMap[glyph.id].literal }}</div>
 		<svg :style="style" :viewBox="viewBox.join(' ')"
 			class="pointer-events-none" ref="svgFrame"></svg>
 		<Transition name="fade">
@@ -22,8 +25,6 @@
 			</g>
 		</svg>
 		</Transition>
-		<div v-if="!isTTF && glyph"
-			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font.glyphMap[glyph.id].literal }}</div>
 	</div>
 </template>
 <script lang="ts">

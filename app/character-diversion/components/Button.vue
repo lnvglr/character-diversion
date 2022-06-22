@@ -183,6 +183,11 @@ export default {
     --size: var(--h-12);
     --padding: var(--p-4) var(--p-5);
   }
+  &.xl {
+    font-size: var(--text-lg);
+    --size: var(--h-16);
+    --padding: var(--p-6) var(--p-7);
+  }
 
   &.center {
     margin-inline: auto;

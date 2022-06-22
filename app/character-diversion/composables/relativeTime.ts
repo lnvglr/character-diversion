@@ -1,7 +1,8 @@
 import RelativeTime from '@yaireo/relative-time'
 import { useI18n } from 'vue-i18n'
 
-export const useRelativeTime = (d1: string, d2: string = null, threshold: number = 2.419e+9) => {
+export const useRelativeTime = (d1: string, d2: string | null, threshold: number = 2.419e+9) => {
+	if (!d1) return
 	const i18n = useI18n({ useScope: 'global' })
 	const locale = i18n.locale.value as string
 	const date1 = new Date(d1)

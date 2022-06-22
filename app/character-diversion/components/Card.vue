@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag || 'div'"
-    class="bg-beige-400 dark:bg-white p-[1px]"
+    class="bg-beige-500 p-[1px]"
     :class="hoverable ? `hover:p-[3px] duration-100` : ''"
   >
     <div

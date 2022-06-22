@@ -6,9 +6,10 @@ import { SamsaFont } from '@/assets/samsa-core'
 import { utils, glyphMethods } from '@/composables/methods'
 import unicodeTable from '@/composables/unicode-table'
 
-export const discourse = reactive<DiscourseState>({
+export const discourse: DiscourseState = reactive<DiscourseState>({
   all: {},
   current: null,
+  font: null,
   search: '',
   filter: {},
   new: {

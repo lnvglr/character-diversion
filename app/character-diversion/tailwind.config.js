@@ -4,6 +4,7 @@ const colors = {
   secondary: defaultColors.slate,
   neutral: defaultColors.stone,
   slate: defaultColors.slate,
+  stone: defaultColors.stone,
   info: defaultColors.blue,
   success: defaultColors.emerald,
   warning: defaultColors.amber,

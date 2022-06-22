@@ -69,7 +69,7 @@ import { Discourse } from "~/types";
 export default {
   data() {
     return {
-      headine: "Everyone has an ospinsion on type. It's time to share it.",
+      headine: "Everyone has an opinion on type. It's time to share yours.",
       letter: "S",
     };
   },

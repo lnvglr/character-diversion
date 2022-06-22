@@ -66,15 +66,15 @@ export default defineComponent({
 
 <style lang="scss">
 .headline {
-  --font-size: var(--text-8xl);
+  --font-size: var(--text-7xl);
   @media screen and (max-width: 1024px) {
-    --font-size: var(--text-6xl);
-  }
-  @media screen and (max-width: 768px) {
     --font-size: var(--text-5xl);
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     --font-size: var(--text-4xl);
+  }
+  @media screen and (max-width: 480px) {
+    --font-size: var(--text-3xl);
   }
   & > * {
     margin-right: 0.5ex;

@@ -22,4 +22,7 @@ export default {
 line {
 	stroke: var(--color-beige-200);
 }
+:global(.dark line) {
+	stroke: var(--color-beige-700);
+}
 </style>

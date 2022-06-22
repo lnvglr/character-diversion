@@ -2,9 +2,9 @@
   <!-- bg-beige-100
       border-t border-beige-200
       ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
-  <Card tag="nav" class="h-full" :hoverable="false">
+  <Card tag="nav" class="h-full z-30 relative" :hoverable="false">
     <ul
-      class="flex flex-row sm:flex-col justify-around items-center p-4 sm:max-w-2xl sm:h-full mx-auto gap-5 bg-beige-50"
+      class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-5"
     >
       <li
         v-for="(route, index) in routes"
@@ -14,7 +14,7 @@
         <NuxtLink
           v-if="route.icon"
           :to="route.path"
-          class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-slate-600"
+          class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-beige-800"
         >
           <Icon :name="route.icon" class="fa-lg" />
           <span class="text-xs mt-2" v-html="route.name" />

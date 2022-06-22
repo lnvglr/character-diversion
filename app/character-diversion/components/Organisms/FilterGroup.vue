@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div class="flex item-center my-5 justify-between">
+<div class="flex flex-col gap-5">
+  <div class="flex item-center justify-between">
     <div class="button-group">
       <Button
         v-for="(item, name) in items"

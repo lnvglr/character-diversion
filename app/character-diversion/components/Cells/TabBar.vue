@@ -1,9 +1,9 @@
 <template>
-  <Card
-    tag="nav"
-    class="w-full flex justify-center gap-2 bg-beige-50 p-2"
+  <nav
+    class="w-full m-2"
     :hoverable="false"
   >
+  <div class="flex justify-center gap-2 w-full">
     <Button
       v-for="(item, name) in items"
       :key="name"
@@ -15,7 +15,8 @@
       v-show="!item.hide"
       >{{ item.label }}</Button
     >
-  </Card>
+    </div>
+  </nav>
 </template>
 
 <script lang="ts">
