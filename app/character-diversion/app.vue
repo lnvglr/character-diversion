@@ -45,7 +45,7 @@ export default {
     if (!app.$strapi) app.provide("strapi", reactive(strapi));
     if (!app.$state) app.provide("state", reactive({ discourse, opinion }));
     if (!app.$f) app.provide("f", { glyphMethods, utils });
-    strapi.findOne("users", strapi.user.value.id, { populate: ["avatar"] }).then(({avatar}) => app.$strapi.user.avatar = avatar)
+    strapi.findOne("users", strapi.user.value?.id || strapi.user.id, { populate: ["avatar"] }).then(({avatar}) => app.$strapi.user.avatar = avatar)
 
     definePageMeta({
       pageTransition: {
