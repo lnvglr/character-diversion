@@ -16,8 +16,10 @@
           :to="route.path"
           class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-beige-800"
         >
-          <Icon :name="route.icon" class="fa-lg" />
-          <span class="text-xs mt-2" v-html="route.name" />
+          <ClientOnly>
+            <Icon :name="route.icon" class="fa-lg" />
+            <span class="text-xs mt-2" v-html="route.name" />
+          </ClientOnly>
         </NuxtLink>
       </li>
       <Button
@@ -74,14 +76,15 @@ export default defineComponent({
         .sort((a, b) => a.meta.order - b.meta.order)
         .map(({ name, meta, path, memory }) => {
           path = memory || path;
-          if (path === "/profile" && !this.$strapi.user) return {}
+          if (path === "/profile" && !this.$strapi.user) return {};
           return {
             name: meta?.name || name[0].toUpperCase() + name.slice(1),
             path,
             icon: meta?.icon || name,
             active: this.$route.name === name,
           };
-        }).filter(e => e);
+        })
+        .filter((e) => e);
     },
   },
 });

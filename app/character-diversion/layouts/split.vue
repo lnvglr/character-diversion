@@ -16,7 +16,6 @@ export default {
   props: {
     background: {
       type: String,
-      default: 'mint',
     },
     back: {
       type: String,
@@ -27,6 +26,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .background {
-  background: var(--background, var(--color-mint-300));
+  background: var(--background, var(--color-beige-200));
 }
 </style>

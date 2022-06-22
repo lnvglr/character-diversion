@@ -1,12 +1,13 @@
 <template>
   <div
     v-if="$state.discourse.font && $state.opinion.form.attributes"
-    class="selection-container grid gap-1"
+    class="selection-container grid overflow-auto snap-y snap-proximity h-full"
     :class="`grid-cols-autofill-${gridSize}`"
     v-bind="$attrs"
+    ref="container"
   >
     <GlyphContanier
-      v-for="glyph in filteredGlyphs"
+      v-for="glyph in filledGlyphs"
       :key="glyph.id"
       :glyph="glyph"
       :gridSize="gridSize"
@@ -16,9 +17,11 @@
       :intersection="intersection"
       :frame="frame"
       :outline="outline"
+      class="snap-start"
     />
-  </div>
-  <div class="w-full p-20 flex flex-col items-center justify-center gap-5">
+    <div class="col-span-full">
+  <Card :hoverable="false">
+  <div class="w-full p-24 flex flex-col items-center justify-center gap-5">
     <span>{{ $t("glyphs.shown", { n: filteredGlyphs.length }) }}</span>
     <div class="flex items-center justify-center gap-2">
       <Button
@@ -31,11 +34,14 @@
       <Button
         @click="limit = limit + 100"
         class="lg"
-        v-if="$state.discourse.font.glyphs.length > limit"
+        v-if="$state.discourse.font?.glyphs.length > limit"
         icon="plus"
         >Show more</Button
       >
     </div>
+  </div>
+  </Card>
+  </div>
   </div>
 </template>
 
@@ -80,9 +86,14 @@ export default defineComponent({
       clickable: true,
       opinionFilter: false,
       limit: 100,
+      fill: 0
       // first: null,
       // last: null
     };
+  },
+  mounted() {
+    window.addEventListener('resize', () => this.checkFill())
+    this.$nextTick(() => this.checkFill())
   },
   watch: {
     // first() {
@@ -91,9 +102,21 @@ export default defineComponent({
     // last(a, b) {
     //   this.select(b)
     // }
+    filteredGlyphs(a, b) {
+      if (a.length !== b.length) this.checkFill()
+    }
   },
   computed: {
+    filledGlyphs() {
+      if (this.fill < 1 || this.fill > 999 || isNaN(this.fill)) return this.filteredGlyphs
+      const dummy = [...Array(this.fill)].map((e) => ({
+        id: (Math.random() * (100 + e)).toString(),
+        dummy: true
+      }))
+      return [...this.filteredGlyphs, ...dummy];
+    },
     filteredGlyphs() {
+      if (!this.$state.discourse.font) return []
       const glyphs = this.$state.discourse.font.glyphs.filter((glyph: SamsaGlyph) => {
         if (
           this.removeEmpty(glyph.id) &&
@@ -105,12 +128,20 @@ export default defineComponent({
           return glyph;
         }
       });
-      return glyphs.slice(0, this.limit);
+      return glyphs.slice(0, this.limit)
     },
   },
   methods: {
+    checkFill(): number {
+      const container = this.$refs.container as HTMLElement
+      const width = container?.offsetWidth
+      const gridSize = Math.floor(width / (parseInt(this.gridSize) / 4 * 16))
+      this.fill = Math.abs(this.filteredGlyphs.length > 0 ? gridSize - (this.filteredGlyphs.length % gridSize) : 0)
+      return this.fill
+    },
     removeEmpty(id: number) {
-      const name = this.$state.discourse.font.glyphMap[id].name;
+      const name = this.$state.discourse.font?.glyphMap[id].name;
+      if (!name) return false;
       return ![
         ".notdef",
         ".null",
@@ -197,4 +228,34 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.selection-container > div {
+  position: relative;
+  &:last-child::before,
+  &:last-child::after {
+    --i: 20;
+    // content: '';
+    position: relative;
+    height: 100%;
+    // width: calc(var(--i) * 100%);
+    width: calc(100% / 64);
+    top: 0;
+    transform: translate(calc(100% / var(--i)), -100%);
+    display: block;
+  }
+  &:last-child::before {
+    background: var(--color-beige-50);;
+    position: absolute;
+    transform: translate(calc(100% / var(--i)), 0%);
+    margin: 1px;
+    width: calc(var(--i) * 100% - 2px);
+    height: calc(100% - 2px);
+    border-radius: var(--rounded-lg);
+    z-index: 20;
+  }
+  &:last-child::after {
+    z-index: 10;
+    background: var(--color-beige-500);
+  }
+}
+</style>

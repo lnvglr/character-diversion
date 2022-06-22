@@ -67,7 +67,7 @@ export const glyphMethods = {
   },
   nameToUnicode,
 
-  setPosition: () => {
+  setAxesPosition: () => {
     const closest = (arr: number[], target: number) => arr.reduce(function (prev, curr) {
       return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
     });

@@ -8,14 +8,14 @@
       autocomplete="name"
       class="lg"
     />
-    <Input
+    <!-- <Input
       type="text"
       name="username"
       placeholder="Username"
       v-model="formData.username"
       autocomplete="username"
       class="lg"
-    />
+    /> -->
     <Input
       type="email"
       name="email"

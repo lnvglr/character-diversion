@@ -12,17 +12,19 @@
       <CharacterCounter v-if="maxlength" :value="modelValue" :maxlength="maxlength" />
       <small v-if="submitOnEnter" class="text-beige-400 leading-none">{{ $t('submit.with.enter') }}</small>
       <small v-if="allowMarkdown" class="text-beige-400 leading-none">
-        <NuxtLink class="hover:underline" target="_blank" to='https://www.markdownguide.org/cheat-sheet/'>{{ $t('markdown.is.allowed') }}</NuxtLink>
+        <MarkdownNotice />
       </small>
       <div class="ml-auto"><Button v-if="$attrs.onCancel" @click.prevent="cancel" icon="close" class="clear xs"
-          color="beige" :title="$t('cancel')" /></div>
+          color="alert" :title="$t('cancel')" /></div>
     </div>
     <label class="placeholder absolute" v-if="label && type !== 'range'">{{ label }}</label>
   </div>
 </template>
 
 <script lang="ts">
+import MarkdownNotice from '@/components/species/MarkdownNotice.vue'
 export default {
+  components: { MarkdownNotice },
   setup() {
     const InputDefault = resolveComponent('InputDefault')
     const InputRange = resolveComponent('InputRange')

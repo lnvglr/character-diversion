@@ -82,7 +82,7 @@ export const opinion = reactive<OpinionState>({
     // opinion[area].id = defaultOpinion.id
     opinion[area] = JSON.parse(JSON.stringify(defaultOpinion))
     if (area === 'form') opinion.formActive = false
-    glyphMethods.setPosition()
+    glyphMethods.setAxesPosition()
   }
 })
 

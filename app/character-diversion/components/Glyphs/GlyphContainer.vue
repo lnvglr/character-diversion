@@ -1,11 +1,12 @@
 <template>
   <div ref="container">
     <Card
-      :hoverable="$state.opinion.formActive"
-      class="card flex justify-center w-full relative  border-0"
+      :hoverable="$state.opinion.formActive && !glyph.dummy"
+      class="card flex justify-center w-full relative border-0"
       :class="{
         'opacity-10': dim(glyph.id),
         'cursor-pointer': $state.opinion.formActive,
+        'hover:z-40': !glyph.dummy,
         [`h-${gridSize}`]: true,
       }"
       @pointerdown="
@@ -14,7 +15,7 @@
       @pointerenter="clickable && active && $f.glyphMethods.toggleGlyph(glyph.id)"
     >
       <GlyphsMiniGlyph
-        v-if="inView"
+        v-if="!glyph.dummy"
         :class="`glyph overflow-hidden text-${fontSize}`"
         :glyph="glyph"
         :tuple="$state.opinion.form.attributes.axes"

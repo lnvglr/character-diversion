@@ -63,14 +63,6 @@ export default defineComponent({
       return v.split(' ').map((e: string, i: number) => i === 1 ? convert(parseFloat(e)) : e ).join(' ')
     }
   },
-  watch: {
-    axes: {
-      handler() {
-        this.$f.glyphMethods.setPosition();
-      },
-      immediate: true,
-    },
-  },
 });
 </script>
 

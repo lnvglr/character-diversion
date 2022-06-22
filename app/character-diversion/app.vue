@@ -1,7 +1,7 @@
 <template>
   <Html :lang="$i18n.locale" :class="$colorMode?.value" :dir="direction">
     <Body
-      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-neutral-700 font-sans"
+      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-stone-900 font-sans"
     >
       <NuxtLayout name="frame">
         <template #header>
@@ -25,24 +25,27 @@
   </Html>
 </template>
 <script lang="ts">
+import { User } from "~/types";
+import { Ref } from "vue";
 import { discourse, opinion } from "~/composables/states";
 import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 export default {
   async setup() {
     const app = useNuxtApp();
-    
+
     const strapi = {
       ...useStrapi4(),
       ...useStrapiAuth(),
       ...useStrapiUser(),
       ...strapiHelpers,
       api: useRuntimeConfig().public.strapi,
-      user: {},
+      user: {} as User,
     };
     strapi.user = await strapi.fetchUser();
     if (!app.$strapi) app.provide("strapi", reactive(strapi));
     if (!app.$state) app.provide("state", reactive({ discourse, opinion }));
     if (!app.$f) app.provide("f", { glyphMethods, utils });
+    strapi.findOne("users", strapi.user.value.id, { populate: ["avatar"] }).then(({avatar}) => app.$strapi.user.avatar = avatar)
 
     definePageMeta({
       pageTransition: {
@@ -59,7 +62,7 @@ export default {
       return ["he", "ar"].includes(this.$i18n.locale) ? "rtl" : "ltr";
     },
   },
-}
+};
 </script>
 <style>
 :where([dir="rtl"] *) {

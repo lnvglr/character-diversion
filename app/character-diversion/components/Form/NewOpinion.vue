@@ -3,8 +3,13 @@
     <form
       v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive"
       @submit.prevent="postOpinion"
+      class="relative"
     >
+      <!-- <Author :user="$strapi.user" imageSize="8" class="mb-2 text-xs" /> -->
+      <Image class="object-cover rounded-full" :class="`absolute top-2 left-3 w-6 h-6 z-10`"
+			:src="$strapi.user.avatar" size="thumbnail" />
       <Input
+        class="indent-7"
         type="textarea"
         :maxlength="500"
         :placeholder="$t('describe.opinion')"
@@ -13,6 +18,9 @@
         :allowMarkdown="true"
         @enter="postOpinion"
         @cancel="$state.opinion.reset('form')"
+        :class="{
+          'shadow-2xl': floating,
+        }"
       />
       <TransitionExpand>
         <div v-if="selectedGlyphs.length > 0">
@@ -25,7 +33,7 @@
           </div>
         </div>
       </TransitionExpand>
-      <div class="flex gap-1 w-full mb-1">
+      <div class="flex gap-1 w-full mb-1" v-if="!floating">
         <Button
           class="clear w-full lg"
           color="alert"
@@ -41,8 +49,10 @@
   <TransitionExpand>
     <div v-if="!$state.opinion.formActive">
       <Button
-        class="w-full"
-        color="success lg"
+        class="lg"
+        :class="'rounded-full mx-auto'"
+        :style="floating ? '--border-radius: 999px' : ''"
+        :color="floating ? 'primary' : 'success'"
         @click="openOpinionForm"
         :label="$t('new.opinion')"
         icon="plus"
@@ -55,6 +65,11 @@
 <script lang="ts">
 import { SamsaFontAxis } from '~/types'
 export default defineComponent({
+  props: {
+    floating: {
+      type: Boolean
+    }
+  },
   computed: {
     currentDiscourse() {
       return this.$state.discourse.current;
@@ -133,7 +148,7 @@ export default defineComponent({
           }
           this.$state.opinion.form.attributes.content = "";
           this.$state.opinion.form.attributes.annotations = {};
-          this.$state.opinion.active = JSON.parse(JSON.stringify(data));
+          // this.$state.opinion.active = JSON.parse(JSON.stringify(data));
           this.$state.opinion.selectedGlyphs = [];
           this.$state.opinion.formActive = false;
         });

@@ -1,5 +1,11 @@
 <template>
-  <div class="flex flex-col overflow-auto h-full w-full">
+  <div class="flex flex-col overflow-auto h-screen w-full">
+
+      <img
+        src="/images/plastic-c.jpg"
+        class="w-screen h-screen absolute z-40 top-0 left-0 object-cover pointer-events-none mix-blend-screen dark:opacity-10"
+        :class="{ 'rotate-180': Math.random() < 0.5 }"
+      />
     <Header class="border-0" iconClass="text-black">Character Diversion</Header>
     <main class="p-10 pb-40 text-black grow">
       <div class="max-w-4xl mx-auto">
