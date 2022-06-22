@@ -1,5 +1,21 @@
 <template>
-  <h1 class="headline font-bold uppercase" v-html="headline"></h1>
+  <!-- <h1 class="headline font-bold uppercase" v-html="headline"></h1> -->
+  <h1 class="headline font-bold uppercase">
+    <span v-for="s in type" :key="s">
+      <VDropdown
+        :distance="12"
+        class="inline-block -my-3 rounded-md bg-info-500 hover:bg-info-600 border border-info-700"
+        style="padding: 0.25em 0.375em 0;"
+        v-if="s === 'type'"
+      >
+        <button class="text-inherit uppercase">{{s}}</button>
+        <template #popper>
+          <div class="px-5 py-3 max-w-md">It doesn't matter if you're a designer, a writer, or just a lover of fonts. Share what you think about the way that text is presented to you in the world around you—and how it can be better.</div>
+        </template>
+      </VDropdown>
+      <template v-else>{{s}}</template>
+    </span>
+  </h1>
   <!-- <h1 class="headline font-bold uppercase">
     <template v-for="word in transformedHeadline" :key="word">
       <span v-if="word.length === 1" class="nowrap inline-block">{{ word[0] }}</span>
@@ -47,6 +63,9 @@ export default defineComponent({
     };
   },
   computed: {
+    type() {
+      return [this.headline.split("type")[0], 'type', this.headline.split("type")[1]]
+    },
     transformedHeadline() {
       return this.headline.split(" ").map((word) => {
         return word.split(this.letter.toLowerCase());
@@ -76,7 +95,7 @@ export default defineComponent({
   @media screen and (max-width: 480px) {
     --font-size: var(--text-3xl);
   }
-  & > * {
+  & > div {
     margin-right: 0.5ex;
   }
   font-family: "Neue Machina", "Gramatika", var(--font-sans);

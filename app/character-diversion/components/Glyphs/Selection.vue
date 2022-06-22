@@ -1,4 +1,7 @@
 <template>
+    <div class="fixed ml-10 left-1/2 bottom-10 z-50 -translate-x-1/2 w-96">
+      <FormNewOpinion :floating="true" />
+    </div>
   <div
     v-if="$state.discourse.font && $state.opinion.form.attributes"
     class="selection-container grid overflow-auto snap-y snap-proximity h-full"
@@ -20,7 +23,7 @@
       class="snap-start"
     />
     <div class="col-span-full">
-  <Card :hoverable="false">
+  <Card>
   <div class="w-full p-24 flex flex-col items-center justify-center gap-5">
     <span>{{ $t("glyphs.shown", { n: filteredGlyphs.length }) }}</span>
     <div class="flex items-center justify-center gap-2">

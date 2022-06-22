@@ -32,16 +32,19 @@
 <script lang="ts">
 export default defineComponent({
   props: {
-    items: Object as () => {
-      [key: string]: {
-        icon: string;
-        label: string;
-        color?: string;
-        class?: string;
-        active?: boolean;
-        hide?: boolean;
-      };
-    },
+    items: {
+      type: Object as () => {
+        [key: string]: {
+          icon: string;
+          label: string;
+          color?: string;
+          class?: string;
+          active?: boolean;
+          hide?: boolean;
+        }
+      },
+      required: true
+    }
   },
   mounted() {
     this.active = Object.entries(this.items).find((e) => e[1].active)?.[0] || "";

@@ -1,19 +1,55 @@
 <template>
-  <div class="h-full flex flex-col justify-start gap-0 overflow-hidden" v-if="$state.discourse.current">
-    <Card class="shrink sticky top-0 z-20" :hoverable="false">
+  <div
+    class="h-full flex flex-col justify-start gap-0 overflow-hidden"
+    v-if="$state.discourse.current"
+  >
+    <Card class="shrink sticky top-0 z-20">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
-    <!-- <DiscourseSidebar /> -->
-    <Card class="" :hoverable="false">
+    <div v-if="activeTab === 'about'" class="grid grid-cols-1 h-full">
+    <Card>
+    <div class="p-5 h-full">
+      <h1 class="text-4xl font-bold">{{$state.discourse.current.attributes.title}}</h1>
+      </div>
+    </Card>
+    </div>
+    <div v-if="activeTab === 'opinions'" class="grid grid-cols-2 h-full">
+      <Card>
+      <div class="flex flex-col w-full">
+        <div
+          class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10"
+          :class="{ 'border-b-0': sidebarMinimized }"
+          v-if="!sidebarMinimized || $state.opinion.formActive"
+        >
+          <FormNewOpinion />
+        </div>
+        <ListOpinions
+          v-if="!sidebarMinimized && $state.discourse.current"
+          :opinions="$state.discourse.current.attributes.opinions?.data"
+          class="border-b border-beige-300"
+        />
+        </div>
+
+      </Card>
+      <GlyphsSelection
+        :gridSize="glyphsViews[glyphsView].gridSize"
+        :fontSize="glyphsViews[glyphsView].fontSize"
+        :edit="glyphsViews[glyphsView].edit && $state.opinion.formActive"
+        :annotations="glyphsViews[glyphsView].annotations"
+        :intersection="glyphsViews[glyphsView].intersection"
+        :frame="glyphsViews[glyphsView].frame"
+        :outline="glyphsViews[glyphsView].outline"
+        :style="style"
+      />
+    </div>
+    <Card v-if="activeTab === 'glyphs'">
       <div class="flex flex-col gap-5 w-full p-5">
         <FilterGroup :items="glyphsViews" @active="(e: string) => glyphsView = e" />
         <GlobalAxes :spectrum="glyphsView === 'intersect'" />
       </div>
     </Card>
-    <div class="fixed ml-10 left-1/2 bottom-10 z-50 -translate-x-1/2 w-96">
-      <FormNewOpinion :floating="true" />
-    </div>
     <GlyphsSelection
+      v-if="activeTab === 'glyphs'"
       :gridSize="glyphsViews[glyphsView].gridSize"
       :fontSize="glyphsViews[glyphsView].fontSize"
       :edit="glyphsViews[glyphsView].edit && $state.opinion.formActive"
@@ -34,7 +70,7 @@ export default defineComponent({
   components: {
     TabBar,
     FilterGroup,
-    GlobalAxes
+    GlobalAxes,
   },
   data() {
     return {
@@ -58,7 +94,7 @@ export default defineComponent({
     };
   },
   computed: {
-    glyphsViews(): { [key: string]: { [key: string]: any } } {
+    glyphsViews(): { [key: string]: { [key: string]: string | boolean | undefined } } {
       return {
         overview: {
           label: "Overview",

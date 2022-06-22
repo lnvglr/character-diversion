@@ -71,8 +71,18 @@ small {
 
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('ttf');
+  src: url('/fonts/Inter-ExtraBold.woff2') format('woff2');
+  font-weight: bold;
 }
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: normal;
+}
+/* @font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_slnt,wght.ttf') format('ttf');
+} */
 @font-face {
   font-family: 'Neue Machina';
   src: url('/fonts/PPNeueMachina-Ultrabold.woff2') format('woff2');
@@ -83,7 +93,9 @@ small {
   src: url('/fonts/PPNeueMachina-Regular.woff2') format('woff2');
   font-weight: normal;
 }
-
+body {
+  font-family: "Inter";
+}
 .slide-enter-active,
 .slide-leave-active {
   transition: transform var(--transition-duration-300) var(--transition-timing-function-default);
@@ -119,7 +131,7 @@ small {
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: all var(--transition-duration-300) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 /* 2. declare enter from and leave to state */
@@ -133,12 +145,17 @@ small {
 }
 
 
+
+
+/* 1. declare transition */
+.page-move,
 .page-enter-active,
 .page-leave-active {
-  transition: var(--transition-duration-300) var(--transition-timing-function-default);
+  transition: all var(--transition-duration-300) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.page-enter,
-.page-leave-active {
+/* 2. declare enter from and leave to state */
+.page-enter-from,
+.page-leave-to {
   opacity: 0;
 }

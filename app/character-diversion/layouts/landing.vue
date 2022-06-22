@@ -1,35 +1,36 @@
 <template>
   <div class="flex flex-col overflow-auto h-screen w-full">
-
-      <img
-        src="/images/plastic-c.jpg"
-        class="w-screen h-screen absolute z-40 top-0 left-0 object-cover pointer-events-none mix-blend-screen dark:opacity-10"
-        :class="{ 'rotate-180': Math.random() < 0.5 }"
-      />
-    <Header class="border-0" iconClass="text-black">Character Diversion</Header>
-    <main class="p-10 pb-40 text-black grow">
-      <div class="max-w-4xl mx-auto">
-        <!-- <Input v-model="headine" class="text-black" />
+     <Card><Header class="border-0" iconClass="text-black">Character Diversion</Header></Card>
+    <main class="pb-40 text-black grow">
+      <Card>
+      <div class="bg-primary-500 text-white w-full">
+        <div class="py-32 px-10 max-w-4xl mx-auto">
+          <!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
-        <LandingHeadline :headline="headine" :letter="letter" class="mt-12 mb-12" />
-        <div
-          class="max-w-2xl mx-auto mb-48 flex gap-24 flex-col sm:flex-row items-start sm:items-center"
-        >
-          <div>
-            Designers and foundries explore, discuss, and work on their typefaces on
-            Character Diversion—the most adequate platform for typographic discourse in
-            the world.
-          </div>
-          <div>
-            <Button
-              to="/discourse"
-              icon="arrow-right"
-              style="--background-color: var(--color-primary-500)"
-              class="lg"
-              >Discover</Button
-            >
+          <LandingHeadline :headline="headine" :letter="letter" class="mb-12" />
+          <div
+            class="max-w-4xl mx-auto flex gap-6 flex-col items-start md:gap-24 md:flex-row md:items-center"
+          >
+            <div class="text-md md:text-lg">
+              Designers and foundries explore, discuss, and work on their typefaces on
+              Character Diversion—the most adequate platform for typographic discourse in
+              the world.
+            </div>
+            <div>
+              <Button
+                to="/discourse"
+                icon="arrow-right"
+                class="lg hover:text-white"
+                >{{ $t("discover.discourses") }}</Button
+              >
+            </div>
           </div>
         </div>
+        </div>
+      </Card>
+      <Card>
+
+      <div class="pt-48 max-w-4xl mx-auto">
         <LandingSection class="stack">
           <template #image>
             <div class="relative">
@@ -49,6 +50,10 @@
             typography, one character at a time. them!</template
           >
         </LandingSection>
+        </div>
+        </Card>
+        <Card>
+      <div class="max-w-4xl mx-auto">
         <LandingSection>
           <template #image><img src="/images/sushi.png" /></template>
           <template #title>Discuss</template>
@@ -66,6 +71,7 @@
           >
         </LandingSection>
       </div>
+        </Card>
     </main>
   </div>
 </template>

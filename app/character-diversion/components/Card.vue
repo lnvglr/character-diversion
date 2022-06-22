@@ -34,7 +34,7 @@ export default {
     },
     hoverable: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
 };
