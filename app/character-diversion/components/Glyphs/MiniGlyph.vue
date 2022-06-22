@@ -17,7 +17,7 @@
 			<g>
 				<!-- <GlyphsGrid v-if="true" :width="characterWidth" :strokeWidth="strokeWidth" /> -->
 				<GlyphsFrame v-if="frame && isTTF" :end="characterWidth" :strokeWidth="strokeWidth" />
-				<GlyphsGlyph :path="path" :class="{ 'fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph :path="path" :class="{ 'fill-info-600 dark:fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
 				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-primary-500'" :strokeWidth="strokeWidth" />
 				<GlyphsOutline v-if="outline" :decomposed="decomposed" :strokeWidth="strokeWidth" />
 				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"

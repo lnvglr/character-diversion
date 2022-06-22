@@ -22,6 +22,8 @@
           'shadow-2xl': floating,
         }"
       />
+      <div class="flex gap-1 w-full mb-1" v-if="!floating">
+
       <TransitionExpand>
         <div v-if="selectedGlyphs.length > 0">
           <div>
@@ -33,14 +35,13 @@
           </div>
         </div>
       </TransitionExpand>
-      <div class="flex gap-1 w-full mb-1" v-if="!floating">
         <Button
-          class="clear w-full lg"
-          color="alert"
+          class="clear ml-auto hover:text-alert-500"
+          style="--color: var(--color-black); --background-color: var(--color-alert-500)"
           @click="$state.opinion.reset('form')"
           >{{ $t("cancel") }}</Button
         >
-        <Button :disabled="!canPost" class="w-full lg" color="success" type="submit">{{
+        <Button :disabled="!canPost" class="" color="success" type="submit">{{
           $t("share.opinion")
         }}</Button>
       </div>

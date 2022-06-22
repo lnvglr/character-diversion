@@ -1,5 +1,5 @@
 <template>
-  <div :class="`flex flex-wrap gap-5`">
+  <div :class="`flex flex-wrap gap-x-5 gap-y-1`">
     <div
       class="flex-1 max-w-full items-center grid"
       v-for="axis in $state.discourse.font.axes"

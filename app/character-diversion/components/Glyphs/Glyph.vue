@@ -19,4 +19,7 @@ export default {
 	fill: currentColor;
 	mix-blend-mode: multiply;
 }
+:global(:where(.dark .glyph-default)) {
+	mix-blend-mode: color-dodge;
+}
 </style>

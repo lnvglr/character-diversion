@@ -76,7 +76,7 @@ export default {
   border: none;
   font-size: 1em;
 }
-:global(:where(.dark .button)) {
+:global(:is(.dark .button)) {
   --color:  var(--color-neutral-800);
   --background-color:  var(--color-neutral-200);
   margin: 0 calc(var(--border-default) * -2);

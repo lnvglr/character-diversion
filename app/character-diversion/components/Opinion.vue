@@ -37,17 +37,11 @@
                 :class="!active ? 'line-clamp-3' : 'line-clamp-none'"
                 v-html="parseOpinion.content"
               />
+              <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
+                <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
+              </span>
               <TransitionExpand>
-                <div
-                  v-if="
-                    active &&
-                    (glyphs.length > 0 ||
-                      Object.values(opinion.attributes.axes).length > 0)
-                  "
-                >
-                  <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
-                    <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
-                  </span>
+                <div v-if="active && Object.values(opinion.attributes.axes).length > 0">
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                     <AxisIndicator :axes="opinion.attributes.axes" />
                   </span>
@@ -87,13 +81,17 @@ export default defineComponent({
     },
     inactive() {
       return (
-        !!this.$state.opinion.active.id && this.$state.opinion.active.id !== this.opinion?.id
+        !!this.$state.opinion.active.id &&
+        this.$state.opinion.active.id !== this.opinion?.id
       );
     },
     glyphs() {
       const extra: string[] = [];
       this.opinion?.attributes.glyphs?.forEach((glyph: number) => {
-        if (!this.parseOpinion.parsedGlyphs.includes(glyph) && 'literal' in this.$state.discourse.font.glyphMap[glyph])
+        if (
+          !this.parseOpinion.parsedGlyphs.includes(glyph) &&
+          "literal" in this.$state.discourse.font.glyphMap[glyph]
+        )
           extra.push(this.$state.discourse.font.glyphMap[glyph].literal);
       });
       return extra;
@@ -130,14 +128,14 @@ export default defineComponent({
   },
   methods: {
     quote() {
-      this.$state.opinion.formActive = true
-      const content = this.$state.opinion.form.attributes.content
-      const author = this.opinion?.attributes.author?.data.attributes?.name
-      const quote  = `> ${this.opinion?.attributes.content} (by ${author})`
+      this.$state.opinion.formActive = true;
+      const content = this.$state.opinion.form.attributes.content;
+      const author = this.opinion?.attributes.author?.data.attributes?.name;
+      const quote = `> ${this.opinion?.attributes.content} (by ${author})`;
       if (!content) {
-        return this.$state.opinion.form.attributes.content = quote
+        return (this.$state.opinion.form.attributes.content = quote);
       }
-      return this.$state.opinion.form.attributes.content = content + '\n' + quote
+      return (this.$state.opinion.form.attributes.content = content + "\n" + quote);
     },
     selectOpinion() {
       const opinion = this.opinion;
@@ -163,7 +161,7 @@ export default defineComponent({
       });
     },
   },
-})
+});
 </script>
 
 <style lang="scss">

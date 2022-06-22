@@ -40,7 +40,9 @@ declare module '@/assets/samsa-core' {
       unicodeTable: {
         [unicodeHex: string]: string
       }
-    }
+    },
+    version: string
+    name: string
   }
   interface SamsaGlyph {
     value: string

@@ -3,12 +3,19 @@
     <button class="hover:underline">{{ $t("markdown.is.allowed") }}</button>
     <template #popper>
       <div class="p-4 text-sm leading-relaxed">
-        <h2 class="text-lg font-bold mb-3">You can use the following syntax</h2>
-        <pre
-          class=""
-          v-html="$f.utils.renderMarkdown(this.definitions.join('<br />'))"
-        ></pre>
-        <p>
+        <h2 class="text-lg font-bold mb-3 w-full flex justify-between"><span>Get started with markdown!</span><Button v-close-popper icon="close" class="clear xs"
+          :title="$t('close')" /></h2>
+        <div
+          class="grid grid-cols-12 gap-3 items-center markdown w-80"
+          v-for="def in definitions"
+          :key="def.icon"
+        >
+          <font-awesome-icon :icon="['fa', def.icon]" class="col-span-1 mx-auto" fixed-width />
+          <div class="col-span-11">
+            <component :is="def.tag || 'span'">{{ def.md }}</component>
+          </div>
+        </div>
+        <p class="mt-2">
           Check out
           <a
             href="https://www.markdownguide.org/cheat-sheet/"
@@ -27,12 +34,30 @@ export default defineComponent({
   data() {
     return {
       definitions: [
-        // '# &#35; Headline 1',
-        // '## Headline 2',
-        "Italic: &#42;*emphasized*&#42;",
-        "Bold: &#42;&#42;**bold**&#42;&#42;",
-        'Image: &#33;&#91;alt text&#93;(https://example.com/image.jpg "Optional title")',
-        "Link: &#91;alt text&#93;(https://example.com/)",
+        {
+          icon: "bold",
+          md: "**bold**",
+        },
+        {
+          icon: "italic",
+          md: "*italic*",
+        },
+        {
+          icon: "strikethrough",
+          md: "~~strikethrough~~",
+        },
+        {
+          icon: "code",
+          md: "`code`",
+        },
+        {
+          icon: "link",
+          md: "[title](https://www.example.com/)",
+        },
+        {
+          icon: "image",
+          md: "![alt text](www.example.com/image.jpg)",
+        },
       ],
     };
   },

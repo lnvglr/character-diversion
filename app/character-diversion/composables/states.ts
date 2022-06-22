@@ -94,19 +94,22 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
       try {
         new SamsaFont({
           url: app.$strapi.api.url + fontName,
-          callback: (e: SamsaFont) => {
-            if (e.errors.length > 0) {
-              reject(e)
+          callback: (font: SamsaFont) => {
+            if (font.errors.length > 0) {
+              reject(font)
             } else {
-              e.cmapReverse = utils.invertObject(e.cmap)
-              e.config.unicodeTable = unicodeTable
-              const map = mapGlyphs(e)
-              e.glyphMap = map.glyphMap
-              e.literalMap = map.literalMap
-              e.postScriptMap = map.postScriptMap
-              e.nameMap = map.nameMap
-              e.glyphs = openTypeGlyphs(e)
-              resolve(e)
+              font.cmapReverse = utils.invertObject(font.cmap)
+              font.config.unicodeTable = unicodeTable
+              const { glyphMap, literalMap, postScriptMap, nameMap } = mapGlyphs(font)
+              font.glyphMap = glyphMap
+              font.literalMap = literalMap
+              font.postScriptMap = postScriptMap
+              font.nameMap = nameMap
+              font.name = font.names[1]
+              font.glyphs = openTypeGlyphs(font)
+              font.version = formatVersion(font)
+              console.log(font)
+              resolve(font)
             }
           },
         })
@@ -115,6 +118,12 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
       }
     }
   )
+}
+
+const formatVersion = (font: SamsaFont): string => {
+  const v = font.names[5].split(";")[0]
+  const convert = (e: number) => (e % 1 == 0) ? e + ".0" : e;
+  return v.split(' ').map((e: string, i: number) => i === 1 ? convert(parseFloat(e)) : e ).join(' ')
 }
 const mapGlyphs = (font: SamsaFontType) => {
   const glyphMap = {}

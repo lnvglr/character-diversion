@@ -1,7 +1,7 @@
 <template>
   <Html :lang="$i18n.locale" :class="$colorMode?.value" :dir="direction">
     <Body
-      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-stone-900 font-sans"
+      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-neutral-900 font-sans"
     >
       <Transition name="page">
       <img
@@ -23,7 +23,7 @@
           </Transition>
         </template>
         <template #body>
-          <NuxtPage class="page w-full" />
+          <NuxtPage class="page w-full h-full" />
         </template>
         <template #navigation>
           <NavBar />

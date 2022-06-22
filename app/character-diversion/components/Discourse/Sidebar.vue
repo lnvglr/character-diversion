@@ -57,11 +57,6 @@ export default defineComponent({
     axes(): string[] {
       return this.$state.discourse.font?.axes;
     },
-    version() {
-      const v = this.$state.discourse.font?.names[5].split(";")[0]
-      const convert = (e: number) => (e % 1 == 0) ? e + ".0" : e;
-      return v.split(' ').map((e: string, i: number) => i === 1 ? convert(parseFloat(e)) : e ).join(' ')
-    }
   },
 });
 </script>
