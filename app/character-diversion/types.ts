@@ -1,6 +1,6 @@
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
 import { Ref } from 'vue'
-export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
+// export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
 import { useStrapiAuth } from '@nuxtjs/strapi/dist/runtime/composables/useStrapiAuth'
 import { StrapiAuthenticationData, StrapiAuthenticationResponse, StrapiAuthProvider, StrapiEmailConfirmationData, StrapiForgotPasswordData, StrapiRegistrationData, StrapiResetPasswordData, StrapiUser } from '@nuxtjs/strapi/dist/runtime/types'

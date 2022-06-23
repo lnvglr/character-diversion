@@ -108,13 +108,12 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
               font.name = font.names[1]
               font.glyphs = openTypeGlyphs(font)
               font.version = formatVersion(font)
-              console.log(font)
               resolve(font)
             }
           },
         })
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     }
   )

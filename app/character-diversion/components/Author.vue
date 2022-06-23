@@ -23,7 +23,7 @@ export default defineComponent({
 		}
 	},
 	mounted() {
-		if (!this.avatar) {
+		if (!this.avatar || !this.author) {
 		return this.$strapi
 			.findOne("users", this.author.id, { populate: ["avatar"] })
 			.then(({avatar}) => {

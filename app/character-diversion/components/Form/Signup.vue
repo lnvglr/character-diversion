@@ -34,7 +34,7 @@
     />
     <Input type="file" v-model="avatar" :accept="['jpg', 'png']" />
     <Button type="submit" class="lg">Sign up</Button>
-    <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
+    <p v-show="error" class="text-sm text-alert-500">{{ errorMsg }}</p>
     <hr />
     <p>
       {{ $t("have.account") }}
@@ -72,8 +72,10 @@ export default defineComponent({
             });
             this.$router.push("/profile");
         });
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
+        this.error = true
+        this.errorMsg = e.error?.message
       }
     },
     slugify(string: string) {

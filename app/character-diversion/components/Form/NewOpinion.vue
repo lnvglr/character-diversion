@@ -11,7 +11,7 @@
       <Input
         class="indent-7"
         type="textarea"
-        :maxlength="500"
+        :maxlength="1000"
         :placeholder="$t('describe.opinion')"
         v-model="$state.opinion.form.attributes.content"
         :submitOnEnter="true"

@@ -6,6 +6,7 @@
     v-if="$state.discourse.font && $state.opinion.form.attributes"
     class="selection-container grid overflow-auto snap-y snap-proximity h-full"
     :class="`grid-cols-autofill-${gridSize}`"
+    style="height: calc(100% - 228px);"
     v-bind="$attrs"
     ref="container"
   >
@@ -223,7 +224,7 @@ export default defineComponent({
     },
     opinionTitles(id: string) {
       return this.hasOpinion(id)
-        .map((opinion: Opinion) => opinion.attributes.content)
+        .map((opinion: Opinion) => opinion?.attributes.content)
         .filter((opinion: Opinion) => opinion);
     },
     // select(remove) {

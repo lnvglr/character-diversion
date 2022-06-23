@@ -23,6 +23,7 @@
         :frame="frame"
         :edit="edit"
         :intersection="intersection"
+        :outline="outline"
         :watcher="[gridSize, intersection]"
         :title="glyph.name"
       />

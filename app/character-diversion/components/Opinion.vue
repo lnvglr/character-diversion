@@ -131,7 +131,7 @@ export default defineComponent({
       this.$state.opinion.formActive = true;
       const content = this.$state.opinion.form.attributes.content;
       const author = this.opinion?.attributes.author?.data.attributes?.name;
-      const quote = `> ${this.opinion?.attributes.content} (by ${author})`;
+      const quote = `> ${this.opinion?.attributes.content} (by ${author})\n\n`;
       if (!content) {
         return (this.$state.opinion.form.attributes.content = quote);
       }

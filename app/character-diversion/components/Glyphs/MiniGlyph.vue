@@ -2,7 +2,7 @@
 	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container">
 
 		<div v-if="!isTTF && glyph"
-			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font.glyphMap[glyph.id].literal }}</div>
+			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font?.glyphMap[glyph.id].literal }}</div>
 		<svg :style="style" :viewBox="viewBox.join(' ')"
 			class="pointer-events-none" ref="svgFrame"></svg>
 		<Transition name="fade">
@@ -17,9 +17,8 @@
 			<g>
 				<!-- <GlyphsGrid v-if="true" :width="characterWidth" :strokeWidth="strokeWidth" /> -->
 				<GlyphsFrame v-if="frame && isTTF" :end="characterWidth" :strokeWidth="strokeWidth" />
-				<GlyphsGlyph :path="path" :class="{ 'fill-info-600 dark:fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph :path="path" :glyph="outline && glyph" :tuple="outline && tuple" :class="{ 'fill-info-600 dark:fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
 				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-primary-500'" :strokeWidth="strokeWidth" />
-				<GlyphsOutline v-if="outline" :decomposed="decomposed" :strokeWidth="strokeWidth" />
 				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"
 					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" />
 			</g>
@@ -123,12 +122,13 @@ export default defineComponent({
 		pathAlt() {
 			return this.intersection && typeof this.decomposedAlt?.svgPath === 'function' && this.decomposedAlt.svgPath()
 		},
-		points() {
-			return this.decomposed?.points
+		points(): number[][] {
+			if (!this.decomposed?.points) return []
+			return this.decomposed.points
 		},
 		characterWidth(): number {
 			if (!this.glyph) return 0
-			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.discourse.font.widths[this.glyph.id]
+			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.discourse.font?.widths[this.glyph.id] || 0
 		},
 		width() {
 			if (!this.glyph) return 0

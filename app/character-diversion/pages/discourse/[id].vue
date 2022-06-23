@@ -1,37 +1,56 @@
 <template>
-  <div
-    class=""
-    v-if="$state.discourse.current"
-  >
+  <div class="" v-if="$state.discourse.current">
     <Card class="shrink sticky top-0 z-20">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
-    <div v-if="activeTab === 'about'" class="">
-      <Card>
-      <div class="p-5 h-full">
-        <h1 class="text-4xl font-bold">{{$state.discourse.current.attributes.title}}</h1>
-        <h2 class="text-xl font-bold mt-5" v-if="$state.discourse.font?.name"><span>{{ $state.discourse.font.name }}</span></h2>
-        <p class="text-sm flex gap-2 items-center my-2 text-beige-600" v-if="$state.discourse.font?.version"><font-awesome-icon :icon="['fa', 'code-branch']" fixed-width /><span>{{ $state.discourse.font.version }}</span></p>
+    <div v-if="activeTab === 'about'" class="h-full flex">
+      <Card class="">
+        <div class="p-5 grid md:grid-cols-2 gap h-full">
+          <div class="h-full">
+            <h1 class="text-4xl font-bold">
+              {{ $state.discourse.current.attributes.title }}
+            </h1>
+            <Author :post="$state.discourse.current" imageSize="12" class="mt-5" />
+            <p class="text-md mt-5">
+              <span v-html="$f.utils.renderMarkdown($state.discourse.current.attributes.content)"></span>
+            </p>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold" v-if="$state.discourse.font?.name">
+              <span>{{ $state.discourse.font.name }}</span>
+            </h2>
+            <p
+              class="text-sm flex gap-2 items-center my-2 text-beige-600"
+              v-if="$state.discourse.font?.version"
+            >
+              <font-awesome-icon :icon="['fa', 'code-branch']" fixed-width /><span>{{
+                $state.discourse.font.version
+              }}</span>
+            </p>
+          </div>
         </div>
       </Card>
     </div>
-    <div v-if="activeTab === 'opinions'" class="grid grid-cols-2 h-full" style="padding-bottom: 66px;">
+    <div
+      v-if="activeTab === 'opinions'"
+      class="grid grid-cols-2 h-full"
+      style="padding-bottom: 66px"
+    >
       <Card class="overflow-auto h-full">
-      <div class="flex flex-col w-full h-full overflow-auto">
-        <div
-          class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10"
-          :class="{ 'border-b-0': sidebarMinimized }"
-          v-if="!sidebarMinimized || $state.opinion.formActive"
-        >
-          <FormNewOpinion />
+        <div class="flex flex-col w-full h-full overflow-auto">
+          <div
+            class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10"
+            :class="{ 'border-b-0': sidebarMinimized }"
+            v-if="!sidebarMinimized || $state.opinion.formActive"
+          >
+            <FormNewOpinion />
+          </div>
+          <ListOpinions
+            v-if="!sidebarMinimized && $state.discourse.current"
+            :opinions="$state.discourse.current.attributes.opinions?.data"
+            class="border-b border-beige-300"
+          />
         </div>
-        <ListOpinions
-          v-if="!sidebarMinimized && $state.discourse.current"
-          :opinions="$state.discourse.current.attributes.opinions?.data"
-          class="border-b border-beige-300"
-        />
-        </div>
-
       </Card>
       <GlyphsSelection
         :gridSize="glyphsViews[glyphsView].gridSize"

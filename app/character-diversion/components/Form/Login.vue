@@ -4,13 +4,16 @@
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" class="lg" autocomplete="current-password" />
     <Button type="submit" :disabled="formData.password?.length < 3" icon="arrow-right" class="lg"
       >Login</Button>
+    <p v-show="error" class="text-sm text-alert-500">{{ errorMsg }}</p>
+
     <Button to="/forgot-password" class="my-2 clear inline lg">{{$t('forgot.password')}}</Button>
     <hr />
     <p>{{$t('no.account.yet')}} <Button to="/register" class="clear inline">{{$t('register')}}</Button></p>
+
   </form>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   name: 'Login',
 
   data() {
@@ -23,10 +26,15 @@ export default {
   methods: {
     async login(e: Event) {
       try {
-        this.$strapi.login(this.formData)
-        this.$router.push('/profile')
-      } catch (e) {}
+        this.$strapi.login(this.formData).then(() => {
+          this.$router.push('/profile')
+        }).catch((e) => {
+          this.error = true
+          this.errorMsg = e.error?.message
+        })
+      } catch (e) {
+      }
     },
   },
-}
+})
 </script>
