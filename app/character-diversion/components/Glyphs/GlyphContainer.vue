@@ -1,18 +1,17 @@
 <template>
-  <div ref="container">
+  <div ref="container" v-if="glyph">
     <Card
       :hoverable="$state.opinion.formActive && !glyph.dummy"
       class="card flex justify-center w-full relative border-0"
       :class="{
         'opacity-10': dim(glyph.id),
-        'cursor-pointer': $state.opinion.formActive,
         'hover:z-40': !glyph.dummy,
         [`h-${gridSize}`]: true,
       }"
       @pointerdown="
-        (active = toggleGlyph), clickable && $f.glyphMethods.toggleGlyph(glyph.id)
+        (active = toggleGlyph), clickable && $f.glyphMethods.toggleGlyph(glyph?.id)
       "
-      @pointerenter="clickable && active && $f.glyphMethods.toggleGlyph(glyph.id)"
+      @pointerenter="clickable && active && $f.glyphMethods.toggleGlyph(glyph?.id)"
     >
       <GlyphsMiniGlyph
         v-if="!glyph.dummy"
@@ -41,14 +40,14 @@
         @click.prevent
       />
       <div
-        v-if="$state.discourse.font.glyphMap[glyph.id]"
+        v-if="$state.discourse.font?.glyphMap[glyph.id]"
         class="z-10 absolute bottom-0 right-0 px-2 m-1 rounded-sm bg-beige-200/80"
         :class="{
           'hover:bg-beige-300 cursor-pointer': $state.opinion.formActive,
-          'text-xs': gridSize < 30,
-          'text-sm m-2': gridSize >= 30,
+          'text-xs': parseInt(gridSize) < 30,
+          'text-sm m-2': parseInt(gridSize) >= 30,
         }"
-        v-html="glyphName(glyph, gridSize < 30)"
+        v-html="glyphName(glyph, parseInt(gridSize) < 30)"
         @pointerdown="(clickable = false), appendGlyph(glyph)"
         @pointerup="clickable = true"
         :title="
@@ -73,10 +72,10 @@
 
 <script lang="ts">
 import { Opinion, SamsaGlyph } from "~/types";
-export default {
+export default defineComponent({
   props: {
     glyph: {
-      type: Object,
+      type: Object as () => SamsaGlyph,
     },
     gridSize: {
       type: String,
@@ -137,7 +136,8 @@ export default {
       this.inView = isIntersecting;
     },
     glyphName(glyph: SamsaGlyph, literal = false) {
-      const g = this.$state.discourse.font.glyphMap[glyph.id];
+      const g = this.$state.discourse.font?.glyphMap[glyph.id];
+      if (!g) return ''
       return literal || g.postScript === "" ? g.literal : g.postScript;
     },
     appendGlyph(glyph: SamsaGlyph) {
@@ -157,12 +157,12 @@ export default {
       const active = this.$state.opinion.active.attributes.glyphs;
       const form = this.$state.opinion.form.attributes.glyphs;
       return (
-        (active.length > 0 && !active.find((g: number) => g === id)) ||
-        (form.length > 0 && !form.find((g: number) => g === id))
+        (active && active.length > 0 && !active.find((g: number) => g === id)) ||
+        (form && form.length > 0 && !form.find((g: number) => g === id))
       );
     },
   },
-};
+})
 </script>
 
 <style lang="scss">

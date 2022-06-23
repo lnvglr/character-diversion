@@ -36,7 +36,7 @@ export default defineComponent({
         dicourseFont.appendChild(
           document.createTextNode(`@font-face {
           font-family: 'dicourseFont';
-          src: url("${this.$strapi.api.url}${current.attributes.font.data.attributes.url}");
+          src: url("${this.$strapi.api.url}${current.attributes.font?.data.attributes.url}");
         }`)
         );
         document.head.appendChild(dicourseFont);

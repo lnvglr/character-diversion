@@ -11,6 +11,7 @@
       <Input
         class="indent-7"
         type="textarea"
+        rows="4"
         :maxlength="1000"
         :placeholder="$t('describe.opinion')"
         v-model="$state.opinion.form.attributes.content"
@@ -19,7 +20,7 @@
         @enter="postOpinion"
         @cancel="$state.opinion.reset('form')"
         :class="{
-          'shadow-2xl': floating,
+          'shadow-xl': floating && $state.opinion.formActive,
         }"
       />
       <div class="flex gap-1 w-full mb-1" v-if="!floating">
@@ -51,9 +52,9 @@
     <div v-if="!$state.opinion.formActive">
       <Button
         class="lg"
-        :class="'rounded-full mx-auto'"
+        :class="`rounded-full ${floating ? 'mx-auto' : ''}`"
         :style="floating ? '--border-radius: 999px' : ''"
-        :color="floating ? 'primary' : 'success'"
+        :color="'primary'"
         @click="openOpinionForm"
         :label="$t('new.opinion')"
         icon="plus"

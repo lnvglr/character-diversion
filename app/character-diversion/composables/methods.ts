@@ -7,10 +7,10 @@ import { content } from '~~/tailwind.config'
 
 const nameToUnicode = (string: string): number => {
   if (string.length === 1) return string.charCodeAt(0)
-  const matchedGlyph = discourse.font.glyphs.find(
+  const matchedGlyph = discourse.font?.glyphs.find(
     (g: SamsaGlyph) => g.name === string
   )
-  if (matchedGlyph) return discourse.font.cmapReverse[matchedGlyph.id]
+  if (matchedGlyph) return discourse.font?.cmapReverse[matchedGlyph.id]
   return 0
 }
 
@@ -22,7 +22,7 @@ export const glyphMethods = {
       )
       : [],
   getTupleValue: (index: number): number[] => {
-    return opinion.form.attributes.axes
+    return opinion.form.attributes.axes && discourse.font?.axes
       ? Object.values(opinion.form.attributes.axes).map(
         (e, i) => e[index] / discourse.font.axes[i]?.max
       ) as number[]

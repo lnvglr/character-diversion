@@ -40,6 +40,10 @@ export default defineComponent({
         title: "",
         content: "",
         font: null,
+      } as {
+        title: string
+        content: string
+        font?: File | null
       },
     };
   },
@@ -48,7 +52,7 @@ export default defineComponent({
   },
   methods: {
     postDiscourse(e: Event) {
-      if (!this.formData.font[0]) return;
+      if (!this.formData.font?.[0]) return;
       const formData = new FormData();
       const dataCompiled = {
         ...this.formData,

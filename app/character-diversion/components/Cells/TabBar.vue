@@ -34,7 +34,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.active = Object.entries(this.items).find(e => e[1].active)?.[0] || "";
+    this.active = Object.entries(this.items || {}).find(e => e[1].active)?.[0] || "";
   },
   data() {
     return {

@@ -1,32 +1,34 @@
 <template>
-<div class="flex flex-col gap-5">
-  <div class="flex item-center justify-between">
-    <div class="button-group">
+  <div class="flex flex-col gap-5">
+    <div class="flex item-center justify-between">
+      <div class="button-group">
+        <Button
+          v-for="(item, name) in items"
+          @click="setActive(name)"
+          :class="{ active: active === name }"
+          :icon="item.icon"
+          :title="item.label"
+          v-show="!item.hide"
+        />
+      </div>
+      <div class="w-full mx-2">
+        <Input
+          type="text"
+          v-model="$state.discourse.search"
+          placeholder="Filter glyphs ..."
+          containerClass="text-bold w-auto w-full"
+          class=""
+        />
+      </div>
       <Button
-        v-for="(item, name) in items"
-        @click="setActive(name)"
-        :class="{ active: active === name }"
-        :icon="item.icon"
-        :title="item.label"
-        v-show="!item.hide"
+        @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion"
+        icon="filter"
+        class="mr-2 clear"
+        :title="$t('filter')"
+        :class="{ active: $state.discourse.filter.opinion }"
       />
     </div>
-    <Button
-      @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion"
-      icon="filter"
-      class="ml-auto mr-2 clear"
-      :title="$t('filter')"
-      :class="{ active: $state.discourse.filter.opinion }"
-    />
   </div>
-  <Input
-    type="text"
-    v-model="$state.discourse.search"
-    placeholder="Filter glyphs ..."
-    containerClass="text-bold w-auto w-full"
-    class="lg"
-  />
-	</div>
 </template>
 
 <script lang="ts">
@@ -41,10 +43,10 @@ export default defineComponent({
           class?: string;
           active?: boolean;
           hide?: boolean;
-        }
+        };
       },
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
     this.active = Object.entries(this.items).find((e) => e[1].active)?.[0] || "";

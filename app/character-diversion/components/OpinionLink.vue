@@ -1,5 +1,5 @@
 <template>
-  <div v-if="linkedOpinions(glyph.id).length > 0" class="">
+  <div v-if="glyph && linkedOpinions(glyph.id).length > 0" class="">
     <VDropdown :distance="12" :skidding="-8" placement="bottom-start">
       <button
         class="flex items-center justify-center font-bold rounded-full text-white bg-primary-500/80"
@@ -19,15 +19,15 @@
   </div>
 </template>
 <script lang="ts">
-import SamsaGlyph from "~/types";
-export default {
+import { SamsaGlyph } from "~/types";
+export default defineComponent({
   props: {
     glyph: {
       type: Object as () => SamsaGlyph,
     },
     size: {
       type: String,
-      default: 'sm'
+      default: "sm",
     },
   },
   methods: {
@@ -35,5 +35,5 @@ export default {
       return this.$f.glyphMethods.glyphHasOpinion(id);
     },
   },
-};
+});
 </script>

@@ -138,7 +138,7 @@ export default defineComponent({
 			return 1
 		},
 		boundaries() {
-			if (!this.points) return [0, this.characterWidth]
+			if (!this.points || this.points.length === 0) return [0, this.characterWidth]
 			const xValues = this.points.map((pt: number[]) => pt[0])
 			return [Math.min(...xValues), Math.max(...xValues)]
 		},

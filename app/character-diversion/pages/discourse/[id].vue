@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-if="$state.discourse.current">
+  <div class="discourse-container" v-if="$state.discourse.current">
     <Card class="shrink sticky top-0 z-20">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
@@ -12,7 +12,11 @@
             </h1>
             <Author :post="$state.discourse.current" imageSize="12" class="mt-5" />
             <p class="text-md mt-5">
-              <span v-html="$f.utils.renderMarkdown($state.discourse.current.attributes.content)"></span>
+              <span
+                v-html="
+                  $f.utils.renderMarkdown($state.discourse.current.attributes.content)
+                "
+              ></span>
             </p>
           </div>
           <div>
@@ -31,22 +35,19 @@
         </div>
       </Card>
     </div>
+    <!-- class="grid grid-cols-2 h-full" -->
     <div
       v-if="activeTab === 'opinions'"
-      class="grid grid-cols-2 h-full"
-      style="padding-bottom: 66px"
+      class="grid grid-cols-2 grid-rows-1 overflow-auto h-full"
     >
       <Card class="overflow-auto h-full">
         <div class="flex flex-col w-full h-full overflow-auto">
           <div
             class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10"
-            :class="{ 'border-b-0': sidebarMinimized }"
-            v-if="!sidebarMinimized || $state.opinion.formActive"
           >
             <FormNewOpinion />
           </div>
           <ListOpinions
-            v-if="!sidebarMinimized && $state.discourse.current"
             :opinions="$state.discourse.current.attributes.opinions?.data"
             class="border-b border-beige-300"
           />
@@ -80,6 +81,12 @@
       :outline="glyphsViews[glyphsView].outline"
       :style="style"
     />
+    <div
+      class="fixed ml-0 sm:ml-10 mb-24 sm:mb-10 left-1/2 bottom-0 z-50 -translate-x-1/2 w-full max-w-xs"
+      v-if="activeTab === 'glyphs'"
+    >
+      <FormNewOpinion :floating="true" />
+    </div>
   </div>
 </template>
 
@@ -157,13 +164,18 @@ export default defineComponent({
     },
     style() {
       const axesRaw = this.$state.opinion.form.attributes.axes;
-      const axes = Object.entries(axesRaw)
+      const axes = Object.entries(axesRaw || {})
         .map((axis) => {
           return `'${axis[0]}' ${axis[1][0]}`;
         })
         .join(", ");
       return `--font-variation-settings: ${axes}`;
     },
+  },
+  watch: {
+    activeTab(tab) {
+      this.$state.discourse.filter.opinion = tab === 'opinions'
+    }
   },
   methods: {
     setView(name: string) {
@@ -173,4 +185,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.discourse-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+}
+</style>

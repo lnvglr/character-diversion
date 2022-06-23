@@ -1,9 +1,9 @@
 <template>
-  <div :class="`flex flex-wrap gap-x-5 gap-y-1`">
+  <div :class="`flex flex-wrap gap-x-5 gap-y-1`"
+      v-if="$state.discourse.font?.axes && $state.discourse.font?.axes.length > 0">
     <div
       class="flex-1 max-w-full items-center grid"
       v-for="axis in $state.discourse.font.axes"
-      v-if="$state.discourse.font"
       :key="axis.tag"
     >
       <Input

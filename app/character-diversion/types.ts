@@ -46,6 +46,7 @@ declare module '@/assets/samsa-core' {
   }
   interface SamsaGlyph {
     value: string
+    dummy: boolean
     openType: {
       is: string
       lig: string
@@ -78,7 +79,7 @@ export interface GlyphMap {
 //==============================================================
 
 export interface Discourse {
-  id: string
+  id: number
   attributes: {
     title: string
     content: string
@@ -90,8 +91,9 @@ export interface Discourse {
     font: string
   }
 }
+
 export interface Opinion {
-  id: string | null
+  id: number
   attributes: {
     content: string | null
     author?: Author
@@ -110,6 +112,7 @@ export interface Opinion {
     }
   }
 }
+
 export interface Author {
   id: number
   attributes: {
@@ -203,7 +206,7 @@ export interface User {
 interface Strapi {
   login(params?:object) : Promise<any>;
   find(collection:string, params?:object) : Promise<any>;
-  findOne(collection:string, id:number) : Promise<any>;
+  findOne(contentType: string, id: string | number, params?: Strapi4RequestParams) : Promise<any>;
   create(collection:string, data:object) : Promise<any>;
   count(collection:string, params?:object) : Promise<any>;
   update(collection:string, id:number, data:object) : Promise<any>;
@@ -219,6 +222,7 @@ interface Strapi {
   sendEmailConfirmation: (data: StrapiEmailConfirmationData) => Promise<void>;
   getProviderAuthenticationUrl: (provider: StrapiAuthProvider) => string;
   authenticateProvider: (provider: StrapiAuthProvider, access_token: string) => Promise<StrapiAuthenticationResponse>;
+  client: typeof strapiHelpers.client;
   user: typeof User;
   uploadFile: typeof strapiHelpers.uploadFile;
   removeFile: typeof strapiHelpers.removeFile;

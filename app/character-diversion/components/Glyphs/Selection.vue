@@ -1,12 +1,8 @@
 <template>
-  <div class="fixed ml-10 left-1/2 bottom-10 z-50 -translate-x-1/2 w-96">
-    <FormNewOpinion :floating="true" />
-  </div>
   <div
     v-if="$state.discourse.font && $state.opinion.form.attributes"
     class="selection-container grid overflow-auto snap-y snap-proximity h-full"
     :class="`grid-cols-autofill-${gridSize}`"
-    style="height: calc(100% - 228px);"
     v-bind="$attrs"
     ref="container"
   >
@@ -200,32 +196,12 @@ export default defineComponent({
         selectedGlyphs.includes(id)
       );
     },
-    glyphName(glyph: SamsaGlyph, literal = false) {
-      const g = this.$state.discourse.font.glyphMap[glyph.id];
-      return literal || g.postScript === "" ? g.literal : g.postScript;
-    },
-    appendGlyph(glyph: SamsaGlyph) {
-      if (!this.$state.opinion.formActive) return;
-      const content = this.$state.opinion.form.attributes.content;
-      const glyphReference = "/" + this.glyphName(glyph);
-      if (!content) return (this.$state.opinion.form.attributes.content = glyphReference);
-      if (content.trim().endsWith(glyphReference)) {
-        return (this.$state.opinion.form.attributes.content = content.substring(
-          0,
-          content.length - glyphReference.length - 1
-        ));
-      }
-      this.$state.opinion.form.attributes.content = content.trim() + " " + glyphReference;
-    },
     hasOpinion(id: number) {
-      return this.$state.discourse.current.attributes.opinions.data.filter(
-        (opinion: Opinion) => opinion.attributes.glyphs.includes(id)
+      if (!this.$state.discourse.current) return [];
+      if (!this.$state.discourse.current.attributes.opinions?.data) return [];
+      return this.$state.discourse.current?.attributes.opinions.data.filter(
+        (opinion: Opinion) => opinion.attributes.glyphs?.includes(id)
       );
-    },
-    opinionTitles(id: string) {
-      return this.hasOpinion(id)
-        .map((opinion: Opinion) => opinion?.attributes.content)
-        .filter((opinion: Opinion) => opinion);
     },
     // select(remove) {
     // select range

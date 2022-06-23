@@ -41,7 +41,7 @@
                 <UITag v-for="glyph in glyphs">{{ glyph }}</UITag>
               </span>
               <TransitionExpand>
-                <div v-if="active && Object.values(opinion.attributes.axes).length > 0">
+                <div v-if="active && Object.values(opinion.attributes.axes || {}).length > 0">
                   <span class="mt-2 flex flex-wrap gap-1 items-center text-xs">
                     <AxisIndicator :axes="opinion.attributes.axes" />
                   </span>
@@ -85,12 +85,12 @@ export default defineComponent({
         this.$state.opinion.active.id !== this.opinion?.id
       );
     },
-    glyphs() {
+    glyphs(): string[] {
       const extra: string[] = [];
       this.opinion?.attributes.glyphs?.forEach((glyph: number) => {
         if (
           !this.parseOpinion.parsedGlyphs.includes(glyph) &&
-          "literal" in this.$state.discourse.font.glyphMap[glyph]
+          this.$state.discourse.font?.glyphMap[glyph].literal
         )
           extra.push(this.$state.discourse.font.glyphMap[glyph].literal);
       });
@@ -152,8 +152,9 @@ export default defineComponent({
       // this.$state.opinion.form.attributes.annotations = selected.attributes.annotations
     },
     removeOpinion() {
-      this.$strapi.delete("opinions", this.opinion?.id).then(({ data }) => {
-        const opinions = this.$state.discourse.current.attributes.opinions;
+      if (!this.opinion) return
+      this.$strapi.delete("opinions", this.opinion.id).then(({ data }) => {
+        const opinions = this.$state.discourse.current?.attributes.opinions;
         if (opinions?.data) {
           opinions.data = opinions.data.filter((e: Opinion) => e.id !== data.id);
         }
