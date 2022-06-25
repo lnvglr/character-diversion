@@ -2,7 +2,7 @@
   <div class="">
     <Card class="dark:text-white" :hoverable="false">
     <div class="w-full flex items-center justify-between gap-5 p-10">
-      <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold">{{$t('discover.discourses')}}</h1>
+      <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold leading-none">{{$t('discover.discourses')}}</h1>
       <p class="max-w-xl">Explore discourses type and discover a new way to delve into the world of typography, one character at a time.</p>
       </div>
       <Button v-if="$strapi.user" to="/discourse/new" key="remove" color="primary" class="

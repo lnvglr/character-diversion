@@ -50,6 +50,11 @@ export default defineComponent({
   async mounted() {
     // console.log()
   },
+  computed: {
+    fontFile() {
+      return this.formData.font?.[0];
+    }
+  },
   methods: {
     postDiscourse(e: Event) {
       if (!this.formData.font?.[0]) return;

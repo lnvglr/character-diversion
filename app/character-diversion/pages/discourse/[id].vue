@@ -4,14 +4,14 @@
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
     <div v-if="activeTab === 'about'" class="h-full flex">
-      <Card class="">
-        <div class="p-5 grid md:grid-cols-2 gap h-full">
-          <div class="h-full">
+      <div class="grid md:grid-cols-2 h-full">
+        <Card class="">
+          <div class="h-full p-10">
             <h1 class="text-4xl font-bold">
               {{ $state.discourse.current.attributes.title }}
             </h1>
             <Author :post="$state.discourse.current" imageSize="12" class="mt-5" />
-            <p class="text-md mt-5">
+            <p class="text-md mt-5 markdown">
               <span
                 v-html="
                   $f.utils.renderMarkdown($state.discourse.current.attributes.content)
@@ -19,7 +19,9 @@
               ></span>
             </p>
           </div>
-          <div>
+        </Card>
+        <Card>
+          <div class="h-full p-10">
             <h2 class="text-xl font-bold" v-if="$state.discourse.font?.name">
               <span>{{ $state.discourse.font.name }}</span>
             </h2>
@@ -32,8 +34,8 @@
               }}</span>
             </p>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
     </div>
     <!-- class="grid grid-cols-2 h-full" -->
     <div
@@ -42,9 +44,7 @@
     >
       <Card class="overflow-auto h-full">
         <div class="flex flex-col w-full h-full overflow-auto">
-          <div
-            class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10"
-          >
+          <div class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10">
             <FormNewOpinion />
           </div>
           <ListOpinions
@@ -122,7 +122,7 @@ export default defineComponent({
     };
   },
   computed: {
-    glyphsViews(): { [key: string]: { [key: string]: string | boolean | undefined } } {
+    glyphsViews() {
       return {
         overview: {
           label: "Overview",
@@ -174,8 +174,8 @@ export default defineComponent({
   },
   watch: {
     activeTab(tab) {
-      this.$state.discourse.filter.opinion = tab === 'opinions'
-    }
+      this.$state.discourse.filter.opinion = tab === "opinions";
+    },
   },
   methods: {
     setView(name: string) {
@@ -189,7 +189,7 @@ export default defineComponent({
 .discourse-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 66px auto;
   height: 100%;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <Card class="min-h-[200px] flex">
+  <Card class="min-h-[200px] flex" v-if="discourse">
     <NuxtLink
       :to="`/discourse/${discourse.id}`"
       class="p-4 flex flex-col flex-1 items-stretch"
@@ -31,7 +31,7 @@ export default defineComponent({
     return {};
   },
   methods: {
-    removeDiscourse(id: string) {
+    removeDiscourse(id: number) {
       this.$strapi
         .delete("discourses", id)
         .then(({ data }: Strapi4Response<Discourse>) => delete discourse.all[data.id]);

@@ -20,7 +20,18 @@ export default defineNuxtConfig({
     // https://router.vuejs.org/api/#routeroptions
     options: {},
   },
-  pageTransition: { 'page-fade': true },
+  pageTransition: {
+    'page-fade': true,
+    onLeave: () => {
+      console.log("leaving");
+    },
+    onBeforeLeave: () => {
+      console.log("onBeforeLeave");
+    },
+    onBeforeEnter: () => {
+      console.log("onBeforeEnter");
+    },
+  },
   css: ['@/assets/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   build: {
     transpile: [

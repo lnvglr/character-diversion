@@ -1,7 +1,7 @@
 import RelativeTime from '@yaireo/relative-time'
 import { useI18n } from 'vue-i18n'
 
-export const useRelativeTime = (d1: string, d2: string | null, threshold: number = 2.419e+9) => {
+export const useRelativeTime = (d1: string, d2?: string, threshold?: number) => {
 	if (!d1) return
 	const i18n = useI18n({ useScope: 'global' })
 	const locale = i18n.locale.value as string
@@ -10,7 +10,7 @@ export const useRelativeTime = (d1: string, d2: string | null, threshold: number
 	const elapsed = Math.abs(date2.getTime() - date1.getTime())
 
 
-	if (elapsed > threshold) {
+	if (elapsed > (threshold || 2.419e+9)) {
 		const options = {
 			month: 'long'
 		} as Intl.DateTimeFormatOptions

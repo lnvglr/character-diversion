@@ -9,6 +9,7 @@
       <Image class="object-cover rounded-full" :class="`absolute top-2 left-3 w-6 h-6 z-10`"
 			:src="$strapi.user.avatar" size="thumbnail" />
       <Input
+        ref="content"
         class="indent-7"
         type="textarea"
         rows="4"
@@ -65,8 +66,12 @@
 </template>
 
 <script lang="ts">
+import Input from '~/components/Input.vue'
 import { SamsaFontAxis } from '~/types'
 export default defineComponent({
+  components: {
+    Input,
+  },
   props: {
     floating: {
       type: Boolean
@@ -91,6 +96,15 @@ export default defineComponent({
     },
   },
   watch: {
+    "$state.opinion.formActive"(value: boolean) {
+      if (!value) return
+      setTimeout(() => {
+        const container = this.$refs.content as InstanceType<typeof Input>
+        if (!container) return
+        const content = container.$el?.querySelector('textarea') as HTMLTextAreaElement;
+        if (content) content.focus();
+      }, 200);
+    },
     "$state.opinion.form.attributes.content"(value: string) {
       const matchedGlyphs = this.$f.glyphMethods.match(value);
       this.$state.opinion.form.attributes.glyphs = [
@@ -140,10 +154,10 @@ export default defineComponent({
           });
         })
         .then(({ data }) => {
-          const attributes = this.$state.discourse.current.attributes;
-          if (attributes.opinions?.data) {
+          const attributes = this.$state.discourse.current?.attributes;
+          if (attributes?.opinions?.data) {
             attributes.opinions.data.push(data);
-          } else {
+          } else if (attributes) {
             attributes.opinions = {
               data: [data],
             };

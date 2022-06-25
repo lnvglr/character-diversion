@@ -17,7 +17,7 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
     content: '',
     files: {}
   },
-  setCurrent: (id: string) => {
+  setCurrent: (id) => {
     const current = discourse.all[id as keyof typeof discourse.all]
     if (!current?.attributes.font?.data?.attributes.url) return discourse.current = null
     useSamsaFont(current.attributes.font?.data?.attributes.url)

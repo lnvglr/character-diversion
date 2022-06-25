@@ -1,9 +1,9 @@
 import publicRuntimeConfig from '@nuxtjs/strapi/dist/module'
 import { Ref } from 'vue'
-// export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { useStrapi4 } from '@nuxtjs/strapi/dist/runtime/composables/useStrapi4'
 import { useStrapiAuth } from '@nuxtjs/strapi/dist/runtime/composables/useStrapiAuth'
 import { StrapiAuthenticationData, StrapiAuthenticationResponse, StrapiAuthProvider, StrapiEmailConfirmationData, StrapiForgotPasswordData, StrapiRegistrationData, StrapiResetPasswordData, StrapiUser } from '@nuxtjs/strapi/dist/runtime/types'
+// export { Strapi4Response, Strapi4ResponseData, Strapi4RequestParams } from '@nuxtjs/strapi/dist/runtime/types'
 import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
@@ -88,7 +88,7 @@ export interface Discourse {
     publishedAt?: string
     updatedAt?: string
     opinions?: Opinion[]
-    font: string
+    font: File
   }
 }
 
@@ -166,7 +166,7 @@ export interface DiscourseState {
     content: string,
     files: object
   },
-  setCurrent: (id: string) => void
+  setCurrent: (id: string | string[]) => void
   fetch: () => void
 }
 interface annotationTool extends Annotation {
@@ -226,6 +226,7 @@ interface Strapi {
   user: typeof User;
   uploadFile: typeof strapiHelpers.uploadFile;
   removeFile: typeof strapiHelpers.removeFile;
+  api: typeof publicRuntimeConfig;
 }
 
 

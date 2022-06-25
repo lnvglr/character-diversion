@@ -3,14 +3,14 @@ import { Opinion, SamsaFont, SamsaGlyph, SamsaFontAxis, Discourse } from '@/type
 import { opinion } from '@/composables/states'
 import { useRelativeTime } from '@/composables/relativeTime'
 import md from '@/composables/markdown'
-import { content } from '~~/tailwind.config'
 
 const nameToUnicode = (string: string): number => {
   if (string.length === 1) return string.charCodeAt(0)
-  const matchedGlyph = discourse.font?.glyphs.find(
+  if (!discourse.font) return 0
+  const matchedGlyph = discourse.font.glyphs.find(
     (g: SamsaGlyph) => g.name === string
   )
-  if (matchedGlyph) return discourse.font?.cmapReverse[matchedGlyph.id]
+  if (matchedGlyph) return discourse.font.cmapReverse[matchedGlyph.id]
   return 0
 }
 
@@ -22,8 +22,9 @@ export const glyphMethods = {
       )
       : [],
   getTupleValue: (index: number): number[] => {
+    if (!discourse.font) return []
     return opinion.form.attributes.axes && discourse.font?.axes
-      ? Object.values(opinion.form.attributes.axes).map(
+      ? Object.values(opinion.form.attributes?.axes ||{}).map(
         (e, i) => e[index] / discourse.font.axes[i]?.max
       ) as number[]
       : []
@@ -60,10 +61,11 @@ export const glyphMethods = {
       .join('')
   },
   glyphToUnicode: (string: string | string[]): number | number[] => {
+    if (!discourse.font) return 0
     if (typeof string === 'string') {
-      return discourse.font?.cmap[nameToUnicode(string)]
+      return discourse.font.cmap[nameToUnicode(string)]
     }
-    return string.map((e) => discourse.font?.cmap[nameToUnicode(e)])
+    return string.map((e) => discourse.font ? discourse.font.cmap[nameToUnicode(e) as number] : 0)
   },
   nameToUnicode,
 
@@ -106,7 +108,7 @@ export const glyphMethods = {
       })
       .filter(e => e)
   },
-  glyphHasOpinion(id: number, discourseId: number = null): Opinion[] | undefined {
+  glyphHasOpinion(id: number, discourseId?: number): Opinion[] | undefined {
     let d: Discourse
     if (!discourseId && !discourse.current) return
     if (discourseId && discourseId in discourse.all) {
@@ -117,7 +119,7 @@ export const glyphMethods = {
       return
     }
     if (!d.attributes.opinions) return []
-    return d.attributes.opinions?.data.filter((opinion: Opinion) => opinion.attributes.glyphs.includes(id))
+    return d.attributes.opinions?.data.filter((opinion: Opinion) => opinion?.attributes?.glyphs?.includes(id))
   },
 }
 
@@ -160,10 +162,13 @@ export const strapiHelpers = {
     let ref: string = ''
     switch(contentType) {
       case 'discourse':
+      case 'discourses':
         ref = 'api::discourse.discourse'
       case 'opinion':
+      case 'opinions':
         ref = 'api::opinion.opinion'
       case 'user':
+      case 'users':
         ref = 'plugin::users-permissions.user'
     }
 

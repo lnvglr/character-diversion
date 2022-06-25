@@ -5,17 +5,16 @@
 </template>
 <script lang="ts">
 import { Opinion } from "~/types"
-export default {
+export default defineComponent({
 	props: {
 		opinions: {
-			type: Array,
+			type: Array as () => Opinion[],
 			default: [],
 		}
 	},
 	computed: {
 		currentOpinions() {
-			return this.opinions.sort((a: Opinion, b: Opinion) => this.score(b) - this.score(a)
-			);
+			return this.opinions.sort((a: Opinion, b: Opinion) => this.score(b) - this.score(a));
 		},
 		watcher() {
 			return [this.currentOpinions, this.$state.opinion.active.id]
@@ -29,10 +28,10 @@ export default {
 		score(opinion: Opinion) {
 			if (!opinion) return 0
 			let score = this.countVotes(opinion) * 5
-			const threshold = (new Date(opinion.attributes.updatedAt).getTime() + (1000 * 60 * 60) - new Date().getTime()) / 100000 | 0
+			const threshold = (new Date(String(opinion.attributes.updatedAt)).getTime() + (1000 * 60 * 60) - new Date().getTime()) / 100000 | 0
 			score += Math.max(0, threshold)
 			return score
 		}
 	},
-}
+})
 </script>
