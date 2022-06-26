@@ -40,13 +40,13 @@ import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 export default defineComponent({
   async setup() {
     const app = useNuxtApp();
-
     const strapi = {
       ...useStrapi4(),
       ...useStrapiAuth(),
       ...useStrapiUser(),
       ...strapiHelpers,
       api: useRuntimeConfig().public.strapi,
+      media: useRuntimeConfig().public.media,
       user: {} as User,
     };
     strapi.user = await strapi.fetchUser();

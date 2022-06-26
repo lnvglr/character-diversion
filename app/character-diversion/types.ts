@@ -225,7 +225,8 @@ interface Strapi {
   user: typeof User;
   uploadFile: typeof strapiHelpers.uploadFile;
   removeFile: typeof strapiHelpers.removeFile;
-  api: typeof publicRuntimeConfig & { media: string };
+  api: typeof publicRuntimeConfig;
+  media: string;
 }
 
 
