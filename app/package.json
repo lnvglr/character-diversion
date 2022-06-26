@@ -1,0 +1,15 @@
+{
+  "name": "character-diversion",
+  "version": "0.0.2",
+  "private": true,
+  "engines": {
+    "npm": "8.5.5",
+    "node": "v16.15.0"
+  },
+  "scripts": {
+		"start": "",
+    "build": "yarn --cwd client install && yarn --cwd client build",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy"
+  }
+}
