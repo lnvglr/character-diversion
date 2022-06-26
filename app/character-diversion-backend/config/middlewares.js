@@ -32,7 +32,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: ['https://www.character-diversion.com'],
+      origin: ['*'],
     }
   },
   'strapi::poweredBy',
