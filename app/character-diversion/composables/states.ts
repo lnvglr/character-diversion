@@ -93,7 +93,7 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
       try {
         new SamsaFont({
-          url: app.$strapi.api.url + fontName,
+          url: app.$strapi.api.media + fontName,
           callback: (font: SamsaFont) => {
             if (font.errors.length > 0) {
               reject(font)

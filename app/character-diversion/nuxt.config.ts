@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
+    media: process.env.API_MEDIA || process.env.API_BASE || 'http://localhost:1337'
   },
   buildModules: [
     '@nuxtjs/tailwindcss',

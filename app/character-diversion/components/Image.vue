@@ -23,7 +23,7 @@ export default defineComponent({
 	},
 	computed: {
 		source() {
-			const base = this.$strapi.api.url
+			const base = this.$strapi.api.media
 			const format = this.src?.formats?.[this.size] ? this.size : 'thumbnail';
 
 			if (this.src?.formats?.[format]) return base + this.src.formats[format].url
