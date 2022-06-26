@@ -23,7 +23,8 @@ export default defineComponent({
 	},
 	computed: {
 		source() {
-			const base = this.$strapi.api.media
+			console.log(this.$strapi.api.media, typeof this.$strapi.api.media)
+			const base = this.$strapi.api.media && this.$strapi.api.media !== 'undefined' && this.$strapi.api.media !== undefined ? this.$strapi.api.media : '';
 			const format = this.src?.formats?.[this.size] ? this.size : 'thumbnail';
 
 			if (this.src?.formats?.[format]) return base + this.src.formats[format].url
