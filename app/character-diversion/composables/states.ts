@@ -72,7 +72,6 @@ export const opinion = reactive<OpinionState>({
   formActive: false,
   active: JSON.parse(JSON.stringify(defaultOpinion)),
   selectedGlyphs: [],
-  invariableGlyphs: [],
   annotationTool: {
     id: null,
     x: 0,
@@ -92,10 +91,10 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
       try {
-        const base = app.$strapi.api.media && app.$strapi.api.media !== undefined ? app.$strapi.api.media : app.$strapi.api.url
+        const base = app.$strapi.api.media && app.$strapi.api.media !== undefined ? app.$strapi.api.media : ''
         console.log(app.$strapi.api.media, fontName)
         new SamsaFont({
-          url: app.$strapi.api.media + fontName,
+          url:  fontName,
           callback: (font: SamsaFont) => {
             if (font.errors.length > 0) {
               reject(font)
