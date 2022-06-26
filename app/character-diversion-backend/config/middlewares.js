@@ -5,7 +5,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: ['http://localhost:1337', 'http://backend.character-diversion.com', 'https://backend.character-diversion.com'],
+      origin: ['http://localhost:1337', 'http://backend.character-diversion.com', 'https://backend.character-diversion.com', 'http://character-diversion.com', 'http://www.character-diversion.com', 'https://character-diversion.com', 'https://www.character-diversion.com'],
     }
   },
   'strapi::poweredBy',
