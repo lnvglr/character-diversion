@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="overflow-auto">
     <Card class="dark:text-white" :hoverable="false">
     <div class="w-full flex items-center justify-between gap-5 p-10">
       <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold leading-none">{{$t('discover.discourses')}}</h1>
