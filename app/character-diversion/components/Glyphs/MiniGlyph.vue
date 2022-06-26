@@ -95,8 +95,10 @@ export default defineComponent({
 		},
 		decomposeWatcher: {
 			handler() {
+				if (!this.inView || !this.isTTF) return
+				// console.log(this.glyph)
+				// console.log(this.$state.discourse.font)
 				setTimeout(() => {
-					if (!this.inView || !this.isTTF) return
 					this.decomposed = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0))
 					this.decomposedAlt = this.intersection && this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(1)) || undefined
 					const variableGlyph = (typeof this.decomposedAlt?.svgPath === 'function') && this.decomposed?.svgPath() !== this.decomposedAlt.svgPath()

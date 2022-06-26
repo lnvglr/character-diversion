@@ -43,6 +43,12 @@
       </Card>
     </div>
   </div>
+  <Card v-else class="w-full">
+  <div class="p-20 flex flex-col items-center w-full">
+    <font-awesome-icon :icon="['fa', 'xmark']" class="text-3xl" />
+    <div class="text-beige-400">No font file attached.</div>
+  </div>
+  </Card>
 </template>
 
 <script lang="ts">

@@ -10,12 +10,12 @@
       --hover-color: var(--color-${color}-600);
       --handle-color: var(--color-${color}-500);
       --track-fill: var(--color-${color}-400);
-      --inline-template: ${['4ch', '1fr', (Array.isArray(modelValue) && value[1] !== null) && '4ch'].filter(e => e).join(' ')};
+      --inline-template: ${['4ch', '1fr', (Array.isArray(value) && valueR[1] !== null) && '4ch'].filter(e => e).join(' ')};
     `"
   :data-min="dataMin" :data-max="dataMax">
     <div class="track" :style="style">
-      <input type="range" ref="min" :value="value[0]" @input="input($event.target, 0)" v-bind="$attrs" :step="step" />
-      <input v-if="Array.isArray(modelValue) && value[1] !== null" type="range" ref="max" :value="value[1]"
+      <input type="range" ref="min" :value="valueR[0]" @input="input($event.target, 0)" v-bind="$attrs" :step="step" />
+      <input v-if="Array.isArray(value) && valueR[1] !== null" type="range" ref="max" :value="valueR[1]"
         @input="input($event.target, 1)" v-bind="$attrs" :step="step" />
     </div>
   </div>
@@ -26,7 +26,7 @@ export default defineComponent({
     type: {
       type: String,
     },
-    modelValue: {
+    value: {
       type: [Array, Number],
     },
     step: {
@@ -49,11 +49,11 @@ export default defineComponent({
     },
   },
   computed: {
-    value() {
-      if (Array.isArray(this.modelValue)) {
-        return this.modelValue
+    valueR() {
+      if (Array.isArray(this.value)) {
+        return this.value
       }
-      return [this.modelValue]
+      return [this.value]
     },
     style() {
       const calc = (name: string, val: number) =>
@@ -61,27 +61,27 @@ export default defineComponent({
           (100 / (this.$attrs.max - this.$attrs.min)) *
           (val - this.$attrs.min)
         ).toFixed(this.decimalPlaces)};`
-      const min = calc('min', this.value[0])
-      const max = calc('max', this.value[1])
-      // const max = calc('max', this.value[1] !== null ? this.value[1] : this.value[0])
-      // const min = calc('min', this.value[1] !== null ? this.value[0] : this.$attrs.min)
+      const min = calc('min', this.valueR[0])
+      const max = calc('max', this.valueR[1])
+      // const max = calc('max', this.valueR[1] !== null ? this.valueR[1] : this.valueR[0])
+      // const min = calc('min', this.valueR[1] !== null ? this.valueR[0] : this.$attrs.min)
       return `${min} ${max}`
     },
     decimalPlaces() {
       return String(this.decimal || this.step)?.split('.')[1]?.length || 0
     },
     dataMin() {
-      return this.value[0]?.toFixed(this.decimalPlaces)
+      return this.valueR[0]?.toFixed(this.decimalPlaces)
     },
     dataMax() {
-      if (!Array.isArray(this.modelValue)) return ''
-      return this.value[1]?.toFixed(this.decimalPlaces)
+      if (!Array.isArray(this.value)) return ''
+      return this.valueR[1]?.toFixed(this.decimalPlaces)
     },
   },
   methods: {
     input(eventTarget: HTMLInputElement, index: number) {
       let value = eventTarget.valueAsNumber
-      const newValues = this.modelValue
+      const newValues = this.value
       const gap = this.gap || Math.max(Math.abs(this.$attrs.max - this.$attrs.min) / 100, this.step)
 
       if (!Array.isArray(newValues)) {

@@ -47,7 +47,6 @@ export default defineComponent({
 					1 * 20);
 				if (svgEl) points.push(svgEl);
 			})
-			console.log(points)
 			return points;
 		}
 	},
