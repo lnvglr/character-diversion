@@ -93,7 +93,7 @@ export interface Discourse {
 }
 
 export interface Opinion {
-  id: number
+  id: number | null
   attributes: {
     content: string | null
     author?: Author
@@ -177,7 +177,6 @@ export interface OpinionState {
   active: Opinion
   formActive: Boolean
   selectedGlyphs: number[]
-  invariableGlyphs: number[]
   annotationTool: annotationTool
   reset: (key: string) => void
 }
