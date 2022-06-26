@@ -1,15 +1,6 @@
 module.exports = [
   'strapi::errors',
-  // 'strapi::cors',
-  {
-    name: 'strapi::cors',
-    config: {
-      enabled: true,
-      // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      headers: '*',
-      // origin: ['http://localhost:3000', 'http://backend.character-diversion.com', 'https://backend.character-diversion.com', 'http://character-diversion.com', 'http://www.character-diversion.com', 'https://character-diversion.com', 'https://www.character-diversion.com'],
-    }
-  },
+  'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
