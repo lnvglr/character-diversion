@@ -1,3 +1,4 @@
+const awsBucket = `${process.env.AWS_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`;
 module.exports = [
   'strapi::errors',
   {
@@ -12,14 +13,14 @@ module.exports = [
             'data:',
             'blob:',
             'dl.airtable.com',
-            'character-diversion.s3.eu-central-1.amazonaws.com',
+            awsBucket,
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
             'dl.airtable.com',
-            'character-diversion.s3.eu-central-1.amazonaws.com',
+            awsBucket,
           ],
           upgradeInsecureRequests: null,
         },
