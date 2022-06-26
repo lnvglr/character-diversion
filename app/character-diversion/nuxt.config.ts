@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     url: process.env.API_BASE || 'http://localhost:1337',
   },
   publicRuntimeConfig: {
-    media: process.env.API_MEDIA || 'http://localhost:1337'
+    media: process.env.API_MEDIA
   },
   buildModules: [
     '@nuxtjs/tailwindcss',
