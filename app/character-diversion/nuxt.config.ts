@@ -56,4 +56,5 @@ export default defineNuxtConfig({
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
   },
+  serverMiddleware: ["redirect-ssl"],
 })

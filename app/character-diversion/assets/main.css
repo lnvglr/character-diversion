@@ -76,6 +76,11 @@ small {
   }
 }
 
+article {
+  p {
+    margin-bottom: var(--m-3);
+  }
+}
 
 @font-face {
   font-family: 'Inter';

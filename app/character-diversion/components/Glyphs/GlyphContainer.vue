@@ -1,7 +1,7 @@
 <template>
   <div ref="container" v-if="glyph">
     <Card
-      :hoverable="$state.opinion.formActive && !glyph.dummy"
+      :hover="$state.opinion.formActive && !glyph.dummy"
       class="card flex justify-center w-full relative border-0"
       :class="{
         'opacity-10': dim(glyph.id),
@@ -32,10 +32,9 @@
         type="checkbox"
         v-model="$state.opinion.selectedGlyphs"
         :value="glyph.id"
-        containerClass="absolute w-fit right-0 p-1"
-        :containerClass="{
-          hide: !$state.opinion.selectedGlyphs.includes(glyph.id),
-        }"
+        containerClass=""
+        :containerClass="`absolute w-fit right-0 p-1
+          ${!$state.opinion.selectedGlyphs.includes(glyph.id) ? 'hide' : ''}`"
         class="info z-10"
         @click.prevent
       />
@@ -137,7 +136,7 @@ export default defineComponent({
     },
     glyphName(glyph: SamsaGlyph, literal = false) {
       const g = this.$state.discourse.font?.glyphMap[glyph.id];
-      if (!g) return ''
+      if (!g) return "";
       return literal || g.postScript === "" ? g.literal : g.postScript;
     },
     appendGlyph(glyph: SamsaGlyph) {
@@ -162,7 +161,7 @@ export default defineComponent({
       );
     },
   },
-})
+});
 </script>
 
 <style lang="scss">

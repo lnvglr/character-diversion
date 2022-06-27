@@ -3,6 +3,7 @@
 		<Image class="object-cover rounded-full" :class="`w-${imageSize} h-${imageSize}`"
 			:src="avatar" size="thumbnail" />
 		<span
+			v-if="info"
 			v-html="[`<b>${name}</b>`, publishedAt].filter(e => e).join(' · ')"></span>
 	</span>
 </template>
@@ -20,7 +21,11 @@ export default defineComponent({
 		imageSize: {
 			type: String,
 			default: '8'
-		}
+		},
+		info: {
+			type: Boolean,
+			default: true
+		},
 	},
 	mounted() {
 		if (!this.avatar || !this.author) {

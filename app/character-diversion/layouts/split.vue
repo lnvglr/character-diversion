@@ -1,14 +1,14 @@
 <template>
-  <main class="flex justify-center h-screen overflow-auto">
+  <Card tag="main" class="flex overflow-auto justify-center h-full">
     <div class="w-full max-w-2xl">
-      <div class="p-5 mt-10 w-4/5 mx-auto text-left">
+      <div class="px-5 py-24 w-4/5 mx-auto text-left">
         <h1 class="font-bold text-left text-4xl sm:text-6xl mb-10">
           <slot name="title"></slot>
         </h1>
         <slot></slot>
       </div>
     </div>
-  </main>
+  </Card>
 </template>
 <script lang="ts">
 export default {

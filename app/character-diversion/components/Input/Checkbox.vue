@@ -17,7 +17,7 @@
 <script lang="ts">
 export default {
   model: {
-    prop: 'modelValue',
+    prop: 'value',
     event: 'change'
   },
   props: {

@@ -1,7 +1,6 @@
 <template>
   <nav
     class="w-full m-2"
-    :hoverable="false"
   >
   <div class="flex justify-center gap-2 w-full">
     <Button

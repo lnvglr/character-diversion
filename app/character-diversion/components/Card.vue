@@ -1,14 +1,9 @@
 <template>
   <component
     :is="tag || 'div'"
-    class="bg-beige-600 dark:bg-black p-[1px]"
-    :class="hoverable ? `hover:p-[3px] duration-100` : ''"
+    class="relative card rounded-lg bg-beige-50 dark:bg-neutral-800 dark:text-white flex flex-1 duration-75"
   >
-    <div
-      class="rounded-lg bg-beige-50 dark:bg-neutral-800 dark:text-white flex flex-1 w-full h-full overflow-hidden"
-    >
       <slot></slot>
-    </div>
   </component>
 </template>
 
@@ -19,11 +14,8 @@ export default {
       type: String,
       default: "div",
     },
-    hoverable: {
-      type: Boolean,
-      default: false,
-    },
   },
 };
 </script>
-<style></style>
+<style>
+</style>

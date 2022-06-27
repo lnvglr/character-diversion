@@ -1,6 +1,7 @@
 {
   "home": "Home",
   "explore": "Explore",
+  "about": "About",
   "profile": "Profile",
   "login": "Login",
   "logout": "Logout",
@@ -22,8 +23,10 @@
   "appearence": "Appearence",
   "language": "Language | Languages",
   "new": "New",
+  "discourse": "Discourse | Discourses",
   "new.discourse": "New Discourse",
   "new.opinion": "New Opinion",
+  "discover": "Discover",
   "discover.discourses": "Discover Discourses",
   "start.new.discourse": "Start a new discourse",
   "title": "Title",

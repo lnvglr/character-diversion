@@ -1,5 +1,5 @@
 <template>
-  <Card class="min-h-[200px] flex" v-if="discourse">
+  <Card class="min-h-[200px] grid hover:border-2 border-beige-500 duration-75" v-if="discourse">
     <NuxtLink
       :to="`/discourse/${discourse.id}`"
       class="p-4 flex flex-col flex-1 items-stretch"

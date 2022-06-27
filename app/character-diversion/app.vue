@@ -12,21 +12,8 @@
       />
       </Transition>
       <NuxtLayout name="frame">
-        <template #header>
-          <Transition name="slide">
-            <Header
-              class="bg-beige-300 text-black"
-              iconClass="text-black"
-              v-if="showHeader"
-              >{{ $route.meta.name }}
-            </Header>
-          </Transition>
-        </template>
         <template #body>
           <NuxtPage class="page w-full h-full" />
-        </template>
-        <template #navigation>
-          <NavBar />
         </template>
       </NuxtLayout>
     </Body>
@@ -68,10 +55,6 @@ export default defineComponent({
     });
   },
   computed: {
-    showHeader() {
-      return false;
-      // return !['/discourse', '/', '/profile'].includes(this.$route.matched[0].path)
-    },
     direction(): string {
       return ["he", "ar"].includes(this.$i18n.locale) ? "rtl" : "ltr";
     },

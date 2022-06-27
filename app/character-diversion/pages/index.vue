@@ -1,12 +1,9 @@
 <template>
-  <div class="flex flex-col overflow-auto h-screen w-full">
-    <Card
-      ><Header class="border-0" iconClass="text-black">Character Diversion</Header></Card
-    >
-    <main class="text-black grow">
-      <Card>
-        <div class="bg-primary-500 text-white w-full dark:bg-slate-800">
-          <div class="py-32 px-10 max-w-4xl mx-auto">
+  <div class="flex flex-col overflow-auto w-full">
+    <!-- <Header class="border-0" iconClass="text-black">Character Diversion</Header> -->
+    <main class="text-black grow gap-0.5 flex flex-col">
+      <Card class="text-white w-full bg-primary-500 dark:bg-slate-800">
+          <div class="py-16 sm:py-32 px-10 max-w-4xl mx-auto">
             <!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
             <LandingHeadline :headline="headine" :letter="letter" class="mb-12" />
@@ -20,12 +17,11 @@
               </div>
               <div>
                 <Button to="/discourse" icon="arrow-right" class="lg hover:text-white">{{
-                  $t("discover.discourses")
+                  $t("discover")
                 }}</Button>
               </div>
             </div>
           </div>
-        </div>
       </Card>
       <Card>
         <div class="py-40 max-w-4xl mx-auto">
@@ -45,7 +41,11 @@
             <template #title>Discover</template>
             <template #description
               >Explore discourses type and discover a new way to delve into the world of
-              typography, one character at a time. them!</template
+              typography, one character at a time. them!
+                <Button to="/discourse" icon="arrow-right" class="lg hover:text-white">{{
+                  $t("discover.doiscourse")
+                }}</Button>
+                </template
             >
           </LandingSection>
         </div>

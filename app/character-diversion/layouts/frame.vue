@@ -1,15 +1,43 @@
 <template>
-	<div class="flex flex-col h-screen w-screen overflow-hidden sm:flex-row-reverse">
-		<div class="flex-grow mb-30 sm:mb-auto h-full"><slot name="body" class=""></slot></div>
-		<div class="fixed bottom-0 w-full h-30 sm:w-auto sm:relative sm:h-screen z-50">
-			<slot name="navigation" class="bg-transparent"></slot>
+  <div
+    class="frame grid h-screen w-screen overflow-hidden bg-beige-500 p-0.5 gap-0.5"
+		 :class="{ nav: showNav }"
+  >
+    <div class="flex" style="grid-area: nav">
+			<NavBar v-if="showNav" />
+			<Header v-else>{{ $route.meta.name }}</Header>
 		</div>
-	</div>
+    <div class="overflow-hidden w-full" style="grid-area: body">
+      <slot name="body" class=""></slot>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+export default defineComponent({
+  computed: {
+    showNav() {
+      return this.$strapi.user;
+    },
+  },
+});
 </script>
 
-<style>
+<style lang="scss" scoped>
+.frame {
+  display: grid;
+  grid-template-rows: min-content auto;
+  grid-template-columns: 1fr;
+  grid-template-areas: "nav" "body";
+	&.nav {
+		grid-template-rows: 1fr;
+		grid-template-columns: min-content 1fr;
+		grid-template-areas: "nav body";
+  	@media screen and (max-width: 640px) {
+			grid-template-rows: 1fr min-content;
+			grid-template-columns: 1fr;
+			grid-template-areas: "body" "nav";
+		}
+  }
+}
 </style>

@@ -167,9 +167,9 @@ export default defineComponent({
     },
     show() {
       if (!this.glyph) return false;
+      if (!this.edit) return false;
+      if (this.glyph.id !== this.pointerPosition.id) return false;
       return (
-        this.edit &&
-        this.glyph.id === this.pointerPosition.id &&
         this.pointerPosition.x !== null &&
         this.pointerPosition.y !== null &&
         !this.hoverRemove

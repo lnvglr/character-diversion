@@ -22,20 +22,7 @@
           </ClientOnly>
         </NuxtLink>
       </li>
-      <Button
-        v-if="!$strapi.user"
-        to="/login"
-        class="hidden sm:block"
-        icon="arrow-right-to-bracket"
-        :label="false"
-      />
-      <ButtonLogout
-        v-else
-        class="clear hidden sm:block"
-        color="alert"
-        :icon="true"
-        :label="false"
-      />
+      <NuxtLink to="/profile"><Author class="w-5 h-5" :user="$strapi.user" :info="false" /></NuxtLink>
     </ul>
   </Card>
 </template>
