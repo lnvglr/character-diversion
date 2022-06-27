@@ -94,9 +94,7 @@ export default defineComponent({
       opinionFilter: false,
       limit: 100,
       fill: 0,
-      scores: {}
-      // first: null,
-      // last: null
+      scores: {} as { [key: number]: number },
     };
   },
   mounted() {
@@ -104,12 +102,6 @@ export default defineComponent({
     this.$nextTick(() => this.checkFill());
   },
   watch: {
-    // first() {
-    //   this.select()
-    // },
-    // last(a, b) {
-    //   this.select(b)
-    // }
     filteredGlyphs(a, b) {
       if (a.length !== b.length) this.checkFill();
     },
@@ -196,13 +188,13 @@ export default defineComponent({
       if ((content === undefined || content === "")&& q !== undefined && q !== "") {
         references = q.replace(', ', ' ').replace(',', ' ')
       }
-      const map = this.$state.discourse.font.glyphMap[id]
-      const ref = Object.values(map).slice(3, 7).join(' ')
+      const map = this.$state.discourse.font?.glyphMap[id]
+      const ref = Object.values(map || {}).slice(3, 7).join(' ')
       const words = references.split(' ')
       const queryMatch = words.some(e => ref.toLowerCase().indexOf(e.toLowerCase()) > -1) || stringSimilarity.compareTwoStrings(ref, references) > 0.2
-      if (words.some(e => map.literal === e)) {
-        words.forEach(word => {
-          if (map.literal === word) this.scores[this.$state.discourse.font.literalMap[word].glyph.id] = 1
+      if (words.some((e: string) => map?.literal === e)) {
+        words.forEach((word: string) => {
+          if (map?.literal === word) this.scores[this.$state.discourse.font?.literalMap[word].glyph.id] = 1
         })
       } else if (queryMatch) {
         this.scores[id] = stringSimilarity.compareTwoStrings(ref, references)

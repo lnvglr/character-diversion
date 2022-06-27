@@ -37,6 +37,7 @@
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.0.3",
     "@nuxtjs/tailwindcss": "^5.0.4",
+    "@types/string-similarity": "^4.0.0",
     "nuxt": "3.0.0-rc.1",
     "sass": "^1.52.1",
     "tailwind-css-variables": "^3.0.1"
