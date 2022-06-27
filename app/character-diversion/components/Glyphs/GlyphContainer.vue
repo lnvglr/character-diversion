@@ -26,15 +26,12 @@
         :watcher="[gridSize, intersection]"
         :title="glyph.name"
       />
-
       <Input
         v-if="$state.opinion.formActive"
         type="checkbox"
         v-model="$state.opinion.selectedGlyphs"
-        :value="glyph.id"
-        containerClass=""
-        :containerClass="`absolute w-fit right-0 p-1
-          ${!$state.opinion.selectedGlyphs.includes(glyph.id) ? 'hide' : ''}`"
+        :itemValue="glyph.id"
+        :containerClass="`absolute w-fit right-0 p-1 ${!$state.opinion.selectedGlyphs.includes(glyph.id) ? 'hide' : ''}`"
         class="info z-10"
         @click.prevent
       />

@@ -10,7 +10,7 @@
   />
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   props: {
     type: {
       type: String,
@@ -21,13 +21,10 @@ export default {
   },
   mounted() {
     this.uid = (Math.random().toString(36)).substring(2, 15)
-    this.$nextTick(() => {
-      // this.calculateTextarea()
-    })
   },
   data() {
     return {
-      uid: null,
+      uid: '',
       clearPassword: false,
     }
   },
@@ -57,7 +54,7 @@ export default {
       }, 0)
     },
   },
-}
+})
 </script>
 <style scoped>
 textarea {

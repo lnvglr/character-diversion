@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$state.discourse.font && $state.opinion.form.attributes"
-    class="selection-container grid overflow-auto snap-y snap-proximity h-full"
+    class="selection-container grid overflow-auto snap-y snap-proximity h-full gap-0.5"
     :class="`grid-cols-autofill-${gridSize}`"
     v-bind="$attrs"
     ref="container"

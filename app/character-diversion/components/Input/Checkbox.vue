@@ -5,57 +5,63 @@
       --color-hover: var(--color-${color}-600);
     `"
     >
-    <input :id="`${_.uid}`" type="checkbox" :checked="selected" :value="value" @change="updateInput">
+    <input :id="`${uid}`" type="checkbox" :checked="checked" :value="modelValue" @change="change" />
 
-    <label :for="`${_.uid}`" class="box flex items-center justify-center cursor-pointer" :class="{
-      active: selected,
+    <label :for="`${uid}`" class="box flex items-center justify-center cursor-pointer" :class="{
+      active: checked,
     }" role="checkbox">
-      <font-awesome-icon v-show="selected" :icon="['fa', 'check']" />
+      <font-awesome-icon v-show="checked" :icon="['fa', 'check']" />
     </label>
   </div>
 </template>
 <script lang="ts">
-export default {
+export default defineComponent({
   model: {
     prop: 'value',
     event: 'change'
   },
   props: {
-    value: {
+    itemValue: {
       type: [String, Number],
-    },
-    modelValue: {
-      default: false
     },
     color: {
       type: String,
       default: () => 'info',
     },
   },
-  computed: {
-    selected() {
-      if (this.modelValue instanceof Array) {
-        return this.modelValue.includes(this.value)
-      }
-      return this.modelValue === 1
+  mounted() {
+    this.uid = (Math.random().toString(36)).substring(2, 15)
+  },
+  data() {
+    return {
+      uid: '',
+      checked: false,
     }
   },
-  methods: {
-    updateInput(event: { target: HTMLInputElement }) {
-      let isChecked = event.target.checked as boolean | string[] | number[]
-      if (this.modelValue instanceof Array) {
-        const newValue = [...this.modelValue]
-        if (isChecked) {
-          newValue.push(this.value)
+  watch: {
+    "$attrs.value": {
+      handler(val) {
+        if (val instanceof Array) {
+          this.checked = val.includes(this.itemValue)
         } else {
-          newValue.splice(newValue.indexOf(this.value), 1)
+          this.checked = val === this.itemValue
         }
-        isChecked = newValue
+      },
+      immediate: true,
+      deep: true
+    },
+  },
+  methods: {
+    change() {
+      this.checked = !this.checked
+      let value: boolean | any[] = this.checked 
+      if (this.$attrs.value instanceof Array) {
+        value = this.checked ? [...this.$attrs.value, this.itemValue] : this.$attrs.value.filter(item => item !== this.itemValue)
       }
-      this.$emit('update:modelValue', isChecked)
-    }
+      this.$emit('update:modelValue', value)
+    },
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

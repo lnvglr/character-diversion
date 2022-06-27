@@ -1,10 +1,14 @@
 <template>
-  <div class="discourse-container" v-if="$state.discourse.current">
+  <div class="discourse-container gap-0.5" v-if="$state.discourse.current">
+    
+    <!-- {{$state.opinion.selectedGlyphs}} -->
+
+    <!-- <Input type="checkbox" v-for="glyph in $state.discourse.font?.glyphs.slice(0,10)" v-model="$state.opinion.selectedGlyphs" :itemValue="glyph.id" /> -->
     <Card class="shrink sticky top-0 z-20">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
-    <div v-if="activeTab === 'about'" class="h-full flex">
-      <div class="grid md:grid-cols-2 h-full">
+    <div v-if="activeTab === 'about'" class="h-full">
+      <div class="grid md:grid-cols-2 h-full gap-0.5">
         <Card class="">
           <div class="h-full p-10">
             <h1 class="text-4xl font-bold">
@@ -40,7 +44,7 @@
     <!-- class="grid grid-cols-2 h-full" -->
     <div
       v-if="activeTab === 'opinions'"
-      class="grid grid-cols-2 grid-rows-1 overflow-auto h-full"
+      class="grid grid-cols-2 grid-rows-1 overflow-auto h-full gap-0.5"
     >
       <Card class="overflow-auto h-full">
         <div class="flex flex-col w-full h-full overflow-auto">

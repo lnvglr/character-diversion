@@ -1,6 +1,6 @@
 <template>
-  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center justify-center gap-2">
-    <span>
+  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center">
+    <span class="flex items-center justify-center gap-2">
       <slot></slot>
       <Icon v-if="iconName" :name="iconName || icon" />
     </span>

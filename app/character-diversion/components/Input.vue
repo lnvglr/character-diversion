@@ -20,11 +20,11 @@
       class="absolute bottom-2 left-3 w-full pr-4 flex gap-2 items-center h-3"
     >
 
-<CharacterCounter
-  v-if="maxlength"
-  :value="String(modelValue)"
-  :maxlength="maxlength"
-/>
+      <CharacterCounter
+        v-if="maxlength"
+        :value="String(modelValue)"
+        :maxlength="maxlength"
+      />
 
       <small v-if="submitOnEnter" class="text-beige-400 leading-none">{{
         $t("submit.with.enter")
@@ -68,7 +68,7 @@ export default defineComponent({
   emits: ["update:modelValue"],
   props: {
     modelValue: {
-      type: [String, Number, Array],
+      type: [String, Boolean, Number, Array],
     },
     validation: {
       type: String,

@@ -20,6 +20,12 @@ export default {
     definePageMeta({
       name: "About",
     });
+  },
+  data() {
+    return {
+      single: false,
+      multiple: [],
+    }
   }
 };
 </script>
