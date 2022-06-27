@@ -23,7 +23,7 @@
             </div>
           </div>
       </Card>
-      <Card>
+      <Card class="landing-section">
         <div class="py-40 max-w-4xl mx-auto">
           <LandingSection class="stack">
             <template #image>
@@ -40,17 +40,18 @@
             </template>
             <template #title>Discover</template>
             <template #description
-              >Explore discourses type and discover a new way to delve into the world of
-              typography, one character at a time. them!
-                <Button to="/discourse" icon="arrow-right" class="lg hover:text-white">{{
+              ><div class="flex flex-col items-start gap-5"><p class="mt-2">Explore discourses type and discover a new way to delve into the world of
+              typography, one character at a time.</p>
+                <Button to="/discourse" icon="arrow-right" class="lg">{{
                   $t("discover.discourses")
                 }}</Button>
+                </div>
                 </template
             >
           </LandingSection>
         </div>
       </Card>
-      <Card>
+      <Card class="landing-section">
         <div class="max-w-4xl mx-auto py-40">
           <LandingSection>
             <template #image><img src="/images/sushi.png" /></template>
@@ -62,7 +63,7 @@
           </LandingSection>
         </div>
       </Card>
-      <Card>
+      <Card class="landing-section">
         <div class="max-w-4xl mx-auto py-40">
           <LandingSection>
             <template #image><img src="/images/sushi.png" /></template>

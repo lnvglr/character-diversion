@@ -1,7 +1,7 @@
 <template>
   <!-- pointer -->
   <circle
-    v-if="show"
+    v-if="false"
     :cx="pointerPosition.x"
     :cy="pointerPosition.y"
     :r="annotationRadius / 1.25"
@@ -18,8 +18,6 @@
     :r="annotationRadius"
     class="fill-beige-300/10 stroke-beige-400/30 stroke"
     :class="{
-      // 'pointer-events-none': edit,
-      // 'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': !edit
       'hover:fill-primary-500/20 hover:stroke-primary-500/70 cursor-pointer': true,
     }"
     :stroke-width="strokeWidth"
@@ -34,12 +32,12 @@
     :cx="annotation.x"
     :cy="annotation.y"
     :r="annotationRadius"
-    class="stroke fill-primary-500/20 stroke-primary-500/50 hover:fill-alert-500/20 hover:stroke-alert-500/50"
+    class="stroke fill-primary-500/20 stroke-primary-500/50 hover:fill-alert-500/20 hover:stroke-alert-500/50 cursor-none"
     :class="{
       'pointer-events-none': $f.utils.arrayContainsObject(allAnnotations, annotation),
     }"
     :stroke-width="strokeWidth"
-    @click="removeAnnotation(annotation)"
+    @click.stop="removeAnnotation(annotation)"
     @pointerenter="hoverRemove = true"
     @pointerleave="hoverRemove = false"
   />
@@ -98,6 +96,7 @@ export default defineComponent({
     },
     addAnnotation(annotation?: Annotation) {
       if (!this.glyph) return
+      if (this.hoverRemove) return
       let annotations = this.$state.opinion.form.attributes.annotations;
       if (!annotations) annotations = {};
       if (!(this.glyph.id in annotations)) annotations[this.glyph.id] = [];
@@ -177,6 +176,9 @@ export default defineComponent({
     },
   },
   watch: {
+    hoverRemove(s) {
+      console.log(s)
+    },
     pointer({ x, y }) {
       if (!this.glyph || !this.scaling || !this.offset || !this.height) return
       this.$state.opinion.annotationTool = {
@@ -191,5 +193,9 @@ export default defineComponent({
 <style scoped>
 svg {
   /* background: rgba(255, 0, 0, 0.1) */
+}
+:global(.edit-glyph) {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64' width='64' height='64' transform='' %3E%3Ccircle cx='0' cy='0' r='20'%0Afill='#10b98130'%0Astroke='#10b981' stroke-width='0.75' /%3E%3C/svg%3E") 32 32, pointer;
+  /* cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64' width='64' height='64' transform='' %3E%3Ccircle cx='0' cy='0' r='20'%0Afill='#f9731630'%0Astroke='#f97316' stroke-width='0.5' /%3E%3C/svg%3E") 32 32, pointer; */
 }
 </style>

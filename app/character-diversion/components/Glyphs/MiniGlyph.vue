@@ -1,5 +1,5 @@
 <template>
-	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container">
+	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container" @click="addAnnotation" :class="{['edit-glyph']: edit}">
 
 		<div v-if="!isTTF && glyph"
 			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font?.glyphMap[glyph.id].literal }}</div>
@@ -17,10 +17,10 @@
 			<g>
 				<!-- <GlyphsGrid v-if="true" :width="characterWidth" :strokeWidth="strokeWidth" /> -->
 				<GlyphsFrame v-if="frame && isTTF" :end="characterWidth" :strokeWidth="strokeWidth" />
-				<GlyphsGlyph :path="path" :glyph="outline && glyph" :tuple="outline && tuple" :class="{ 'fill-info-600 dark:fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
+				<GlyphsGlyph :path="path" :glyph="outline && glyph" :tuple="outline && tuple" :class="{ 'fill-info-500 dark:fill-info-500': decomposedAlt && intersection }" :strokeWidth="strokeWidth" />
 				<GlyphsGlyph v-if="pathAlt" :path="pathAlt" :class="'fill-primary-500'" :strokeWidth="strokeWidth" />
 				<GlyphsAnnotationTool v-if="annotations" :edit="edit" :glyph="glyph" :strokeWidth="strokeWidth"
-					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" />
+					:pointer="pointer" :height="height" :scaling="scaling" :offset="offset" ref="annotations" />
 			</g>
 		</svg>
 		</Transition>
@@ -195,6 +195,9 @@ export default defineComponent({
 				this.height = (refSVG.getBoundingClientRect().height - refSVGFrame.getBoundingClientRect().height) / 2
 			})
 
+		},
+		addAnnotation() {
+			this.$refs.annotations.addAnnotation()
 		}
 	}
 })

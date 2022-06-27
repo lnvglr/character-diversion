@@ -1,5 +1,7 @@
 <template>
-  <div ref="container" v-if="glyph">
+  <div ref="container" v-if="glyph"
+      :style="glyph.dummy && glyph.n ? `grid-column: span ${glyph.n} / span ${glyph.n};` : ''"
+      >
     <Card
       :hover="$state.opinion.formActive && !glyph.dummy"
       class="card flex justify-center w-full relative border-0"

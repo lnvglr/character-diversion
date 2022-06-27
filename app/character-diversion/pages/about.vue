@@ -10,25 +10,34 @@
       <p>With a move away from language-based discourse to glyph-based discourse Character Diversion is a proposal that will hopefully be vividly and controversially discussed. Maybe it will be found worthy of its aspirations, maybe the prevailing opinion will be that it failed in what it set out to. Hopefully, it will inspire how we think about discourse in the realm of design.
       </p>
       <p>See the Git Repo: <NuxtLink to="https://github.com/lnvglr/character-diversion" target="_blank" class="text-info-500 hover:underline" color="info">https://github.com/lnvglr/character-diversion</NuxtLink></p>
+      <!-- <div v-for="paper in papers" :key="paper.paper" v-html="paper.text" /> -->
+      <div v-for="paper in papers" :key="paper.paper" v-html="$f.utils.renderMarkdown(paper.text)" class="markdown" />
     </article>
   </NuxtLayout>
 </template>
 
 <script>
-export default {
+export default defineComponent({
   setup() {
-
     definePageMeta({
       name: "About",
     });
   },
+  async mounted() {
+    const papers = []
+    this.links.forEach(paper => {
+      fetch(paper).then(res => res.text()).then(text => papers.push({paper, text}))
+    })
+    this.papers = papers
+    console.log(this.papers)
+  },
   data() {
     return {
-      single: false,
-      multiple: [],
+      links: ['https://raw.githubusercontent.com/lnvglr/character-diversion/master/character-diversion.md'],
+      papers: [],
     }
   }
-};
+})
 </script>
 
 <style></style>

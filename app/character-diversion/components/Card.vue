@@ -1,7 +1,7 @@
 <template>
   <component
     :is="tag || 'div'"
-    class="relative card rounded-lg bg-beige-50 dark:bg-neutral-800 dark:text-white flex flex-1 duration-75"
+    class="relative card rounded-sm bg-beige-50 dark:bg-neutral-800 dark:text-white flex flex-1 duration-75"
   >
       <slot></slot>
   </component>

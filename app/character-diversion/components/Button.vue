@@ -7,7 +7,9 @@
     :class="{ [color]: color, [`active-${activeColor}`]: activeColor, inv: invert }"
     class="button items-center justify-center"
   >
-    <span class="flex items-center justify-center gap-2">
+
+    <div v-if="loading" class="spinner absolute sm" />
+    <span :class="{['opacity-0']: loading}" class="flex items-center justify-center gap-2">
       <slot></slot>
       <Icon v-if="iconName" :name="iconName || icon" />
     </span>
@@ -47,6 +49,10 @@ export default defineComponent({
     activeColor: {
       type: String,
       default: "",
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   },
   mounted() {

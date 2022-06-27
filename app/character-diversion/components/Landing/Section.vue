@@ -19,11 +19,16 @@ export default {}
 .container {
   display: flex;
   align-items: center;
-  &:nth-child(even) {
-    flex-direction: row-reverse;
-  }
   & > * {
     flex-basis: 50%;
   }
 }
+</style>
+<style lang="scss">
+.landing-section:nth-child(odd) {
+  .container {
+    flex-direction: row-reverse;
+  }
+}
+
 </style>

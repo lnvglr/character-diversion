@@ -1,12 +1,12 @@
 <template>
-  <div
+  <transition-group name="list" tag="div"
     v-if="$state.discourse.font && $state.opinion.form.attributes"
     class="selection-container grid overflow-auto snap-y snap-proximity h-full gap-0.5"
     :class="`grid-cols-autofill-${gridSize}`"
     v-bind="$attrs"
     ref="container"
   >
-    <GlyphContanier
+    <!-- <GlyphContanier
       v-for="glyph in filledGlyphs"
       :key="glyph.id"
       :glyph="glyph"
@@ -18,10 +18,10 @@
       :frame="frame"
       :outline="outline"
       class="snap-start"
-    />
+    /> -->
     <div class="col-span-full">
       <Card>
-        <div class="w-full p-24 flex flex-col items-center justify-center gap-5">
+        <div class="w-full p-24 pb-48 flex flex-col items-center justify-center gap-5">
           <span>{{ $t("glyphs.shown", { n: filteredGlyphs.length }) }}</span>
           <div class="flex items-center justify-center gap-2">
             <Button
@@ -42,16 +42,17 @@
         </div>
       </Card>
     </div>
-  </div>
+  </transition-group>
   <Card v-else class="w-full">
-  <div class="p-20 flex flex-col items-center w-full">
-    <font-awesome-icon :icon="['fa', 'xmark']" class="text-3xl" />
-    <div class="text-beige-400">No font file attached.</div>
-  </div>
+    <div class="p-20 flex flex-col items-center w-full">
+      <font-awesome-icon :icon="['fa', 'xmark']" class="text-3xl" />
+      <div class="text-beige-400">No font file attached.</div>
+    </div>
   </Card>
 </template>
 
 <script lang="ts">
+import stringSimilarity from 'string-similarity'
 import { Opinion, SamsaGlyph } from "~/types";
 import GlyphContanier from "~/components/Glyphs/GlyphContainer.vue";
 export default defineComponent({
@@ -93,6 +94,7 @@ export default defineComponent({
       opinionFilter: false,
       limit: 100,
       fill: 0,
+      scores: {}
       // first: null,
       // last: null
     };
@@ -116,26 +118,29 @@ export default defineComponent({
     filledGlyphs() {
       if (this.fill < 1 || this.fill > 999 || isNaN(this.fill))
         return this.filteredGlyphs;
-      const dummy = [...Array(this.fill)].map((e) => ({
-        id: (Math.random() * (100 + e)).toString(),
+      const dummy = {
+        id: (Math.random() * (100)).toString(),
         dummy: true,
-      }));
-      return [...this.filteredGlyphs, ...dummy];
+        n: this.fill
+      }
+      return [...this.filteredGlyphs, dummy];
     },
     filteredGlyphs() {
       if (!this.$state.discourse.font) return [];
-      const glyphs = this.$state.discourse.font.glyphs.filter((glyph: SamsaGlyph) => {
-        if (
-          this.removeEmpty(glyph.id) &&
-          this.filterByVariability(glyph) &&
-          this.filterByActive(glyph.id) &&
-          this.filterByOpinions(glyph.id) &&
-          this.matchGlyphs(glyph.id)
-        ) {
-          return glyph;
-        }
-      });
-      return glyphs.slice(0, this.limit);
+      const glyphs = this.$state.discourse.font.glyphs
+      return glyphs
+      // const glyphs = this.$state.discourse.font.glyphs.filter((glyph: SamsaGlyph) => {
+      //   if (
+      //     this.removeEmpty(glyph.id) &&
+      //     this.filterByVariability(glyph) &&
+      //     this.filterByActive(glyph.id) &&
+      //     this.filterByOpinions(glyph.id) &&
+      //     this.matchGlyphs(glyph.id)
+      //   ) {
+      //     return glyph;
+      //   }
+      // });
+      // return glyphs.slice(0, this.limit).sort((a, b) => (this.scores?.[b.id] || 0) - (this.scores?.[a.id] || 0));
     },
   },
   methods: {
@@ -143,9 +148,10 @@ export default defineComponent({
       const container = this.$refs.container as HTMLElement;
       const width = container?.offsetWidth;
       const gridSize = Math.floor(width / ((parseInt(this.gridSize) / 4) * 16));
+      const remainder = this.filteredGlyphs.length % gridSize
       this.fill = Math.abs(
         this.filteredGlyphs.length > 0
-          ? gridSize - (this.filteredGlyphs.length % gridSize)
+          ? (remainder > 0 ? gridSize - remainder : 0)
           : 0
       );
       return this.fill;
@@ -184,23 +190,31 @@ export default defineComponent({
       return active.length === 0 || active.includes(id);
     },
     matchGlyphs(id: number) {
+      // const selectedGlyphs = this.$state.opinion.selectedGlyphs;
+      // const match = stringSimilarity.compareTwoStrings()
       const q = this.$state.discourse.search?.trim();
-      const content = this.$state.opinion.form.attributes.content?.trim();
-      let references = content;
-      if (content === undefined && q !== undefined && q !== "") {
-        references = q
-          .split(/(\,|\s)/)
-          .filter((e: string) => e !== " ")
-          .map((e: string) => "/" + e)
-          .join("");
+      const content = this.$f.glyphMethods.match(this.$state.opinion.form.attributes.content?.trim(), 'literal').join(' ');
+      let references = content || ""
+      if ((content === undefined || content === "")&& q !== undefined && q !== "") {
+        references = q.replace(', ', ' ').replace(',', ' ')
       }
-      const matchedGlyphs = this.$f.glyphMethods.match(references);
-      const selectedGlyphs = this.$state.opinion.selectedGlyphs;
-      return (
-        matchedGlyphs.length === 0 ||
-        matchedGlyphs.includes(id) ||
-        selectedGlyphs.includes(id)
-      );
+      const map = this.$state.discourse.font.glyphMap[id]
+      const ref = Object.values(map).slice(3, 7).join(' ')
+      const words = references.split(' ')
+      const queryMatch = words.some(e => ref.toLowerCase().indexOf(e.toLowerCase()) > -1) || stringSimilarity.compareTwoStrings(ref, references) > 0.2
+      if (words.some(e => map.literal === e)) {
+        words.forEach(word => {
+          if (map.literal === word) this.scores[this.$state.discourse.font.literalMap[word].glyph.id] = 1
+        })
+      } else if (queryMatch) {
+        this.scores[id] = stringSimilarity.compareTwoStrings(ref, references)
+      }
+      return queryMatch
+      // return (
+      //   matchedGlyphs.length === 0 ||
+      //   matchedGlyphs.includes(id) ||
+      //   selectedGlyphs.includes(id)
+      // );
     },
     hasOpinion(id: number) {
       if (!this.$state.discourse.current) return [];

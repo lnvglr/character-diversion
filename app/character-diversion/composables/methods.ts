@@ -95,18 +95,20 @@ export const glyphMethods = {
   //                                       )
   // regexPattern: /(?<=\/)[\S]+?(?=$|\.\s|[^\w.\s]|\s|\/)/ig,
   regexPattern: /\/([\S]+?)(?=$|\.\s|[^\w.\s]|\s|\/)/gi,
-  match: (string: string) => {
+  match: (string: string, key?: string = 'id') => {
     if (!string) return []
     const match = (string.trim().match(glyphMethods.regexPattern) || []).map((e: string) => e.slice(1))
     return match
       .map(e => {
-        return (
+        const map = (
           discourse.font.literalMap[e] ||
           discourse.font.postScriptMap[e] ||
           discourse.font.nameMap[e]
-        )?.glyph.id
-      })
-      .filter(e => e)
+        )
+        if (!map) return
+        if (key === 'id') return map.glyph.id
+        if (map[key]) return map[key]
+      }).filter(e => e)
   },
   glyphHasOpinion(id: number, discourseId?: number): Opinion[] | undefined {
     let d: Discourse
@@ -153,7 +155,36 @@ export const utils = {
         .join('.')
     )
   },
-  getRelativeLuminance: (rgb: number[]) => rgb ? 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2] : 0
+  getRelativeLuminance: (rgb: number[]) => rgb ? 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2] : 0,
+  debounce: (callback, wait) => {
+    let timeoutId = null;
+    return (...args) => {
+      window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => {
+        callback.apply(null, args);
+      }, wait);
+    };
+  },
+  throttle: (func, limit) => {
+    let lastFunc
+    let lastRan
+    return function() {
+      const context = this
+      const args = arguments
+      if (!lastRan) {
+        func.apply(context, args)
+        lastRan = Date.now()
+      } else {
+        clearTimeout(lastFunc)
+        lastFunc = setTimeout(function() {
+          if ((Date.now() - lastRan) >= limit) {
+            func.apply(context, args)
+            lastRan = Date.now()
+          }
+        }, limit - (Date.now() - lastRan))
+      }
+    }
+  }
 }
 export const strapiHelpers = {
   client: <T>(contentType: string, data?: Partial<T>, method: string = "POST") =>

@@ -1,21 +1,26 @@
 <template>
   <div class="overflow-auto gap-0.5 flex flex-col">
     <Card class="dark:text-white">
-    <div class="w-full flex items-center justify-between gap-5 p-10">
+    <div class="w-full flex flex-col gap-5 p-10">
+    <div class="w-full flex items-center justify-between gap-5">
       <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold leading-none">{{$t('discover.discourses')}}</h1>
       <p class="max-w-xl">Explore discourses type and discover a new way to delve into the world of typography, one character at a time.</p>
       </div>
       <Button v-if="$strapi.user" to="/discourse/new" key="remove" color="primary" class="
         ml-auto lg" icon="plus">{{$t('new.discourse')}}</Button>
-        </div>
+      </div>
+      <Input class="lg" v-model="filterQuery" :placeholder="$t('search.discourses')" />
+      </div>
     </Card>
-    <div class="discourses-container grid grid-cols-2 gap-0.5">
+
+    <transition-group name="list" tag="div" class="discourses-container gap-0.5" :style="{ '--total': discourses.length }">
       <DiscourseCard
-        v-for="discourseItem in discourses"
-        :key="discourseItem.id"
-        :discourse="discourseItem"
-      />
-    </div>
+        v-for="(item, i) in discourses"
+        :key="item.id"
+        :discourse="item"
+        :style="{'--i': i}" 
+      ></DiscourseCard>
+    </transition-group>
   </div>
 </template>
 
@@ -29,10 +34,13 @@ export default defineComponent({
         .values(this.$state.discourse.all)
         .sort((a: Discourse, b: Discourse) => {
           return Number(new Date(b.attributes.publishedAt)) - Number(new Date(a.attributes.publishedAt))
-        })
+        }).filter(item => !this.filterQuery || item.attributes.title.toLowerCase().indexOf(this.filterQuery) > -1);
     },
   },
-  methods: {
+  data() {
+    return {
+      filterQuery: ""
+    }
   }
 })
 </script>
@@ -46,7 +54,8 @@ export default defineComponent({
   // gap: var(--p-5);
   & > * {
     width: 100%;
-    max-width: 100%
+    max-width: 100%;
+    // transition-duration: 1000ms;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="frame grid h-screen w-screen overflow-hidden bg-beige-500 p-0.5 gap-0.5"
+    class="frame grid h-screen w-screen overflow-hidden bg-beige-300 p-0.5 gap-0.5"
 		 :class="{ nav: showNav }"
   >
     <div class="flex" style="grid-area: nav">

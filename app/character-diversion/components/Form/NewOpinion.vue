@@ -4,7 +4,6 @@
       v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive"
       @submit.prevent="postOpinion"
       class="relative"
-      :class="{ ['opacity-50']: loading }"
     >
       <!-- <Author :user="$strapi.user" imageSize="8" class="mb-2 text-xs" /> -->
       <Image class="object-cover rounded-full" :class="`absolute top-2 left-3 w-6 h-6 z-10`"
@@ -20,7 +19,7 @@
         :submitOnEnter="true"
         :allowMarkdown="true"
         @enter="postOpinion"
-        @cancel="$state.opinion.reset('form')"
+        @cancel="$state.opinion.reset('form'), loading = false"
         :class="{
           'shadow-xl': floating && $state.opinion.formActive,
         }"
@@ -40,10 +39,11 @@
       </TransitionExpand>
         <Button
           class="clear ml-auto"
-          @click="$state.opinion.reset('form')"
+          @click="$state.opinion.reset('form'), loading = false"
           >{{ $t("cancel") }}</Button
         >
-        <Button :disabled="!canPost" color="success" type="submit">{{
+        <Button :disabled="!canPost" color="success" type="submit"
+        :loading="loading">{{
           $t("share.opinion")
         }}</Button>
       </div>
@@ -121,6 +121,7 @@ export default defineComponent({
     openOpinionForm() {
       if (!this.$strapi.user) return this.$router.push("/login");
       this.$state.opinion.formActive = true;
+      this.loading = false
     },
     postOpinion() {
       this.loading = true
@@ -129,56 +130,52 @@ export default defineComponent({
       const { id, attributes } = this.$state.discourse.current
       const discourse = JSON.parse(JSON.stringify({ id, attributes }))
       const axes = {} as { [key: string]: number[] };
-      console.log('load')
-      setTimeout(() => {
-        console.log('loaded')
-        this.loading = false
-      }, 1000)
-      // Object.entries(axesRaw || {})
-      //   .forEach(e => {
-      //     const axis: SamsaFontAxis = this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0])
-      //     // this adds all axes:
-      //     axes[e[0]] = e[1]
-      //     // this adds only non default axes:
-      //     // if (axis.default !== e[1][0]) {
-      //     //   axes[e[0]] = e[1]
-      //     // }
-      //   })
-      // const opinion = {
-      //   content,
-      //   glyphs,
-      //   axes,
-      //   annotations,
-      //   discourse,
-      //   author: this.$strapi.user,
-      // };
-      // this.$strapi
-      //   .create("opinions", opinion)
-      //   .then(({ data }) => {
-      //     return this.$strapi.findOne("opinions", data.id, {
-      //       populate: [
-      //         "author",
-      //         "author.avatar",
-      //         "comments.author",
-      //         "comments.author.avatar",
-      //       ],
-      //     });
-      //   })
-      //   .then(({ data }) => {
-      //     const attributes = this.$state.discourse.current?.attributes;
-      //     if (attributes?.opinions?.data) {
-      //       attributes.opinions.data.push(data);
-      //     } else if (attributes) {
-      //       attributes.opinions = {
-      //         data: [data],
-      //       };
-      //     }
-      //     this.$state.opinion.form.attributes.content = "";
-      //     this.$state.opinion.form.attributes.annotations = {};
-      //     // this.$state.opinion.active = JSON.parse(JSON.stringify(data));
-      //     this.$state.opinion.selectedGlyphs = [];
-      //     this.$state.opinion.formActive = false;
-      //   });
+      Object.entries(axesRaw || {})
+        .forEach(e => {
+          const axis: SamsaFontAxis = this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0])
+          // this adds all axes:
+          axes[e[0]] = e[1]
+          // this adds only non default axes:
+          // if (axis.default !== e[1][0]) {
+          //   axes[e[0]] = e[1]
+          // }
+        })
+      const opinion = {
+        content,
+        glyphs,
+        axes,
+        annotations,
+        discourse,
+        author: this.$strapi.user,
+      };
+      this.$strapi
+        .create("opinions", opinion)
+        .then(({ data }) => {
+          return this.$strapi.findOne("opinions", data.id, {
+            populate: [
+              "author",
+              "author.avatar",
+              "comments.author",
+              "comments.author.avatar",
+            ],
+          });
+        })
+        .then(({ data }) => {
+          const attributes = this.$state.discourse.current?.attributes;
+          if (attributes?.opinions?.data) {
+            attributes.opinions.data.push(data);
+          } else if (attributes) {
+            attributes.opinions = {
+              data: [data],
+            };
+          }
+          this.$state.opinion.form.attributes.content = "";
+          this.$state.opinion.form.attributes.annotations = {};
+          // this.$state.opinion.active = JSON.parse(JSON.stringify(data));
+          this.$state.opinion.selectedGlyphs = [];
+          this.$state.opinion.formActive = false;
+          this.loading = false
+        });
     },
   },
 })
