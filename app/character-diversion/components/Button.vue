@@ -1,5 +1,12 @@
 <template>
-  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center justify-center">
+  <component
+    :is="to ? NuxtLink : ButtonDefault"
+    :to="to"
+    :title="title"
+    :disabled="disabled"
+    :class="{ [color]: color, [`active-${activeColor}`]: activeColor, inv: invert }"
+    class="button items-center justify-center"
+  >
     <span class="flex items-center justify-center gap-2">
       <slot></slot>
       <Icon v-if="iconName" :name="iconName || icon" />
@@ -8,19 +15,19 @@
 </template>
 <script lang="ts">
 export default defineComponent({
-  name: 'Button',
+  name: "Button",
   setup() {
-		const NuxtLink = resolveComponent('NuxtLink')
-    const ButtonDefault = resolveComponent('ButtonDefault')
+    const NuxtLink = resolveComponent("NuxtLink");
+    const ButtonDefault = resolveComponent("ButtonDefault");
     return {
-			NuxtLink,
-			ButtonDefault,
-    }
+      NuxtLink,
+      ButtonDefault,
+    };
   },
   data() {
     return {
       invert: false,
-    }
+    };
   },
   props: {
     name: String,
@@ -31,74 +38,76 @@ export default defineComponent({
       type: String,
     },
     icon: {
-      type: [String, Boolean]
+      type: [String, Boolean],
     },
     color: {
       type: String,
-      default: '',
-    }
+      default: "",
+    },
+    activeColor: {
+      type: String,
+      default: "",
+    },
   },
   mounted() {
     this.$nextTick(() => {
-      const color = window.getComputedStyle(this.$el).color
-      const rgb = color.match(/\d+/g)
+      const color = window.getComputedStyle(this.$el).color;
+      const rgb = color.match(/\d+/g);
       if (this.$f.utils.getRelativeLuminance(rgb) > 50) {
-        this.invert = true
+        this.invert = this.color === "" && true;
       }
-    })
+    });
   },
   computed: {
     iconName() {
-      switch(this.$i18n.locale) {
-        case 'he':
-          if (this.icon === 'arrow-left') {
-            return 'arrow-right'
+      switch (this.$i18n.locale) {
+        case "he":
+          if (this.icon === "arrow-left") {
+            return "arrow-right";
           }
-          if (this.icon === 'arrow-right') {
-            return 'arrow-left'
+          if (this.icon === "arrow-right") {
+            return "arrow-left";
           }
-          break
+          break;
       }
-      return this.icon
+      return this.icon;
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
 .button:hover {
-
-  &> :deep(*),
+  & > :deep(*),
   :deep(svg),
   :deep(path) {
     fill: currentColor !important;
   }
 }
+$colors: primary, secondary, info, beige, success, warning, alert;
 :global(:where(.button)) {
   display: flex;
   margin: 0 calc(var(--border-default) * -2);
   border: none;
   font-size: 1em;
 }
-:global(:where(.button span)) {
-  color: white;
-  fill: white;
-}
-:global(:where(.button.inv span)) {
-  color: black;
-  fill: black;
-}
-:global(:is(.dark .button)) {
-  --color:  var(--color-neutral-800);
-  --background-color:  var(--color-neutral-200);
-  margin: 0 calc(var(--border-default) * -2);
-}
-:where(.button) {
+// :global(:where(.button.inv span)) {
+//   color: black;
+//   fill: black;
+// }
+// :global(:is(.dark .button)) {
+//   --color: var(--color-neutral-800);
+//   --background-color: var(--color-neutral-200);
+//   margin: 0 calc(var(--border-default) * -2);
+// }
+.button {
   --size: var(--h-8);
-  // --color: white;
   --padding: var(--p-2) var(--p-3);
   --bg-opacity: 1;
   --border-radius: var(--rounded-md);
+  --color: white;
+  --background: currentColor;
+  --hover: transparent;
   height: var(--size);
   border-radius: var(--border-radius);
   position: relative;
@@ -110,80 +119,82 @@ export default defineComponent({
   transition: all var(--transition-duration-default) ease-in-out;
   z-index: 1;
   white-space: nowrap;
-
-  &:before {
-    transition: all var(--transition-duration-default) ease-in-out;
-    border-radius: var(--border-radius);
-    opacity: var(--bg-opacity);
-    background-color: currentColor;
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+  span {
+    color: var(--color);
   }
-  &:hover {
-    // --border-color: currentColor;
+
+  @each $color in $colors {
+    &.#{"" + $color} {
+      --background: var(--color-#{$color}-500);
+      --hover: var(--color-#{$color}-600);
+      color: white;
+      &:hover {
+        color: white
+      }
+      &.clear {
+        --color: var(--color-#{$color}-500);
+        &:hover {
+          --color: var(--color-#{$color}-500);
+          --bg-opacity: 0.1;
+        }
+      }
+      &.inv {
+        color: var(--color-#{$color}-700);
+      }
+    }
+    &.router-link-active {
+      &.clear, & {
+        --color: var(--color-primary-500) !important;
+      }
+    }
+  }
+  &.clear {
     --bg-opacity: 0;
-    // background-color: currentColor;
-    cursor: pointer;
-    span {
-      color: currentColor;
+    --color: black;
+    --hover: var(--color);
+    box-shadow: none;
+    &:hover {
+      --bg-opacity: 0.1;
     }
   }
 
-  &:focus, &:focus-visible {
+  &:hover {
+    --background: var(--hover);
+    --border-color: currentColor;
+    cursor: pointer;
+    --color: currentColor;
+  }
+
+  &:focus,
+  &:focus-visible {
     box-shadow: 0 0 0 3px var(--color-info-200);
     outline: none;
     z-index: 10;
   }
 
-  &:active, &.active {
+  &:active,
+  &.active {
     --color: var(--color-white);
     --background-color: var(--color-info-500);
-    // --color: currentColor;
     &:hover {
-      // --background-color: var(--color-info-600);
       --bg-opacity: 1;
     }
   }
 
-  &[disabled]:not([disabled=false]) {
+  &[disabled]:not([disabled="false"]) {
     opacity: 0.5;
     pointer-events: none;
     cursor: default;
-  }
-
-  &.fill {
-    --color: var(--black);
-    background: var(--color);
-    color: var(--white);
-    box-shadow: none;
-  }
-
-  &.clear {
-    span {
-      color: currentColor
-    }
-    --bg-opacity: 0;
-    &:hover, &.active {
-      &:before {
-        background-color: currentColor;
-      }
-      --bg-opacity: 0.1;
-    }
   }
 
   &.round {
     --padding: 0;
     min-width: var(--size);
     max-width: var(--size);
-    &, &:before {
-      border-radius: var(--rounded-full)
+    &,
+    &:before {
+      border-radius: var(--rounded-full);
     }
-
   }
   &.xxs {
     font-size: var(--text-xs);
@@ -218,51 +229,36 @@ export default defineComponent({
     min-height: var(--size);
   }
 
-//   $colors: primary,
-//   secondary,
-//   info,
-//   beige,
-//   success,
-//   warning,
-//   alert;
 
-//   @each $color in $colors {
-//     &.#{"" + $color} {
-//       &, &.clear:hover {
-//         --background-color: var(--color-#{$color}-500);
-//       }
-//       &:not(.clear):hover {
-//         --color: white;
-// 				--bg-opacity: 1;
-//         --background-color: var(--color-#{$color}-600);
-//         --border-color: var(--background-color);
-//       }
-//     }
-//   }
+  &:before {
+    transition: all var(--transition-duration-default) ease-in-out;
+    border-radius: var(--border-radius);
+    opacity: var(--bg-opacity);
+    background-color: var(--background);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 }
-// :global(.input-group > :is(.input, .button)) {
-//   &:first-child {
-//     border-top-right-radius: 0 !important;
-//     border-bottom-right-radius: 0 !important;
-//   }
-//   &:last-child {
-//     border-top-left-radius: 0 !important;
-//     border-bottom-left-radius: 0 !important;
-//   }
-// }
 </style>
 <style lang="scss">
 .input-group {
   display: flex;
   :is(input, .button) {
     &:first-child {
-      &, &:before {
+      &,
+      &:before {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
     }
     &:last-child {
-      &, &:before {
+      &,
+      &:before {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }

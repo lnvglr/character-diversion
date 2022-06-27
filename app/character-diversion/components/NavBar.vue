@@ -20,7 +20,7 @@
           <span class="text-xs mt-2" v-html="route.name" />
         </NuxtLink>
       </li>
-      <Button to="/about" icon="circle-info" class="text-beige-500 text-2xl clear round rounded-full"></Button>
+      <Button to="/about" icon="circle-info" color="beige" activeColor="primary" class="active:text-primary-500 text-2xl clear round rounded-full"></Button>
       <NuxtLink to="/profile" class="mb-3"><Author :user="$strapi.user" :info="false" class="hover:opacity-70" /></NuxtLink>
     </ul>
   </Card>

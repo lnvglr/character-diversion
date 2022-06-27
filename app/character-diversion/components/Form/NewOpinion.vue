@@ -25,7 +25,7 @@
           'shadow-xl': floating && $state.opinion.formActive,
         }"
       />
-      <div class="flex gap-1 w-full mb-1" v-if="!floating">
+      <div class="flex gap-1 w-full mb-1">
 
       <TransitionExpand>
         <div v-if="selectedGlyphs.length > 0">
@@ -39,12 +39,11 @@
         </div>
       </TransitionExpand>
         <Button
-          class="clear ml-auto hover:text-alert-500"
-          style="--color: var(--color-black); --background-color: var(--color-alert-500)"
+          class="clear ml-auto"
           @click="$state.opinion.reset('form')"
           >{{ $t("cancel") }}</Button
         >
-        <Button :disabled="!canPost" class="" color="success" type="submit">{{
+        <Button :disabled="!canPost" color="success" type="submit">{{
           $t("share.opinion")
         }}</Button>
       </div>
@@ -130,51 +129,56 @@ export default defineComponent({
       const { id, attributes } = this.$state.discourse.current
       const discourse = JSON.parse(JSON.stringify({ id, attributes }))
       const axes = {} as { [key: string]: number[] };
-      Object.entries(axesRaw || {})
-        .forEach(e => {
-          const axis: SamsaFontAxis = this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0])
-          // this adds all axes:
-          axes[e[0]] = e[1]
-          // this adds only non default axes:
-          // if (axis.default !== e[1][0]) {
-          //   axes[e[0]] = e[1]
-          // }
-        })
-      const opinion = {
-        content,
-        glyphs,
-        axes,
-        annotations,
-        discourse,
-        author: this.$strapi.user,
-      };
-      this.$strapi
-        .create("opinions", opinion)
-        .then(({ data }) => {
-          return this.$strapi.findOne("opinions", data.id, {
-            populate: [
-              "author",
-              "author.avatar",
-              "comments.author",
-              "comments.author.avatar",
-            ],
-          });
-        })
-        .then(({ data }) => {
-          const attributes = this.$state.discourse.current?.attributes;
-          if (attributes?.opinions?.data) {
-            attributes.opinions.data.push(data);
-          } else if (attributes) {
-            attributes.opinions = {
-              data: [data],
-            };
-          }
-          this.$state.opinion.form.attributes.content = "";
-          this.$state.opinion.form.attributes.annotations = {};
-          // this.$state.opinion.active = JSON.parse(JSON.stringify(data));
-          this.$state.opinion.selectedGlyphs = [];
-          this.$state.opinion.formActive = false;
-        });
+      console.log('load')
+      setTimeout(() => {
+        console.log('loaded')
+        this.loading = false
+      }, 1000)
+      // Object.entries(axesRaw || {})
+      //   .forEach(e => {
+      //     const axis: SamsaFontAxis = this.$state.discourse.font.axes.find((f: SamsaFontAxis) => f.tag === e[0])
+      //     // this adds all axes:
+      //     axes[e[0]] = e[1]
+      //     // this adds only non default axes:
+      //     // if (axis.default !== e[1][0]) {
+      //     //   axes[e[0]] = e[1]
+      //     // }
+      //   })
+      // const opinion = {
+      //   content,
+      //   glyphs,
+      //   axes,
+      //   annotations,
+      //   discourse,
+      //   author: this.$strapi.user,
+      // };
+      // this.$strapi
+      //   .create("opinions", opinion)
+      //   .then(({ data }) => {
+      //     return this.$strapi.findOne("opinions", data.id, {
+      //       populate: [
+      //         "author",
+      //         "author.avatar",
+      //         "comments.author",
+      //         "comments.author.avatar",
+      //       ],
+      //     });
+      //   })
+      //   .then(({ data }) => {
+      //     const attributes = this.$state.discourse.current?.attributes;
+      //     if (attributes?.opinions?.data) {
+      //       attributes.opinions.data.push(data);
+      //     } else if (attributes) {
+      //       attributes.opinions = {
+      //         data: [data],
+      //       };
+      //     }
+      //     this.$state.opinion.form.attributes.content = "";
+      //     this.$state.opinion.form.attributes.annotations = {};
+      //     // this.$state.opinion.active = JSON.parse(JSON.stringify(data));
+      //     this.$state.opinion.selectedGlyphs = [];
+      //     this.$state.opinion.formActive = false;
+      //   });
     },
   },
 })
