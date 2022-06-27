@@ -127,20 +127,18 @@ export default defineComponent({
     },
     filteredGlyphs() {
       if (!this.$state.discourse.font) return [];
-      const glyphs = this.$state.discourse.font.glyphs
-      return glyphs
-      // const glyphs = this.$state.discourse.font.glyphs.filter((glyph: SamsaGlyph) => {
-      //   if (
-      //     this.removeEmpty(glyph.id) &&
-      //     this.filterByVariability(glyph) &&
-      //     this.filterByActive(glyph.id) &&
-      //     this.filterByOpinions(glyph.id) &&
-      //     this.matchGlyphs(glyph.id)
-      //   ) {
-      //     return glyph;
-      //   }
-      // });
-      // return glyphs.slice(0, this.limit).sort((a, b) => (this.scores?.[b.id] || 0) - (this.scores?.[a.id] || 0));
+      const glyphs = this.$state.discourse.font.glyphs.filter((glyph: SamsaGlyph) => {
+        if (
+          this.removeEmpty(glyph.id) &&
+          this.filterByVariability(glyph) &&
+          this.filterByActive(glyph.id) &&
+          this.filterByOpinions(glyph.id) &&
+          this.matchGlyphs(glyph.id)
+        ) {
+          return glyph;
+        }
+      });
+      return glyphs.slice(0, this.limit).sort((a, b) => (this.scores?.[b.id] || 0) - (this.scores?.[a.id] || 0));
     },
   },
   methods: {
