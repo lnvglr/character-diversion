@@ -166,7 +166,7 @@ body {
   transition-duration: var(--transition-duration-75);
 }
 .list-enter-active { 
-  transition-delay: calc(50ms * var(--i, 1) );
+  transition-delay: calc(calc(500ms / var(--total, 1000)) * var(--i, 1) );
 }
 
 /* ensure leaving items are taken out of layout flow so that moving

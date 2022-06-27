@@ -5,9 +5,10 @@
     :class="`grid-cols-autofill-${gridSize}`"
     v-bind="$attrs"
     ref="container"
+    :style="{ '--total': filledGlyphs.length }"
   >
     <GlyphContanier
-      v-for="glyph in filledGlyphs"
+      v-for="(glyph, i) in filledGlyphs"
       :key="glyph.id"
       :glyph="glyph"
       :gridSize="gridSize"
@@ -17,6 +18,7 @@
       :intersection="intersection"
       :frame="frame"
       :outline="outline"
+      :style="{'--i': i}" 
       class="snap-start"
     />
     <div class="col-span-full">

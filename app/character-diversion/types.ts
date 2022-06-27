@@ -42,7 +42,8 @@ declare module '@/assets/samsa-core' {
       }
     },
     version: string
-    name: string
+    name: string,
+    unitsPerEm: number
   }
   interface SamsaGlyph {
     value: string

@@ -37,14 +37,16 @@ export default defineComponent({
 			return this.points.filter(({ r }) => !r);
 		},
 		points() {
+      console.log(this.$state.discourse.font?.unitsPerEm)
+      const size = this.$state.discourse.font?.unitsPerEm ? 200000 / this.$state.discourse.font?.unitsPerEm : 20
 			if (!(this.glyph instanceof SamsaGlyph)) return
-			const points = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(1)).points
+			const points = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0)).points
 			const transformed = [] as SVGElement[]
 			points.forEach((pt: number[]) => {
 				let svgEl = this.getSVGForShape(
 					pt,
 					pt[2] ? "■" : "●",
-					1 * 20);
+					size);
 				if (svgEl) points.push(svgEl);
 			})
 			return points;
