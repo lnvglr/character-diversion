@@ -1,5 +1,5 @@
 <template>
-  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center">
+  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center justify-center">
     <span class="flex items-center justify-center gap-2">
       <slot></slot>
       <Icon v-if="iconName" :name="iconName || icon" />
@@ -42,7 +42,7 @@ export default defineComponent({
     this.$nextTick(() => {
       const color = window.getComputedStyle(this.$el).color
       const rgb = color.match(/\d+/g)
-      if (this.$f.utils.getRelativeLuminance(rgb) > 128) {
+      if (this.$f.utils.getRelativeLuminance(rgb) > 50) {
         this.invert = true
       }
     })
@@ -77,19 +77,16 @@ export default defineComponent({
 :global(:where(.button)) {
   display: flex;
   margin: 0 calc(var(--border-default) * -2);
-  // --border-color: transparent;
-  // --background-color: var(--color-neutral-800);
   border: none;
   font-size: 1em;
-  // background-color: currentColor;
 }
 :global(:where(.button span)) {
   color: white;
   fill: white;
 }
 :global(:where(.button.inv span)) {
-  color: red;
-  fill: red;
+  color: black;
+  fill: black;
 }
 :global(:is(.dark .button)) {
   --color:  var(--color-neutral-800);
@@ -108,7 +105,6 @@ export default defineComponent({
   padding: var(--padding);
   text-align: center;
   line-height: 1.1;
-  // color: var(--color);
   box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
   text-align: center;
   transition: all var(--transition-duration-default) ease-in-out;
@@ -130,10 +126,12 @@ export default defineComponent({
   }
   &:hover {
     // --border-color: currentColor;
-    --color: var(--background-color);
     --bg-opacity: 0;
     // background-color: currentColor;
     cursor: pointer;
+    span {
+      color: currentColor;
+    }
   }
 
   &:focus, &:focus-visible {

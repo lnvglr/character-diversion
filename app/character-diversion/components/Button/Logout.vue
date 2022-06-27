@@ -1,5 +1,5 @@
 <template>
-	<Button @click="logout" v-if="$strapi.user" title="Logout" :icon="icon && 'arrow-right-from-bracket'">
+	<Button @click="logout" v-if="$strapi.user" title="Logout" :icon="icon && 'arrow-right-from-bracket'" class="text-alert-500">
 		<template v-slot v-if="label">
 			{{ label }}
 		</template>

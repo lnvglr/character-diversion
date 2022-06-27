@@ -24,7 +24,7 @@ export default {
 			locales: {
 				de: 'Deutsch',
 				en: 'English',
-				he: 'עברית',
+				// he: 'עברית',
 			}
 		}
 	},

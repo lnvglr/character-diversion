@@ -4,6 +4,7 @@
       v-if="$strapi.user && $state.opinion.form.attributes && $state.opinion.formActive"
       @submit.prevent="postOpinion"
       class="relative"
+      :class="{ ['opacity-50']: loading }"
     >
       <!-- <Author :user="$strapi.user" imageSize="8" class="mb-2 text-xs" /> -->
       <Image class="object-cover rounded-full" :class="`absolute top-2 left-3 w-6 h-6 z-10`"
@@ -77,6 +78,11 @@ export default defineComponent({
       type: Boolean
     }
   },
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     currentDiscourse() {
       return this.$state.discourse.current;
@@ -118,6 +124,7 @@ export default defineComponent({
       this.$state.opinion.formActive = true;
     },
     postOpinion() {
+      this.loading = true
       const { content, glyphs, axes: axesRaw, annotations } = this.$state.opinion.form.attributes;
       if (!this.canPost) return;
       const { id, attributes } = this.$state.discourse.current

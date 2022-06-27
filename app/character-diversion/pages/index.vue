@@ -16,7 +16,7 @@
                 in the world.
               </div>
               <div>
-                <Button to="/discourse" icon="arrow-right" class="lg">{{
+                <Button to="/discourse" icon="arrow-right" class="lg text-primary-100">{{
                   $t("discover")
                 }}</Button>
               </div>
