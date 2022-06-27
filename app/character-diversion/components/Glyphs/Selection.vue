@@ -6,7 +6,7 @@
     v-bind="$attrs"
     ref="container"
   >
-    <!-- <GlyphContanier
+    <GlyphContanier
       v-for="glyph in filledGlyphs"
       :key="glyph.id"
       :glyph="glyph"
@@ -18,7 +18,7 @@
       :frame="frame"
       :outline="outline"
       class="snap-start"
-    /> -->
+    />
     <div class="col-span-full">
       <Card>
         <div class="w-full p-24 pb-48 flex flex-col items-center justify-center gap-5">
