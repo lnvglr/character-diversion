@@ -2,7 +2,7 @@
   <NuxtLayout name="split">
     <div class="flex flex-col items-start gap-5">
       <div v-if="$strapi.user?.name" class="w-full">
-        <h1 class="font-bold text-4xl inline">
+        <h1 class="font-bold text-4xl inline-block">
           {{ $t("greeting", { name: $strapi.user?.name.split(" ")[0] }) }}
         </h1>
         <div class="flex gap-5 mt-10 mb-5 items-center justify-between">

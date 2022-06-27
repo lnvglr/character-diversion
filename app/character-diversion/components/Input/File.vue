@@ -1,27 +1,47 @@
 <template>
-  <div
-    @dragenter.prevent="({dataTransfer}) => (active = true, draggedFiles = dataTransfer.items.length)"
-    @dragleave.prevent="active = false"
-    @dragover.prevent
-    @drop.prevent="({dataTransfer}) => checkFiles(dataTransfer)"
-    :class="{ active, disabled: !moreSpace }"
-    class="dropzone"
-    v-bind="$attrs"
-  >
-    <div v-if="!moreSpace && dropzone" style="pointer-events: none">
-      <span>{{$t('files.uploadMax', { n: maxFiles })}}</span>
-    </div>
-    <div v-else-if="active && dropzone" style="pointer-events: none">
-      <span>{{$t('files.drop', draggedFiles)}}</span>
-    </div>
-    <div v-else-if="dropzone">
-      <i18n-t keypath="files.dropNotice" tag="span" for="browse" scope="global">
-        <label for="dropzoneFile">{{$t('files.browse')}}</label>
-      </i18n-t>
-      <small>{{$t('files.supported', { formats: accept.join(', ').toUpperCase(), size: formatBytes(maxFileSize) })}}</small>
-      <input @change="({target}) => checkFiles(target)" ref="files" type="file" id="dropzoneFile" class="dropzoneFile" multiple />
+  <TransitionExpand>
+    <div v-if="maxFiles > files.length">
+    <div
+      @dragenter.prevent="
+        ({ dataTransfer }) => (
+          (active = true), (draggedFiles = dataTransfer.items.length)
+        )
+      "
+      @dragleave.prevent="active = false"
+      @dragover.prevent
+      @drop.prevent="({ dataTransfer }) => checkFiles(dataTransfer)"
+      :class="{ active, disabled: !moreSpace }"
+      class="dropzone"
+      v-bind="$attrs"
+    >
+      <div v-if="!moreSpace && dropzone" style="pointer-events: none">
+        <span>{{ $t("files.uploadMax", { n: maxFiles }) }}</span>
+      </div>
+      <div v-else-if="active && dropzone" style="pointer-events: none">
+        <span>{{ $t("files.drop", draggedFiles) }}</span>
+      </div>
+      <div v-else-if="dropzone">
+        <i18n-t keypath="files.dropNotice" tag="span" for="browse" scope="global">
+          <label for="dropzoneFile">{{ $t("files.browse") }}</label>
+        </i18n-t>
+        <small>{{
+          $t("files.supported", {
+            formats: accept.join(", ").toUpperCase(),
+            size: formatBytes(maxFileSize),
+          })
+        }}</small>
+        <input
+          @change="({ target }) => checkFiles(target)"
+          ref="files"
+          type="file"
+          id="dropzoneFile"
+          class="dropzoneFile"
+          multiple
+        />
+      </div>
     </div>
   </div>
+  </TransitionExpand>
   <transition-group name="fade" tag="ul" v-if="filelist && dropzone">
     <FileCard
       v-for="(item, i) in files"
@@ -39,29 +59,33 @@
     :active="callout.length > 0"
     :close="true"
     @close="callout = []"
-    >
-      {{ callout.join('. ') }}
-    </div>
+  >
+    {{ callout.join(". ") }}
+  </div>
 </template>
 
 <script lang="ts">
-import FileCard from '~/components/UI/FileCard.vue'
+import FileCard from "~/components/UI/FileCard.vue";
 // import Callout from '~/components/UI/Callout.vue'
 
 export default defineComponent({
-  name: 'DropZone',
+  name: "DropZone",
   components: {
     FileCard,
-  //   Callout,
+    //   Callout,
   },
   props: {
     name: String,
     accept: {
       type: Array,
-      default: () => ['ttf', 'otf'],
+      default: () => ["ttf", "otf"],
     },
     maxSize: {
       type: Number,
+    },
+    maxFiles: {
+      type: Number,
+      default: 3,
     },
     dropzone: {
       type: Boolean,
@@ -76,87 +100,95 @@ export default defineComponent({
     return {
       active: false,
       files: [],
-      maxFiles: 3,
       maxFileSize: this.maxSize || 2 * 1024 * 1024,
       draggedFiles: 0,
       callout: [],
-    }
+    };
   },
   computed: {
     moreSpace() {
-      return this.files.length < this.maxFiles
-    }
+      return this.files.length < this.maxFiles;
+    },
   },
   methods: {
     checkFiles(input) {
       this.callout = [];
       [...input.files].forEach((file) => {
-        if (file.type.includes('font')) {
-          this.addFile(file)
+        if (file.type.includes("font")) {
+          this.addFile(file);
         } else {
-          this.getDataURL(file).then((preview) => this.addFile(file, preview))
+          this.getDataURL(file).then((preview) => this.addFile(file, preview));
         }
-      })
-      this.active = false
+      });
+      this.active = false;
     },
     addFile(file, preview = null) {
-      const uniqueName = this.files.every(e => e.file.name !== file.name)
-      const withinSize = file.size <= this.maxFileSize
-      const allowedType = this.accept.some(e => {
-        return file.type.replace(/jpeg|jpe/, 'jpg').includes(e.replace(/jpeg|jpe/, 'jpg'))
-      })
-      if (!uniqueName) this.callout.push(this.$t('files.duplicate') + ` (${file.name})`)
-      if (!withinSize) this.callout.push(this.$t('files.supportedSize', { size: this.formatBytes(this.maxFileSize) }) + ` (${file.name})`)
-      const format = this.$t('files.supportedFormats', { formats: this.accept.join(', ').toUpperCase() });
-      if (!allowedType && !this.callout.includes(format)) this.callout.push(format)
+      const uniqueName = this.files.every((e) => e.file.name !== file.name);
+      const withinSize = file.size <= this.maxFileSize;
+      const allowedType = this.accept.some((e) => {
+        return file.type
+          .replace(/jpeg|jpe/, "jpg")
+          .includes(e.replace(/jpeg|jpe/, "jpg"));
+      });
+      if (!uniqueName) this.callout.push(this.$t("files.duplicate") + ` (${file.name})`);
+      if (!withinSize)
+        this.callout.push(
+          this.$t("files.supportedSize", { size: this.formatBytes(this.maxFileSize) }) +
+            ` (${file.name})`
+        );
+      const format = this.$t("files.supportedFormats", {
+        formats: this.accept.join(", ").toUpperCase(),
+      });
+      if (!allowedType && !this.callout.includes(format)) this.callout.push(format);
       if (this.moreSpace && uniqueName && withinSize && allowedType) {
-        this.files.push({ file, preview })
+        this.files.push({ file, preview });
       }
     },
     removeFile(index) {
-      this.files.splice(index, 1)
+      this.files.splice(index, 1);
     },
     async getDataURL(file) {
       return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = reject
-        reader.readAsDataURL(file)
-      })
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     },
     formatBytes(bytes: number, decimals: number = 2): string {
-      if (bytes === 0) return '0 Bytes';
+      if (bytes === 0) return "0 Bytes";
 
       const k = 1024;
       const dm = decimals < 0 ? 0 : decimals;
-      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+      const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
       const i = Math.floor(Math.log(bytes) / Math.log(k));
-      
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
 
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+    },
   },
   watch: {
     files: {
       handler(data) {
-        this.$emit('update:modelValue', data.map((e) => e.file))
-        this.$state.discourse.new.files = data.map((e) => e.file)
+        this.$emit(
+          "update:modelValue",
+          data.map((e) => e.file)
+        );
+        // this.$state.discourse.new.files = data.map((e) => e.file)
       },
       deep: true,
     },
     callout: {
       handler(data) {
-        if (data.length > 0) setTimeout(() => this.callout = [], 10000)
+        if (data.length > 0) setTimeout(() => (this.callout = []), 10000);
       },
       deep: true,
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
-
 :global(:where(.dropzone)) {
   border-style: dashed;
   transition: var(--transition-duration-default);
@@ -164,7 +196,6 @@ export default defineComponent({
   color: currentColor;
   padding: var(--padding-s);
   background: var(--color-white);
-
 }
 .dropzone {
   div {
@@ -237,5 +268,4 @@ ul {
     }
   }
 }
-
 </style>

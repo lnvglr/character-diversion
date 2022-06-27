@@ -144,7 +144,7 @@ $colors: primary, secondary, info, beige, success, warning, alert;
     }
     &.router-link-active {
       &.clear, & {
-        --color: var(--color-primary-500) !important;
+        --color: var(--color-primary-500);
       }
     }
   }
@@ -167,19 +167,19 @@ $colors: primary, secondary, info, beige, success, warning, alert;
 
   &:focus,
   &:focus-visible {
-    box-shadow: 0 0 0 3px var(--color-info-200);
+    box-shadow: 0 0 0 1px var(--color);
     outline: none;
     z-index: 10;
   }
 
-  &:active,
-  &.active {
-    --color: var(--color-white);
-    --background-color: var(--color-info-500);
-    &:hover {
-      --bg-opacity: 1;
-    }
-  }
+  // &:active,
+  // &.active {
+  //   --color: var(--color-white);
+  //   --background-color: var(--color-info-500);
+  //   &:hover {
+  //     --bg-opacity: 1;
+  //   }
+  // }
 
   &[disabled]:not([disabled="false"]) {
     opacity: 0.5;
@@ -196,13 +196,23 @@ $colors: primary, secondary, info, beige, success, warning, alert;
       border-radius: var(--rounded-full);
     }
   }
+  &.fill {
+    --background: white;
+    --color: currentColor;
+    &:hover {
+      --background: currentColor;
+      --color: white;
+      // --border-color: white;
+      box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
+    }
+  }
   &.xxs {
     font-size: var(--text-xs);
     --size: var(--h-5);
     --padding: var(--p-0) var(--p-1);
   }
   &.xs {
-    font-size: var(--text-xs);
+    // font-size: var(--text-lg);
     --size: var(--h-6);
     --padding: var(--p-0) var(--p-1);
   }
@@ -248,7 +258,7 @@ $colors: primary, secondary, info, beige, success, warning, alert;
 <style lang="scss">
 .input-group {
   display: flex;
-  :is(input, .button) {
+  .button {
     &:first-child {
       &,
       &:before {
@@ -263,6 +273,24 @@ $colors: primary, secondary, info, beige, success, warning, alert;
         border-bottom-left-radius: 0;
       }
     }
+  }
+  .input-container {
+    input {
+      height: var(--h-12);
+    }
+    &:first-child {
+     input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    &:last-child {
+      input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
   }
 }
 </style>

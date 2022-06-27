@@ -32,13 +32,13 @@
       autocomplete="new-password"
       class="lg"
     />
-    <Input type="file" v-model="avatar" :accept="['jpg', 'png']" />
+    <Input type="file" v-model="avatar" :accept="['jpg', 'png']" :maxFiles="1" />
     <Button type="submit" class="lg">Sign up</Button>
     <p v-show="error" class="text-sm text-alert-500">{{ errorMsg }}</p>
     <hr />
     <p>
       {{ $t("have.account") }}
-      <Button to="/login" class="clear inline">{{ $t("login") }}</Button>
+      <Button to="/login" class="clear inline-block">{{ $t("login") }}</Button>
     </p>
   </form>
 </template>

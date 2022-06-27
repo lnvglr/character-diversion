@@ -6,9 +6,9 @@
       >Login</Button>
     <p v-show="error" class="text-sm text-alert-500">{{ errorMsg }}</p>
 
-    <Button to="/forgot-password" class="my-2 clear inline lg">{{$t('forgot.password')}}</Button>
+    <Button to="/forgot-password" class="my-2 clear inline-block lg">{{$t('forgot.password')}}</Button>
     <hr />
-    <p>{{$t('no.account.yet')}} <Button to="/register" class="clear inline">{{$t('register')}}</Button></p>
+    <p>{{$t('no.account.yet')}} <Button to="/register" class="clear inline-block">{{$t('register')}}</Button></p>
 
   </form>
 </template>

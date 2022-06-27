@@ -8,7 +8,7 @@
     <span>
       <Truncate :string="file.name" />
       <span class="tag">{{ size(file.size) }}</span>
-      <Button class="xs round symbol" @click.prevent="remove" color="alert">×</Button>
+      <Button class="xs round text-lg" @click.prevent="remove" color="alert">×</Button>
     </span>
   </component>
 </template>
@@ -43,9 +43,9 @@ export default {
 
 <style lang="scss" scoped>
 .file {
-  background: var(--grey-light-02);
+  background: var(--color-beige-100);
   box-shadow: var(--input-border) var(--grey-light-03);
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded-lg);
   margin-bottom: 10px;
   display: flex;
   overflow: hidden;

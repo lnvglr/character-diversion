@@ -10,8 +10,8 @@
       <Button to="/about" class="lg clear hidden sm:block" :class="{active: $route.name === 'about'}"
         >{{$t('about')}}</Button>
       <div v-if="!$strapi.user" class="flex items-center gap-5 ml-auto">
-        <Button to="/login" class="clear lg">Login</Button>
-        <Button to="/register" class="lg">Sign Up</Button>
+        <Button to="/login" v-if="$route.name !== 'login'" class="clear lg">Login</Button>
+        <Button to="/register" v-if="$route.name !== 'register'" class="lg">Sign Up</Button>
       </div>
     </header>
   </Card>
