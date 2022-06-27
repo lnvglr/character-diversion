@@ -152,7 +152,8 @@ export const utils = {
           })
         .join('.')
     )
-  }
+  },
+  getRelativeLuminance: (rgb: number[]) => rgb ? 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2] : 0
 }
 export const strapiHelpers = {
   client: <T>(contentType: string, data?: Partial<T>, method: string = "POST") =>
@@ -190,5 +191,5 @@ export const strapiHelpers = {
         .then(resolve)
         .catch(reject)
     })
-  }
+  },
 }

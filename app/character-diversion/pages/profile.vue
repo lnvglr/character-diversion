@@ -51,10 +51,10 @@
 <script>
 export default {
   setup() {
+    const app = useNuxtApp();
     definePageMeta({
       name: "Profile",
-      icon: "user",
-      order: 4,
+      middleware: ["auth"]
     });
   },
   data() {

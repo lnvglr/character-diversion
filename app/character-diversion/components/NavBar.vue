@@ -22,7 +22,8 @@
           </ClientOnly>
         </NuxtLink>
       </li>
-      <NuxtLink to="/profile"><Author class="w-5 h-5" :user="$strapi.user" :info="false" /></NuxtLink>
+      <Button to="/about" icon="circle-info" class="text-beige-500 text-2xl clear round rounded-full"></Button>
+      <NuxtLink to="/profile" class="mb-3"><Author :user="$strapi.user" :info="false" class="hover:opacity-70" /></NuxtLink>
     </ul>
   </Card>
 </template>

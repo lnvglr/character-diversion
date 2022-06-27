@@ -1,7 +1,9 @@
 <template>
-  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="color" class="button items-center justify-center gap-2">
-    <slot></slot>
-    <Icon v-if="iconName" :name="iconName || icon" />
+  <component :is="to ? NuxtLink : ButtonDefault" :to="to" :title="title" :disabled="disabled" :class="{[color]: color, inv: invert}" class="button items-center justify-center gap-2">
+    <span>
+      <slot></slot>
+      <Icon v-if="iconName" :name="iconName || icon" />
+    </span>
   </component>
 </template>
 <script lang="ts">
@@ -15,6 +17,11 @@ export default defineComponent({
 			ButtonDefault,
     }
   },
+  data() {
+    return {
+      invert: false,
+    }
+  },
   props: {
     name: String,
     title: String,
@@ -22,7 +29,6 @@ export default defineComponent({
     disabled: Boolean,
     to: {
       type: String,
-      default: '',
     },
     icon: {
       type: [String, Boolean]
@@ -30,16 +36,16 @@ export default defineComponent({
     color: {
       type: String,
       default: '',
-      // validator: (e: string) => [
-      //   '',
-      //   'primary',
-      //   'secondary',
-      //   'info',
-      //   'success',
-      //   'warning',
-      //   'alert',
-      // ].includes(e)
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const color = window.getComputedStyle(this.$el).color
+      const rgb = color.match(/\d+/g)
+      if (this.$f.utils.getRelativeLuminance(rgb) > 128) {
+        this.invert = true
+      }
+    })
   },
   computed: {
     iconName() {
@@ -71,10 +77,19 @@ export default defineComponent({
 :global(:where(.button)) {
   display: flex;
   margin: 0 calc(var(--border-default) * -2);
-  --border-color: transparent;
-  --background-color: var(--color-neutral-800);
+  // --border-color: transparent;
+  // --background-color: var(--color-neutral-800);
   border: none;
   font-size: 1em;
+  // background-color: currentColor;
+}
+:global(:where(.button span)) {
+  color: white;
+  fill: white;
+}
+:global(:where(.button.inv span)) {
+  color: red;
+  fill: red;
 }
 :global(:is(.dark .button)) {
   --color:  var(--color-neutral-800);
@@ -83,7 +98,7 @@ export default defineComponent({
 }
 :where(.button) {
   --size: var(--h-8);
-  --color: white;
+  // --color: white;
   --padding: var(--p-2) var(--p-3);
   --bg-opacity: 1;
   --border-radius: var(--rounded-md);
@@ -93,7 +108,7 @@ export default defineComponent({
   padding: var(--padding);
   text-align: center;
   line-height: 1.1;
-  color: var(--color);
+  // color: var(--color);
   box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
   text-align: center;
   transition: all var(--transition-duration-default) ease-in-out;
@@ -104,7 +119,7 @@ export default defineComponent({
     transition: all var(--transition-duration-default) ease-in-out;
     border-radius: var(--border-radius);
     opacity: var(--bg-opacity);
-    background-color: var(--background-color);
+    background-color: currentColor;
     content: '';
     width: 100%;
     height: 100%;
@@ -114,9 +129,10 @@ export default defineComponent({
     z-index: -1;
   }
   &:hover {
-    --border-color: currentColor;
+    // --border-color: currentColor;
     --color: var(--background-color);
     --bg-opacity: 0;
+    // background-color: currentColor;
     cursor: pointer;
   }
 
@@ -131,7 +147,7 @@ export default defineComponent({
     --background-color: var(--color-info-500);
     // --color: currentColor;
     &:hover {
-      --background-color: var(--color-info-600);
+      // --background-color: var(--color-info-600);
       --bg-opacity: 1;
     }
   }
@@ -150,12 +166,14 @@ export default defineComponent({
   }
 
   &.clear {
-    --color: var(--background-color);
-    // background-color: transparent;
-    box-shadow: none;
+    span {
+      color: currentColor
+    }
     --bg-opacity: 0;
     &:hover, &.active {
-      --background-color: var(--color-info-500);
+      &:before {
+        background-color: currentColor;
+      }
       --bg-opacity: 0.1;
     }
   }
@@ -164,6 +182,10 @@ export default defineComponent({
     --padding: 0;
     min-width: var(--size);
     max-width: var(--size);
+    &, &:before {
+      border-radius: var(--rounded-full)
+    }
+
   }
   &.xxs {
     font-size: var(--text-xs);
@@ -198,27 +220,27 @@ export default defineComponent({
     min-height: var(--size);
   }
 
-  $colors: primary,
-  secondary,
-  info,
-  beige,
-  success,
-  warning,
-  alert;
+//   $colors: primary,
+//   secondary,
+//   info,
+//   beige,
+//   success,
+//   warning,
+//   alert;
 
-  @each $color in $colors {
-    &.#{"" + $color} {
-      &, &.clear:hover {
-        --background-color: var(--color-#{$color}-500);
-      }
-      &:not(.clear):hover {
-        --color: white;
-				--bg-opacity: 1;
-        --background-color: var(--color-#{$color}-600);
-        --border-color: var(--background-color);
-      }
-    }
-  }
+//   @each $color in $colors {
+//     &.#{"" + $color} {
+//       &, &.clear:hover {
+//         --background-color: var(--color-#{$color}-500);
+//       }
+//       &:not(.clear):hover {
+//         --color: white;
+// 				--bg-opacity: 1;
+//         --background-color: var(--color-#{$color}-600);
+//         --border-color: var(--background-color);
+//       }
+//     }
+//   }
 }
 // :global(.input-group > :is(.input, .button)) {
 //   &:first-child {

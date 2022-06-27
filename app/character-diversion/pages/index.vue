@@ -16,7 +16,7 @@
                 in the world.
               </div>
               <div>
-                <Button to="/discourse" icon="arrow-right" class="lg hover:text-white">{{
+                <Button to="/discourse" icon="arrow-right" class="lg">{{
                   $t("discover")
                 }}</Button>
               </div>
@@ -43,7 +43,7 @@
               >Explore discourses type and discover a new way to delve into the world of
               typography, one character at a time. them!
                 <Button to="/discourse" icon="arrow-right" class="lg hover:text-white">{{
-                  $t("discover.doiscourse")
+                  $t("discover.discourses")
                 }}</Button>
                 </template
             >
