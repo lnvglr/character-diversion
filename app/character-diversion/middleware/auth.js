@@ -1,10 +1,10 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const user = useStrapiUser().value
-  if (to === "profile" && !user) {
+  if (to.name === "profile" && !user) {
     return navigateTo('/login')
   }
-  if (to === "login" && user) {
+  if (to.name === "login" && user) {
     return navigateTo('/profile')
   }
-  return navigateTo(to)
+  return navigateTo(to.fullPath)
 })
