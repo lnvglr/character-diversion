@@ -2,7 +2,7 @@
   <div class="flex flex-col overflow-auto w-full">
     <!-- <Header class="border-0" iconClass="text-black">Character Diversion</Header> -->
     <main class="text-black grow gap-0.5 flex flex-col">
-      <Card class="text-white w-full bg-primary-500 dark:bg-slate-800">
+      <Card class="text-white w-full bg-primary-500 dark:bg-neutral-800">
           <div class="py-16 sm:py-32 px-10 max-w-4xl mx-auto">
             <!-- <Input v-model="headine" class="text-black" />
 				<Input v-model="letter" class="text-black" /> -->
@@ -16,39 +16,28 @@
                 in the world.
               </div>
               <div>
-                <Button to="/discourse" icon="arrow-right" class="lg fill text-primary-500">{{
-                  $t("discover")
+                <Button to="/discourse" icon="arrow-right" class="lg fill text-primary-500" style="--border-color: white">{{
+                  $t("explore")
                 }}</Button>
               </div>
             </div>
           </div>
       </Card>
-      <Card class="landing-section">
-        <div class="py-40 max-w-4xl mx-auto">
-          <LandingSection class="stack">
-            <template #image>
-              <div class="relative">
-                <div
-                  v-for="(discourseItem, i) in discourses"
-                  :key="discourseItem.id"
-                  class="d"
-                  :style="`--i: ${i}; --length: ${discourses.length}`"
-                >
-                  <DiscourseCard :discourse="discourseItem" />
-                </div>
-              </div>
-            </template>
-            <template #title>Discover</template>
-            <template #description
-              ><div class="flex flex-col items-start gap-5"><p class="mt-2">Explore discourses type and discover a new way to delve into the world of
-              typography, one character at a time.</p>
-                <Button to="/discourse" icon="arrow-right" class="lg">{{
-                  $t("discover.discourses")
-                }}</Button>
-                </div>
-                </template
-            >
-          </LandingSection>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-0.5 w-full">
+          <DiscourseCard v-for="(discourseItem, i) in discourses"
+          :key="discourseItem.id" :discourse="discourseItem" />
+        </div>
+        <Card>
+        <div class="py-24 max-w-2xl mx-auto">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center px-5 gap-y-5 gap-x-24">
+        <div class="">
+          <h1 class="text-4xl font-bold">{{$t("discover")}}</h1>
+          <p class="mt-2">Explore discourses type and discover a new way to delve into the world of typography, one character at a time.</p>
+          </div>
+          <Button to="/discourse" icon="arrow-right" class="lg">{{
+            $t("discover.discourses")
+          }}</Button>
+          </div>
         </div>
       </Card>
       <Card class="landing-section">
