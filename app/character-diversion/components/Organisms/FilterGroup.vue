@@ -78,11 +78,11 @@ export default defineComponent({
     --border-radius: 0;
 
     &:first-child {
-      --border-radius: var(--rounded-md) 0 0 var(--rounded-md);
+      --border-radius: var(--rounded-sm) 0 0 var(--rounded-sm);
     }
 
     &:last-child {
-      --border-radius: 0 var(--rounded-md) var(--rounded-md) 0;
+      --border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
     }
   }
 }
