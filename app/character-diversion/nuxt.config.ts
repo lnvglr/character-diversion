@@ -57,6 +57,6 @@ export default defineNuxtConfig({
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
   },
-  // serverMiddleware: process.env.NODE_ENV === 'production' ? ["redirect-ssl"] : [],
+  serverMiddleware: process.env.NODE_ENV === 'production' ? ["redirect-ssl"] : [],
   
 })
