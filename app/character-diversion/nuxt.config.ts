@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
 import i18n from './config/i18n'
+import redirectSSL from 'redirect-ssl';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -56,5 +57,7 @@ export default defineNuxtConfig({
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
   },
-  serverMiddleware: process.env.NODE_ENV === 'production' ? ["redirect-ssl"] : [],
+  // serverMiddleware: process.env.NODE_ENV === 'production' ? ["redirect-ssl"] : [],
+  serverMiddleware: [redirectSSL.create({enabled: process.env.NODE_ENV === 'production'})],
+  
 })
