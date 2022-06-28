@@ -176,7 +176,7 @@ input {
 
 :global(:where(input, textarea)) {
   display: block;
-  border-radius: var(--rounded-md);
+  border-radius: var(--rounded-sm);
 }
 
 :global(form :is(.input-container)) {

@@ -1,6 +1,6 @@
 <template>
 	<img v-if="src && source" :src="source" :style="`--aspect-ratio: ${aspectRatio}`" />
-	<div v-else class="flex items-center justify-center text-2xl text-beige-400 font-bold">{{placeholder}}</div>
+	<div v-else class="placeholder flex items-center justify-center text-beige-400 font-bold">{{placeholder}}</div>
 </template>
 <script lang="ts">
 export default defineComponent({
@@ -36,5 +36,8 @@ export default defineComponent({
 img {
 	aspect-ratio: var(--aspect-ratio);
 	object-fit: cover;
+}
+:global(.placeholder) {
+	font-size: var(--text-xl);
 }
 </style>

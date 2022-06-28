@@ -197,7 +197,7 @@ export default defineComponent({
 
 		},
 		addAnnotation() {
-			this.$refs.annotations.addAnnotation()
+			if (this.edit) this.$refs.annotations.addAnnotation()
 		}
 	}
 })

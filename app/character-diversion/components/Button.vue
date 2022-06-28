@@ -9,7 +9,11 @@
   >
 
     <div v-if="loading" class="spinner absolute sm" />
-    <span :class="{['opacity-0']: loading}" class="flex items-center justify-center gap-2">
+    <span class="flex items-center justify-center gap-2" :class="{
+      'opacity-0': loading,
+      'move-left': icon === 'arrow-left',
+      'move-right': icon === 'arrow-right',
+      }">
       <slot></slot>
       <Icon v-if="iconName" :name="iconName || icon" />
     </span>
@@ -60,7 +64,7 @@ export default defineComponent({
       const color = window.getComputedStyle(this.$el).color;
       const rgb = color.match(/\d+/g);
       if (this.$f.utils.getRelativeLuminance(rgb) > 50) {
-        this.invert = this.color === "" && true;
+        this.invert = this.color === "" &&  true;
       }
     });
   },
@@ -83,11 +87,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.button {
+  :deep(svg) {
+    transition: transform var(--transition-duration-300);
+  }
+}
 .button:hover {
   & > :deep(*),
   :deep(svg),
   :deep(path) {
     fill: currentColor !important;
+  }
+  .move-right > :deep(svg) {
+    transform: translateX(0.25em)
+  }
+  .move-left > :deep(svg) {
+    transform: translateX(-0.25em)
   }
 }
 $colors: primary, secondary, info, beige, success, warning, alert;
@@ -101,16 +116,20 @@ $colors: primary, secondary, info, beige, success, warning, alert;
 //   color: black;
 //   fill: black;
 // }
-// :global(:is(.dark .button)) {
-//   --color: var(--color-neutral-800);
-//   --background-color: var(--color-neutral-200);
-//   margin: 0 calc(var(--border-default) * -2);
-// }
+:global(.dark .button) {
+  --background: white;
+}
+:global(.dark .button span) {
+  --color: black;
+}
+:global(.dark .button.clear span) {
+  --color: white;
+}
 .button {
   --size: var(--h-8);
   --padding: var(--p-2) var(--p-3);
   --bg-opacity: 1;
-  --border-radius: var(--rounded-md);
+  --border-radius: var(--rounded-sm);
   --color: white;
   --background: currentColor;
   --hover: transparent;
@@ -133,22 +152,28 @@ $colors: primary, secondary, info, beige, success, warning, alert;
     &.#{"" + $color} {
       --background: var(--color-#{$color}-500);
       --hover: var(--color-#{$color}-600);
-      color: white;
-      &:hover {
-        color: white
+      &, span {
+        --color: white;
+        &:hover {
+          --color: white
+        }
       }
       &.clear {
+        &, span {
         --color: var(--color-#{$color}-500);
         &:hover {
           --color: var(--color-#{$color}-500);
           --bg-opacity: 0.1;
         }
+        }
       }
       &.inv {
-        color: var(--color-#{$color}-700);
+        &, span {
+          --color: var(--color-#{$color}-700);
+        }
       }
     }
-    &.router-link-active {
+    &.router-link-active, &.active {
       &.clear, & {
         --color: var(--color-primary-500);
       }
@@ -165,9 +190,9 @@ $colors: primary, secondary, info, beige, success, warning, alert;
   }
 
   &:hover {
+    cursor: pointer;
     --background: var(--hover);
     --border-color: currentColor;
-    cursor: pointer;
     --color: currentColor;
   }
 
@@ -206,9 +231,9 @@ $colors: primary, secondary, info, beige, success, warning, alert;
     --background: white;
     --color: currentColor;
     &:hover {
-      --background: currentColor;
+      --background: transparent;
       --color: white;
-      // --border-color: white;
+      --border-color: white;
       box-shadow: inset 0 0 0 var(--border-default) var(--border-color);
     }
   }

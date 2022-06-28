@@ -26,7 +26,6 @@
         :intersection="intersection"
         :outline="outline"
         :watcher="[gridSize, intersection]"
-        :title="glyph.name"
       />
       <Input
         v-if="$state.opinion.formActive"

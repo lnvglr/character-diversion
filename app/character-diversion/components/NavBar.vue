@@ -4,17 +4,17 @@
       ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
   <Card tag="nav" class="h-full z-30 relative">
     <ul
-      class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-5"
+      class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-10 sm:gap-5"
     >
       <li
         v-for="(route, index) in routes"
         :key="route.name"
-        :class="{ 'mb-auto': index === routes.length - 1 }"
+        :class="{ 'sm:mb-auto': index === routes.length - 1 }"
       >
         <NuxtLink
           v-if="route.icon"
           :to="route.path"
-          class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-beige-800"
+          class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-neutral-700"
         >
           <ClientOnly>
             <Icon :name="route.icon" class="fa-lg" />
@@ -22,8 +22,21 @@
           </ClientOnly>
         </NuxtLink>
       </li>
+      <li class="hidden sm:block">
       <Button to="/about" icon="circle-info" color="beige" activeColor="primary" class="active:text-primary-500 text-2xl clear round rounded-full"></Button>
-      <NuxtLink to="/profile" class="mb-3"><Author :user="$strapi.user" :info="false" class="hover:opacity-70" /></NuxtLink>
+      </li>
+      <li>
+      <NuxtLink to="/profile" class="sm:mb-3 flex flex-col items-center justify-center w-16 h-16">
+          <Image
+            :src="$strapi.user.avatar"
+            :placeholder="$strapi.user.name[0]"
+            size="small"
+            class="-mt-1 w-6 h-6 sm:w-8 sm:h-8 text-md border border-beige-200 rounded-full"
+          />
+
+          <span class="text-xs mt-2 sm:hidden">{{$t('profile')}}</span>
+        </NuxtLink>
+        </li>
     </ul>
   </Card>
 </template>
