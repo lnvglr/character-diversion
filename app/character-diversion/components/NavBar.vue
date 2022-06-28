@@ -16,8 +16,10 @@
           :to="route.path"
           class="flex flex-col items-center justify-center rounded-md duration-100 border-beige-200 hover:bg-beige-100 active:scale-95 active:text-primary-600 w-16 h-16 md:w-16 md:h-16 dark:text-slate-200 dark:hover:bg-beige-800"
         >
-          <Icon :name="route.icon" class="fa-lg" />
-          <span class="text-xs mt-2" v-html="route.name" />
+          <ClientOnly>
+            <Icon :name="route.icon" class="fa-lg" />
+            <span class="text-xs mt-2" v-html="route.name" />
+          </ClientOnly>
         </NuxtLink>
       </li>
       <Button to="/about" icon="circle-info" color="beige" activeColor="primary" class="active:text-primary-500 text-2xl clear round rounded-full"></Button>

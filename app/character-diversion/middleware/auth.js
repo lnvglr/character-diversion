@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (to.name === "profile" && !user) {
     return navigateTo('/login')
   }
-  if (to.name === "login" && user) {
+  if ((to.name === "login" || to.name === "register") && user) {
     return navigateTo('/profile')
   }
 })
