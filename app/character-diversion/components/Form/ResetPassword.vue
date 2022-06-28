@@ -27,7 +27,7 @@ export default {
       })
         .then(() => {
           this.done = true
-          this.$router.push('login')
+          this.$router.push('/login')
         })
         .catch(() => {
           this.error = true
