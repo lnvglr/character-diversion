@@ -38,6 +38,6 @@ img {
 	object-fit: cover;
 }
 :global(.placeholder) {
-	font-size: var(--text-xl);
+	font-size: var(--text-sm);
 }
 </style>

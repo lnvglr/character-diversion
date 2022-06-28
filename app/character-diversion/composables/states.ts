@@ -29,7 +29,7 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
       .finally(() => discourse.current = current)
   },
   fetch: () => {
-    new Promise(
+    return new Promise(
       (resolve, reject) => {
         useNuxtApp().$strapi.find('discourses', {
           // @todo: pull opinions only for current discourse
@@ -94,7 +94,7 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
       try {
         const base = app.$strapi.media && app.$strapi.media !== undefined ? app.$strapi.media : ''
         new SamsaFont({
-          url:  fontName,
+          url: fontName,
           callback: (font: SamsaFont) => {
             if (font.errors.length > 0) {
               reject(font)

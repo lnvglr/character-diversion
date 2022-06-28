@@ -19,11 +19,14 @@
   </div>
 </template>
 <script lang="ts">
-import { SamsaGlyph } from "~/types";
+import { Opinion, SamsaGlyph } from "~/types";
 export default defineComponent({
   props: {
     glyph: {
       type: Object as () => SamsaGlyph,
+    },
+    opinions: {
+      type: Array as () => Opinion[],
     },
     size: {
       type: String,
@@ -32,7 +35,7 @@ export default defineComponent({
   },
   methods: {
     linkedOpinions(id: number) {
-      return this.$f.glyphMethods.glyphHasOpinion(id);
+      return this.opinions || this.$f.glyphMethods.glyphHasOpinion(id);
     },
   },
 });

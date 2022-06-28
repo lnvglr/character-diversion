@@ -1,6 +1,6 @@
 <template>
   <Card tag="main" class="flex overflow-y-auto justify-center h-full">
-    <div class="w-full max-w-2xl">
+    <div class="w-full max-w-4xl">
       <div class="px-0 sm:px-5 pb-10 pt-0 sm:py-24 w-4/5 mx-auto text-left">
         <h1 class="font-bold text-left text-4xl sm:text-6xl mb-10">
           <slot name="title"></slot>

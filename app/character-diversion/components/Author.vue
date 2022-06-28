@@ -1,6 +1,6 @@
 <template>
 	<span class="flex gap-2 items-center text-beige-400" v-if="author">
-		<Image class="object-cover rounded-full" :class="`w-${imageSize} h-${imageSize} min-w-[${Number(imageSize) / 4}rem]`"
+		<Image class="object-cover rounded-full border border-beige-300" :class="`w-${imageSize} h-${imageSize}`" :style="{minWidth: Number(imageSize) / 4 + 'rem'}"
 			:src="avatar" size="thumbnail" :placeholder="name[0]" />
 		<span
 			v-if="info"

@@ -1,11 +1,11 @@
 <template>
-  <div class="container gap-10">
+  <div class="container gap-x-20 gap-y-10 flex items-start md:items-center flex-col md:flex-row p-5">
     <div class="">
       <!-- <Noise class="text-amber-900 bg-yellow-600" style="--offset-start: -150;"><div class="p-5"><slot name="image"></slot></div></Noise> -->
       <slot name="image"></slot>
     </div>
-    <div>
-      <h1 class="text-2xl font-bold"><slot name="title"></slot></h1>
+    <div class="">
+      <h1 class="text-4xl font-bold"><slot name="title"></slot></h1>
       <div><slot name="description"></slot></div>
     </div>
   </div>
@@ -17,8 +17,6 @@ export default {}
 
 <style lang="scss" scoped>
 .container {
-  display: flex;
-  align-items: center;
   & > * {
     flex-basis: 50%;
   }

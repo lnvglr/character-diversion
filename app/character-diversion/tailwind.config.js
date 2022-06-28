@@ -77,7 +77,8 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      sans: ['Inter', 'Gramatika', 'Neue Machina', 'sans-serif'],
+      sans: ['Inter', 'Gramatika', 'sans-serif'],
+      display: ['Neue Machina', 'Gramatika', 'sans-serif'],
       hebrew: ['Assistant'],
     },
     colors,

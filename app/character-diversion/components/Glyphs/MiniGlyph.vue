@@ -2,7 +2,7 @@
 	<div class="flex items-center select-none w-full overflow-hidden relative" ref="container" @click="addAnnotation" :class="{['edit-glyph']: edit}">
 
 		<div v-if="!isTTF && glyph"
-			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ $state.discourse.font?.glyphMap[glyph.id].literal }}</div>
+			class="font-user absolute w-full left-0 text-center pointer-events-none">{{ glyph.font?.glyphMap[glyph.id].literal }}</div>
 		<svg :style="style" :viewBox="viewBox.join(' ')"
 			class="pointer-events-none" ref="svgFrame"></svg>
 		<Transition name="fade">
@@ -96,8 +96,6 @@ export default defineComponent({
 		decomposeWatcher: {
 			handler() {
 				if (!this.inView || !this.isTTF) return
-				// console.log(this.glyph)
-				// console.log(this.$state.discourse.font)
 				setTimeout(() => {
 					this.decomposed = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0))
 					this.decomposedAlt = this.intersection && this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(1)) || undefined
@@ -113,7 +111,7 @@ export default defineComponent({
 	},
 	computed: {
 		isTTF(): boolean {
-			return !!this.$state.discourse.font.tables.glyf
+			return !!this.glyph?.font.tables.glyf
 		},
 		decomposeWatcher() {
 			return [this.tuple, this.inView, this.$attrs]
@@ -130,11 +128,11 @@ export default defineComponent({
 		},
 		characterWidth(): number {
 			if (!this.glyph) return 0
-			return this.points?.slice(-3, -2)?.[0]?.[0] || this.$state.discourse.font?.widths[this.glyph.id] || 0
+			return this.points?.slice(-3, -2)?.[0]?.[0] || this.glyph.font?.widths[this.glyph.id] || 0
 		},
 		width() {
 			if (!this.glyph) return 0
-			this.characterWidth + this.glyph.font.unitsPerEm * 2
+			this.characterWidth + this.glyph.font?.unitsPerEm * 2
 		},
 		scale() {
 			return 1
@@ -147,8 +145,8 @@ export default defineComponent({
 		offset() {
 			if (!this.glyph) return { x: 0, y: 0 }
 			return {
-				x: this.glyph.font.unitsPerEm * 10,
-				y: this.glyph.font.unitsPerEm / 4
+				x: this.glyph.font?.unitsPerEm * 10,
+				y: this.glyph.font?.unitsPerEm / 4
 			}
 		},
 		viewBox() {
@@ -157,12 +155,12 @@ export default defineComponent({
 				this.boundaries[0] - this.offset.x / 2,
 				-this.offset.y,
 				this.boundaries[1] + this.offset.x,
-				this.glyph.font.unitsPerEm + this.offset.y
+				this.glyph.font?.unitsPerEm + this.offset.y
 			]
 		},
 		fontSize() {
 			if (!this.glyph) return 0
-			return (this.characterWidth + this.offset.x) / this.glyph.font.unitsPerEm
+			return (this.characterWidth + this.offset.x) / this.glyph.font?.unitsPerEm
 		},
 		style() {
 			return {
