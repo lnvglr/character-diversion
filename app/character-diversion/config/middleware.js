@@ -1,4 +1,1 @@
-console.log('Loading middleware...');
-module.exports = {
-	
-};
+module.exports = {};

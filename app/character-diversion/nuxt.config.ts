@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
 import i18n from './config/i18n'
-import sslRedirect from 'heroku-ssl-redirect';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -13,7 +12,8 @@ export default defineNuxtConfig({
     url: process.env.API_BASE || 'http://localhost:1337',
   },
   publicRuntimeConfig: {
-    media: process.env.API_MEDIA
+    media: process.env.API_MEDIA,
+    env: process.env.NODE_ENV
   },
   buildModules: [
     '@nuxtjs/tailwindcss',
@@ -57,7 +57,6 @@ export default defineNuxtConfig({
       __INTLIFY_PROD_DEVTOOLS__: false,
     },
   },
-  serverMiddleware: [sslRedirect(['production'], 301)],
   // serverMiddleware: process.env.NODE_ENV === 'production' ? ["redirect-ssl"] : [],
   
 })
