@@ -19,7 +19,7 @@
         :submitOnEnter="true"
         :allowMarkdown="true"
         @enter="postOpinion"
-        @cancel="$state.opinion.reset('form'), loading = false"
+        @cancel="cancel"
         :class="{
           'shadow-xl': floating && $state.opinion.formActive,
         }"
@@ -28,10 +28,10 @@
 
       <TransitionExpand>
         <div v-if="selectedGlyphs.length > 0">
-          <div>
+          <div class="flex flex-wrap gap-1">
             <font-awesome-icon
               :icon="['fas', 'circle-check']"
-              class="text-beige-400 mr-2"
+              class="text-beige-400 mr-1"
             />
             <UITag v-for="g in selectedGlyphs">{{ g }}</UITag>
           </div>
@@ -39,7 +39,7 @@
       </TransitionExpand>
         <Button
           class="clear ml-auto"
-          @click="$state.opinion.reset('form'), loading = false"
+          @click="cancel"
           >{{ $t("cancel") }}</Button
         >
         <Button :disabled="!canPost" color="success" type="submit"
@@ -118,6 +118,11 @@ export default defineComponent({
     },
   },
   methods: {
+    cancel() {
+      this.$state.opinion.reset('form')
+      this.$state.opinion.reset('active')
+      this.loading = false
+    },
     openOpinionForm() {
       if (!this.$strapi.user) return this.$router.push("/login");
       this.$state.opinion.formActive = true;

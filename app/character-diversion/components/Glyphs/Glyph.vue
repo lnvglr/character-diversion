@@ -37,7 +37,6 @@ export default defineComponent({
 			return this.points.filter(({ r }) => !r);
 		},
 		points() {
-      console.log(this.$state.discourse.font?.unitsPerEm)
       const size = this.$state.discourse.font?.unitsPerEm ? 30000 / this.$state.discourse.font?.unitsPerEm : 20
 			if (!(this.glyph instanceof SamsaGlyph)) return
 			const points = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0)).points

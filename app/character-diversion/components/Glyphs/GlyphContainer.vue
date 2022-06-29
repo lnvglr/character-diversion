@@ -58,6 +58,7 @@
         :size="gridSize >= 30 ? 'lg' : 'md'"
         @pointerdown="clickable = false"
         @pointerup="clickable = true"
+        :active="peek"
         class="m-1 z-10 absolute bottom-0 left-0"
         :class="{
           'm-2': gridSize >= 30,
@@ -114,6 +115,7 @@ export default defineComponent({
       clickable: true,
       observer: new IntersectionObserver((e) => this.checkView(e[0])),
       inView: false,
+      peek: false,
     };
   },
   computed: {
@@ -122,6 +124,12 @@ export default defineComponent({
     },
   },
   watch: {
+    '$state.opinion.peek': {
+      handler(id: number) {
+        console.log(this.glyph.id, id)
+        this.peek = this.glyph.id === id
+      },
+    }
     // selected(value: boolean) {
     // 	if (value && this.$refs.container) {
     // 		this.$refs.container.scrollIntoView({ block: "nearest", behavior: 'smooth' })

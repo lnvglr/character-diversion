@@ -11,7 +11,7 @@
   "have.account": "You have an account?",
   "forgot.password": "Forgot password?",
   "files.browse": "browse",
-  "files.drop": "drop file | drop files",
+  "files.drop": "Drop file | Drop files",
   "files.dropNotice": "Drop files here, or {0}",
   "files.duplicate": "you have already uploaded a file with this name",
   "files.supported": "only {formats} and maximum {size} per file",

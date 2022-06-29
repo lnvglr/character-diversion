@@ -1,34 +1,12 @@
 <template>
   <NuxtLayout name="split" back="/discourse">
-    <template #title>{{ formData.title || $t("new.discourse") }}</template>
-    <form @submit.prevent="postDiscourse" class="flex flex-col justify-center">
-      <Input
-        type="text"
-        name="title"
-        v-model="formData.title"
-        :placeholder="$t('title')"
-        validation="required"
-        class="lg"
-      />
-      <Input
-        type="textarea"
-        :maxlength="1000"
-        :placeholder="$t('describe.discourse')"
-        v-model="formData.content"
-        :allowMarkdown="true"
-      />
-      <Input
-        type="file"
-        name="font"
-        v-model="formData.font"
-        :accept="['ttf', 'otf']"
-        :maxFiles="1"
-        :maxSize="3 * 1024 * 1024"
-      />
-      <Button type="submit" :disabled="!formData.font?.[0]" class="lg">{{
-        $t("start.new.discourse")
-      }}</Button>
-    </form>
+    <template #title>{{discourseTitle || $t("new.discourse") }}</template>
+    <FormNewDiscourse
+      :submitLabel="$t('start.new.discourse')"
+      @submit="postDiscourse"
+      @cancel="$router.push('/discourse')"
+      @update:formData="({title}) => discourseTitle = title"
+    />
   </NuxtLayout>
 </template>
 
@@ -36,37 +14,21 @@
 export default defineComponent({
   data() {
     return {
-      formData: {
-        title: "",
-        content: "",
-        font: null,
-      } as {
-        title: string
-        content: string
-        font?: File | null
-      },
-    };
-  },
-  async mounted() {
-    // console.log()
-  },
-  computed: {
-    fontFile() {
-      return this.formData.font?.[0];
+      discourseTitle: "",
     }
   },
   methods: {
-    postDiscourse(e: Event) {
-      if (!this.formData.font?.[0]) return;
+    postDiscourse(data: any) {
+      if (!data.font?.[0]) return;
       const formData = new FormData();
       const dataCompiled = {
-        ...this.formData,
+        ...data,
         author: this.$strapi.user,
       };
 
       delete dataCompiled.font;
       formData.append("data", JSON.stringify(dataCompiled));
-      formData.append("files.font", this.formData.font[0], this.formData.font[0].name);
+      formData.append("files.font", data.font[0], data.font[0].name);
 
       this.$strapi
         .client("discourses", formData)

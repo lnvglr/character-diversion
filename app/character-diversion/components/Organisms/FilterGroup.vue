@@ -22,11 +22,10 @@
       </div>
       <Button
         @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion"
-        icon="filter"
         class="mr-2 clear"
         :title="$t('filter')"
         :class="{ active: $state.discourse.filter.opinion }"
-      />
+      >with opinion</Button>
     </div>
   </div>
 </template>

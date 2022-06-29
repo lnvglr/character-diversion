@@ -176,6 +176,7 @@ interface annotationTool extends Annotation {
 export interface OpinionState {
   form: Opinion
   active: Opinion
+  peek: number
   formActive: Boolean
   selectedGlyphs: number[]
   annotationTool: annotationTool

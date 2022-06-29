@@ -15,8 +15,10 @@
           label="false"
         />
       </h2>
-
-      <Author :post="discourse" class="text-sm mt-auto border-t border-beige-200 pt-4" />
+      <div class="mt-auto py-2">
+      <span class="text-xs flex gap-1">{{$t('opinion', discourse.attributes.opinions.data.length)}}<UITag>{{discourse.attributes.opinions.data.length}}</UITag></span>
+      </div>
+      <Author :post="discourse" class="text-sm border-t border-beige-200 pt-4" />
     </NuxtLink>
   </Card>
 </template>

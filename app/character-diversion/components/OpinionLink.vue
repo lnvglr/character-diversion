@@ -1,6 +1,6 @@
 <template>
   <div v-if="glyph && linkedOpinions(glyph.id).length > 0" class="">
-    <VDropdown :distance="12" :skidding="-8" placement="bottom-start">
+    <VDropdown :distance="12" :skidding="-8" placement="bottom-start" :shown="active" @hide="$state.opinion.peek = null">
       <button
         class="flex items-center justify-center font-bold rounded-full text-white bg-primary-500/80"
         :class="size === 'lg' ? 'w-5 h-5 text-xs' : 'w-3 h-3 text-[0.5rem]'"
@@ -32,6 +32,15 @@ export default defineComponent({
       type: String,
       default: "sm",
     },
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
+  watch: {
+    active() {
+      console.log(this.active)
+    }
   },
   methods: {
     linkedOpinions(id: number) {

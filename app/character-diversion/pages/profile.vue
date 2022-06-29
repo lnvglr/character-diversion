@@ -68,7 +68,6 @@ export default {
     update() {
       if (this.$strapi.user.avatar) {
         return this.remove().then((e) => {
-          console.log(e)
           return this.upload();
         });
       }

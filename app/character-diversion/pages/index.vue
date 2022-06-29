@@ -32,8 +32,12 @@
         <div class="py-24 max-w-2xl mx-auto gap-5 flex flex-col items-center">
           <h2 class="text-xl font-bold">Join the Community</h2>
           <div class="flex items-center gap-5 ml-auto">
-            <Button to="/login" v-if="$route.name !== 'login'" class="clear lg">Login</Button>
-            <Button to="/register" v-if="$route.name !== 'register'" class="lg">Sign Up</Button>
+            <Button to="/login" v-if="$route.name !== 'login'" class="clear lg"
+              >Login</Button
+            >
+            <Button to="/register" v-if="$route.name !== 'register'" class="lg"
+              >Sign Up</Button
+            >
           </div>
         </div>
       </Card>
@@ -62,35 +66,53 @@
           </div>
         </div>
       </Card>
-       <Card class="bg-beige-300">
-        <div class="py-24 max-w-2xl mx-auto">
+      <Card class="bg-beige-300">
+        <div class="py-24 max-w-4xl mx-auto">
           <div
             class="flex flex-col sm:flex-row items-start sm:items-center px-5 gap-y-5 gap-x-12"
           >
-            <div class="relative w-48 h-48 bg-white rounded-sm flex items-center justify-center min-w-[12rem]">
-            <!-- <MiniGlyph :glyph="glyph" /> -->
-              <span class="font-display font-bold text-[10rem] leading-none pt-10">R</span>
+          <div class="flex flex-row gap-x-6">
+            <div
+              class="relative w-36 h-36 bg-white rounded-sm flex items-center justify-center min-w-[6rem]"
+            >
+              <span class="font-display font-bold text-[8rem] leading-none pt-6"
+                >C</span
+              >
               <OpinionLink
-                v-if="glyph"
-                :glyph="glyph"
-                :opinions="opinions"
+                v-if="glyphs"
+                :glyph="glyphs[0]"
+                :opinions="glyphs[0].opinions"
                 :size="'lg'"
                 class="m-2 z-10 absolute bottom-0 left-0"
               />
-              </div>
-              <div class="flex flex-col items-start gap-5">
+            </div>
+            <div
+              class="relative w-36 h-36 bg-white rounded-sm flex items-center justify-center min-w-[6rem]"
+            >
+              <span class="font-display font-bold text-[8rem] leading-none pt-6"
+                >R</span
+              >
+              <OpinionLink
+                v-if="glyphs"
+                :glyph="glyphs[1]"
+                :opinions="glyphs[1].opinions"
+                :size="'lg'"
+                class="m-2 z-10 absolute bottom-0 left-0"
+              />
+            </div>
+            </div>
+            <div class="flex flex-col items-start gap-5">
               <h2 class="text-4xl font-bold">{{ $t("discuss") }}</h2>
               <p>
-                  On Character Diversion discourse is based on the things you actually
-                  talk about: characters. You can attache your opinions to certain
-                  characters, parts of characters and spectra in the design space of
-                  variable fonts.
-                </p>
-                <Button to="/discourse" icon="arrow-right" class="lg">{{
-                  $t("share.thoughts")
-                }}</Button>
-              </div>
+                On Character Diversion discourse is based on the things you actually talk
+                about: characters. You can attache your opinions to certain characters,
+                parts of characters and spectra in the design space of variable fonts.
+              </p>
+              <Button to="/discourse" icon="arrow-right" class="lg">{{
+                $t("share.thoughts")
+              }}</Button>
             </div>
+          </div>
         </div>
       </Card>
       <Card class="landing-section">
@@ -98,8 +120,20 @@
           <LandingSection>
             <template #image><img src="/images/diverge.svg" /></template>
             <template #description
-              ><div class="flex flex-col gap-3"><div><span class="text-primary-500 border border-primary-500 dark:border-none dark:bg-primary-500 dark:text-white rounded-md mb-5 px-2 py-1 text-xs">coming soon</span></div><h2 class="text-4xl font-bold">{{ $t("diverge") }}</h2>
-<p>Users will be able to contribute to a type design discourse by actually proposing a diverting letter shape, posting it, and then giving users the ability to view the different options.</p></div></template
+              ><div class="flex flex-col gap-3">
+                <div>
+                  <span
+                    class="text-primary-500 border border-primary-500 dark:border-none dark:bg-primary-500 dark:text-white rounded-md mb-5 px-2 py-1 text-xs"
+                    >coming soon</span
+                  >
+                </div>
+                <h2 class="text-4xl font-bold">{{ $t("diverge") }}</h2>
+                <p>
+                  Users will be able to contribute to a type design discourse by actually
+                  proposing a diverting letter shape, posting it, and then giving users
+                  the ability to view the different options.
+                </p>
+              </div></template
             >
           </LandingSection>
         </div>
@@ -107,7 +141,9 @@
 
       <Card class="landing-section">
         <div class="max-w-2xl mx-auto py-24">
-          <Button class="lg" to="/about" color="primary" icon="arrow-right">About this Project</Button>
+          <Button class="lg" to="/about" color="primary" icon="arrow-right"
+            >About this Project</Button
+          >
         </div>
       </Card>
     </main>
@@ -119,75 +155,126 @@ import { Discourse, Opinion, SamsaFont } from "~/types";
 import MiniGlyph from "~~/components/Glyphs/MiniGlyph.vue";
 
 export default defineComponent({
-    setup() {
-        definePageMeta({
-            name: "Home",
-            icon: "home",
-            order: 1,
-        });
-    },
-    data() {
-        return {
-            headine: "Everyone has an opinion on type. It's time to share yours.",
-            letter: "S",
-            glyph: {
-                id: 1
-            },
-            opinions: [
-                {
-                    id: 1,
-                    attributes: {
-                        content: "I like the way the type is written.",
-                        author: {
-                            data: {
-                                id: 1,
-                                attributes: {
-                                    name: "Franko"
-                                }
-                            }
-                        },
-                        votes: [
-                            {
-                                author: this.$strapi.user?.id || 2,
-                                value: 1
-                            },
-                            {
-                                author: 1,
-                                value: 1
-                            }
-                        ]
-                    }
+  setup() {
+    definePageMeta({
+      name: "Home",
+      icon: "home",
+      order: 1,
+    });
+  },
+  data() {
+    return {
+      headine: "Everyone has an opinion on type. It's time to share yours.",
+      letter: "S",
+      glyphs: [{
+        id: 1,
+        character: 'C',
+        opinions: [
+        {
+          id: 2,
+          attributes: {
+            content: "This /C has a particularly beautiful curvature.",
+            author: {
+              data: this.$strapi.user || {
+                id: 1,
+                attributes: {
+                  name: "Leon Vogler",
                 },
-                {
-                    id: 2,
-                    attributes: {
-                        content: "Beautiful inktrap!",
-                        author: {
-                            data: this.$strapi.user || {
-                                id: 1,
-                                attributes: {
-                                    name: "Leon Vogler"
-                                }
-                            }
-                        },
-                    }
-                }
-            ] as Opinion[]
-        };
-    },
-    async mounted() {
-    },
-    computed: {
-        discourses(): Discourse[] {
-            const n = 3;
-            const d = Object.values<Discourse>(this.$state.discourse.all).sort((a: Discourse, b: Discourse) => {
-                return (Number(new Date(String(a.attributes.publishedAt))) -
-                    Number(new Date(String(b.attributes.publishedAt))));
-            });
-            return d.slice(-n);
+              },
+            },
+          },
         },
+      ] as Opinion[],
+      },
+      {
+        id: 1,
+        character: 'R',
+        opinions: [
+        {
+          id: 1,
+          attributes: {
+            content: "This one is fabulous.",
+            author: {
+              data: {
+                id: 1,
+                attributes: {
+                  name: "Franko",
+                },
+              },
+            },
+            votes: [
+              {
+                author: this.$strapi.user?.id || 2,
+                value: 1,
+              },
+            ],
+          },
+        },
+        {
+          id: 2,
+          attributes: {
+            content: "Beautiful inktrap!",
+            author: {
+              data: this.$strapi.user || {
+                id: 1,
+                attributes: {
+                  name: "Leon Vogler",
+                },
+              },
+            },
+            votes: [
+              {
+                author: this.$strapi.user?.id || 2,
+                value: 1,
+              },
+              {
+                author: 1,
+                value: 1,
+              },
+              {
+                author: 3,
+                value: 1,
+              },
+              {
+                author: 4,
+                value: 1,
+              },
+              {
+                author: 5,
+                value: 1,
+              },
+              {
+                author: 6,
+                value: 1,
+              },
+              {
+                author: 7,
+                value: 1,
+              },
+            ],
+          },
+        },
+      ] as Opinion[],
+      }],
+     
+    };
+  },
+  async mounted() {},
+  computed: {
+    discourses(): Discourse[] {
+      const n = 3;
+      const d = Object.values<Discourse>(this.$state.discourse.all).sort(
+        (a: Discourse, b: Discourse) => {
+          return (
+            Number(new Date(String(a.attributes.publishedAt))) -
+            Number(new Date(String(b.attributes.publishedAt)))
+          );
+        }
+      );
+      return d.slice(-n);
     },
-    components: { MiniGlyph }
+  },
+  components: { MiniGlyph },
 });
 </script>
 

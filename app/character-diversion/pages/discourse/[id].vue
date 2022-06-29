@@ -7,48 +7,16 @@
     <Card class="shrink sticky top-0 z-20">
       <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
     </Card>
-    <div v-if="activeTab === 'about'" class="h-full">
-      <div class="grid md:grid-cols-2 h-full gap-0.5">
-        <Card class="">
-          <div class="h-full p-10">
-            <h1 class="text-4xl font-bold">
-              {{ $state.discourse.current.attributes.title }}
-            </h1>
-            <Author :post="$state.discourse.current" imageSize="12" class="mt-5" />
-            <p class="text-md mt-5 markdown">
-              <span
-                v-html="
-                  $f.utils.renderMarkdown($state.discourse.current.attributes.content)
-                "
-              ></span>
-            </p>
-          </div>
-        </Card>
-        <Card>
-          <div class="h-full p-10">
-            <h2 class="text-xl font-bold" v-if="$state.discourse.font?.name">
-              <span>{{ $state.discourse.font.name }}</span>
-            </h2>
-            <p
-              class="text-sm flex gap-2 items-center my-2 text-beige-600"
-              v-if="$state.discourse.font?.version"
-            >
-              <font-awesome-icon :icon="['fa', 'code-branch']" fixed-width /><span>{{
-                $state.discourse.font.version
-              }}</span>
-            </p>
-          </div>
-        </Card>
-      </div>
-    </div>
-    <!-- class="grid grid-cols-2 h-full" -->
+
+    <AboutDiscourse v-if="activeTab === 'about'" />
+
     <div
       v-if="activeTab === 'opinions'"
       class="grid grid-cols-2 grid-rows-1 overflow-auto h-full gap-0.5"
     >
       <Card class="overflow-auto h-full">
         <div class="flex flex-col w-full h-full overflow-auto">
-          <div class="p-2 sticky top-0 bg-beige-100 border-y border-beige-300 z-10">
+          <div class="p-2 sticky top-0 bg-beige-100 border-b border-beige-300 z-10">
             <FormNewOpinion />
           </div>
           <ListOpinions
@@ -98,11 +66,13 @@
 import TabBar from "@/components/Cells/TabBar.vue";
 import FilterGroup from "@/components/Organisms/FilterGroup.vue";
 import GlobalAxes from "@/components/Organisms/GlobalAxes.vue";
+import AboutDiscourse from "@/components/Species/AboutDiscourse.vue";
 export default defineComponent({
   components: {
     TabBar,
     FilterGroup,
     GlobalAxes,
+    AboutDiscourse
   },
   data() {
     return {

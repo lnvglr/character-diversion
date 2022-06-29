@@ -81,10 +81,10 @@ export default defineComponent({
   },
   methods: {
     activateOpinion(id?: string) {
-      const opinions = this.$state.discourse.current.attributes.opinions.data;
-      const opinion = opinions.find((opinion: Opinion) => opinion.id === id);
-      const selected = JSON.parse(JSON.stringify(opinion));
-      this.$state.opinion.active = selected;
+      // const opinions = this.$state.discourse.current.attributes.opinions.data;
+      // const opinion = opinions.find((opinion: Opinion) => opinion.id === id);
+      // const selected = JSON.parse(JSON.stringify(opinion.id));
+      this.$state.opinion.peek = this.glyph.id;
     },
     removeAnnotation(annotation: Annotation) {
       if ((this.$state.opinion.active.id, annotation.opinionId)) {
@@ -177,7 +177,7 @@ export default defineComponent({
   },
   watch: {
     hoverRemove(s) {
-      console.log(s)
+      // console.log(s)
     },
     pointer({ x, y }) {
       if (!this.glyph || !this.scaling || !this.offset || !this.height) return
