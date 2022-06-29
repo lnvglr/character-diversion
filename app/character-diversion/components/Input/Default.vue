@@ -1,8 +1,8 @@
 <template>
   <component
     :is="'textarea' === type ? 'textarea' : 'input'"
-    :value="modelValue"
-    @input="updateValue($event.target.value)"
+    :value="value"
+    @input="updateValue(($event.target as HTMLInputElement).value)"
     v-bind="$attrs"
     :type="clearPassword ? 'text' : type"
     :ref="uid"
@@ -15,7 +15,7 @@ export default defineComponent({
     type: {
       type: String,
     },
-    modelValue: {
+    value: {
       type: [String, Number],
     },
   },
@@ -29,23 +29,23 @@ export default defineComponent({
     }
   },
   watch: {
-    modelValue: {
+    value: {
       handler(newValue: string) {
         this.calculateTextarea(newValue)
       },
     },
   },
   computed: {
-    element() {
-      return this.$refs[this.uid]
+    element(): HTMLElement {
+      return this.$refs[this.uid] as HTMLElement
     }
   },
   methods: {
-    updateValue(val) {
+    updateValue(val: string | number) {
       const value = 'number' === this.type ? Number(val) : String(val)
       this.$emit('update:modelValue', value)
     },
-    calculateTextarea(content: string = null) {
+    calculateTextarea(content: string) {
       setTimeout(() => {
         if (this.type === 'textarea' && this.element) {
           this.element.setAttribute('style', `height: auto;`)
