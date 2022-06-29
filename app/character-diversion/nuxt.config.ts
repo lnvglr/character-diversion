@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
     // '@nuxtjs/pwa'
+    '@kevinmarrec/nuxt-pwa'
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
@@ -47,12 +48,15 @@ export default defineNuxtConfig({
       '@fortawesome/free-solid-svg-icons',
     ],
   },
-  // pwa: {
-  //   manifest: {
-  //     name: 'Character Diversion',
-  //     publicPath: './pwa/manifest.json',
-  //   },
-  // },
+  pwa: {
+    workbox: {
+      enabled: true
+    },
+    // manifest: {
+    //   name: 'Character Diversion',
+    //   publicPath: './pwa/manifest.json',
+    // },
+  },
   intlify: i18n,
   vite: {
     define: {
