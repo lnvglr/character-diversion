@@ -81,17 +81,6 @@ export default defineComponent({
         this.updateDiscourse(this.formData);
       }
     },
-
-    async remove() {
-      await this.$strapi
-        .removeFile(this.$strapi.user.avatar.id)
-        .then(() => (this.$strapi.user.avatar = null));
-    },
-    async upload(file, contentType, id, field) {
-      return await this.$strapi
-        .uploadFile(file[0], contentType, id, field)
-        .then((res) => res);
-    },
     updateFormData(formData: typeof this.formData) {
       this.formData = formData;
       if (this.$state.discourse.current && formData.title)
@@ -105,21 +94,18 @@ export default defineComponent({
       data.content = formData.content;
 
       if (formData.font) {
-        const font = await this.upload(
-          formData.font,
+        const font = await this.$strapi.uploadFile(
+          formData.font[0],
           "discourses",
           this.$state.discourse.current.id,
           "font"
-        );
+        ).then((res) => res);
         console.log(font);
       }
 
       this.$strapi
         .update("discourses", this.$state.discourse.current.id, data)
-        .then((e) => {
-          console.log(e);
-          this.editing = false;
-        });
+        .then((e) => this.editing = false);
     },
   },
 });

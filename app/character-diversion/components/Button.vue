@@ -220,7 +220,7 @@ $colors: primary, secondary, info, beige, success, warning, alert;
   // }
 
   &[disabled]:not([disabled="false"]) {
-    opacity: 0.5;
+    --background: var(--color-beige-300);
     pointer-events: none;
     cursor: default;
   }

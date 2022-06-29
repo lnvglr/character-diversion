@@ -105,10 +105,12 @@ export default defineComponent({
   },
   watch: {
     filteredGlyphs(a, b) {
-      if (a.length !== b.length) this.checkFill();
-      setTimeout(() => {
-        this.$refs.container?.$el.scrollTo({top:0,left:0, behavior: "smooth"});
-      },100)
+      if (a.length !== b.length) {
+        this.checkFill();
+        setTimeout(() => {
+          this.$refs.container?.$el.scrollTo({top:0,left:0, behavior: "smooth"});
+        },100)
+      }
     },
   },
   computed: {
