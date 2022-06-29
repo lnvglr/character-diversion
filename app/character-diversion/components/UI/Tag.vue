@@ -1,5 +1,5 @@
 <template>
-	<span class="glyph-tag">
+	<span class="glyph-tag" :class="{round}">
 		<slot />
 	</span>
 </template>
@@ -7,6 +7,12 @@
 <script lang="ts">
 export default {
 	name: "Tag",
+	props: {
+		round: {
+			type: Boolean,
+			default: false
+		}
+	}
 }
 </script>
 
@@ -18,6 +24,9 @@ export default {
 	color: var(--color-beige-500);
 	& + & {
 		margin-left: var(--p-1);
+	}
+	&.round {
+		border-radius: var(--rounded-full);
 	}
 }
 </style>

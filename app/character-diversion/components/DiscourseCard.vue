@@ -16,14 +16,17 @@
         />
       </h2>
       <div class="mt-auto py-2">
-      <span class="text-xs flex gap-1">{{$t('opinion', discourse.attributes.opinions.data.length)}}<UITag>{{discourse.attributes.opinions.data.length}}</UITag></span>
+      <span class="text-xs flex gap-2">
+        <span class="flex gap-1">{{$t('opinion', opinions.length)}}<UITag :round="true">{{opinions.length}}</UITag></span>
+        <span class="flex gap-1">{{$t('participant', participants.length)}}<UITag :round="true">{{participants.length}}</UITag></span>
+      </span>
       </div>
       <Author :post="discourse" class="text-sm border-t border-beige-200 pt-4" />
     </NuxtLink>
   </Card>
 </template>
 <script lang="ts">
-import { Discourse, Strapi4Response } from "~/types";
+import { Discourse, Opinion, Strapi4Response } from "~/types";
 export default defineComponent({
   name: "Discourse Card",
   props: {
@@ -31,6 +34,14 @@ export default defineComponent({
   },
   data() {
     return {};
+  },
+  computed: {
+    opinions() {
+      return this.discourse?.attributes.opinions?.data;
+    },
+    participants() {
+      return [...new Set(this.discourse?.attributes.opinions?.data.map((opinion: Opinion) => opinion.attributes.author?.data?.id))]
+    },
   },
   methods: {
     removeDiscourse(id: number) {
