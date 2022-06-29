@@ -11,6 +11,7 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
   current: null,
   font: null,
   search: '',
+  currentFont: 0,
   filter: {},
   new: {
     title: '',
@@ -19,8 +20,9 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
   },
   setCurrent: (id) => {
     const current = discourse.all[id as keyof typeof discourse.all]
-    if (!current?.attributes.font?.data?.attributes.url) return discourse.current = null
-    useSamsaFont(current.attributes.font?.data?.attributes.url)
+    if (!current?.attributes.font.data?.[discourse.currentFont].attributes?.url) return discourse.current = null
+
+    useSamsaFont(current.attributes.font.data[discourse.currentFont].attributes.url)
       .then((font: SamsaFont) => {
         discourse.font = font
         current.font = font
@@ -58,6 +60,13 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
     )
   }
 })
+watchEffect(() => {
+  if (discourse.current?.attributes.font.data?.[discourse.currentFont]) {
+    console.log('discourse.currentFont', discourse.currentFont)
+    discourse.setCurrent(discourse.current.id)
+  }
+})
+
 const defaultOpinion = {
   id: null,
   attributes: {

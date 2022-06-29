@@ -4,6 +4,9 @@ import i18n from './config/i18n'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  meta: {
+    title: 'Character Diversion',
+  },
   modules: [
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',

@@ -174,7 +174,14 @@ $colors: primary, secondary, info, beige, success, warning, alert;
       }
     }
     &.router-link-active, &.active {
-      &.clear, & {
+      &:not(.clear) {
+        --background: var(--color-primary-500);
+        &:hover {
+          --color: white;
+          --background: var(--color-primary-600);
+        }
+      }
+      &.clear {
         --color: var(--color-primary-500);
       }
     }

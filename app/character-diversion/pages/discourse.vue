@@ -28,7 +28,8 @@ export default defineComponent({
     },
     "$state.discourse.current": {
       handler(current: Discourse) {
-        if (!current) {
+        const currentFont = this.$state.discourse.currentFont
+        if (!current?.attributes.font?.data?.[currentFont]?.attributes.url) {
           this.$state.opinion.reset("active");
           return;
         }
@@ -36,7 +37,7 @@ export default defineComponent({
         dicourseFont.appendChild(
           document.createTextNode(`@font-face {
           font-family: 'dicourseFont';
-          src: url("${this.$strapi.media}${current.attributes.font?.data.attributes.url}");
+          src: url("${this.$strapi.media}${current.attributes.font?.data?.[currentFont]?.attributes.url}");
         }`)
         );
         document.head.appendChild(dicourseFont);

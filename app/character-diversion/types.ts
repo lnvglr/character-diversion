@@ -158,6 +158,7 @@ export interface DiscourseState {
   }
   current: Discourse | null
   font: SamsaFont | null
+  currentFont: number
   search: string
   filter: {
     [key: string]: boolean

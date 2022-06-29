@@ -39,11 +39,12 @@
       ]
     },
     "font": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
