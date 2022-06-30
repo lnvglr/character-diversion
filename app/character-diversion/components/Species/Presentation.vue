@@ -11,6 +11,13 @@ export default defineComponent({
   mounted() {
     this.socket = this.$nuxtSocket({
       channel: "/index",
+			// reconnectionDelay: 1000,
+			// reconnection: true,
+			// reconnectionAttemps: 10,
+			transports: ['websocket'],
+			// agent: false,
+			// upgrade: false,
+			// rejectUnauthorized: false
     });
     this.socket?.on("sendMessage", (msg, cb) => {
       this.message = msg;
