@@ -2,7 +2,7 @@
   <form class="flex flex-col gap-2" @submit.prevent="login">
     <Input type="text" name="email" placeholder="Email" v-model="formData.identifier" class="lg" />
     <Input type="password" name="password" placeholder="Password" v-model="formData.password" class="lg" autocomplete="current-password" />
-    <Button type="submit" :disabled="formData.password?.length < 3" icon="arrow-right" class="lg"
+    <Button type="submit" :disabled="formData.password?.length < 3" icon="arrow-right" class="lg" :loading="loading"
       >Login</Button>
     <p v-show="error" class="text-sm text-alert-500">{{ errorMsg }}</p>
 
@@ -21,18 +21,23 @@ export default defineComponent({
       formData: {} as { identifier: string; password: string },
       error: false,
       errorMsg: `An error occurred, please try again`,
+      loading: false
     }
   },
   methods: {
     async login(e: Event) {
       try {
+        this.loading = true
         this.$strapi.login(this.formData).then(() => {
           this.$router.push('/profile')
         }).catch((e) => {
           this.error = true
           this.errorMsg = e.error?.message
+        }).finally(() => {
+          this.loading = false
         })
       } catch (e) {
+        this.loading = false
       }
     },
   },

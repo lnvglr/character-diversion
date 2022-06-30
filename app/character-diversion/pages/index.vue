@@ -71,9 +71,9 @@
           <div
             class="flex flex-col sm:flex-row items-start sm:items-center px-5 gap-y-5 gap-x-12"
           >
-          <div class="flex flex-row gap-x-6">
+          <div class="flex flex-row sm:flex-col md:flex-row gap-6">
             <div
-              class="relative w-36 h-36 bg-white rounded-sm flex items-center justify-center min-w-[6rem]"
+              class="relative w-36 h-36 bg-white dark:text-neutral-800 rounded-sm flex items-center justify-center min-w-[6rem]"
             >
               <span class="font-display font-bold text-[8rem] leading-none pt-6"
                 >C</span
@@ -87,7 +87,7 @@
               />
             </div>
             <div
-              class="relative w-36 h-36 bg-white rounded-sm flex items-center justify-center min-w-[6rem]"
+              class="relative w-36 h-36 bg-white dark:text-neutral-800 rounded-sm flex items-center justify-center min-w-[6rem]"
             >
               <span class="font-display font-bold text-[8rem] leading-none pt-6"
                 >R</span

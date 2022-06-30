@@ -1,4 +1,7 @@
 <template>
+  <Card class="shrink sticky top-0 z-20">
+    <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
+  </Card>
   <NuxtLayout name="split">
     <template #title>{{ $t("about") }}</template>
     <article>
@@ -16,7 +19,7 @@
   </NuxtLayout>
 </template>
 
-<script>
+<script lang="ts">
 export default defineComponent({
   setup() {
     definePageMeta({
@@ -35,6 +38,22 @@ export default defineComponent({
     return {
       links: ['https://raw.githubusercontent.com/lnvglr/character-diversion/master/character-diversion.md'],
       papers: [],
+      activeTab: "about",
+      tabs: {
+        presentation: {
+          icon: "border-all",
+          label: "Presentation",
+        },
+        about: {
+          icon: "address-card",
+          label: "About",
+          active: true,
+        },
+        // opinions: {
+        //   icon: "diagram-successor",
+        //   label: "Opinions",
+        // },
+      }
     }
   }
 })

@@ -85,7 +85,21 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss">
 
+.dark .button {
+  --background: white;
+  span {
+    --color: black;
+  }
+  &.clear span {
+    --color: white;
+  }
+  &.active.clear span {
+    --color: var(--color-primary-500);
+  }
+}
+</style>
 <style lang="scss" scoped>
 .button {
   :deep(svg) {
@@ -116,15 +130,6 @@ $colors: primary, secondary, info, beige, success, warning, alert;
 //   color: black;
 //   fill: black;
 // }
-:global(.dark .button) {
-  --background: white;
-}
-:global(.dark .button span) {
-  --color: black;
-}
-:global(.dark .button.clear span) {
-  --color: white;
-}
 .button {
   --size: var(--h-8);
   --padding: var(--p-2) var(--p-3);

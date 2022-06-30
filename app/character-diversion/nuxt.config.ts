@@ -50,7 +50,7 @@ export default defineNuxtConfig({
   },
   pwa: {
     workbox: {
-      enabled: true
+      enabled: true,
     },
     // manifest: {
     //   name: 'Character Diversion',

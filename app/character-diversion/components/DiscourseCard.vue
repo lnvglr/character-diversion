@@ -1,5 +1,5 @@
 <template>
-  <Card class="min-h-[200px] grid border-beige-300 dark:border-neutral-900 duration-75 hover:rounded-md hover:shadow-[inset_0_0_0_2px_var(--color-beige-300)]" v-if="discourse">
+  <Card class="min-h-[200px] grid duration-75 hover:rounded-md hover:shadow-[inset_0_0_0_2px_var(--color-beige-300)] dark:hover:shadow-[inset_0_0_0_2px_var(--color-neutral-900)]" v-if="discourse">
     <NuxtLink
       :to="`/discourse/${discourse.id}`"
       class="p-4 flex flex-col flex-1 items-stretch"
@@ -21,7 +21,7 @@
         <span class="flex gap-1">{{$t('participant', participants.length)}}<UITag :round="true">{{participants.length}}</UITag></span>
       </span>
       </div>
-      <Author :post="discourse" class="text-sm border-t border-beige-200 pt-4" />
+      <Author :post="discourse" class="text-sm border-t border-beige-200 dark:border-neutral-600 pt-4" />
     </NuxtLink>
   </Card>
 </template>

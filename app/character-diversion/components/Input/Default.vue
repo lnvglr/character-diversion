@@ -7,6 +7,7 @@
     :type="clearPassword ? 'text' : type"
     :ref="uid"
     rows="3"
+    class="dark:bg-neutral-700 dark:border-neutral-600"
   />
 </template>
 <script lang="ts">
