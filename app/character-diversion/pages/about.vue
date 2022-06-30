@@ -4,6 +4,8 @@
   </Card>
   <NuxtLayout name="split">
     <template #title>{{ $t("about") }}</template>
+    <Button @click="sendMessage">send message</Button>
+    {{message}}
     <article>
       <p>
         The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there is discourse in the world of typography but the platforms do not provide the appropriate environment and tools.
@@ -20,6 +22,7 @@
 </template>
 
 <script lang="ts">
+import { NuxtSocket } from '~/types'
 export default defineComponent({
   setup() {
     definePageMeta({
@@ -27,17 +30,34 @@ export default defineComponent({
     });
   },
   async mounted() {
-    const papers = []
+    const papers = [] as string[]
     this.links.forEach(paper => {
       fetch(paper).then(res => res.text()).then(text => papers.push({paper, text}))
     })
     this.papers = papers
     console.log(this.papers)
+
+    this.socket = this.$nuxtSocket({
+      channel: '/index'
+    })
+    this.socket?.on('sendMessage', (msg, cb) => {
+      this.message = msg
+      /* Handle event */
+      console.log(msg, cb)
+    })
+  },
+  methods: {
+    sendMessage() {
+      this.socket?.emit('sendMessage', { id: 'abc123', message: 'Hello World!' }).then(e => console.log(e))
+    },
   },
   data() {
     return {
+      message: null,
+      socket: null as NuxtSocket,
+      messageRxd: '' as string,
       links: ['https://raw.githubusercontent.com/lnvglr/character-diversion/master/character-diversion.md'],
-      papers: [],
+      papers: [] as string[],
       activeTab: "about",
       tabs: {
         presentation: {

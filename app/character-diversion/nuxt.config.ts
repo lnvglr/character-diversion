@@ -11,7 +11,9 @@ export default defineNuxtConfig({
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
     // '@nuxtjs/pwa'
-    '@kevinmarrec/nuxt-pwa'
+    '@kevinmarrec/nuxt-pwa',
+    'nuxt-socket-io',
+
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
@@ -31,15 +33,15 @@ export default defineNuxtConfig({
   },
   pageTransition: {
     'page-fade': true,
-    onLeave: () => {
-      console.log("leaving");
-    },
-    onBeforeLeave: () => {
-      console.log("onBeforeLeave");
-    },
-    onBeforeEnter: () => {
-      console.log("onBeforeEnter");
-    },
+    // onLeave: () => {
+    //   console.log("leaving");
+    // },
+    // onBeforeLeave: () => {
+    //   console.log("onBeforeLeave");
+    // },
+    // onBeforeEnter: () => {
+    //   console.log("onBeforeEnter");
+    // },
   },
   css: ['@/assets/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   build: {
@@ -69,4 +71,14 @@ export default defineNuxtConfig({
   //   redirectSSL.create({enabled: process.env.NODE_ENV === 'production'})
   // ],
   
+  io: {
+    sockets: [{
+      name: 'main',
+      default: true,
+      url: 'https://www.character-diversion.com:3000'
+    },{
+      name: 'local',
+      url: 'http://localhost:3000'
+    }]
+  }
 })
