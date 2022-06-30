@@ -22,8 +22,12 @@
 </template>
 
 <script lang="ts">
+import TabBar from "@/components/Cells/TabBar.vue";
 import { NuxtSocket } from '~/types'
 export default defineComponent({
+  components: {
+    TabBar,
+  },
   setup() {
     definePageMeta({
       name: "About",
