@@ -4,8 +4,7 @@
   </Card>
   <NuxtLayout name="split">
     <template #title>{{ $t("about") }}</template>
-    <Button @click="sendMessage">send message</Button>
-    {{message}}
+    <Presentation />
     <article>
       <p>
         The world of typography lives on discussion and debate. Designers speak about type in conferences, creative studios, and online forums. And those discussions have advanced the typographic discourse for decades. So there is discourse in the world of typography but the platforms do not provide the appropriate environment and tools.
@@ -23,10 +22,12 @@
 
 <script lang="ts">
 import TabBar from "@/components/Cells/TabBar.vue";
+import Presentation from "@/components/Species/Presentation.vue";
 import { NuxtSocket } from '~/types'
 export default defineComponent({
   components: {
     TabBar,
+    Presentation,
   },
   setup() {
     definePageMeta({
@@ -41,19 +42,6 @@ export default defineComponent({
     this.papers = papers
     console.log(this.papers)
 
-    this.socket = this.$nuxtSocket({
-      channel: '/index'
-    })
-    this.socket?.on('sendMessage', (msg, cb) => {
-      this.message = msg
-      /* Handle event */
-      console.log(msg, cb)
-    })
-  },
-  methods: {
-    sendMessage() {
-      this.socket?.emit('sendMessage', { id: 'abc123', message: 'Hello World!' }).then(e => console.log(e))
-    },
   },
   data() {
     return {

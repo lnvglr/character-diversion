@@ -1,6 +1,8 @@
 import { defineNuxtConfig } from 'nuxt'
 import i18n from './config/i18n'
-// import redirectSSL from 'redirect-ssl';
+import pwa from './config/pwa'
+import vite from './config/vite'
+import io from './config/web-sockets'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -10,10 +12,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
-    // '@nuxtjs/pwa'
     '@kevinmarrec/nuxt-pwa',
     'nuxt-socket-io',
-
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
@@ -31,18 +31,6 @@ export default defineNuxtConfig({
     // https://router.vuejs.org/api/#routeroptions
     options: {},
   },
-  pageTransition: {
-    'page-fade': true,
-    // onLeave: () => {
-    //   console.log("leaving");
-    // },
-    // onBeforeLeave: () => {
-    //   console.log("onBeforeLeave");
-    // },
-    // onBeforeEnter: () => {
-    //   console.log("onBeforeEnter");
-    // },
-  },
   css: ['@/assets/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   build: {
     transpile: [
@@ -50,35 +38,8 @@ export default defineNuxtConfig({
       '@fortawesome/free-solid-svg-icons',
     ],
   },
-  pwa: {
-    workbox: {
-      enabled: true,
-    },
-    // manifest: {
-    //   name: 'Character Diversion',
-    //   publicPath: './pwa/manifest.json',
-    // },
-  },
+  pwa,
   intlify: i18n,
-  vite: {
-    define: {
-      __VUE_I18N_FULL_INSTALL__: true,
-      __VUE_I18N_LEGACY_API__: false,
-      __INTLIFY_PROD_DEVTOOLS__: false,
-    },
-  },
-  // serverMiddleware: [
-  //   redirectSSL.create({enabled: process.env.NODE_ENV === 'production'})
-  // ],
-  
-  io: {
-    sockets: [{
-      name: 'main',
-      default: true,
-      url: 'https://www.character-diversion.com:3000'
-    },{
-      name: 'local',
-      url: 'http://localhost:3000'
-    }]
-  }
+  vite,
+  io
 })

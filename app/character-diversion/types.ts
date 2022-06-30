@@ -8,7 +8,7 @@ import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 
 import { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
 export { SamsaFont, SamsaGlyph } from '@/assets/samsa-core'
-export { NuxtSocket } from 'nuxt-socket-io/lib/types.d.ts'
+export type { NuxtSocket } from 'nuxt-socket-io'
 
 
 declare module '@/assets/samsa-core' {

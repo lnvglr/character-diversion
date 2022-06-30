@@ -31,7 +31,7 @@
     "floating-vue": "^2.0.0-beta.17",
     "heroku-ssl-redirect": "^0.1.1",
     "markdown-it": "^13.0.1",
-    "nuxt-socket-io": "^3.0.6",
+    "nuxt-socket-io": "^3.0.9",
     "redirect-ssl": "^3.0.0",
     "reveal.js": "^4.0.2",
     "string-similarity": "^4.0.4",
