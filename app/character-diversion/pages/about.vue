@@ -1,11 +1,6 @@
 <template>
-  <div class="top-0 z-50 w-full">
-    <Card class="shrink">
-      <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
-    </Card>
-  </div>
-  <Presentation v-if="activeTab === 'presentation'" />
-  <NuxtLayout name="split" v-if="activeTab === 'about'">
+
+  <NuxtLayout name="split">
     <template #title>{{ $t("about") }}</template>
     <article>
       <p>
@@ -48,59 +43,26 @@
         >
       </p>
       <!-- <div v-for="paper in papers" :key="paper.paper" v-html="paper.text" /> -->
-      <div
+      <!-- <div
         v-for="paper in papers"
         :key="paper.paper"
         v-html="$f.utils.renderMarkdown(paper.text)"
         class="markdown"
-      />
+      /> -->
     </article>
   </NuxtLayout>
 </template>
 
 <script lang="ts">
-import TabBar from "@/components/Cells/TabBar.vue";
-import Presentation from "@/components/Species/Presentation.vue";
-import { NuxtSocket } from "~/types";
 export default defineComponent({
-  components: {
-    TabBar,
-    Presentation,
-  },
-  setup() {
-    definePageMeta({
-      name: "About",
-    });
-  },
-  async mounted() {
-    const papers = [] as string[];
-    this.links.forEach((paper) => {
-      fetch(paper)
-        .then((res) => res.text())
-        .then((text) => papers.push({ paper, text }));
-    });
-    this.papers = papers;
-  },
-  data() {
-    return {
-      links: [],
-      // links: ['https://raw.githubusercontent.com/lnvglr/character-diversion/master/character-diversion.md'],
-      papers: [] as string[],
-      activeTab: "about",
-      tabs: {
-        presentation: {
-          icon: "border-all",
-          label: "Presentation",
-        },
-        about: {
-          icon: "address-card",
-          label: "About",
-          active: true,
-        },
-      },
-    };
-  },
-});
+	setup () {
+		
+
+		return {}
+	}
+})
 </script>
 
-<style></style>
+<style scoped>
+
+</style>
