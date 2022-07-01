@@ -34,7 +34,7 @@
     "nuxt-socket-io": "^3.0.9",
     "redirect-ssl": "^3.0.0",
     "string-similarity": "^4.0.4",
-    "text-title-case": "^1.0.2",
+    "text-title-case": "^1.0.2"
   },
   "devDependencies": {
     "@kevinmarrec/nuxt-pwa": "^0.3.1",
