@@ -56,7 +56,6 @@ export default defineComponent({
     Slide,
   },
   mounted() {
-    const app = this
     // this.init()
 
     // this.socket.addEventListener('message', (message) => {
