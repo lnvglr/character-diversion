@@ -3,6 +3,8 @@ import i18n from './config/i18n'
 import pwa from './config/pwa'
 import vite from './config/vite'
 import io from './config/web-sockets'
+import { Server as SocketIO } from 'socket.io'
+
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -41,5 +43,11 @@ export default defineNuxtConfig({
   pwa,
   intlify: i18n,
   vite,
-  io
+  io,
+
+  hooks: {
+    listen(server: Server) {
+      const io = new SocketIO(server)
+    }
+  }
 })

@@ -41,6 +41,7 @@ export default defineComponent({
   watch: {
     "$attrs.value": {
       handler(val) {
+        console.log(val)
         if (val instanceof Array) {
           this.checked = val.includes(this.itemValue)
         } else {
@@ -54,7 +55,7 @@ export default defineComponent({
   methods: {
     change() {
       this.checked = !this.checked
-      let value: boolean | any[] = this.checked 
+      let value: boolean | any[] = this.checked
       if (this.$attrs.value instanceof Array) {
         value = this.checked ? [...this.$attrs.value, this.itemValue] : this.$attrs.value.filter(item => item !== this.itemValue)
       }

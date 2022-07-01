@@ -79,6 +79,7 @@ module.exports = {
     fontFamily: {
       sans: ['Inter', 'Gramatika', 'sans-serif'],
       display: ['Neue Machina', 'Gramatika', 'sans-serif'],
+      presentation: ['Gramatika', 'sans-serif'],
       hebrew: ['Assistant'],
     },
     colors,
