@@ -259,7 +259,9 @@ export default defineComponent({
      
     };
   },
-  async mounted() {},
+  async mounted() {
+    this.$state.discourse.fetch()
+  },
   computed: {
     discourses(): Discourse[] {
       const n = 3;
