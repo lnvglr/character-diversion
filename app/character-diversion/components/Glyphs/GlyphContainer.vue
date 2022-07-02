@@ -126,15 +126,9 @@ export default defineComponent({
   watch: {
     '$state.opinion.peek': {
       handler(id: number) {
-        console.log(this.glyph.id, id)
-        this.peek = this.glyph.id === id
+        this.peek = this.glyph?.id === id
       },
     }
-    // selected(value: boolean) {
-    // 	if (value && this.$refs.container) {
-    // 		this.$refs.container.scrollIntoView({ block: "nearest", behavior: 'smooth' })
-    // 	}
-    // },
   },
   methods: {
     checkView({ isIntersecting }) {
