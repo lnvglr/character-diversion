@@ -21,7 +21,7 @@
       :style="{'--i': i}" 
       class="snap-start"
     />
-    <div class="col-span-full">
+    <div class="col-span-full" key="footer">
       <Card>
         <div class="w-full p-24 pb-48 flex flex-col items-center justify-center gap-5">
           <span>{{ $t("glyphs.shown", { n: filteredGlyphs.length }) }}</span>

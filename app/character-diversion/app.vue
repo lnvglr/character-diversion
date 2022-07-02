@@ -21,7 +21,6 @@
 </template>
 <script lang="ts">
 import { User } from "~/types";
-import { Ref } from "vue";
 import { discourse, opinion, presentation } from "~/composables/states";
 import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 export default defineComponent({

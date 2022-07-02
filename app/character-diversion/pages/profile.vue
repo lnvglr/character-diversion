@@ -46,7 +46,7 @@
 </template>
 
 <script>
-export default {
+export default defineComponent({
   setup() {
     const app = useNuxtApp();
     definePageMeta({
@@ -99,7 +99,7 @@ export default {
       immediate: true,
     },
   },
-};
+})
 </script>
 
 <style>

@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   data() {
     return {
       icons: {
@@ -45,7 +45,7 @@ export default {
       this.$colorMode.preference = key
     }
   }
-}
+})
 </script>
 
 <style>

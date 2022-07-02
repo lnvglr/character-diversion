@@ -37,7 +37,21 @@ export default defineNuxtConfig({
       '@fortawesome/free-solid-svg-icons',
     ],
   },
-  pwa,
+  pwa: {
+    workbox: {
+      enabled: true,
+    },
+    // manifest: {
+    //   name: 'Character Diversion',
+    //   publicPath: './pwa/manifest.json',
+    // },
+  },
   intlify: i18n,
-  vite,
+  vite: {
+    define: {
+      __VUE_I18N_FULL_INSTALL__: true,
+      __VUE_I18N_LEGACY_API__: false,
+      __INTLIFY_PROD_DEVTOOLS__: false,
+    },
+  },
 })
