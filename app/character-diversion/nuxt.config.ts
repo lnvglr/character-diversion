@@ -2,8 +2,6 @@ import { defineNuxtConfig } from 'nuxt'
 import i18n from './config/i18n'
 import pwa from './config/pwa'
 import vite from './config/vite'
-import io from './config/web-sockets'
-import { Server as SocketIO } from 'socket.io'
 
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -15,7 +13,6 @@ export default defineNuxtConfig({
     '@nuxtjs/strapi',
     '@nuxtjs/color-mode',
     '@kevinmarrec/nuxt-pwa',
-    'nuxt-socket-io',
   ],
   strapi: {
     url: process.env.API_BASE || 'http://localhost:1337',
@@ -43,11 +40,4 @@ export default defineNuxtConfig({
   pwa,
   intlify: i18n,
   vite,
-  io,
-
-  hooks: {
-    listen(server: Server) {
-      const io = new SocketIO(server)
-    }
-  }
 })

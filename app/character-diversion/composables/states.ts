@@ -37,7 +37,7 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
           // @todo: pull opinions only for current discourse
           // then remove data key and spread opinions.data to opinions
           populate: [
-            'featuredImage',
+            // 'featuredImage',
             'font',
             'author',
             'author.avatar',
