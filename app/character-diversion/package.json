@@ -29,9 +29,7 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "@yaireo/relative-time": "^1.0.2",
     "floating-vue": "^2.0.0-beta.17",
-    "heroku-ssl-redirect": "^0.1.1",
     "markdown-it": "^13.0.1",
-    "nuxt-socket-io": "^3.0.9",
     "redirect-ssl": "^3.0.0",
     "string-similarity": "^4.0.4",
     "text-title-case": "^1.0.2"

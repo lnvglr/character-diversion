@@ -1,7 +1,6 @@
 <template>
   <div class="container gap-x-20 gap-y-10 flex flex-col items-start sm:items-center sm:flex-row p-5">
     <div class="">
-      <!-- <Noise class="text-amber-900 bg-yellow-600" style="--offset-start: -150;"><div class="p-5"><slot name="image"></slot></div></Noise> -->
       <slot name="image"></slot>
     </div>
     <div class="">
@@ -21,12 +20,4 @@ export default {}
     flex-basis: 50%;
   }
 }
-</style>
-<style lang="scss">
-// .landing-section:nth-child(odd) {
-//   .container {
-//     flex-direction: row-reverse;
-//   }
-// }
-
 </style>

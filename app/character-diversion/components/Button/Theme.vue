@@ -2,7 +2,7 @@
   <div class="button-group">
     <Button
       v-for="(item, name) in icons"
-      @click="set(name)"
+      @click="setActive(name)"
       :class="{ active: $colorMode.preference === name }"
       :icon="item"
       :title="name"
@@ -41,7 +41,7 @@ export default defineComponent({
       const i = this.themes.indexOf(this.$colorMode.preference)
       this.$colorMode.preference = this.themes[(i + 1) % this.themes.length]
     },
-    set(key: string) {
+    setActive(key: string) {
       this.$colorMode.preference = key
     }
   }
