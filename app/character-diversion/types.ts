@@ -168,7 +168,7 @@ export interface DiscourseState {
     content: string,
     files: object
   },
-  setCurrent: (id: string | string[]) => void
+  setCurrent: (id: number | number[]) => void
   fetch: () => void
 }
 interface annotationTool extends Annotation {
