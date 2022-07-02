@@ -161,6 +161,8 @@ export default defineComponent({
         ".null",
         "space",
         "nonmarkingreturn",
+        "controlCR",
+        "nbspace",
         "￿",
         "uni00A0",
         "uni2007",
