@@ -1,7 +1,7 @@
 <template>
   <Html :lang="$i18n.locale" :class="$colorMode?.value" :dir="direction">
     <Body
-      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-neutral-900 font-sans"
+      class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-neutral-900 overflow-x-hidden font-sans"
     >
       <Transition name="page">
       <img
@@ -22,7 +22,7 @@
 <script lang="ts">
 import { User } from "~/types";
 import { Ref } from "vue";
-import { discourse, opinion } from "~/composables/states";
+import { discourse, opinion, presentation } from "~/composables/states";
 import { glyphMethods, utils, strapiHelpers } from "~/composables/methods";
 export default defineComponent({
   async setup() {
@@ -38,7 +38,7 @@ export default defineComponent({
     };
     strapi.user = await strapi.fetchUser();
     if (!app.$strapi) app.provide("strapi", reactive(strapi));
-    if (!app.$state) app.provide("state", reactive({ discourse, opinion }));
+    if (!app.$state) app.provide("state", reactive({ discourse, opinion, presentation }));
     if (!app.$f) app.provide("f", { glyphMethods, utils });
     if (app.$strapi.user?.id)
       strapi

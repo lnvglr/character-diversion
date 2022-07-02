@@ -54,12 +54,13 @@
       :style="style"
     />
     <div
-      class="fixed ml-0 sm:ml-10 mb-24 sm:mb-10 left-1/2 bottom-0 z-50 -translate-x-1/2 w-full max-w-xs"
+      class="fixed ml-0 sm:ml-10 mb-10 sm:mb-10 left-1/2 bottom-0 z-50 -translate-x-1/2 w-full max-w-xs"
       v-if="activeTab === 'glyphs'"
     >
       <FormNewOpinion :floating="true" />
     </div>
   </div>
+  <div v-else class="w-full h-full flex items-center justify-center"><div class="loading"></div></div>
 </template>
 
 <script lang="ts">

@@ -4,7 +4,7 @@
     :class="{ 'text-white': bg || img[0] }"
     @click.self="$emit('next')"
   >
-    <span class="text-3xl font-bold text-beige-300 font-presentation">{{
+    <span v-if="preHeader" class="text-3xl font-bold text-beige-400 font-presentation">{{
       preHeader
     }}</span>
     <component
@@ -25,9 +25,8 @@
     </div>
   </div>
   <img v-if="bg" :src="bg" class="absolute top-0 left-0 w-full h-full object-cover z-0" />
-  <div v-if="img.length > 0" class="grid grid-cols-2 absolute top-0 left-0 w-full h-full">
-    <img v-if="img[0]" :src="img[0]" class="object-cover col-start-1 col-span-1 h-full" />
-    <img v-if="img[1]" :src="img[1]" class="object-cover col-start-2 col-span-1 h-full" />
+  <div v-if="img.length > 0" :class="`grid grid-cols-${img.length} absolute top-0 left-0 w-full h-full`">
+    <span v-for="i, k in img"><img v-if="i" :src="i" :class="`object-cover object-center col-start-${k} col-span-1 h-full w-full`" /></span>
   </div>
 </template>
 

@@ -106,17 +106,19 @@ export default defineComponent({
     transition: transform var(--transition-duration-300);
   }
 }
-.button:hover {
-  & > :deep(*),
-  :deep(svg),
-  :deep(path) {
-    fill: currentColor !important;
-  }
-  .move-right > :deep(svg) {
-    transform: translateX(0.25em)
-  }
-  .move-left > :deep(svg) {
-    transform: translateX(-0.25em)
+@media (hover: hover) {
+  .button:hover {
+    & > :deep(*),
+    :deep(svg),
+    :deep(path) {
+      fill: currentColor !important;
+    }
+    .move-right > :deep(svg) {
+      transform: translateX(0.25em)
+    }
+    .move-left > :deep(svg) {
+      transform: translateX(-0.25em)
+    }
   }
 }
 $colors: primary, secondary, info, beige, success, warning, alert;

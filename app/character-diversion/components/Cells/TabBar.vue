@@ -12,7 +12,7 @@
       @click="setActive(name)"
       :class="{ active: active === name }"
       v-show="!item.hide"
-      >{{ item.label }}</Button
+      ><span class="hidden sm:block">{{ item.label }}</span></Button
     >
     </div>
   </nav>

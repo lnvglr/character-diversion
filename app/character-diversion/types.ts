@@ -183,6 +183,9 @@ export interface OpinionState {
   annotationTool: annotationTool
   reset: (key: string) => void
 }
+export interface PresentationState {
+  currentSlide: number
+}
 
 interface User {
   id: number,
@@ -240,6 +243,7 @@ declare module '@vue/runtime-core' {
     $state: {
       discourse: DiscourseState
       opinion: OpinionState
+      presentation: PresentationState
     },
     $strapi: Strapi
     $f: any

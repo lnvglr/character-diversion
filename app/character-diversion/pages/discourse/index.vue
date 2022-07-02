@@ -2,12 +2,12 @@
   <div class="overflow-auto gap-0.5 flex flex-col">
     <Card class="dark:text-white">
     <div class="w-full flex flex-col gap-5 p-5 sm:p-10">
-    <div class="w-full flex items-center justify-between gap-5">
+    <div class="w-full flex sm:items-center justify-between gap-5">
       <div class="flex flex-col gap-5"><h1 class="lg:text-7xl md:text-5xl sm:text-3xl text-2xl font-bold leading-none">{{$t('discover.discourses')}}</h1>
       <p class="max-w-xl">Explore discourses type and discover a new way to delve into the world of typography, one character at a time.</p>
       </div>
       <Button v-if="$strapi.user" to="/discourse/new" key="remove" color="primary" class="
-        ml-auto lg" icon="plus">{{$t('new.discourse')}}</Button>
+        sm:ml-auto lg w-16 sm:w-auto" icon="plus" ><span class="hidden sm:block">{{$t('new.discourse')}}</span></Button>
       </div>
       <Input class="lg" v-model="filterQuery" :placeholder="$t('search.discourses')" />
       </div>
@@ -34,7 +34,7 @@ export default defineComponent({
         .values(this.$state.discourse.all)
         .sort((a: Discourse, b: Discourse) => {
           return Number(new Date(b.attributes.publishedAt)) - Number(new Date(a.attributes.publishedAt))
-        }).filter(item => !this.filterQuery || item.attributes.title.toLowerCase().indexOf(this.filterQuery) > -1);
+        }).filter(item => !this.filterQuery || [item.attributes.title, item.attributes.content, item.attributes.author.data.attributes.name].join(' ').toLowerCase().indexOf(this.filterQuery) > -1);
     },
   },
   data() {

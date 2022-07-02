@@ -2,6 +2,7 @@
 
   <NuxtLayout name="split">
     <template #title>{{ $t("about") }}</template>
+		<!-- <Button to="/presentation" class="lg inline-block mb-5" icon="arrow-right" color="primary">Go to Presentation</Button> -->
     <article>
       <p>
         The world of typography lives on discussion and debate. Designers speak about type

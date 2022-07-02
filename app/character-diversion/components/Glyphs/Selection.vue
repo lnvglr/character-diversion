@@ -1,8 +1,8 @@
 <template>
   <transition-group name="list" tag="div"
     v-if="$state.discourse.font && $state.opinion.form.attributes"
-    class="selection-container grid overflow-auto snap-y snap-proximity h-full gap-0.5"
-    :class="`grid-cols-autofill-${gridSize}`"
+    class="selection-container grid overflow-auto h-full gap-0.5"
+    :class="`grid-cols-autofill-${gridSize} ${false ? 'snap-y snap-proximity' : ''}`">
     v-bind="$attrs"
     ref="container"
     :style="{ '--total': filledGlyphs.length }"

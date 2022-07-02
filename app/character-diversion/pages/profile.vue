@@ -35,11 +35,8 @@
             />
           </div>
         </TransitionExpand>
-        <h3 class="font-bold text-2xl mt-10 mb-5">{{ $t("appearence") }}</h3>
+        <hr />
         <ButtonTheme class="mb-5" />
-        <h3 class="font-bold text-2xl mt-10 mb-5">
-          {{ $t("language", $i18n.availableLocales.length) }}
-        </h3>
         <LanguageSwitcher class="mb-5" />
         <hr />
         <ButtonLogout color="alert" />

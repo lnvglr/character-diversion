@@ -96,6 +96,13 @@ export const opinion = reactive<OpinionState>({
   }
 })
 
+
+export const presentation = reactive<PresentationState>({
+  currentSlide: 0,
+})
+
+
+
 export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
   const app = useNuxtApp()
   return new Promise(

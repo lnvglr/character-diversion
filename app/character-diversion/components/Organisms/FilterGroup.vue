@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-5">
-    <div class="flex item-center justify-between">
+    <div class="flex flex-col gap-3 sm:flex-row item-center justify-between">
       <div class="button-group">
         <Button
           v-for="(item, name) in items"
@@ -11,7 +11,7 @@
           v-show="!item.hide"
         />
       </div>
-      <div class="w-full mx-2">
+      <div class="w-full">
         <Input
           type="text"
           v-model="$state.discourse.search"
@@ -22,7 +22,7 @@
       </div>
       <Button
         @click="$state.discourse.filter.opinion = !$state.discourse.filter.opinion"
-        class="mr-2 clear"
+        class="mr-2 clear hidden sm:block"
         :title="$t('filter')"
         :class="{ active: $state.discourse.filter.opinion }"
       >with opinion</Button>

@@ -71,6 +71,8 @@ module.exports = {
     ),
     ...['2xl', '4xl', '8xl', '10xl', '12xl', '13xl', '14xl', '15xl', '16xl'].map((e) => `text-${e}`),
     ...['none', '2', '3', '4', '5', '6'].map((e) => `line-clamp-${e}`),
+    ...['1', '2', '3', '4', '5', '6'].map((e) => `grid-cols-${e}`),
+    ...['1', '2', '3', '4', '5', '6'].map((e) => `col-start-${e}`),
   ],
   tailwindcss: {
     viewer: true,
