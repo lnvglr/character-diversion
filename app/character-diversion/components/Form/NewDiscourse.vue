@@ -25,7 +25,7 @@
       :maxSize="3 * 1024 * 1024"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-      <Button type="submit" class="lg sm:order-2">{{submitLabel}}</Button>
+      <Button type="submit" class="lg sm:order-2" :loading="loading">{{submitLabel}}</Button>
       <Button class="clear lg" @click="$emit('cancel')">{{$t('cancel')}}</Button>
     </div>
   </form>
@@ -42,6 +42,10 @@ export default defineComponent({
     discourse: {
       type: Object as () => Discourse,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    }
   },
   data() {
     return {

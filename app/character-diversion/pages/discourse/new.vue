@@ -6,6 +6,7 @@
       @submit="postDiscourse"
       @cancel="$router.push('/discourse')"
       @update:formData="({title}) => discourseTitle = title"
+      :loading="loading"
     />
   </NuxtLayout>
 </template>
@@ -15,11 +16,13 @@ export default defineComponent({
   data() {
     return {
       discourseTitle: "",
+      loading: false,
     }
   },
   methods: {
     postDiscourse(data: any) {
       if (!data.font?.[0]) return;
+      this.loading = true
       const formData = new FormData();
       const dataCompiled = {
         ...data,
@@ -47,6 +50,7 @@ export default defineComponent({
           });
         })
         .then(({ data }) => {
+          this.loading = false
           this.$state.discourse.all[data.id] = data;
           this.$router.push(`/discourse/${data.id}`);
         });
