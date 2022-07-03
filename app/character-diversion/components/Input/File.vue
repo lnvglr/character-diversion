@@ -197,6 +197,9 @@ export default defineComponent({
   padding: var(--padding-s);
   background: var(--color-white);
 }
+:global(:where(.dark .dropzone)) {
+  background: var(--color-neutral-700);
+}
 .dropzone {
   div {
     min-height: 150px;
