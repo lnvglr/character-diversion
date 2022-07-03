@@ -61,6 +61,7 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
   }
 })
 watchEffect(() => {
+  if (!discourse.current) discourse.filter.opinion = false
   if (discourse.current?.attributes.font.data?.[discourse.currentFont]) {
     // console.log('discourse.currentFont', discourse.currentFont)
     discourse.setCurrent(discourse.current.id)

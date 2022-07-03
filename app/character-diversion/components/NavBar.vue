@@ -2,7 +2,7 @@
   <!-- bg-beige-100
       border-t border-beige-200
       ltr:sm:border-r rtl:sm:border-l sm:border-0 -->
-  <Card tag="nav" class="h-full z-30 relative">
+  <Card tag="nav" class="h-full z-30 relative flex-1">
     <ul
       class="flex flex-row sm:flex-col justify-around items-center p-2 sm:max-w-2xl sm:h-full mx-auto gap-10 sm:gap-5"
     >
