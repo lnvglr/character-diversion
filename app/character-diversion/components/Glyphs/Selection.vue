@@ -1,7 +1,7 @@
 <template>
+  <div class="overflow-auto h-full flex flex-col gap-0.5" v-if="$state.discourse.font && $state.opinion.form.attributes">
   <transition-group name="list" tag="div"
-    v-if="$state.discourse.font && $state.opinion.form.attributes"
-    class="selection-container grid overflow-auto h-full gap-0.5"
+    class="selection-container grid mb-auto gap-0.5"
     :class="`grid-cols-autofill-${gridSize} ${false ? 'snap-y snap-proximity' : ''}`"
     v-bind="$attrs"
     ref="container"
@@ -21,6 +21,8 @@
       :style="{'--i': i}" 
       class="snap-start"
     />
+  </transition-group>
+
     <div class="col-span-full" key="footer">
       <Card>
         <div class="w-full p-24 pb-48 flex flex-col items-center justify-center gap-5">
@@ -44,7 +46,8 @@
         </div>
       </Card>
     </div>
-  </transition-group>
+    </div>
+
   <Card v-else class="w-full">
     <div class="p-20 flex flex-col items-center w-full">
       <font-awesome-icon :icon="['fa', 'xmark']" class="text-3xl" />

@@ -15,7 +15,7 @@
       <div class="flex flex-col gap-2 w-full">
         <div class="relative">
           <div class="flex w-full">
-            <Vote :opinion="opinion" class="w-10" style="min-width: var(--w-7)" />
+            <Vote :opinion="opinion" class="w-10 -ml-1 mr-1" style="min-width: var(--w-7)" />
             <div class="flex-1">
               <div
                 class="float-right"

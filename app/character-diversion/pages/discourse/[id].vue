@@ -164,7 +164,7 @@ export default defineComponent({
 .discourse-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 66px auto;
+  grid-template-rows: min-content min-content 1fr min-content;
   height: 100%;
 }
 </style>

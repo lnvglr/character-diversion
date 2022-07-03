@@ -1,5 +1,5 @@
 <template>
-  <Card>
+  <Card class="flex-1">
     <header class="flex items-center p-4 h-16 py-2 sm:py-4 md:py-5 md:px-7 gap-2 w-full">
       <NuxtLink :to="backTo" class="flex items-center gap-3 mr-1 sm:mr-3 md:mr-12"
         >

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="opinion"
-    class="flex flex-col text-beige-400 justify-center items-center self-start -ml-1 mr-1"
+    class="flex flex-col text-beige-400 justify-center items-center self-start"
   >
     <Button
       @click.stop="vote(1)"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import type { Opinion, Vote } from "~/types";
+import type { Opinion } from "~/types";
 export default defineComponent({
   name: 'Vote',
   props: {
@@ -36,10 +36,9 @@ export default defineComponent({
   },
   computed: {
     userVote(): number | undefined {
-      const a = { a: 'a', opi: this.opinion };
       if (!this.$strapi.user) return
       return this.opinion?.attributes.votes?.find(
-        (e: Vote) => e.author === this.$strapi.user.id
+        ({author}) => author === this.$strapi.user.id
       )?.value;
     },
     positives(): number {
@@ -74,19 +73,19 @@ export default defineComponent({
       if (!this.opinion) return
       this.opinion.attributes.votes =
         this.opinion.attributes.votes?.filter(
-          (e: Vote) => e.author !== this.$strapi.user.id
+          ({author}) => author !== this.$strapi.user.id
         ) || [];
     },
     async addVote(value: number): Promise<void> {
-      if (!this.opinion) return
+      if (!this.opinion?.id) return
       if (!this.opinion.attributes.votes) this.opinion.attributes.votes = [];
       this.opinion.attributes.votes.push({
         author: this.$strapi.user.id,
         value,
         createdAt: (new Date()).toString(),
       });
-      await this.$strapi.update("opinions", this.opinion?.id, {
-        votes: this.opinion?.attributes.votes,
+      await this.$strapi.update("opinions", this.opinion.id, {
+        votes: this.opinion.attributes.votes,
       });
     },
   },
