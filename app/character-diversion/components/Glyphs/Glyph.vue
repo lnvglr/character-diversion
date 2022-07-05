@@ -1,5 +1,5 @@
 <template>
-  <path class="glyph-default" v-if="path" :d="path" :stroke-width="strokeWidth" :class="{outlineActive: glyph}" v-bind="$attrs"></path>
+  <path class="glyph-default" v-if="path" :d="path" :stroke-width="strokeWidth" :class="{outlineActive: glyph, 'fill-info-500': intersection === 'info', 'fill-primary-500': intersection === 'primary' }" v-bind="$attrs"></path>
 	<g v-if="glyph" class="points">
 	<circle v-for="({ cx, cy, r }, i) in circles" :key="i" :cy="cy" :cx="cx" :r="r" class="fill-primary-500"></circle>
 	<rect v-for="({ x, y, width, height }, i) in rects" :key="i" :x="x" :y="y" :width="width" :height="height" class="fill-info-500"></rect>
@@ -25,6 +25,10 @@ export default defineComponent({
       type: [Boolean, Object as () => any],
       default: false,
     },
+    intersection: {
+      type: [Boolean, String],
+      default: false,
+    }
   },
 	mounted() {
 		this.points
