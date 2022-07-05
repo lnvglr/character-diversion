@@ -88,7 +88,7 @@ export interface Discourse {
     publishedAt?: string
     updatedAt?: string
     opinions?: Opinion[]
-    font: File
+    font: any
   }
 }
 

@@ -20,17 +20,18 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
   },
   setCurrent: (id) => {
     const current = discourse.all[id as keyof typeof discourse.all]
-    if (!current?.attributes.font.data?.[discourse.currentFont].attributes?.url) return discourse.current = null
-
-    useSamsaFont(current.attributes.font.data[discourse.currentFont].attributes.url)
+    if (!current) return discourse.current = null
+    const url = current.attributes.font.data?.[discourse.currentFont]?.attributes?.url
+    if (discourse.font?.url === url) return discourse.current = current
+    useSamsaFont(url)
       .then((font: SamsaFont) => {
         discourse.font = font
-        current.font = font
       })
       .catch(e => console.error(e))
       .finally(() => discourse.current = current)
   },
   fetch: () => {
+    console.time('fetch discourses');
     return new Promise(
       (resolve, reject) => {
         useNuxtApp().$strapi.find('discourses', {
@@ -50,7 +51,8 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
         })
           .then(({ data }) => {
             discourse.all = data.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
-            discourse.setCurrent(useRoute().params.id)
+            discourse.setCurrent(parseInt(useRoute().params.id))
+            console.timeEnd('fetch discourses');
             resolve(discourse.all)
           })
           .catch((err: Error) => {
@@ -60,13 +62,13 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
     )
   }
 })
-watchEffect(() => {
-  if (!discourse.current) discourse.filter.opinion = false
-  if (discourse.current?.attributes.font.data?.[discourse.currentFont]) {
-    // console.log('discourse.currentFont', discourse.currentFont)
-    discourse.setCurrent(discourse.current.id)
-  }
-})
+// watchEffect(() => {
+//   if (!discourse.current) discourse.filter.opinion = false
+//   if (discourse.current?.attributes.font.data?.[discourse.currentFont]) {
+//     // console.log('discourse.currentFont', discourse.currentFont)
+//     discourse.setCurrent(discourse.current.id)
+//   }
+// })
 
 const defaultOpinion = {
   id: null,
@@ -106,6 +108,8 @@ export const presentation = reactive<PresentationState>({
 
 export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
   const app = useNuxtApp()
+  console.time('useSamsaFont')
+  console.time('start')
   return new Promise(
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
@@ -117,6 +121,7 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
             if (font.errors.length > 0) {
               reject(font)
             } else {
+              console.timeEnd('start')
               font.cmapReverse = utils.invertObject(font.cmap)
               font.config.unicodeTable = unicodeTable
               const { glyphMap, literalMap, postScriptMap, nameMap } = mapGlyphs(font)
@@ -127,6 +132,7 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
               font.name = font.names[1]
               font.glyphs = openTypeGlyphs(font)
               font.version = formatVersion(font)
+              console.timeEnd('useSamsaFont')
               resolve(font)
             }
           },

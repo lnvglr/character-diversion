@@ -17,14 +17,15 @@ export default defineComponent({
     });
   },
   mounted() {
+    console.log("Discourse mounted");
     this.$state.discourse.fetch();
   },
   watch: {
     $route: {
       handler() {
-        // if (Object.keys(this.$state.discourse.all).length === 0) {
-        //   this.$state.discourse.fetch();
-        // }
+        if (Object.keys(this.$state.discourse.all).length === 0) {
+          this.$state.discourse.fetch();
+        }
         this.$state.discourse.setCurrent(this.$route.params.id);
       },
       immediate: true,
