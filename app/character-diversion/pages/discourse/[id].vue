@@ -60,7 +60,7 @@
       <FormNewOpinion :floating="true" />
     </div>
   </div>
-  <div v-else class="w-full h-full flex items-center justify-center"><div class="loading"></div></div>
+  <div v-else class="absolute top-0 w-full h-full flex items-center justify-center"><div class="spinner absolute lg"></div></div>
 </template>
 
 <script lang="ts">
@@ -95,6 +95,9 @@ export default defineComponent({
         },
       },
     };
+  },
+  mounted() {
+    if (!this.$state.discourse.current) this.$state.discourse.setCurrent(Number(this.$route.params.id));
   },
   computed: {
     glyphsViews() {

@@ -111,7 +111,8 @@ export default defineComponent({
       if (a.length !== b.length) {
         this.checkFill();
         setTimeout(() => {
-          this.$refs.container?.$el.scrollTo({top:0,left:0, behavior: "smooth"});
+          const container = this.$refs.container as any;
+          container?.$el.scrollTo({top:0,left:0, behavior: "smooth"});
         },100)
       }
     },
@@ -140,7 +141,8 @@ export default defineComponent({
           return glyph;
         }
       });
-      return glyphs.slice(0, this.limit).sort((a, b) => (this.scores?.[b.id] || 0) - (this.scores?.[a.id] || 0));
+      const sorted = glyphs.slice(0, this.limit).sort((a, b) => (this.scores?.[b.id] || 0) - (this.scores?.[a.id] || 0));
+      return sorted
     },
   },
   methods: {

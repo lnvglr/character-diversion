@@ -88,7 +88,7 @@ article {
   --duration: 0.875s;
   border: var(--border-2) solid rgba(51,51,51,0.17);
   border-radius: 50%;
-  border-top: var(--border-2) solid var(--color, white);
+  border-top: var(--border-2) solid var(--color, currentColor);
   animation: spin var(--duration) infinite cubic-bezier(0.9, 0.3, 0.3, 0.7);
   width: var(--size);
   height: var(--size);

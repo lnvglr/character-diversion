@@ -8,7 +8,7 @@
     class="button items-center justify-center"
   >
 
-    <div v-if="loading" class="spinner absolute sm" />
+    <div v-if="loading" class="text-white spinner absolute sm" />
     <span class="flex items-center justify-center gap-2" :class="{
       'opacity-0': loading,
       'move-left': icon === 'arrow-left',
