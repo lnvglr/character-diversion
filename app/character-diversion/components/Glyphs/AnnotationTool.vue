@@ -196,6 +196,6 @@ svg {
 }
 :global(.edit-glyph) {
   /* cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64' width='64' height='64' transform='' %3E%3Ccircle cx='0' cy='0' r='20'%0Afill='#10b98130'%0Astroke='#10b981' stroke-width='0.75' /%3E%3C/svg%3E") 32 32, pointer; */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64' width='64' height='64' transform='' %3E%3Ccircle cx='0' cy='0' r='20'%0Afill='#f9731630'%0Astroke='#f97316' stroke-width='0.5' /%3E%3C/svg%3E") 32 32, pointer;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-32 -32 64 64' width='64' height='64' transform='' %3E%3Ccircle cx='0' cy='0' r='20'%0Afill='#10b98130'%0Astroke='#10b981' stroke-width='0.875' /%3E%3C/svg%3E") 32 32, pointer;
 }
 </style>
