@@ -31,7 +31,6 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
       .finally(() => discourse.current = current)
   },
   fetch: () => {
-    console.time('fetch discourses');
     return new Promise(
       (resolve, reject) => {
         useNuxtApp().$strapi.find('discourses', {
@@ -52,7 +51,6 @@ export const discourse: DiscourseState = reactive<DiscourseState>({
           .then(({ data }) => {
             discourse.all = data.reduce((acc: Object, curr: Discourse) => ({ ...acc, [curr.id]: curr }), {})
             discourse.setCurrent(parseInt(useRoute().params.id))
-            console.timeEnd('fetch discourses');
             resolve(discourse.all)
           })
           .catch((err: Error) => {
@@ -108,8 +106,6 @@ export const presentation = reactive<PresentationState>({
 
 export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
   const app = useNuxtApp()
-  console.time('useSamsaFont')
-  console.time('start')
   return new Promise(
     (resolve, reject) => {
       if (!fontName) return reject({ errors: 'Error: fontName is null.' })
@@ -121,7 +117,6 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
             if (font.errors.length > 0) {
               reject(font)
             } else {
-              console.timeEnd('start')
               font.cmapReverse = utils.invertObject(font.cmap)
               font.config.unicodeTable = unicodeTable
               const { glyphMap, literalMap, postScriptMap, nameMap } = mapGlyphs(font)
@@ -132,7 +127,6 @@ export const useSamsaFont = (fontName: string): Promise<SamsaFont> => {
               font.name = font.names[1]
               font.glyphs = openTypeGlyphs(font)
               font.version = formatVersion(font)
-              console.timeEnd('useSamsaFont')
               resolve(font)
             }
           },

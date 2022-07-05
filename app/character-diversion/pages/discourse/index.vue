@@ -30,13 +30,11 @@ import { Discourse } from '~/types'
 export default defineComponent({
   computed: {
     discourses() {
-      console.time('discourses')
       const discourses = Object
         .values(this.$state.discourse.all)
         .sort((a: Discourse, b: Discourse) => {
           return Number(new Date(b.attributes.publishedAt)) - Number(new Date(a.attributes.publishedAt))
         }).filter(item => !this.filterQuery || [item.attributes.title, item.attributes.content, item.attributes.author?.data?.attributes.name].join(' ').toLowerCase().indexOf(this.filterQuery) > -1);
-      console.timeEnd('discourses')
       return discourses
     },
   },
