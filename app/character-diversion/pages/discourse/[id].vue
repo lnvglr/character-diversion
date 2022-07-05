@@ -97,7 +97,6 @@ export default defineComponent({
     };
   },
   created() {
-    console.log("mounted id");
     // if (!this.$state.discourse.current) this.$state.discourse.setCurrent(Number(this.$route.params.id));
   },
   computed: {
