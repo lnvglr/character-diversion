@@ -43,6 +43,17 @@
           >https://github.com/lnvglr/character-diversion</NuxtLink
         >
       </p>
+      <div class="bg-white rounded-md p-5 my-10 flex gap-5">
+      <Image src="https://character-diversion.s3.eu-central-1.amazonaws.com/thumbnail_IMG_6980_9f9018fa66.jpeg" alt="Leon Vogler" class="w-24 h-24 rounded-full" />
+      <div>
+        <p>
+          <strong>Leon Vogler</strong> created <em>Character Diversion</em> in the context of his BA at <a href="https://www.kisd.de/">KISD</a>. He is a freelance web developer and designer.</p>
+          <p class="m-0">
+            <a href="mailto:post@leonvogler.de">post@leonvogler.de</a><br />
+            <a href="https://leonvogler.de">leonvogler.de</a>
+        </p>
+      </div>
+      </div>
       <!-- <div v-for="paper in papers" :key="paper.paper" v-html="paper.text" /> -->
       <!-- <div
         v-for="paper in papers"
@@ -64,6 +75,11 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+a {
+  color: var(--color-info-500);
+  &:hover{
+    text-decoration: underline;
+  }
+}
 </style>

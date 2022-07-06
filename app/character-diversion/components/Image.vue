@@ -6,7 +6,7 @@
 export default defineComponent({
 	props: {
 		src: {
-			type: Object,
+			type: [Object, String],
 		},
 		size: {
 			type: String,
@@ -23,6 +23,7 @@ export default defineComponent({
 	},
 	computed: {
 		source() {
+			if (typeof this.src === 'string') return this.src
 			const base = '';
 			const format = this.src?.formats?.[this.size] ? this.size : 'thumbnail';
 
