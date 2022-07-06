@@ -199,12 +199,24 @@ body {
 /* 1. declare transition */
 .page-move,
 .page-enter-active,
-.page-leave-active {
-  transition: all var(--transition-duration-300) cubic-bezier(0.55, 0, 0.1, 1);
+.page-leave-active,
+.page-plain-move,
+.page-plain-enter-active,
+.page-plain-leave-active {
+  transition: all var(--transition-duration-75) cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 /* 2. declare enter from and leave to state */
 .page-enter-from,
-.page-leave-to {
+.page-leave-to,
+.page-plain-enter-from,
+.page-plain-leave-to  {
   opacity: 0;
+}
+.page-enter-from {
+  transform: scale(1.02);
+  
+}
+.page-leave-to {
+  transform: scale(0.98);
 }

@@ -3,7 +3,7 @@
     <Body
       class="antialiased duration-300 transition-colors text-neutral-800 dark:text-neutral-200 bg-beige-100 dark:bg-neutral-900 overflow-x-hidden font-sans"
     >
-      <Transition name="page">
+      <Transition name="page-plain">
       <img
         v-if="$route.matched[0].path === '/'"
         src="/images/plastic-c.jpg"

@@ -7,7 +7,7 @@
 			<NavBar v-if="showNav" />
 			<Header v-else>{{ $route.meta.name }}</Header>
 		</div>
-    <div class="overflow-hidden w-full" style="grid-area: body">
+    <div class="overflow-hidden w-full relative" style="grid-area: body">
       <slot name="body" class=""></slot>
     </div>
   </div>
