@@ -6,6 +6,7 @@
     v-bind="$attrs"
     ref="container"
     :style="{ '--total': filledGlyphs.length }"
+    v-if="filledGlyphs.length > 0"
   >
     <GlyphContanier
       v-for="(glyph, i) in filledGlyphs"
