@@ -37,15 +37,17 @@
           </div>
         </div>
       </TransitionExpand>
-        <Button
-          class="clear ml-auto"
-          @click="cancel"
-          >{{ $t("cancel") }}</Button
-        >
-        <Button :disabled="!canPost" color="success" type="submit"
-        :loading="loading">{{
-          $t("share.opinion")
-        }}</Button>
+      <Button
+        class="ml-auto clear flex-1"
+        color="beige"
+        style="--bg-opacity: 0.2;"
+        @click="cancel"
+        >{{ $t("cancel") }}</Button
+      >
+      <Button :disabled="!canPost" class="flex-1" color="success" type="submit"
+      :loading="loading">{{
+        $t("share.opinion")
+      }}</Button>
       </div>
     </form>
   </TransitionExpand>

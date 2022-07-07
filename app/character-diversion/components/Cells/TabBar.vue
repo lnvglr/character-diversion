@@ -8,9 +8,9 @@
       :key="name"
       :icon="item.icon"
       :title="item.label"
-      class="flex-1 lg clear flex-row-reverse"
+      class="lg clear flex-row-reverse"
       @click="setActive(name)"
-      :class="{ active: active === name }"
+      :class="{ active: active === name, 'flex-1': !item.shrink }"
       v-show="!item.hide"
       ><span class="hidden sm:block">{{ item.label }}</span></Button
     >
@@ -29,6 +29,7 @@ export default defineComponent({
         class?: string;
         active?: boolean;
         hide?: boolean;
+        shrink?: boolean;
       };
     },
   },

@@ -19,7 +19,7 @@
       :intersection="intersection"
       :frame="frame"
       :outline="outline"
-      :style="{'--i': i}" 
+      :style="{'--i': i && !glyph.dummy}"
       class="snap-start"
     />
   </transition-group>
@@ -104,13 +104,13 @@ export default defineComponent({
     };
   },
   mounted() {
-    window.addEventListener("resize", () => this.checkFill());
-    this.$nextTick(() => this.checkFill());
+    // window.addEventListener("resize", () => this.checkFill());
+    // this.$nextTick(() => this.checkFill());
   },
   watch: {
     filteredGlyphs(a, b) {
       if (a.length !== b.length) {
-        this.checkFill();
+        // this.checkFill();
         setTimeout(() => {
           const container = this.$refs.container as any;
           container?.$el.scrollTo({top:0,left:0, behavior: "smooth"});
@@ -148,9 +148,11 @@ export default defineComponent({
   },
   methods: {
     checkFill(): number {
-      const container = this.$refs.container as HTMLElement;
+      const container = (this.$refs.container as any)?.$el as HTMLElement;
       const width = container?.offsetWidth;
-      const gridSize = Math.floor(width / ((parseInt(this.gridSize) / 4) * 16));
+      // const gridSize = Math.floor(width / ((parseInt(this.gridSize) / 4) * 16));
+      const style = container instanceof Element ? window.getComputedStyle(container) : false;
+      const gridSize = style ? style.getPropertyValue("grid-template-columns").split(" ").length : 0;
       const remainder = this.filteredGlyphs.length % gridSize
       this.fill = Math.abs(
         this.filteredGlyphs.length > 0

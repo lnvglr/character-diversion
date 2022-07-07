@@ -1,12 +1,16 @@
 <template>
   <div class="discourse-container gap-0.5" v-if="$state.discourse.current">
-    
     <!-- {{$state.opinion.selectedGlyphs}} -->
 
     <!-- <Input type="checkbox" v-for="glyph in $state.discourse.font?.glyphs.slice(0,10)" v-model="$state.opinion.selectedGlyphs" :itemValue="glyph.id" /> -->
-    <Card class="shrink sticky top-0 z-20">
-      <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
-    </Card>
+    <div class="flex gap-0.5 sticky top-0 z-20 w-full">
+      <Card class="w-16 hidden sm:flex items-center justify-center hover:bg-beige-200 cursor-pointer" @click="$router.push('/discourse')">
+        <Icon name="arrow-left" />
+      </Card>
+      <Card class="flex-1">
+        <TabBar :items="tabs" @active="(e: string) => activeTab = e" />
+      </Card>
+    </div>
 
     <AboutDiscourse v-if="activeTab === 'about'" />
 
@@ -54,13 +58,19 @@
       :style="style"
     />
     <div
-      class="fixed ml-0 sm:ml-10 mb-10 sm:mb-10 left-1/2 bottom-0 z-50 -translate-x-1/2 w-full max-w-xs"
+      class="fixed ml-0 sm:ml-10 mb-10 sm:mb-10 left-1/2 z-50 -translate-x-1/2 w-full max-w-xs"
+      :class="{
+        'bottom-0': !$strapi.user,
+        'bottom-20 sm:bottom-0': $strapi.user,
+      }"
       v-if="activeTab === 'glyphs'"
     >
       <FormNewOpinion :floating="true" />
     </div>
   </div>
-  <div v-else class="absolute top-0 w-full h-full flex items-center justify-center"><div class="spinner absolute lg"></div></div>
+  <div v-else class="absolute top-0 w-full h-full flex items-center justify-center">
+    <div class="spinner absolute lg"></div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -73,7 +83,7 @@ export default defineComponent({
     TabBar,
     FilterGroup,
     GlobalAxes,
-    AboutDiscourse
+    AboutDiscourse,
   },
   data() {
     return {
@@ -165,9 +175,8 @@ export default defineComponent({
 
 <style lang="scss">
 .discourse-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: min-content 1fr;
+  display: flex;
+  flex-direction: column;
   // grid-template-rows: min-content min-content 1fr min-content;
   height: 100%;
 }
