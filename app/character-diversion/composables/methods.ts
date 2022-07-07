@@ -73,10 +73,11 @@ export const glyphMethods = {
     const closest = (arr: number[], target: number) => arr.reduce(function (prev, curr) {
       return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
     });
+    console.log(discourse.font?.axes)
     opinion.form.attributes.axes = discourse.font?.axes.reduce(
       (acc: Object, curr: SamsaFontAxis) => {
         const min = closest([curr.min, curr.max], curr.default) === curr.default ? curr.min : curr.default
-        const max = closest([curr.min, curr.max], curr.default) === curr.default ? curr.default : curr.max
+        const max = closest([curr.min, curr.max], curr.default) === curr.default && min !== curr.default ? curr.default : curr.max
         return {
           ...acc,
           [curr.tag]: [min, max],
