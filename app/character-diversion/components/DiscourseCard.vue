@@ -4,24 +4,29 @@
       :to="`/discourse/${discourse.id}`"
       class="p-4 flex flex-col flex-1 items-stretch"
     >
-      <h2 class="text-2xl font-bold leading-tight flex justify-between">
-        {{ discourse.attributes.title
-        }}<Button
-          v-if="discourse.attributes.author?.data?.id === $strapi.user?.id"
-          @click.prevent="removeDiscourse(discourse.id)"
-          color="alert"
-          class="sm text-sm clear"
-          icon="trash"
-          label="false"
-        />
-      </h2>
+    <div class="flex items-center gap-3 mb-5">
+      <div class="text-5xl text-info-500 bg-beige-100 flex items-center justify-center p-2 rounded-md w-20 h-20 min-w-[5rem] overflow-hidden" v-html="fontPreview"></div>
+        <h2 class="text-2xl font-bold leading-tight flex justify-between">
+          {{ discourse.attributes.title
+          }}
+        </h2>
+      </div>
       <div class="mt-auto py-2">
       <span class="text-xs flex gap-2">
         <span class="flex gap-1">{{$t('opinion', opinions.length)}}<UITag :round="true">{{opinions.length}}</UITag></span>
         <span class="flex gap-1">{{$t('participant', participants.length)}}<UITag :round="true">{{participants.length}}</UITag></span>
       </span>
       </div>
-      <Author :post="discourse" class="text-sm border-t border-beige-200 dark:border-neutral-600 pt-4" />
+      <div class="flex justify-between items-center border-t border-beige-200 dark:border-neutral-600 pt-4">
+      <Author :post="discourse" class="text-sm" /><Button
+            v-if="discourse.attributes.author?.data?.id === $strapi.user?.id"
+            @click.prevent="removeDiscourse(discourse.id)"
+            color="alert"
+            class="sm text-sm clear"
+            icon="trash"
+            label="false"
+          />
+          </div>
     </NuxtLink>
   </Card>
 </template>
@@ -36,6 +41,38 @@ export default defineComponent({
     return {};
   },
   computed: {
+    font() {
+      return {
+        url: this.discourse?.attributes.font.data[0].attributes.url,
+        name: this.discourse?.attributes.font.data[0].attributes.name,
+      }
+    },
+    previewGlyphs() {
+      const font = this.font.name;
+      // if (this.discourse?.id == 42) return 'אל'
+      switch (font) {
+        case "SeoulGrotesqueVF.ttf":
+        case "CableBoldNewHebrewTypography-Regular.ttf":
+          return "אל";
+        case "square-float.ttf":
+          return "f";
+        case "FedrawithCRVF.ttf":
+          return "jת";
+        default:
+          return "Ag";
+      }
+    },
+    fontPreview() {
+      return `
+        <style type="text/css">
+          @font-face {
+            font-family: '${this.font.name}';
+            src: url('${this.font.url}');
+          }
+        </style>
+        <div class="font-preview" style="font-family: '${this.font.name}';">${this.previewGlyphs}</div>
+      `;
+    },
     opinions() {
       return this.discourse?.attributes.opinions?.data;
     },
