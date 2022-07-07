@@ -17,7 +17,7 @@
       class="pointer-events-none"
       ref="svgFrame"
     ></svg>
-    <div class="absolute flex items-center justify-center w-full" v-if="!path && isTTF">
+    <div class="absolute flex items-center justify-center w-full" v-if="loading">
       <div class="spinner"></div>
     </div>
     <Transition name="fade">
@@ -119,6 +119,7 @@ export default defineComponent({
       pointer: {},
       observer: new IntersectionObserver((e) => this.checkView(e[0])),
       inView: false,
+      loading: true
     };
   },
   mounted() {
@@ -137,6 +138,7 @@ export default defineComponent({
         if (!this.inView || !this.isTTF) return;
         setTimeout(() => {
           this.decomposed = this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(0));
+          this.loading = false
           this.decomposedAlt =
             (this.intersection &&
               this.glyph?.decompose(this.$f.glyphMethods.getTupleValue(1))) ||
