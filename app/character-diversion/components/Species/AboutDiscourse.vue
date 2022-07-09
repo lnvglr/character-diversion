@@ -47,10 +47,10 @@
 						v-model="$state.discourse.currentFont"
 						:max="$state.discourse.current?.attributes.font.data?.length - 1 || 0"
 					/> -->
-					<p class="mt-5">Select Version:</p>
+					<!-- <p class="mt-5">Select Version:</p>
 					<div class="flex gap-2">
 					<Button v-for="(font, key) in $state.discourse.current?.attributes.font.data" :key="font.id" @click="$state.discourse.currentFont = key" class="text-sm" :class="{active: $state.discourse.currentFont === key }">{{ font.attributes.name }}</Button>
-					</div>
+					</div> -->
         </div>
         <!-- @update:formData="({ title }) => (discourseTitle = title)" -->
       </Card>
