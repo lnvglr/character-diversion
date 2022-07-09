@@ -6,7 +6,7 @@
           <h1 class="font-bold text-4xl">
             {{ $state.discourse.current.attributes.title }}
           </h1>
-          <Button class="clear" @click="edit">{{ $t(editing ? "done" : "edit") }}</Button>
+          <Button class="clear" @click="edit" v-if="$state.discourse.current.attributes.author.data.id === $strapi.user.id">{{ $t(editing ? "done" : "edit") }}</Button>
         </div>
         <Author
           v-if="!editing"

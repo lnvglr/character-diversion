@@ -49,7 +49,6 @@ export default defineComponent({
     },
     previewGlyphs() {
       const font = this.font.name;
-      // if (this.discourse?.id == 42) return 'אל'
       switch (font) {
         case "SeoulGrotesqueVF.ttf":
         case "CableBoldNewHebrewTypography-Regular.ttf":
