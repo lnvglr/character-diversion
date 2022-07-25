@@ -1,8 +1,13 @@
 {
   "home": "Home",
   "explore": "Entdecken",
+  "about": "Über",
+  "about.project": "Über dieses Projekt",
+  "discover.copy": "Erkunde Diskurse über Schrift und entdecke einen neuen Weg, um in die Welt der Typografie einzutauchen, ein Zeichen nach dem anderen.",
   "discuss": "Diskutieren",
+  "discuss.copy": "Auf Character Diversion basiert der Diskurs auf den Dingen, über die man tatsächlich spricht: Schriftzeichen. Du kannst deine Meinung zu bestimmten Schriftzeichen, Zeichenteilen und Spektren im Gestaltungsraum variabler Schriften kundtun.",
   "diverge": "Abweichen",
+  "diverge.copy": "Du kannst zu einem Diskurs über Schriftdesign beitragen, indem du eine abweichende Buchstabenform vorschlagen, diese posten und so anderen die Möglichkeit geben, die verschiedenen Optionen zu vergleichen.",
   "profile": "Profil",
   "login": "Anmelden",
   "signup": "Registrieren",
@@ -33,5 +38,10 @@
   "done": "Fertig",
   "opinion": "Meinung | Meinungen",
   "share.opinion": "Meinung teilen",
-  "describe.discourse":  "Give a brief account of what you want to discuss."
+  "describe.discourse":  "Give a brief account of what you want to discuss.",
+  "hero.copy": "Jeder hat eine Meinung zu Schrift. Es ist Zeit, deine zu teilen.",
+  "hero.copy.key": "Schrift",
+  "hero.subcopy": "Designer:innen und Typefoundries erkunden, diskutieren und arbeiten an ihren Schriften auf Character Diversion - der weltweit besten Plattform für typografischen Diskurs.",
+  "coming.soon": "Bald verfügbar",
+  "participant": "Teilnehmer"
 }

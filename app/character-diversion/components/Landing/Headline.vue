@@ -6,7 +6,7 @@
         :distance="12"
         class="inline-block -my-3 rounded-md bg-info-500 hover:bg-info-600 border border-info-700"
         style="padding: 0.25em 0.375em 0;"
-        v-if="s === 'type'"
+        v-if="s === key"
       >
         <button class="text-inherit uppercase">{{s}}</button>
         <template #popper>
@@ -63,8 +63,11 @@ export default defineComponent({
     };
   },
   computed: {
+    key() {
+      return this.$t("hero.copy.key");
+    },
     type() {
-      return [this.headline.split("type")[0], 'type', this.headline.split("type")[1]]
+      return [this.headline.split(this.key)[0], this.key, this.headline.split(this.key)[1]]
     },
     transformedHeadline() {
       return this.headline.split(" ").map((word) => {

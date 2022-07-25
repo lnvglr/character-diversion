@@ -2,6 +2,7 @@
   "home": "Home",
   "explore": "Explore",
   "about": "About",
+  "about.project": "About this Project",
   "profile": "Profile",
   "login": "Login",
   "logout": "Logout",
@@ -28,8 +29,11 @@
   "new.discourse": "New Discourse",
   "new.opinion": "New Opinion",
   "discover": "Discover",
+  "discover.copy": "Explore discourses on type and discover a new way to delve into the world of typography, one character at a time",
   "discuss": "Discuss",
+  "discuss.copy": "On Character Diversion discourse is based on the things you actually talk about: characters. You can attache your opinions to certain characters, parts of characters and spectra in the design space of variable fonts.",
   "diverge": "Diverge",
+  "diverge.copy": "Users will be able to contribute to a type design discourse by actually proposing a diverting letter shape, posting it, and then giving users the ability to view the different options.",
   "discover.discourses": "Discover Discourses",
   "search.discourses": "Search Discourses",
   "start.new.discourse": "Start a new discourse",
@@ -50,5 +54,9 @@
   "vote.down": "Vote down",
   "vote.not.allowed": "You are not allowed to vote on your own opinions.",
   "filter": "Filter",
-  "glyphs.shown": "{n} glyph | {n} glyphs"
+  "glyphs.shown": "{n} glyph | {n} glyphs",
+  "hero.copy": "Everyone has an opinion on type. It's time to share yours.",
+  "hero.copy.key": "type",
+  "hero.subcopy": "Designers and foundries explore, discuss, and work on their typefaces on Character Diversion—the most adequate platform for typographic discourse in the world.",
+  "coming.soon": "coming soon"
 }

@@ -10,11 +10,7 @@
           <div
             class="max-w-4xl mx-auto flex gap-6 flex-col items-start md:gap-24 md:flex-row md:items-center"
           >
-            <div class="text-md md:text-lg">
-              Designers and foundries explore, discuss, and work on their typefaces on
-              Character Diversion—the most adequate platform for typographic discourse in
-              the world.
-            </div>
+            <div class="text-md md:text-lg">{{$t("hero.subcopy")}}</div>
             <div>
               <Button
                 to="/discourse"
@@ -55,10 +51,7 @@
           >
             <div class="">
               <h2 class="text-4xl font-bold">{{ $t("discover") }}</h2>
-              <p class="mt-2">
-                Explore discourses type and discover a new way to delve into the world of
-                typography, one character at a time.
-              </p>
+              <p class="mt-2">{{$t('discover.copy')}}</p>
             </div>
             <Button to="/discourse" icon="arrow-right" class="lg">{{
               $t("discover.discourses")
@@ -103,11 +96,7 @@
             </div>
             <div class="flex flex-col items-start gap-5">
               <h2 class="text-4xl font-bold">{{ $t("discuss") }}</h2>
-              <p>
-                On Character Diversion discourse is based on the things you actually talk
-                about: characters. You can attache your opinions to certain characters,
-                parts of characters and spectra in the design space of variable fonts.
-              </p>
+              <p>{{$t('discuss.copy')}}</p>
               <Button to="/discourse" icon="arrow-right" class="lg">{{
                 $t("share.thoughts")
               }}</Button>
@@ -124,15 +113,11 @@
                 <div>
                   <span
                     class="text-primary-500 border border-primary-500 dark:border-none dark:bg-primary-500 dark:text-white rounded-md mb-5 px-2 py-1 text-xs"
-                    >coming soon</span
+                    >{{$t('coming.soon')}}</span
                   >
                 </div>
                 <h2 class="text-4xl font-bold">{{ $t("diverge") }}</h2>
-                <p>
-                  Users will be able to contribute to a type design discourse by actually
-                  proposing a diverting letter shape, posting it, and then giving users
-                  the ability to view the different options.
-                </p>
+                <p>{{$t('diverge.copy')}}</p>
               </div></template
             >
           </LandingSection>
@@ -142,7 +127,7 @@
       <Card class="landing-section">
         <div class="max-w-2xl mx-auto py-24">
           <Button class="lg" to="/about" color="primary" icon="arrow-right"
-            >About this Project</Button
+            >{{$t('about.project')}}</Button
           >
         </div>
       </Card>
@@ -164,7 +149,7 @@ export default defineComponent({
   },
   data() {
     return {
-      headine: "Everyone has an opinion on type. It's time to share yours.",
+      headine: this.$t("hero.copy"),
       letter: "S",
       glyphs: [{
         id: 1,
